@@ -1,13 +1,24 @@
 const express = require('express')
-const bodyParser = reuqire('body-praser');
+const bodyParser = require('body-parser');
+var mysql      = require('mysql');
+var dbconfig = require('./config/dbconfig');
+var connection = mysql.createConnection(dbconfig);
+var app = express();
 
-const app = express();
+connection.connect(function(err){
+
+if(!err) {
+    console.log("Database is connected ... ");    
+} else {
+    console.log("Error connecting database: ", err);
+}
+});
 
 app.use(bodyParser.json());
 
 app.get('/api/check', (req, res) =>{
 
-    res.send({hi:'hello'})
+    res.send({hi:'data from server when loaded'})
 });
 
 
