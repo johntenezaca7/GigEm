@@ -5,8 +5,10 @@
   "proxy": {
     "/api/*": {
       "target": "http://localhost:5000"
-    },
+    }
+  },
   "dependencies": {
+    "axios": "^0.17.1",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-scripts": "1.0.17"
