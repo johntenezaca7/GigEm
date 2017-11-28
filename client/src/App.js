@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import Navbar from './Components/Navbar'
 import BandProfile from './Components/BandProfile';
+import UserDashboard from './Components/UserDashboard';
 
 class App extends Component {
   constructor(props){
@@ -28,9 +29,10 @@ class App extends Component {
   }
   render() {
     return (
-      <div >
+      <div>
           <Navbar />
-          <BandProfile />
+          {/* <BandProfile /> */}
+          <UserDashboard />
       </div>
     );
   }
