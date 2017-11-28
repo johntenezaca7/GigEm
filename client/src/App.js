@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+///////////////////////////////
+////// Component Imports //////
+///////////////////////////////
+
+import Navbar from './Components/Navbar'
+import BandProfile from './Components/BandProfile';
+import UserDashboard from './Components/UserDashboard';
 
 class App extends Component {
   constructor(props){
@@ -22,8 +29,10 @@ class App extends Component {
   }
   render() {
     return (
-      <div >
-          Hello from App
+      <div>
+          <Navbar />
+          {/* <BandProfile /> */}
+          <UserDashboard />
       </div>
     );
   }
