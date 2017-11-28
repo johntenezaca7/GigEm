@@ -1,5 +1,5 @@
 const express = require('express')
-const bodyParser = reuqire('body-praser');
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 
 app.get('/api/check', (req, res) =>{
 
-    res.send({hi:'hello'})
+    res.send({hi:'data from server when loaded'})
 });
 
 
