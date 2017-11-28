@@ -7,7 +7,7 @@ class App extends Component {
     super(props);
     this.state = {}
 
-    this.fetchDemo() = this.fetchDemo.bind(this);
+    this.fetchDemo = this.fetchDemo.bind(this);
   }
 
   fetchDemo(){
