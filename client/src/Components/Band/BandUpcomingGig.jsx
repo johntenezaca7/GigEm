@@ -1,13 +1,17 @@
 import React from 'react';
-import ProgressComponent from './ProgressComponent';
+// import ProgressComponent from './ProgressComponent';
+import Datetime from 'react-datetime';
 
 export default class UpcomingGig extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
     }
+    
 
     render() {
+        
+
         return (
             <div className="container">
                 <div className="row">
@@ -30,11 +34,14 @@ export default class UpcomingGig extends React.Component {
                         <div className="col col-md-auto">
                             <label for="exampleInputEmail1">Date Placeholder</label>
                         </div>
+
+
+
                             <div className="col align-self-end text-right">
-                            <input type="email" class="form-control mt-1 form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-                            </div>
-                        </div>
-                        <div className="form-inline">
+                            <Datetime />
+                    </div>
+                </div>
+                        <div className="form-inline ">
                             <div className="col col-md-auto">
                             <label for="exampleInputEmail1">Notes</label>
                             </div>
@@ -43,7 +50,7 @@ export default class UpcomingGig extends React.Component {
                             </div>
                         </div>
                                 <div className="button-block">
-                                    <button type="submit" class="btn btn-secondary">Submit</button>
+                                    <button type="submit" className="btn btn-secondary">Submit</button>
                                 </div>
                       </div>
                     </div>
