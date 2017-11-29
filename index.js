@@ -1,26 +1,14 @@
 const express = require('express')
 const bodyParser = require('body-parser');
-var mysql      = require('mysql');
-var dbconfig = require('./config/dbconfig');
-var connection = mysql.createConnection(dbconfig);
+const db = require('./db');
+
 var app = express();
 
-connection.connect(function(err){
-
-if(!err) {
-    console.log("Database is connected ... ");    
-} else {
-    console.log("Error connecting database: ", err);
-}
-});
 
 app.use(bodyParser.json());
 
-app.get('/api/check', (req, res) =>{
 
-    res.send({hi:'data from server when loaded'})
-});
-
+require('./routes/authRoute')(app, db)
 
 if (process.env.NODE_ENV === 'production') {
 	//Express will serve up production assets like out main.js file, or main.css file!
