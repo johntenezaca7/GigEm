@@ -28,25 +28,8 @@ class App extends Component {
     super(props);
     this.state = {}
     this.fetchDemo = this.fetchDemo.bind(this);
-
-    this.reducer = (state = 0, action) => {
-      switch(action.type) {
-        case 'INCREMENT':
-          return state + 1;
-        case 'DECREMENT':
-          return state - 1;
-        default:
-          return state;
-      }
-    }
-
-    this.store = createStore(this.reducer);
   }
-
-
-
   
-
   fetchDemo(){
     axios.get('/api/check')
       .then(res => {
@@ -58,7 +41,7 @@ class App extends Component {
     this.fetchDemo()
   }
   render() {
-    console.log(this.store.getState());
+    // console.log(this.store.getState().user);
     return (
       <Router>
       <div>
