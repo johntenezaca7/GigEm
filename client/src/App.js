@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 
 import {
   BrowserRouter as Router,
@@ -28,19 +28,11 @@ class App extends Component {
     super(props);
     this.state = {}
 
-    this.fetchDemo = this.fetchDemo.bind(this);
+
   }
 
-  fetchDemo(){
-    axios.get('/api/check')
-      .then(res => {
-        console.log(res.data)
-      })
-  }
-  
-  componentDidMount(){
-    this.fetchDemo()
-  }
+
+ 
   render() {
     return (
       <Router>
