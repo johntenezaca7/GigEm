@@ -3,7 +3,7 @@ import React from 'react';
 import {
     BrowserRouter as Router,
     Route,
-    Link
+    // Link
   } from 'react-router-dom'
 
 // import Navbar from '../Navbar';
@@ -47,7 +47,7 @@ export default class BandDashboard extends React.Component {
                     <div className="text-center">
                       <h1 className="display-4">Gigs to Finalize</h1>
                     </div>
-                    <BandPotentialGig />
+                    <BandToFinalize />
                   </div>} />
                 <Route exact path="/band/potential" render={() => 
                   <div>
