@@ -37,16 +37,14 @@
     "mongoose": "^4.13.5",
     "mysql": "^2.15.0",
     "passport": "^0.4.0",
+    "passport-google-oauth20": "^1.0.0",
     "rc-progress": "^2.2.5",
     "react": "^16.2.0",
-<<<<<<< HEAD
     "passport-google-oauth20": "^1.0.0",
-=======
->>>>>>> moreroutes
     "react-datetime": "^2.11.0",
     "react-dom": "^16.2.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-progressbar.js": "git://github.com/sebacruz/react-progressbar.js.git#d6c73e808c00341378f37174d5108af83e44de09"
+    "react-scripts": "^1.0.17"
   }
 }
