@@ -1,6 +1,7 @@
 import React from 'react';
 
-// import UpcomingGig from './Components/UpcomingGig';
+import UpcomingGig from './UpcomingGig';
+import PotentialGig from './PotentialGig';
 
 export default class UserDashboard extends React.Component {
     constructor(props) {
@@ -12,18 +13,19 @@ export default class UserDashboard extends React.Component {
       return (
         <div>
           <div className="row">
-            <div className="col-1">
-            </div>
-            <div className="col-8">
+            {/* <div className="col">
+            </div> */}
+            <div className="col">
               <h2>Upcoming Gig'em Shows</h2>
-                <p>Committed Show Component Placeholder</p>
-                <p>Committed Show Component Placeholder</p>
+                <p><UpcomingGig percent={100} /></p>
+                <p><UpcomingGig/></p>
               <h2>Potential Gigs</h2>
-                <p>Potential Show Component Placeholder</p>
-                <p>Potential Show Component Placeholder</p>
+                <p><PotentialGig /></p>
+                <p><PotentialGig /></p>
+                <p><PotentialGig /></p>
             </div>
-            <div className="col-1">
-            </div>
+            {/* <div className="col-1">
+            </div> */}
           </div>
         </div>
       )
