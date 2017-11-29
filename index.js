@@ -4,11 +4,11 @@ const db = require('./db');
 
 var app = express();
 
-
 app.use(bodyParser.json());
 
-
 require('./routes/authRoute')(app, db)
+require('./routes/venueRoute')(app, db)
+
 
 if (process.env.NODE_ENV === 'production') {
 	//Express will serve up production assets like out main.js file, or main.css file!
