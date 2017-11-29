@@ -7,7 +7,6 @@
       "target": "http://localhost:5000"
     }
   },
-
   "dependencies": {
     "axios": "^0.17.1",
     "module-alias": "^2.0.3",

@@ -5,5 +5,5 @@ package-lock.json
 keys.js
 
 -- to run schema.sql from command line --
-mysql -h gigem.c4ypxmjg5a26.us-east-2.rds.amazonaws.com -u vengeance -p < schema.sql
-- then enter password
+mysql -h (keys.dbHost) -u vengeance -p < schema.sql
+- then enter (keys.dbPassword)

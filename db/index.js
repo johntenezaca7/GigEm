@@ -11,4 +11,4 @@ const config = require('../config/dbconfig');
      }
  })
 
- 
+ exports.connection = connection;
