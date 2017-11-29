@@ -1,5 +1,3 @@
-// const connection = require('./db');
-
 module.exports = (app, db) => {
 
   const getAllVenues = (callback) => {
@@ -22,5 +20,4 @@ module.exports = (app, db) => {
     console.log('venue route working')
     res.send({hi:'new venue added'})
   });
-
 }

@@ -156,15 +156,15 @@ ALTER TABLE `Properties` ADD FOREIGN KEY (band_id) REFERENCES `Bands` (`id`);
 -- Test Data
 -- ---
 
-INSERT INTO `Users` (`id`,`google_id`,`name`,`description`,`email`,`age`,`zip`,`city`,`state`,`photo`,`status`,`credits`) VALUES
-('','goog1','music man','loves trombones','parade@gmail.com','33','12345','spokane','IA','pic.svg','good','');
-INSERT INTO `Bands` (`id`,`google_id`,`name`,`description`,`email`,`zip`,`current_zip`,`city`,`state`,`photo`,`status`,`credits`) VALUES
-('','goog2','Monsoon Of Sound','weather music','monsoon@gmail.com','34567','','new york','NY','photo.jpeg','good','');
-INSERT INTO `Venue` (`id`,`name`,`description`,`city`,`state`,`zip`,`location`) VALUES
-('','Music Hut','The last straw','Muskogee','OK','56789','here');
+-- INSERT INTO `Users` (`id`,`google_id`,`name`,`description`,`email`,`age`,`zip`,`city`,`state`,`photo`,`status`,`credits`) VALUES
+-- ('','goog1','music man','loves trombones','parade@gmail.com','33','12345','spokane','IA','pic.svg','good','');
+-- INSERT INTO `Bands` (`id`,`google_id`,`name`,`description`,`email`,`zip`,`current_zip`,`city`,`state`,`photo`,`status`,`credits`) VALUES
+-- ('','goog2','Monsoon Of Sound','weather music','monsoon@gmail.com','34567','','new york','NY','photo.jpeg','good','');
+-- INSERT INTO `Venue` (`id`,`name`,`description`,`city`,`state`,`zip`,`location`) VALUES
+-- ('','Music Hut','The last straw','Muskogee','OK','56789','here');
 -- INSERT INTO `Event` (`id`,`venue_id`,`band_id`,`name`,`description`,`photo`,`start_date`,`start_time`,`end_date`,`final_commit_date`,`city`,`state`,`zip`,`status`,`price`,`min_commits`,`commits`) VALUES
--- ('','','','Event Fest','we got the musics','picture.png','10-10-2017','8:00pm','10-11-2017','10-09-2017','hoboken','NJ','23456','good','10','5','3');
+-- ('','1','1','Event Fest','we got the musics','picture.png','10-10-2017','8:00pm','10-11-2017','10-09-2017','hoboken','NJ','23456','good','10','5','3');
 -- INSERT INTO `Attendance` (`id`,`event_id`,`user_id`) VALUES
--- ('','','');
+-- ('','4','2');
 -- INSERT INTO `Properties` (`id`,`band_id`,`link_url`,`description`) VALUES
--- ('','','','');
+-- ('','1','www.bands.com','test band links');
