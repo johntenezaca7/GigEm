@@ -17,12 +17,12 @@ export default class UserDashboard extends React.Component {
             </div> */}
             <div className="col">
               <h2>Upcoming Gig'em Shows</h2>
-                <p><UpcomingGig/></p>
-                <p><UpcomingGig/></p>
+                <div><UpcomingGig/></div>
+                <div><UpcomingGig/></div>
               <h2>Potential Gigs</h2>
-                <p><PotentialGig /></p>
-                <p><PotentialGig /></p>
-                <p><PotentialGig /></p>
+                <div><PotentialGig /></div>
+                <div><PotentialGig /></div>
+                <div><PotentialGig /></div>
             </div>
             {/* <div className="col-1">
             </div> */}

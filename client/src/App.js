@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
-
+import axios from 'axios';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  // Link
 } from 'react-router-dom'
+import { createStore } from 'redux';
 
 
 ///////////////////////////////
@@ -17,18 +17,18 @@ import BandProfile from './Components/BandProfile';
 import UserDashboard from './Components/User/UserDashboard';
 import BandDashboard from './Components/Band/BandDashboard';
 
-import BandNavTabs from "./Components/Band/BandNavTabs";
-import BandUpcomingGig from './Components/Band/BandUpcomingGig';
-import BandPotentialGig from './Components/Band/BandPotentialGig';
-import BandToFinalize from './Components/Band/BandToFinalize'
-import BandPitch from './Components/Band/BandPitch';
-
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {}
-
-
+    this.fetchDemo = this.fetchDemo.bind(this);
+  }
+  
+  fetchDemo(){
+    axios.get('/api/check')
+      .then(res => {
+        console.log(res.data)
+      })
   }
 
 
@@ -37,11 +37,6 @@ class App extends Component {
     return (
       <Router>
       <div>
-{/* 
-          <Navbar />
-          {/* <BandProfile /> */}
-          {/* <UserDashboard /> */}
-          {/* <BandDashboard />  */}
 
           <Route exact path="/profile" render={() => <div><Navbar /><BandProfile /></div>} />
           <Route exact path="/user" render={() => <div><Navbar /><UserDashboard /></div>} />
