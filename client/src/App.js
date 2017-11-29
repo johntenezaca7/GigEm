@@ -6,7 +6,7 @@ import axios from 'axios';
 ///////////////////////////////
 
 import Navbar from './Components/Navbar'
-import BandProfile from './Components/BandProfile';
+// import BandProfile from './Components/BandProfile';
 import UserDashboard from './Components/UserDashboard';
 
 class App extends Component {
