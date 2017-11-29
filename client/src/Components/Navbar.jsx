@@ -1,5 +1,11 @@
 import React from 'react';
 
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
+
 class Navbar extends React.Component {
     constructor(props) {
         super(props);
@@ -50,13 +56,24 @@ class Navbar extends React.Component {
                   <tbody>
                     <tr>
                     <td>
+                      <Link to="/band">
+                        <button className="btn btn-info my-2 my-sm-0" type="submit">View Band Routes</button>
+                      </Link>
+                      </td>
+                    <td>
+                      <Link to="/profile">
                         <button className="btn btn-danger my-2 my-sm-0" type="submit">My Profile (bands only)</button>
+                      </Link>
                       </td>
                       <td>
-                        <button className="btn btn-primary my-2 my-sm-0" type="submit">My Shows</button>
+                        <Link to="/myshows">
+                          <button className="btn btn-primary my-2 my-sm-0" type="submit">My Shows</button>
+                        </Link>
                       </td>
                       <td>
+                        <Link to="logout">
                         <button className="btn btn-primary my-2 my-sm-0" type="submit">Logout</button>
+                        </Link>
                       </td>
                     </tr>
                   </tbody>
