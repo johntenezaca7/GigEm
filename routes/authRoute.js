@@ -2,12 +2,6 @@ const passport = require('passport');
 
 module.exports = (app, db) => {
 
-<<<<<<< HEAD
-  app.get('/api/check', (req, res) =>{
-    console.log('routes working')
-    res.send({hi:'data from server when loaded'})
-  });
-=======
     app.get('/auth/google',
         passport.authenticate('google', {
             scope: ['profile', 'email']
@@ -30,6 +24,5 @@ module.exports = (app, db) => {
         res.send(req.user)
     });
 
->>>>>>> finished google oauth, added cookie sessions, user can sign in and log out
 
 };
