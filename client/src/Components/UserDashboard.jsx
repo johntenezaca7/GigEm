@@ -17,7 +17,7 @@ export default class UserDashboard extends React.Component {
             </div> */}
             <div className="col">
               <h2>Upcoming Gig'em Shows</h2>
-                <p><UpcomingGig percent={100} /></p>
+                <p><UpcomingGig/></p>
                 <p><UpcomingGig/></p>
               <h2>Potential Gigs</h2>
                 <p><PotentialGig /></p>

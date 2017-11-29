@@ -7,10 +7,7 @@
       "target": "http://localhost:5000"
     }
   },
-  "aliases": {
-    "react": "node_modules/react",
-    "react-dom": "node_modules/react_dom"
-  },
+
   "dependencies": {
     "axios": "^0.17.1",
     "module-alias": "^2.0.3",
