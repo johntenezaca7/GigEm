@@ -28,22 +28,18 @@
     "axios": "^0.17.1",
     "body-parser": "^1.18.2",
     "concurrently": "^3.5.1",
-    "cookie-session": "^2.0.0-beta.3",
     "express": "^4.16.2",
     "jquery": "^3.2.1",
     "module-alias": "^2.0.3",
     "mongoose": "^4.13.5",
+<<<<<<< HEAD
+    "mysql": "^2.15.0",
+    "passport": "^0.4.0"
+=======
     "passport": "^0.4.0",
     "rc-progress": "^2.2.5",
     "react": "^16.2.0",
-<<<<<<< HEAD
     "react-progressbar.js": "git://github.com/sebacruz/react-progressbar.js.git#d6c73e808c00341378f37174d5108af83e44de09"
-    "mysql": "^2.15.0",
-    "passport": "^0.4.0",
-    "passport-google-oauth20": "^1.0.0"
-=======
-    "react-progressbar.js": "git://github.com/sebacruz/react-progressbar.js.git#d6c73e808c00341378f37174d5108af83e44de09",
-    "mysql": "^2.15.0"
->>>>>>> newnewFeature
+>>>>>>> newFeature
   }
 }

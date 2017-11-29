@@ -49,6 +49,9 @@ class Navbar extends React.Component {
                 <table>
                   <tbody>
                     <tr>
+                    <td>
+                        <button className="btn btn-danger my-2 my-sm-0" type="submit">My Profile (bands only)</button>
+                      </td>
                       <td>
                         <button className="btn btn-primary my-2 my-sm-0" type="submit">My Shows</button>
                       </td>
@@ -66,3 +69,4 @@ class Navbar extends React.Component {
 }
 
 export default Navbar;
+
