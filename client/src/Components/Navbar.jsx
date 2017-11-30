@@ -34,7 +34,7 @@ class Navbar extends React.Component {
     }
     
     render() {
-      console.log('Inside Navbar:'+JSON.stringify(this.props.auth));
+      
         return (
             <div>
               <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -101,7 +101,11 @@ class Navbar extends React.Component {
 }
 
 function mapStateToProps({ auth }){
-    return { auth }
+  console.log('map:', auth)
+    return { 
+      auth: auth,
+      userInFo: 'info'
+    }
 }
 
 export default  connect(mapStateToProps)(Navbar);
