@@ -9,9 +9,6 @@ passport.serializeUser((user, done ) => {
     // let username = user.google_id;
     console.log(user);
     user = user[0].google_id || null
-=======
-    console.log('user has been serialized!')
->>>>>>> 20de9f47
     done(null, user);
 });
 
