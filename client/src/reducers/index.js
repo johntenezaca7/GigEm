@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux'; 
 import authReducer from './authReducers';
+import eventsReducer from './eventsReducers';
 
 export default combineReducers({
     auth: authReducer,
-    info:'info'
+    events: eventsReducer,
+    info: 'info'
 })
