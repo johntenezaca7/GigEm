@@ -21,20 +21,24 @@ class Navbar extends React.Component {
             </div>
           );
         default:
+<<<<<<< HEAD
           return[
                     <Link to="/myshows">
                           <button className="btn btn-primary my-2 my-sm-0" type="submit">My Shows</button>
                         </Link>
                       ,
+=======
+          return (
+>>>>>>> 20de9f47
             <div key="1">
               <a href="/api/logout" >LogOut</a>
             </div>
-          ] 
+          )
       }
     }
     
     render() {
-      console.log('Inside Navbar:'+JSON.stringify(this.props.auth));
+      console.log('Inside Navbar:' + JSON.stringify(this.props));
         return (
             <div>
               <nav className="navbar navbar-expand-lg navbar-light bg-light">

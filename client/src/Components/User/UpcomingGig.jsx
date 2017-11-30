@@ -11,7 +11,7 @@ export default class UpcomingGig extends React.Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container border p-3">
                 <div className="row">
                     <div className="col align-self-start">
                       Clark<br />

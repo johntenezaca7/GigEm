@@ -5,8 +5,12 @@ const db = require('../db/index');
 
 
 passport.serializeUser((user, done ) => {
+<<<<<<< HEAD
     // console.log('tryin;',user[0].google_id)
     user = user[0].google_id || null
+=======
+    console.log('user has been serialized!')
+>>>>>>> 20de9f47
     done(null, user);
 });
 
