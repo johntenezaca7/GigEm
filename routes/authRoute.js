@@ -20,9 +20,28 @@ module.exports = (app, db) => {
         res.redirect('/');
     });
 
+    const getUserByGoogleId = (req, callback) => {
+        // console.log(req.user)
+        const sql = `SELECT * FROM Users WHERE google_id="${req.user[0].google_id}"`;
+        return db.connection.query(sql, (err, data) => {
+            if (err) console.log('getUserByGoogId Error: ', err);
+            callback(err, data);
+        })
+    };
+    
     app.get('/api/current_user', (req, res) => {
         console.log('getting current user', req.user)
         res.send(req.user)
+    // console.log('CHECK',req);
+    // res.send(req.user);
+    // console.log("CONSOLE ", req.user);
+    // if (req.user) {
+    //     getUserByGoogleId(req, (err, data) => {
+    //         if (err){ res.json(err)};
+    //         console.log("RETURNED DATA", data);
+    //         res.send(req.user);
+    //     });    
+    // }
     });
 
 
