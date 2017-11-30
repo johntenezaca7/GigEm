@@ -24,7 +24,7 @@ export default class UpcomingGig extends React.Component {
                       <h6>Edit Details</h6>
                         <div className="form-inline">
                             <div className="col col-md-auto">
-                            <label for="exampleInputEmail1">Location</label>
+                            <label>Location</label>
                             </div>
                             <div className="col align-self-end text-right">
                             <input type="email" className="form-control mt-1 form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
@@ -32,21 +32,18 @@ export default class UpcomingGig extends React.Component {
                         </div>
                         <div className="form-inline">
                         <div className="col col-md-auto">
-                            <label for="exampleInputEmail1">Date Placeholder</label>
+                            <label>Date Placeholder</label>
                         </div>
-
-
-
                             <div className="col align-self-end text-right">
                             <Datetime />
                     </div>
                 </div>
                         <div className="form-inline ">
                             <div className="col col-md-auto">
-                            <label for="exampleInputEmail1">Notes</label>
+                            <label>Notes</label>
                             </div>
                             <div className="col align-self-end text-right">
-                            <input type="email" class="form-control mt-1 form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+                            <input type="email" className="form-control mt-1 form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
                             </div>
                         </div>
                                 <div className="button-block">

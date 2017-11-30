@@ -17,18 +17,27 @@ class Navbar extends React.Component {
         case false:
           return(
             <div>
-            <a href="/auth/google">Login With Google</a>
+              <td>
+                <Link to="/auth/google">
+                  <button className="btn btn-warning my-2 my-sm-0" type="submit">Login With Google</button>
+                </Link>
+              </td>
             </div>
           );
         default:
-          return[
-                    <Link to="/myshows">
-                          <button className="btn btn-primary my-2 my-sm-0" type="submit">My Shows</button>
-                        </Link>
-                      ,
-            <div key="1">
-              <a href="/api/logout" >LogOut</a>
-            </div>
+          return (
+            <div>
+              {/* <td> */}
+                <Link to="/myshows">
+                  <button className="btn btn-primary my-2 my-sm-0" type="submit">My Shows</button>
+                </Link>
+              {/* </td> */}
+              {/* <td> */}
+                <Link to="/api/logout">
+                  <button className="btn btn-warning my-2 my-sm-0" type="submit">Logout</button>
+                </Link>
+              {/* </td> */}
+          </div>
           )
       }
     }
