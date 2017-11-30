@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import {
   BrowserRouter as Router,
   Route,
@@ -23,21 +23,15 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {}
-    this.fetchDemo = this.fetchDemo.bind(this);
   }
-  
-  fetchDemo(){
-    axios.get('/api/check')
-      .then(res => {
-        console.log(res.data)
-      })
-  }
+
   componentDidMount(){
     this.props.fetchUser();
   }
 
   render() {
- 
+    // console.log(this);
+    //this.props.fetchUser().then((x) => console.log(x));
     return (
       <Router>
       <div>
@@ -61,4 +55,4 @@ class App extends Component {
   }
 }
 
-export default connect(null, actions )(App);
+export default connect(null, actions)(App);
