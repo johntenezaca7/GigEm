@@ -25,6 +25,20 @@ class Navbar extends React.Component {
             </div>
           );
         default:
+<<<<<<< HEAD
+<<<<<<< HEAD
+          return[
+                    <Link to="/myshows">
+                          <button className="btn btn-primary my-2 my-sm-0" type="submit">My Shows</button>
+                        </Link>
+                      ,
+=======
+          return (
+>>>>>>> 20de9f47
+            <div key="1">
+              <a href="/api/logout" >LogOut</a>
+            </div>
+=======
           return (
             <div>
               {/* <td> */}
@@ -38,6 +52,7 @@ class Navbar extends React.Component {
                 {/* </Link> */}
               {/* </td> */}
           </div>
+>>>>>>> 0edf20fa
           )
       }
     }
