@@ -17,11 +17,11 @@ class Navbar extends React.Component {
         case false:
           return(
             <div>
-              <td>
-                <Link to="/auth/google">
-                  <button className="btn btn-warning my-2 my-sm-0" type="submit">Login With Google</button>
-                </Link>
-              </td>
+              {/* <td> */}
+                {/* <Link to="/auth/google"> */}
+                <a href="/auth/google"><button className="btn btn-warning my-2 my-sm-0" type="submit">Login With Google</button></a>
+                {/* </Link> */}
+              {/* </td> */}
             </div>
           );
         default:
@@ -33,9 +33,9 @@ class Navbar extends React.Component {
                 </Link>
               {/* </td> */}
               {/* <td> */}
-                <Link to="/api/logout">
-                  <button className="btn btn-warning my-2 my-sm-0" type="submit">Logout</button>
-                </Link>
+                {/* <Link to="/api/logout"> */}
+                  <a href="/api/logout"><button className="btn btn-warning my-2 my-sm-0" type="submit">Logout</button></a>
+                {/* </Link> */}
               {/* </td> */}
           </div>
           )
@@ -56,7 +56,7 @@ class Navbar extends React.Component {
                 <ul className="navbar-nav mr-auto">
                   <li className="nav-item active">
                     <a className="nav-link">
-                    <h1>Username</h1>
+                    <h1>{this.props.auth[0] ? this.props.auth[0].google_id : 'Anonymous User'}</h1>
                     <span className="sr-only">(current)</span>
                     </a>
                   </li>
