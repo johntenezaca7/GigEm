@@ -6,13 +6,31 @@ import {
   Link
 } from 'react-router-dom'
 
-class Navbar extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
+import { connect } from 'react-redux';
 
+class Navbar extends React.Component {
+    
+    renderContent(){
+      switch(this.props.auth){
+        case null:
+          return;
+        case false:
+          return(
+            <div>
+            <a href="/auth/google">Login With Google</a>
+            </div>
+          );
+        default:
+          return[
+            <div>
+              <a href="/api/logout" >LogOut</a>
+            </div>
+          ] 
+      }
+    }
+    
     render() {
+      console.log('Inside Navbar:'+JSON.stringify(this.props.auth));
         return (
             <div>
               <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -71,10 +89,8 @@ class Navbar extends React.Component {
                         </Link>
                       </td>
                       <td>
-                        <Link to="logout">
-                        <button className="btn btn-primary my-2 my-sm-0" type="submit">Logout</button>
-                        </Link>
-                      </td>
+                       {this.renderContent()}
+                      </td> 
                     </tr>
                   </tbody>
                 </table>
@@ -85,5 +101,9 @@ class Navbar extends React.Component {
     }
 }
 
-export default Navbar;
+function mapStateToProps({ auth }){
+    return { auth }
+}
+
+export default  connect(mapStateToProps)(Navbar);
 
