@@ -7,6 +7,8 @@ import {
   Link
 } from 'react-router-dom'
 
+import { connect } from 'react-redux'; 
+import * as actions from './actions';
 
 ///////////////////////////////
 ////// Component Imports //////
@@ -30,10 +32,12 @@ class App extends Component {
 
 
   }
+  componentDidMount(){
+    this.props.fetchUser();
+  }
 
-
- 
   render() {
+ 
     return (
       <Router>
       <div>
@@ -62,4 +66,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(null, actions )(App);
