@@ -8,6 +8,7 @@ export default class PotentialGig extends React.Component {
     }
 
     render() {
+        console.log('Potential Gig: ', this.props.gig);
         return (
             <div className="container border p-3 ">
                 <div className="row">

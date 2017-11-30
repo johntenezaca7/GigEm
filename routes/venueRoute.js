@@ -11,7 +11,6 @@ module.exports = (app, db) => {
   app.get('/venues', (req, res) =>{
     getAllVenues((err, data) => {
       if (err) res.json(err);
-      
       res.send(data);
     });
   });
