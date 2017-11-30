@@ -5,7 +5,7 @@ import {
   Route,
   // Link
 } from 'react-router-dom'
-import { createStore } from 'redux';
+// import { createStore } from 'redux';
 
 import { connect } from 'react-redux'; 
 import * as actions from './actions';

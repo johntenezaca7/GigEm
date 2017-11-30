@@ -17,25 +17,24 @@ const config = require('../config/dbconfig');
      connection.query(sql, (err, data) => {
          if(err){
              callback(err, null)
-            } else {
-                callback(null, data);
-            }
-        });
-    }
-    
-    const newUser = function(profile, callback){
-        let sql = `INSERT INTO Users(google_id, name, email, photo) VALUES("${profile.id}", "${profile.displayName}", "${profile.emails[0].value}", "${profile.photos[0].value}")`;
-        connection.query(sql, (err, data) => {
-            if(err){
-                callback(err, null);
-            } else {
-                callback(null, data);
-            }
-        });
-    }
-    
-    
-    
-    exports.checkUser = checkUser;
-    exports.newUser = newUser;
-    exports.connection = connection;
+         } else {
+             callback(null, data);
+         }
+     });
+ }
+
+ const newUser = function(profile, callback){
+     let sql = `INSERT INTO Users(google_id, name, email, photo) VALUES("${profile.id}", "${profile.displayName}", "${profile.emails[0].value}", "${profile.photos[0].value}")`;
+     connection.query(sql, (err, data) => {
+         if(err){
+             callback(err, null);
+         } else {
+             callback(null, data);
+         }
+     });
+ }
+
+
+
+ exports.checkUser = checkUser;
+ exports.newUser = newUser;
