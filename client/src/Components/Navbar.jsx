@@ -43,11 +43,7 @@ class Navbar extends React.Component {
     }
     
     render() {
-<<<<<<< HEAD
-      console.log('Inside Navbar:' + JSON.stringify(this.props));
-=======
       
->>>>>>> moreFront
         return (
             <div>
               <nav className="navbar navbar-expand-lg navbar-light bg-light">
