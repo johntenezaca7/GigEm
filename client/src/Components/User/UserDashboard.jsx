@@ -3,13 +3,25 @@ import React from 'react';
 import UpcomingGig from './UpcomingGig';
 import PotentialGig from './PotentialGig';
 
-export default class UserDashboard extends React.Component {
+// import axios from 'axios'
+
+import { connect } from 'react-redux';
+// import { FETCH_EVENTS } from '../../actions/types';
+
+
+class UserDashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
     }
 
+    // componentWillMount() {
+    //   fetchEvents();
+    // }
+
     render() {
+      console.log('in user dashboard:');
+      console.log('this.props: ', this.props);
       return (
         <div>
           <div className="row">
@@ -31,3 +43,9 @@ export default class UserDashboard extends React.Component {
       )
     }
 }
+
+function mapStateToProps({ events }){
+  return { events }
+}
+
+export default  connect(mapStateToProps)(UserDashboard);
