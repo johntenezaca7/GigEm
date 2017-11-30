@@ -6,7 +6,6 @@ const db = require('./db');
 const cookieSession = require('cookie-session');
 const keys = require('./config/keys')
 
-
 require('./services/passport');
 
 var app = express();

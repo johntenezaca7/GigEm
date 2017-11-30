@@ -34,7 +34,10 @@ const config = require('../config/dbconfig');
      });
  }
 
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> 0edf20fa
  exports.checkUser = checkUser;
  exports.newUser = newUser;
