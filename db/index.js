@@ -11,9 +11,6 @@ const config = require('../config/dbconfig');
      }
  })
 
-<<<<<<< HEAD
- exports.connection = connection;
-=======
  const checkUser = function(id, callback){
      
      let sql = `SELECT google_id FROM Users WHERE google_id = "${id}"`;
@@ -41,4 +38,3 @@ const config = require('../config/dbconfig');
 
  exports.checkUser = checkUser;
  exports.newUser = newUser;
->>>>>>> finished google oauth, added cookie sessions, user can sign in and log out
