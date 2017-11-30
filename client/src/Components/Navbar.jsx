@@ -22,7 +22,11 @@ class Navbar extends React.Component {
           );
         default:
           return[
-            <div>
+                    <Link to="/myshows">
+                          <button className="btn btn-primary my-2 my-sm-0" type="submit">My Shows</button>
+                        </Link>
+                      ,
+            <div key="1">
               <a href="/api/logout" >LogOut</a>
             </div>
           ] 
@@ -82,11 +86,6 @@ class Navbar extends React.Component {
                       <Link to="/profile">
                         <button className="btn btn-danger my-2 my-sm-0" type="submit">My Profile (bands only)</button>
                       </Link>
-                      </td>
-                      <td>
-                        <Link to="/myshows">
-                          <button className="btn btn-primary my-2 my-sm-0" type="submit">My Shows</button>
-                        </Link>
                       </td>
                       <td>
                        {this.renderContent()}

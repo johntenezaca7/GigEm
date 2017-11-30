@@ -40,14 +40,14 @@ if (process.env.NODE_ENV === 'production') {
 	});
 }
 
-const PORT = process.env.PORT || 5000;
 
 let frontRoute = function (req, res) {
 	//console.log(path.join(__dirname, '/../react-client/dist/', 'index.html'));
-	  res.sendFile(path.join(__dirname, '/../react-client/dist/', 'index.html'));
-	};
+	res.sendFile(path.join(__dirname, '/../react-client/dist/', 'index.html'));
+};
 app.get('/*', frontRoute);
 
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log('Server running on ' + PORT)
 })
