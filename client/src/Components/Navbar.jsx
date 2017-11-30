@@ -29,12 +29,12 @@ class Navbar extends React.Component {
             <div key="1">
               <a href="/api/logout" >LogOut</a>
             </div>
-          ] 
+          )
       }
     }
     
     render() {
-      console.log('Inside Navbar:'+JSON.stringify(this.props.auth));
+      console.log('Inside Navbar:' + JSON.stringify(this.props));
         return (
             <div>
               <nav className="navbar navbar-expand-lg navbar-light bg-light">
