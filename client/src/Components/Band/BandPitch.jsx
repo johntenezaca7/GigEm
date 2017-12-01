@@ -18,7 +18,7 @@ export default class BandPitch extends React.Component {
                         <div className="form-inline">
                           {/* <div className="col col-md-auto"> */}
                           <div>
-                            <label for="exampleInputEmail1" className="text-left">Location</label>
+                            <label className="text-left">Location</label>
                           </div>
                           {/* </div> */}
                           {/* <div className="col "> */}
@@ -28,7 +28,7 @@ export default class BandPitch extends React.Component {
                         </div>
                         <div className="form-inline">
                           {/* <div className="col col-md-auto"> */}
-                            <label for="exampleInputEmail1">Available Dates</label>
+                            <label >Available Dates</label>
                           {/* </div> */}
                           {/* <div className="col"> */}
                             <Datetime />
@@ -36,15 +36,15 @@ export default class BandPitch extends React.Component {
                         </div>
                         <div className="form-inline ">
                           {/* <div className="col col-md-auto"> */}
-                          <label for="exampleInputEmail1">Notes</label>
-                            <input type="email" class="form-control mt-1 form-control-sm  justify-content-end" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+                          <label>Notes</label>
+                            <input type="email" className="form-control mt-1 form-control-sm  justify-content-end" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
                         </div>
 
                     </div>
                     <div className="col-sm text-right">
                         <div className="form-inline">
                             {/* <div className="col col-6"> */}
-                              <label for="exampleInputEmail1" className="text-left">Commits Needed</label>
+                              <label className="text-left">Commits Needed</label>
                             {/* </div> */}
                             {/* <div className="col"> */}
                               <input type="email" className="form-control mt-1 form-control-sm justify-content-right" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
@@ -52,13 +52,13 @@ export default class BandPitch extends React.Component {
                         </div>
                         <div className="form-inline">
                           {/* <div className="col"> */}
-                            <label for="exampleInputEmail1">By</label>
+                            <label>By</label>
                             {/* <div className="col align-self-end text-right"> */}
                             <Datetime />
                           {/* </div> */}
                         </div>
                         <div className="button-block">
-                          <button type="submit" class="btn btn-secondary">Submit</button>
+                          <button type="submit" className ="btn btn-secondary">Submit</button>
                         </div>
                     </div>
                 </div> 
