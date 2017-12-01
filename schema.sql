@@ -136,7 +136,7 @@ ALTER TABLE `Attendance` ADD FOREIGN KEY (user_id) REFERENCES `Users` (`id`);
 INSERT INTO `Users` (`id`,`google_id`,`is_band`, `name`,`description`,`email`,`age`,`zip`,`city`,`state`,`photo`,`status`,`credits`) VALUES
   ('','goog1', '0','james fannerly','loves trombones','parade@gmail.com','33','12345','spokane','IA','pic.svg','','');
 
-INSERT INTO `Users` (`id`,`google_id`,`name`,`description`,`email`,`zip`,`current_zip`,`city`,`state`,`photo`,`status`,`credits`) VALUES
+INSERT INTO `Users` (`id`,`google_id`,`name`,`is_band`,`description`,`email`,`zip`,`city`,`state`,`photo`,`status`,`credits`) VALUES
 ('','goog2','Monsoon Of Sound', '1','weather music','monsoon@gmail.com','34567','new york','NY','photo.jpeg','','');
 
 INSERT INTO `Venue` (`id`,`name`,`description`,`city`,`state`,`zip`,`location`) VALUES
