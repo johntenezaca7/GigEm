@@ -14,7 +14,7 @@ export default class UpcomingGig extends React.Component {
         return (
             <div className="container border p-3" key={this.props.gig.id}>
                 <div className="row">
-                    <div className="col align-self-start">
+                    <div className="col-2 align-self-start">
                       {this.props.gig.name}<br />
                       {this.props.gig.city}<br />
                       Fully Commited 🎉
