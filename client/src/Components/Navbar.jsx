@@ -95,7 +95,7 @@ class Navbar extends React.Component {
 }
 
 function mapStateToProps({ auth }){
-  console.log('map:', auth)
+  //console.log('map:', auth)
     return { 
       auth: auth,
       userInFo: 'info'

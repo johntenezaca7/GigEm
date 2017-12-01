@@ -8,21 +8,22 @@ export default class PotentialGig extends React.Component {
     }
 
     render() {
-        console.log('Potential Gig: ', this.props.gig);
+        let percent = ((this.props.gig.commits / this.props.gig.min_commits)*100);
         return (
             <div className="container border p-3 ">
                 <div className="row">
                     <div className="col align-self-start">
-                      Clark<br />
-                      <div className="text-primary">15 of 20 commits!</div>
+                        {this.props.gig.name}<br />
+                      
+                      <div className="text-primary">{this.props.gig.commits} of {this.props.gig.min_commits} commits!</div>
                     </div>
                     <div className="col-lg-5 justify-content-md-center">
-                      <ProgressComponent percent={Math.floor(Math.random() * 100)} />
+                      <ProgressComponent percent={percent} />
                     </div>
                     <div className="col col-md-auto" align="right">
-                      Oakland, CA<br />
-                      December 12, 2017 to<br />
-                      December 17, 2017
+                        {this.props.gig.city}<br />
+                      {this.props.gig.start_date} to<br />
+                      {this.props.gig.end_date}
                     </div>
                     <div className="col col-md-auto align-self-end" align="right">
                         <div>Committed /<br /> 
