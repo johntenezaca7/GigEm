@@ -20,24 +20,26 @@ class UserDashboard extends React.Component {
     // }
 
     render() {
-      console.log('in user dashboard:');
-      console.log('this.props: ', this.props);
+
       return (
         <div>
           <div className="row">
-            {/* <div className="col">
-            </div> */}
-            <div className="col">
-              <h2>Upcoming Gig'em Shows</h2>
-                <div><UpcomingGig/></div>
-                <div><UpcomingGig/></div>
-              <h2>Potential Gigs</h2>
-                <div><PotentialGig /></div>
-                <div><PotentialGig /></div>
-                <div><PotentialGig /></div>
+            <div className="col col-1">
             </div>
-            {/* <div className="col-1">
-            </div> */}
+            <div className="col">
+            <h2>Upcoming Gig'em Shows</h2>
+              {
+                this.props.events
+                  .filter((x) => x.is_committed === 1)
+                  .map((x) => <UpcomingGig gig={x} />)
+              }
+              <h2>Potential Gigs</h2>
+              {
+                this.props.events
+                  .filter((x) => x.is_committed === 0)
+                  .map((x) => <PotentialGig gig={x} />)
+              }
+            </div>
           </div>
         </div>
       )
