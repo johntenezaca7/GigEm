@@ -2,7 +2,7 @@ module.exports = (app, db) => {
     
   const getAllEvents = (callback) => {
     const sql = `SELECT * FROM Event`;
-    const joinsql = `SELECT Event.venue_id, Users.id, Event.name, Event.description, Event.photo, Event.start_date, Event.start_time, Event.end_date, Event.final_commit_date, Event.city, Event.state, Event.zip, Event.is_committed, Event.price, Event.min_commits, Event.commits
+    const joinsql = `SELECT Event.venue_id, Users.name, Event.name, Event.description, Event.photo, Event.start_date, Event.start_time, Event.end_date, Event.final_commit_date, Event.city, Event.state, Event.zip, Event.is_committed, Event.price, Event.min_commits, Event.commits
      FROM Event INNER JOIN Users ON Event.user_id=Users.id`;
     return db.connection.query(joinsql, (err, data) => {
       if (err) console.log('getAllEvent Error: ', err);

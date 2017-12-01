@@ -1,15 +1,36 @@
 const mysql = require('mysql');
 const config = require('../config/dbconfig');
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize(config.database, config.user, config.password, {
+  host: config.host,
+  dialect: 'mysql',
 
- const connection = mysql.createConnection(config);
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  }
+});
 
- connection.connect((err) => {
-     if(err){
-         console.log(err);
-     } else {
-         console.log('Connected to AWS MySQL!')
-     }
- })
+sequelize
+.authenticate()
+.then(() => {
+  console.log('Connection has been established successfully.');
+})
+.catch(err => {
+  console.error('Unable to connect to the database:', err);
+});
+
+//  const connection = mysql.createConnection(config);
+
+//  connection.connect((err) => {
+//      if(err){
+//          console.log(err);
+//      } else {
+//          console.log('Connected to AWS MySQL!')
+//      }
+//  })
 
 const checkUser = function(id, callback){     
      let sql = `SELECT google_id FROM Users WHERE google_id = "${id}"`;
