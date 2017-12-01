@@ -10,19 +10,20 @@ export default class UpcomingGig extends React.Component {
 
 
     render() {
-        console.log('Upcoming Gig this.props: ', this.props);
+        //console.log('Upcoming Gig this.props: ', this.props);
         return (
             <div className="container border p-3" key={this.props.gig.id}>
                 <div className="row">
                     <div className="col align-self-start">
-                      {this.props.gig.band_id}<br />
+                      {this.props.gig.name}<br />
+                      {this.props.gig.city}<br />
                       Fully Commited 🎉
                     </div>
                     <div className="col-lg-8 justify-content-md-center">
                       <ProgressComponent percent={100} />
                     </div>
                     <div className="col col-md-auto align-self-end" align="right">
-                      {this.props.gig.start_date}<br />
+                      {this.props.gig.final_commit_date}<br />
                       {this.props.gig.venue_id}<br />
                       Doors @ {this.props.gig.start_time}
                     </div>
