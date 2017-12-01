@@ -18,9 +18,9 @@ class BandProfile extends React.Component {
                       <img src="./Assets/bandLogo.svg" width="200px" height="200px" alt="Bandname"/>
                     </div>
                     Brooklyn, NY
-                    <h5>Upcoming Gig'em Shows</h5>
+                    <h3>Upcoming Gig'em Shows</h3>
                     Upcoming Shows Component Placeholder
-                    <h5>Potential Gigs</h5>
+                    <h3>Potential Gigs</h3>
                     Potential Gigs Placeholder
                 </div>
                 <div className="col-1">

@@ -12,3 +12,6 @@ export const fetchEvents = () => async dispatch => {
     dispatch({ type: FETCH_EVENTS, payload: res.data})
 }
 
+export const fetchBandInfo = () => async dispatch => {
+    const res = await axios.post('/bandinfo')
+}
