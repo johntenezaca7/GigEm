@@ -14,7 +14,7 @@ export default class Developers extends React.Component {
             <div className="col col-1">
             </div>
             <div className="col col-md-auto mx-auto text-center small">
-              <img src="../../Assets/Developers/DylanMcBurnett.jpg" alt="Dyland McBurnett" width="150px" height="150px" className="p-2" /><br />
+              <img src="../../Assets/Developers/DylanMcBurnett.jpg" alt="Dyland McBurnett" width="150px" height="150px" className="rounded-circle" /><br />
               <div>
                 Dylan McBurnett
               </div>
@@ -28,7 +28,7 @@ export default class Developers extends React.Component {
               </div>
             </div>
             <div className="col col-md-auto mx-auto text-center small">
-              <img src="../../Assets/Developers/JohnTenezaca.jpg" alt="John Tenezaca" width="150px" height="150px" className="p-2"/><br />
+              <img src="../../Assets/Developers/JohnTenezaca.jpg" alt="John Tenezaca" width="150px" height="150px" className="rounded-circle" /><br />
               <div>
                 John Tenezaca
               </div>
@@ -42,7 +42,7 @@ export default class Developers extends React.Component {
               </div>
             </div>
             <div className="col col-md-auto mx-auto text-center small">
-              <img src="../../Assets/Developers/TommyYork.jpg" alt="Tommy York" width="150px" height="150px" className="p-2"/><br />
+              <img src="../../Assets/Developers/TommyYork.jpg" alt="Tommy York" width="150px" height="150px" className="rounded-circle" /><br />
               <div>
                 Tommy York
               </div>

@@ -23,16 +23,16 @@ export default class UserDashboard extends React.Component {
     render() {
 
       return (
-        <div>
-          <div className="container-fluid p-5" id="landingpage">
+        <div className="landingpage">
+          <div className="container-fluid p-5 landingcontainer">
             <div className="row"> 
           
-                      <div className="col col-md-auto mx-auto text-center">
-                          <img src="../../Assets/tools/aws.svg" height="550px" alt="Gigem Logo"/>
+                    <div className="col mx-auto text-center m-5">
+                          <img src="../../Assets/tools/aws.svg" width="100%" style={{maxWidth: '40%'}} className="img-fluid" alt="Gigem Logo"/>
                     </div>
                   </div>
           
-                  <div className="row">
+                  <div className="row m-2">
                     <div className="col col-md-auto mx-auto text-center" id="branddiv">
                       <div className="m-5" style={{height: '20%'}}>
                         <a href="/auth/google"><button className="btn btn-info my-5 my-sm-0 align-middle" type="submit">Login</button></a>
@@ -40,6 +40,9 @@ export default class UserDashboard extends React.Component {
                         <br/>
                       </div>
                     </div>
+                  </div>
+
+                  <div className="row m-1">
                   </div>
           
                     <div className="row">
@@ -58,8 +61,8 @@ export default class UserDashboard extends React.Component {
           <div className="container-fluid">
 
           <div className="row">
-            <div className="col col-2">
-            </div>
+            {/* <div className="col col-2">
+            </div> */}
             <div className="col mx-auto text-center">
               <div className="m-5">
                 <a name="description">
@@ -69,40 +72,40 @@ export default class UserDashboard extends React.Component {
                 </a>
               </div>
             </div>
-            <div className="col col-2">
-            </div>
+            {/* <div className="col col-2">
+            </div> */}
           </div>
 
           <div className="row">
-            <div className="col col-2">
-            </div>
+            {/* <div className="col col-2">
+            </div> */}
             <div className="col mx-auto">
               <Developers />
             </div>
-            <div className="col col-2">
-            </div>
+            {/* <div className="col col-2">
+            </div> */}
         </div>
 
         <div className="row">
-          <div className="col col-2">
-          </div>
+          {/* <div className="col col-2">
+          </div> */}
           <div className="col self-align-center">
             <h1 className="display-4 text-center m-2">
               Tools
             </h1>
           </div>
-          <div className="col col-2">
-          </div>
+          {/* <div className="col col-2">
+          </div> */}
         </div>
 
         <div className="row">
-          <div className="col col-2">
-          </div>
+          {/* <div className="col col-2">
+          </div> */}
           <div className="col self-align-center">
             <Footer />
           </div>
-          <div className="col col-2">
-          </div>
+          {/* <div className="col col-2">
+          </div> */}
         </div>
       </div>
 
