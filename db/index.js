@@ -238,9 +238,9 @@ Showcase.sync(forceObj).then(() => {
   });
 });
 
-// // Showcase.findAll({ include: [ Venue, User ] }).then(showcases => {
-// //   console.log(JSON.stringify(showcases))
-// // });
+// Showcase.findAll({ include: [ Venue, User ] }).then(showcases => {
+//   console.log(JSON.stringify(showcases))
+// });
 
 let Properties = connection.define('Properties', {
   id: {
@@ -356,17 +356,24 @@ Attendance.sync(forceObj).then(() => {
 //   }
 // });
 
+// Showcase.findAll({ include: [ Venue, User ] }).then(showcases => {
+//   console.log(JSON.stringify(showcases))
+// });
 
 // const checkUser = function(id, callback){     
-//      let sql = `SELECT google_id FROM Users WHERE google_id = "${id}"`;
-//      connection.query(sql, (err, data) => {
-//          if(err){
-//              callback(err, null)
-//             } else {
-//                 callback(null, data);
-//             }
-//         });
+//   let sql = `SELECT google_id FROM Users WHERE google_id = "${id}"`;
+//   connection.query(sql, (err, data) => {
+//     if(err){
+//         callback(err, null)
+//       } else {
+//           callback(null, data);
+//       }
+//     });
 // }
+
+const checkUser = (id, callback) => User.findAll({where: {googleId: id}}).then((user) => {
+  callback(user);
+});
     
 // const newUser = function(profile, callback){
 //         let sql = `INSERT INTO Users(google_id, name, email, photo) VALUES("${profile.id}", "${profile.displayName}", "${profile.emails[0].value}", "${profile.photos[0].value}")`;
@@ -390,7 +397,7 @@ Attendance.sync(forceObj).then(() => {
 //     })
 // }
     
-    
+exports.checkUser = checkUser;    
 exports.User = User;
 exports.Venue = Venue;
 exports.Showcase = Showcase;
