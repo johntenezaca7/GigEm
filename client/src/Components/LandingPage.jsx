@@ -35,7 +35,6 @@ export default class UserDashboard extends React.Component {
                   <div className="row m-2">
                     <div className="col col-md-auto mx-auto text-center" id="branddiv">
                       <div className="m-5" style={{height: '20%'}}>
-                        <a href="/auth/google"><button className="btn btn-info my-5 my-sm-0 align-middle" type="submit">Login</button></a>
                         <a href="/auth/google"><button className="btn btn-info btn-lg align-middle" type="submit">Login</button></a>
                         <br/>
                         <br/>
