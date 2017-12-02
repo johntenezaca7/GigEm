@@ -22,7 +22,7 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+// remove when sequlize is updated
 require('./routes/authRoute')(app, db)
 require('./routes/venueRoute')(app, db)
 require('./routes/eventRoute')(app, db)
