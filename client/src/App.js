@@ -36,6 +36,19 @@ class App extends Component {
   render() {
     return (
       <Router>
+
+      <div>
+
+          <Route exact path="/" render={() => <div><LandingPage /></div>} />
+
+          <Route exact path="/bandprofile" render={() => <div><Navbar /><BandProfile /></div>} />
+          <Route exact path="/userprofile" render={() => <div><Navbar /><UserProfile /></div>} />
+
+          <Route exact path="/user" render={() => <div><Navbar /><UserDashboard /></div>} />
+          <Route exact path="/band" render={() => <div><Navbar /><BandDashboard /></div>} />
+
+
+
         <div>
           <Route exact path="/" render={() => <div><LandingPage /></div>} />
 
