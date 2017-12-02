@@ -1,21 +1,34 @@
-let sequelize = require('../db/index.js');
-
-const Venue = sequelize.define('Venue', {
-  firstName: {
-    type: Sequelize.STRING
-  },
-  lastName: {
-    type: Sequelize.STRING
-  }
-});
-    
-  // force: true will drop the table if it already exists
-Venue.sync({force: true}).then(() => {
-  // Table created
-  return Venue.create({
-    firstName: 'John',
-    lastName: 'Hancock'
+module.exports = (connection, Sequelize) => {
+  // //Venues
+  return venue = connection.define('Venue', {
+    id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: Sequelize.STRING,
+      defaultValue: ''
+    },
+    description: {
+      type: Sequelize.TEXT,
+      defaultValue: ''
+    },
+    city: {
+      type: Sequelize.STRING,
+      defaultValue: ''
+    },
+    state: {
+      type: Sequelize.STRING,
+      defaultValue: ''
+    },
+    zip: {
+      type: Sequelize.INTEGER,
+      defaultValue: null
+    },
+    location: {
+      type: Sequelize.STRING,
+      defaultValue: ''
+    }
   });
-});
-
-exports.Venue = Venue;
+}

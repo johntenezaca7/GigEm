@@ -75,26 +75,6 @@ module.exports = (connection, Sequelize) => {
       defaultValue: 0
     }
   });
-
-  // force: true will drop the table if it already exists
-Event.sync({force: true}).then(() => {
-  console.log('SYNC IN EVENTS-----------------------')
-  // Table created
-  return Event.create({
-    venueId: 123456,
-    userId: '1',
-    name: 'Festivus',
-    description: 'for the rest of us',
-    zip: 23456,
-    city: "Dallas",
-    state: "TX",
-    photo: 'pic.jpeg',
-    minCommits: 10,
-    commits: 6
-  });
-});
-
-
-
 };
+
 

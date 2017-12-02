@@ -24,8 +24,34 @@ connection
 
 let User = require('../models/Users')(connection, Sequelize);
 let Event = require('../models/Events')(connection, Sequelize);
-console.log('EVENTTTTTttttttttt', Event);
+let Venue = require('../models/Venues')(connection, Sequelize);
+let Attendance = require('../models/Attendance')(connection, Sequelize);
+
+//console.log('EVENTTTTTttttttttt', Event);
   // force: true will drop the table if it already exists
+// Attendance.sync({force: true}).then(() => {
+//   console.log('SYNC IN Atttendance-----------------------')
+//   // Table created
+//   return Attendance.create({
+//     eventId: 1,
+//     userId: 1
+//   });
+// });
+
+  // Venue.sync({force: true}).then(() => {
+//   console.log('SYNC IN Venue-----------------------')
+//   // Table created
+//   return Venue.create({
+//     name: 'Good Room',
+//     description: 'its alright',
+//     zip: 23456,
+//     city: "Brooklyn",
+//     state: "NY",
+//     location: 'right here',
+//   });
+// });
+
+
   // Event.sync({force: true}).then(() => {
   //   console.log('SYNC IN EVENTS-----------------------')
   //   // Table created
