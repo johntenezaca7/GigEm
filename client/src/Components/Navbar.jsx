@@ -67,12 +67,12 @@ class Navbar extends React.Component {
                   <tbody>
                     <tr>
                     <td>
-                      <Link to="/bandprofile">
+                      <Link to="/band">
                         <button className="btn btn-info my-2 my-sm-0" type="submit">View Band Routes</button>
                       </Link>
                       </td>
                     <td>
-                      <Link to="/profile">
+                      <Link to="/bandprofile">
                         <button className="btn btn-danger my-2 my-sm-0" type="submit">Band Profile</button>
                       </Link>
                     </td>

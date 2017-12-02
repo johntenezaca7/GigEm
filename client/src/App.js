@@ -19,6 +19,8 @@ import BandProfile from './Components/BandProfile';
 import UserProfile from './Components/User/UserProfile';
 import UserDashboard from './Components/User/UserDashboard';
 import BandDashboard from './Components/Band/BandDashboard';
+import LandingPage from './Components/LandingPage';
+
 
 class App extends Component {
   constructor(props){
@@ -38,12 +40,14 @@ class App extends Component {
       <Router>
       <div>
 
+          <Route exact path="/" render={() => <div><LandingPage /></div>} />
+
           <Route exact path="/bandprofile" render={() => <div><Navbar /><BandProfile /></div>} />
           <Route exact path="/userprofile" render={() => <div><Navbar /><UserProfile /></div>} />
 
           <Route exact path="/user" render={() => <div><Navbar /><UserDashboard /></div>} />
           <Route exact path="/band" render={() => <div><Navbar /><BandDashboard /></div>} />
-          <Route exact path="/" render={() => <div><Navbar /><UserDashboard /></div>} />
+
 
           <Route exact path="/myshows" render={() => <div><Navbar /><div>Placeholder for filtered shows.</div></div>} />
           <Route exact path="/logout" render={() => <div><Navbar /><div>Placeholder auth / logout.</div></div>} />
