@@ -20,10 +20,10 @@ export default class Developers extends React.Component {
               </div>
               <div>
                 <a href="https://www.linkedin.com/in/dylan-mcburnett/">
-                  <img src="../../Assets/tools/LinkedIn.svg" width="20px" className="m-1"/>
+                  <img src="../../Assets/tools/LinkedIn.svg" width="20px" alt="LinkedIn" className="m-1"/>
                 </a>
                 <a href="https://github.com/dylanash">
-                  <img src="../../Assets/tools/github.svg" width="20px"  className="m-1" />
+                  <img src="../../Assets/tools/github.svg" width="20px" alt="Github" className="m-1" />
                 </a>
               </div>
             </div>
@@ -34,10 +34,10 @@ export default class Developers extends React.Component {
               </div>
               <div>
                 <a href="https://www.linkedin.com/in/jtenez/">
-                  <img src="../../Assets/tools/LinkedIn.svg" width="20px" className="m-1" />
+                  <img src="../../Assets/tools/LinkedIn.svg" width="20px" alt="LinkedIn" className="m-1" />
                 </a>
                 <a href="https://github.com/johntenezaca7">
-                  <img src="../../Assets/tools/github.svg" width="20px" className="m-1" />
+                  <img src="../../Assets/tools/github.svg" width="20px" alt="Github" className="m-1" />
                 </a>
               </div>
             </div>
@@ -48,10 +48,10 @@ export default class Developers extends React.Component {
               </div>
               <div>
                 <a href="https://www.linkedin.com/in/tommyyork/">
-                  <img src="../../Assets/tools/LinkedIn.svg" width="20px" className="m-1" />
+                  <img src="../../Assets/tools/LinkedIn.svg" width="20px" alt="LinkedIn" className="m-1" />
                 </a>
                 <a href="https://github.com/tommyyork">
-                  <img src="../../Assets/tools/github.svg" width="20px" className="m-1" />
+                  <img src="../../Assets/tools/github.svg" width="20px" alt="Github" className="m-1" />
                 </a>
               </div>
             </div>

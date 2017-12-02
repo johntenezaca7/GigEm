@@ -2,6 +2,8 @@ import React from 'react';
 import Footer from './Footer';
 import Developers from './Developers';
 
+// import Particles from 'react-particles';
+
 export default class UserDashboard extends React.Component {
     constructor(props) {
         super(props);
@@ -17,39 +19,101 @@ export default class UserDashboard extends React.Component {
       this.props.onFetchClick();
     }
 
+
     render() {
 
       return (
-        <div className="container w-100">
-          <div className="row"> 
-            <div className="col col-md-auto mx-auto text-center">
-              <img src="../../Assets/tools/React.svg" width="50%" alt="Gigem Logo"/>
-              <h1 className="display-1">Gig'em</h1>
-              <div className="m-3">
-                <a href="/auth/google"><button className="btn btn-info my-2 my-sm-0" type="submit">Login</button></a>
-              </div>
-              <div className="m-2">
-               A Kickstarter-like for local music shows, allowing users to commit to potential local show and 
-               bands to propose events across the country. This project was designed as a thesis project at Hack Reactor NYC
-              by the following developers:
-              </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col self-align-center">
-            <Developers />
-          </div>
-        </div>
         <div>
-        <h1 className="display-4 text-center m-2">Tools</h1>
-        </div>
-        <div className="row">
+        <div className="container-fluid p-5" id="landingpage">
+          <div className="row m-5"> 
 
+            <div className="col col-md-auto mx-auto text-center">
+              <div className="m-5">
+                <img src="../../Assets/tools/aws.svg" width="120%" alt="Gigem Logo"/>
+              </div>
+          </div>
+        </div>
+
+        <div className="row m-5">
+          <div className="col col-md-auto mx-auto text-center" id="branddiv">
+            {/* <h1 className="text-warning m-5" id="branddiv">Gig'em</h1> */}
+            <a href="/auth/google"><button className="btn btn-info my-2 my-sm-0 m-5" type="submit">Login</button></a>
+          </div>
+        </div>
+
+          <div className="row m-5">
+            <br />
+          </div>
+
+          <div className="row m-5">
+            <br />
+          </div>
+
+
+          <div className="row m-5">
+
+            <div className="col col-md-auto mx-auto text-center m-5">
+              <svg class="arrows">
+                <path class="a1" d="M0 0 L30 32 L60 0"></path>
+                <path class="a2" d="M0 20 L30 52 L60 20"></path>
+                <path class="a3" d="M0 40 L30 72 L60 40"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+          <div className="container-fluid">
+          <div className="row">
+
+            <div className="col col-2">
+            </div>
+            <div className="col mx-auto text-center">
+              <div className="m-5">
+                <a name="description">
+                  A Kickstarter-like application for local music shows, allowing users to commit to potential local show and 
+                  bands to propose events across the country. This project was designed as a thesis project at Hack Reactor NYC
+                  by the following developers:
+                </a>
+              </div>
+            </div>
+            <div className="col col-2">
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col col-2">
+            </div>
+            <div className="col mx-auto">
+              <Developers />
+            </div>
+            <div className="col col-2">
+            </div>
+        </div>
+
+        <div className="row">
+          <div className="col col-2">
+          </div>
+          <div className="col self-align-center">
+            <h1 className="display-4 text-center m-2">
+              Tools
+            </h1>
+          </div>
+          <div className="col col-2">
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col col-2">
+          </div>
           <div className="col self-align-center">
             <Footer />
           </div>
+          <div className="col col-2">
+          </div>
         </div>
       </div>
+
+    </div>
       )
     }
 }
