@@ -24,47 +24,40 @@ export default class UserDashboard extends React.Component {
 
       return (
         <div>
-        <div className="container-fluid p-5" id="landingpage">
-          <div className="row m-5"> 
-
-            <div className="col col-md-auto mx-auto text-center">
-              <div className="m-5">
-                <img src="../../Assets/tools/aws.svg" width="120%" alt="Gigem Logo"/>
-              </div>
+          <div className="container-fluid p-5" id="landingpage">
+            <div className="row"> 
+          
+                      <div className="col col-md-auto mx-auto text-center">
+                          <img src="../../Assets/tools/aws.svg" height="550px" alt="Gigem Logo"/>
+                    </div>
+                  </div>
+          
+                  <div className="row">
+                    <div className="col col-md-auto mx-auto text-center" id="branddiv">
+                      <div className="m-5" style={{height: '20%'}}>
+                        <a href="/auth/google"><button className="btn btn-info my-5 my-sm-0 align-middle" type="submit">Login</button></a>
+                        <br/>
+                        <br/>
+                      </div>
+                    </div>
+                  </div>
+          
+                    <div className="row">
+                        <div className="col col-md-auto mx-auto text-center m-5">
+                          <a href="#description">
+                            <svg class="arrows">
+                              <path class="a1" d="M0 0 L30 32 L60 0"></path>
+                              <path class="a2" d="M0 20 L30 52 L60 20"></path>
+                              <path class="a3" d="M0 40 L30 72 L60 40"></path>
+                            </svg>
+                          </a>
+                      </div>
+                    </div>
           </div>
-        </div>
-
-        <div className="row m-5">
-          <div className="col col-md-auto mx-auto text-center" id="branddiv">
-            {/* <h1 className="text-warning m-5" id="branddiv">Gig'em</h1> */}
-            <a href="/auth/google"><button className="btn btn-info my-2 my-sm-0 m-5" type="submit">Login</button></a>
-          </div>
-        </div>
-
-          <div className="row m-5">
-            <br />
-          </div>
-
-          <div className="row m-5">
-            <br />
-          </div>
-
-
-          <div className="row m-5">
-
-            <div className="col col-md-auto mx-auto text-center m-5">
-              <svg class="arrows">
-                <path class="a1" d="M0 0 L30 32 L60 0"></path>
-                <path class="a2" d="M0 20 L30 52 L60 20"></path>
-                <path class="a3" d="M0 40 L30 72 L60 40"></path>
-              </svg>
-            </div>
-          </div>
-        </div>
 
           <div className="container-fluid">
-          <div className="row">
 
+          <div className="row">
             <div className="col col-2">
             </div>
             <div className="col mx-auto text-center">
