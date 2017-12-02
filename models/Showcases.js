@@ -1,19 +1,19 @@
 module.exports = (connection, Sequelize) => {
   
-  return event = connection.define('Event', {
+  return showcase = connection.define('Showcase', {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    venueId: {
-      type: Sequelize.INTEGER,
-      defaultValue: null
-    },
-    userId: {
-      type: Sequelize.INTEGER,
-      defaultValue: null
-    },
+    // venueId: {
+    //   type: Sequelize.INTEGER,
+    //   defaultValue: null
+    // },
+    // userId: {
+    //   type: Sequelize.INTEGER,
+    //   defaultValue: null
+    // },
     name: {
       type: Sequelize.STRING,
       defaultValue: ''

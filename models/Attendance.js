@@ -5,13 +5,13 @@ module.exports = (connection, Sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    eventId: {
-      type: Sequelize.INTEGER,
-      defaultValue: null
-    },
-    userId: {
-      type: Sequelize.INTEGER,
-      defaultValue: null
-    }
+    // eventId: {
+    //   type: Sequelize.INTEGER,
+    //   defaultValue: null
+    // },
+    // userId: {
+    //   type: Sequelize.INTEGER,
+    //   defaultValue: null
+    // }
   });
 }

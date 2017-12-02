@@ -5,10 +5,10 @@ module.exports = (connection, Sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    userId: {
-      type: Sequelize.INTEGER,
-      defaultValue: null
-    },
+    // userId: {
+    //   type: Sequelize.INTEGER,
+    //   defaultValue: null
+    // },
     linkUrl: {
       type: Sequelize.TEXT,
       defaultValue: null
