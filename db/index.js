@@ -136,7 +136,7 @@ let Venue = connection.define('Venue', {
   }
 });
 
-Venue.sync(forceObj).then(() => {
+Venue.sync({forceObj}).then(() => {
   console.log('SYNC VENUES-----------------------')
   // Table created
   return Venue.create({
@@ -218,9 +218,9 @@ let Showcase = connection.define('Showcase', {
 });
 
 Showcase.belongsTo(Venue);
-Venue.hasMany(Showcase);
+// Venue.hasMany(Showcase);
 Showcase.belongsTo(User);
-User.hasMany(Showcase);
+// User.hasMany(Showcase);
 
 Showcase.sync(forceObj).then(() => {
   console.log('SYNC SHOWCASES-----------------------')
@@ -231,34 +231,62 @@ Showcase.sync(forceObj).then(() => {
     zip: 23456,
     city: "Dallas",
     state: "TX",
+    isCommitted: '1',
     photo: 'pic.jpeg',
     minCommits: 10,
-    commits: 6
+    commits: 11
   });
 });
 
-Showcase.findAll({ include: [ Venue, User ] }).then(showcases => {
-  console.log(JSON.stringify(showcases))
+// // Showcase.findAll({ include: [ Venue, User ] }).then(showcases => {
+// //   console.log(JSON.stringify(showcases))
+// // });
+
+let Properties = connection.define('Properties', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  linkUrl: {
+    type: Sequelize.TEXT,
+    defaultValue: null
+  },
+  description: {
+    type: Sequelize.TEXT,
+    defaultValue: null
+  }
+});
+
+Properties.belongsTo(User);
+
+Properties.sync(forceObj).then(() => {
+  console.log('SYNC PROPERTIES-----------------------')
+  // Table created
+  return Properties.create({
+    linkUrl: 'bandsite.com',
+    description: 'woah what a great link'
+  });
 });
 
 
-
-// let User = require('../models/Users')(connection, Sequelize);
-// let Showcase = require('../models/Showcases')(connection, Sequelize);
-// let Venue = require('../models/Venues')(connection, Sequelize);
-// let Attendance = require('../models/Attendance')(connection, Sequelize);
-// let Properties = require('../models/Properties')(connection, Sequelize);
-
-// Foreign Keys
-// Properties.belongsTo(User);
-// Attendance.belongsToMany(User);
-// Attendance.belongsToMany(Showcase);
-// Showcase.belongsToMany(User, {through: 'Attendance'});
-// User.belongsToMany(Showcase, {through: 'Attendance'});
+let Attendance = connection.define('Attendance', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  }
+});
 
 
+Attendance.belongsTo(User);
+Attendance.belongsTo(Showcase);
 
-
+Attendance.sync(forceObj).then(() => {
+  console.log('SYNC IN Atttendance-----------------------')
+  // Table created
+  return Attendance.create({});
+});
 
 
 
@@ -363,8 +391,10 @@ Showcase.findAll({ include: [ Venue, User ] }).then(showcases => {
 // }
     
     
-// exports.getUserInfo = getUserInfo;
-// exports.checkUser = checkUser;
-// exports.newUser = newUser;
-// exports.connection = connection;
+exports.User = User;
+exports.Venue = Venue;
+exports.Showcase = Showcase;
+exports.Properties = Properties;
+exports.Attendance = Attendance;
+exports.connection = connection;
    
