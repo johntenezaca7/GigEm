@@ -28,12 +28,22 @@ const sql = `INSERT INTO Event (venue_id, user_id, name, description, photo, sta
     })
   };
 
-  app.get('/api/events', (req, res) =>{;
+  app.get('/api/events', (req, res) =>{
     dbDef.Showcase.findAll({})
     .then((data) => {
       // console.log('found showcases: ', console.log(data));
       res.send(data);
     })
+  });
+
+  app.post('/api/commit', (req, res) => {
+    console.log(req.body);
+    dbDef.Attendance.create({
+      UserId: req.body.user,
+      ShowcaseId: req.body.gig
+    }).then((data) => res.send(data));
+
+    // res.send('ok');
   });
   
   app.post('/api/addevent', (req, res) =>{

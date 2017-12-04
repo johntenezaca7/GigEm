@@ -43,7 +43,7 @@ class UserDashboard extends React.Component {
               {
                 this.props.events
                   .filter((x) => x.isCommitted === false)
-                  .map((x) => <PotentialGig key={x.id} gig={x} />)
+                  .map((x) => <PotentialGig user={this.props.auth.id} key={x.id} gig={x} />)
               }
             </div>
           </div>
@@ -52,8 +52,11 @@ class UserDashboard extends React.Component {
     }
 }
 
-function mapStateToProps({ events }){
-  return { events }
+function mapStateToProps({ events, auth }){
+  return { 
+    events: events,
+    auth: auth
+  }
 }
 
 const mapDispatchToProps = dispatch => {

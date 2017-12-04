@@ -1,5 +1,6 @@
 import React from 'react';
 import ProgressComponent from './ProgressComponent';
+import axios from 'axios';
 
 export default class PotentialGig extends React.Component {
     constructor(props) {
@@ -7,7 +8,15 @@ export default class PotentialGig extends React.Component {
         this.state = {};
     }
 
+    updateEvent(e) {
+        console.log('potentialgig: ', e);
+        console.log('gig id: ', this.props.gig.id);
+        console.log('user id: ', this.props.user);
+        axios.post('/api/commit', {'user': this.props.user, 'gig': this.props.gig.id} ).then(this.setState({}))
+    }
+
     render() {
+        console.log('potentialGig props: ', this.props);
         let percent = ((this.props.gig.commits / this.props.gig.min_commits)*100);
         return (
             <div className="container border p-3 ">
@@ -28,7 +37,7 @@ export default class PotentialGig extends React.Component {
                     <div className="col-1 col-md-auto align-self-end" align="right">
                         <div>Committed /<br /> 
                         Not committed</div>
-                        <div><button className="btn btn-info my-2 my-sm-0">Commit</button></div>
+                        <div><button className="btn btn-info my-2 my-sm-0" onClick={this.updateEvent.bind(this)}>Commit</button></div>
                     </div>
                 </div>
             </div>
