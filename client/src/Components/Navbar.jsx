@@ -43,7 +43,7 @@ class Navbar extends React.Component {
     }
     
     render() {
-      console.log(this.props.auth);
+      console.log('navbar this.props', this.props);
         return (
             <div>
               <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -58,7 +58,7 @@ class Navbar extends React.Component {
                 <ul className="navbar-nav mr-auto">
                   <li className="nav-item active">
                     <a className="nav-link">
-                    <h1>{this.props.auth ? this.props.auth : 'Anonymous User'}</h1>
+                    <h1>{this.props.auth.name ? this.props.auth.name : 'Anonymous User'}</h1>
                     <span className="sr-only">(current)</span>
                     </a>
                   </li>
