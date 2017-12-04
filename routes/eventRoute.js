@@ -31,7 +31,7 @@ const sql = `INSERT INTO Event (venue_id, user_id, name, description, photo, sta
   app.get('/events', (req, res) =>{;
     dbDef.Showcase.findAll({})
     .then((data) => {
-      console.log('found showcases: ', console.log(data));
+      // console.log('found showcases: ', console.log(data));
       res.send(data);
     })
   });

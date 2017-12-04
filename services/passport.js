@@ -38,7 +38,7 @@ passport.use(new GoogleStrategy({
     // send to db
     db.User.findOne({where : {googleId: profile.id}})
       .then(function(obj) {
-        console.log('db.User.findOne: ', obj);
+        //console.log('db.User.findOne: ', obj);
         // if that obj exists
         if (obj) {  
         //   return obj.update({

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { FETCH_USER /*, USER_INFO */ } from './types';
 import { FETCH_EVENTS } from './types';
 import { FETCH_BAND_INFO } from './types';
+import { FETCH_USER_PROFILE } from './types';
 
 export const fetchUser = () => async dispatch => {
     // eslint-disable-next-line
@@ -23,4 +24,12 @@ export const fetchBandInfo = () => async dispatch => {
     const res = await axios.post('/bandinfo')
     // eslint-disable-next-line
     dispatch({ type: FETCH_BAND_INFO, payload: res.data })
+}
+
+
+export const fetchUserProfile = () => async dispatch => {
+    // eslint-disable-next-line
+    const res = await axios.get('/profile')
+    // eslint-disable-next-line
+    dispatch({ type: FETCH_USER_PROFILE, payload: res.data })
 }
