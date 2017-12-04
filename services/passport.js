@@ -38,7 +38,6 @@ passport.use(new GoogleStrategy({
     if (refreshToken !== undefined) profile.refreshToken = refreshToken;
   
     // console.log(profile)
-<<<<<<< fcb16a3d1c175358811bf36e77e6799462054d84
    const existingUser = await db.User.findOne({where : {googleId: profile.id}});
         if(existingUser){
             return done(null, existingUser)
@@ -50,20 +49,6 @@ passport.use(new GoogleStrategy({
                email: profile.emails[0].value
             })
          done(null, newUser)
-=======
-    db.User.findOne({where : {googleId: profile.id}})
-      .then(function(obj) {
-        if (obj.googleId) {
-            done(null, obj.googleId)
-        } else {
-            db.User.create({
-                // accessToken: accessToken,
-               googleId: profile.id,
-               name: profile.displayName,
-               email: profile.emails[0].value,
-            //    photo: profile.photots[0].value
-                })       
->>>>>>> resolve conflict in passport for findOne
         }
     )
 );
