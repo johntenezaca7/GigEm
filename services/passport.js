@@ -6,8 +6,10 @@ const db = require('../db/index');
 
 passport.serializeUser((user, done ) => {
 
+
     user = user.googleId || user
     console.log('seralizing', user)
+
 
 
     done(null, user);
@@ -34,6 +36,7 @@ passport.use(new GoogleStrategy({
     profile.accessToken = accessToken;
     profile.expires_in = params.expires_in;
     if (refreshToken !== undefined) profile.refreshToken = refreshToken;
+  
     // console.log(profile)
    const existingUser = await db.User.findOne({where : {googleId: profile.id}});
         if(existingUser){

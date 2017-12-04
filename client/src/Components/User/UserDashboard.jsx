@@ -6,7 +6,7 @@ import PotentialGig from './PotentialGig';
 // import axios from 'axios'
 
 import { connect } from 'react-redux';
-// import { fetchEvents } from '../../actions/index';
+import { fetchEvents } from '../../actions/index';
 
 
 class UserDashboard extends React.Component {
@@ -56,14 +56,14 @@ function mapStateToProps({ events }){
   return { events }
 }
 
-// const mapDispatchToProps = dispatch => {
-//   //console.log('mapdispatch to props: ', dispatch);
-//   return {
-//     onFetchClick: id => {
-//       //console.log('onFetchClick id: ', id)
-//       dispatch(fetchEvents())
-//     }
-//   }
-// }
+const mapDispatchToProps = dispatch => {
+  //console.log('mapdispatch to props: ', dispatch);
+  return {
+    onFetchClick: id => {
+      //console.log('onFetchClick id: ', id)
+      dispatch(fetchEvents())
+    }
+  }
+}
 
-export default connect(mapStateToProps)(UserDashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(UserDashboard);
