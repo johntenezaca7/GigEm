@@ -32,18 +32,9 @@ module.exports = (app, db) => {
     };
     
     app.get('/api/current_user', (req, res) => {
-        // console.log('getting current user', req.user)
+        console.log('getting current user', req.user)
         res.send(req.user)
-    // console.log('CHECK',req);
-    // res.send(req.user);
-    // console.log("CONSOLE ", req.user);
-    // if (req.user) {
-    //     getUserByGoogleId(req, (err, data) => {
-    //         if (err){ res.json(err)};
-    //         console.log("RETURNED DATA", data);
-    //         res.send(req.user);
-    //     });    
-    // }
+   
     });
 
 
