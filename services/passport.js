@@ -5,8 +5,11 @@ const db = require('../db/index');
 
 
 passport.serializeUser((user, done ) => {
+
     console.log('seralizing', user.id)
     user = user.id || null
+
+
     done(null, user);
 });
 
@@ -27,7 +30,7 @@ passport.use(new GoogleStrategy({
   },
 
   function(accessToken, refreshToken, params, profile, done) {
-    //   console.log(profile);
+    console.log('passport user id: ', profile.id);
     profile.accessToken = accessToken;
     profile.expires_in = params.expires_in;
     if (refreshToken !== undefined) profile.refreshToken = refreshToken;
@@ -43,8 +46,8 @@ passport.use(new GoogleStrategy({
                name: profile.displayName,
                email: profile.emails[0].value,
             //    photo: profile.photots[0].value
-                })    
+                })       
         }
       })
-      .then(done(null, profile))
+      .then((profile) => done(null, profile))
     }))

@@ -1,14 +1,15 @@
+const dbDef = require('../db/index');
+
 module.exports = (app, db) => {
-    
-  const getAllEvents = (callback) => {
-    const sql = `SELECT * FROM Event`;
-    const joinsql = `SELECT Event.venue_id, Users.name, Event.name, Event.description, Event.photo, Event.start_date, Event.start_time, Event.end_date, Event.final_commit_date, Event.city, Event.state, Event.zip, Event.is_committed, Event.price, Event.min_commits, Event.commits
-     FROM Event INNER JOIN Users ON Event.user_id=Users.id`;
-    return db.connection.query(joinsql, (err, data) => {
-      if (err) console.log('getAllEvent Error: ', err);
-      callback(err, data);
-    })
-  };
+  // const getAllEvents = (callback) => {
+  //   const sql = `SELECT * FROM Event`;
+  //   const joinsql = `SELECT Event.venue_id, Users.name, Event.name, Event.description, Event.photo, Event.start_date, Event.start_time, Event.end_date, Event.final_commit_date, Event.city, Event.state, Event.zip, Event.is_committed, Event.price, Event.min_commits, Event.commits
+  //    FROM Event INNER JOIN Users ON Event.user_id=Users.id`;
+  //   return db.connection.query(joinsql, (err, data) => {
+  //     if (err) console.log('getAllEvent Error: ', err);
+  //     callback(err, data);
+  //   })
+  // };
 
   // const sql = `INSERT INTO Event (venue_id,band_id,name,description,photo,start_date,start_time,end_date,final_commit_date,city,state,zip,status,price,min_commits,commits) VALUES
   // (${req.body.venue_id},${req.body.band_id},${req.body.name},${req.body.description},${req.body.photo},${req.body.start_date},${req.body.start_time},${req.body.end_date},${req.body.final_commit_date},${req.body.city},${req.body.state},${req.body.zip},${req.body.status},${req.body.price},${req.body.min_commits},${req.body.commits})`;
@@ -27,12 +28,12 @@ const sql = `INSERT INTO Event (venue_id, user_id, name, description, photo, sta
     })
   };
 
-  app.get('/events', (req, res) =>{
-    getAllEvents((err, data) => {
-      if (err) res.json(err);
-      
+  app.get('/events', (req, res) =>{;
+    dbDef.Showcase.findAll({})
+    .then((data) => {
+      console.log('found showcases: ', console.log(data));
       res.send(data);
-    });
+    })
   });
   
   app.post('/addevent', (req, res) =>{

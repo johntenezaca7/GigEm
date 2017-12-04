@@ -31,6 +31,22 @@ let User = connection.define('User', {
     primaryKey: true,
     autoIncrement: true,
   },
+  // accessToken: {
+  //   type: Sequelize.STRING,
+  //   defaultValue: null
+  // },
+  // expires_in: {
+  //   type: Sequelize.DATE,
+  //   defaultValue: null
+  // },
+  // refreshToken: {
+  //   type: Sequelize.STRING,
+  //   defaultValue: null
+  // },
+  // profileJSON: {
+  //   type: Sequelize.STRING,
+  //   defaultValue: null
+  // },
   googleId: {
     type: Sequelize.STRING,
     defaultValue: null
@@ -104,6 +120,8 @@ let User = connection.define('User', {
 //     status: 'cool'
 //   });
 // });
+
+
 
 let Venue = connection.define('Venue', {
   id: {
@@ -219,9 +237,7 @@ let Showcase = connection.define('Showcase', {
 });
 
 Showcase.belongsTo(Venue);
-// Venue.hasMany(Showcase);
 Showcase.belongsTo(User);
-// User.hasMany(Showcase);
 
 // Showcase.sync(forceObj).then(() => {
 //   console.log('SYNC SHOWCASES-----------------------')
@@ -237,10 +253,6 @@ Showcase.belongsTo(User);
 //     minCommits: 10,
 //     commits: 11
 //   });
-// });
-
-// Showcase.findAll({ include: [ Venue, User ] }).then(showcases => {
-//   console.log(JSON.stringify(showcases))
 // });
 
 let Properties = connection.define('Properties', {
@@ -289,127 +301,6 @@ Attendance.belongsTo(Showcase);
 //   return Attendance.create({});
 // });
 
-
-
-// Showcase.hasOne(Venue, { foreignKey: 'venueId' })
-// Showcase.hasOne(User, { foreignKey: 'userId' })
-// User.hasMany(Properties, { foreignKey: 'userId' })
-// Attendance.hasMany(Showcase, { foreignKey: 'eventId' })
-// Attendance.hasMany(User, { foreignKey: 'userId' })
-
-//console.log('EVENTTTTTttttttttt', Event);
-  // force: true will drop the table if it already exists
-// Properties.sync({force: true}).then(() => {
-//   console.log('SYNC IN Properties-----------------------')
-//   // Table created
-//   return Properties.create({
-//     // userId: 1,
-//     linkUrl: 'www.rockon.com',
-//     description: 'rock off'
-//   });
-// });
-
-
-//   Attendance.sync({force: true}).then(() => {
-//   console.log('SYNC IN Atttendance-----------------------')
-//   // Table created
-//   return Attendance.create({
-//     // eventId: 1,
-//     // userId: 1
-//   });
-// });
-
-
-// //Venues
-// const Venue = connection.define('Venue', {
-//   id: {
-//     type: Sequelize.INTEGER,
-//     primaryKey: true,
-//     autoIncrement: true,
-//   },
-//   name: {
-//     type: Sequelize.STRING,
-//     defaultValue: ''
-//   },
-//   description: {
-//     type: Sequelize.TEXT,
-//     defaultValue: ''
-//   },
-//   zip: {
-//     type: Sequelize.INTEGER,
-//     defaultValue: null
-//   },
-//   city: {
-//     type: Sequelize.STRING,
-//     defaultValue: ''
-//   },
-//   state: {
-//     type: Sequelize.STRING,
-//     defaultValue: ''
-//   },
-//   photo: {
-//     type: Sequelize.STRING,
-//     defaultValue: ''
-//   },
-//   location: {
-//     type: Sequelize.STRING,
-//     defaultValue: ''
-//   }
-// });
-
-// Showcase.findAll({ include: [ Venue, User ] }).then(showcases => {
-//   console.log(JSON.stringify(showcases))
-// });
-
-// const checkUser = function(id, callback){     
-//   let sql = `SELECT google_id FROM Users WHERE google_id = "${id}"`;
-//   connection.query(sql, (err, data) => {
-//     if(err){
-//         callback(err, null)
-//       } else {
-//           callback(null, data);
-//       }
-//     });
-// }
-
-// const checkUser = (id, callback) => {
-//   User.findAll({where: {googleId: id}})
-//     .then((user, err) => {
-//       console.log(user);
-//       if (user.length === 0) {
-//         console.log('user not found');
-//         callback(user);
-//       } else {
-//         console.log('attempting to checkUser');
-//         callback(user);
-
-//       }
-//     })
-// };
-    
-// const newUser = function(profile, callback){
-//         let sql = `INSERT INTO Users(google_id, name, email, photo) VALUES("${profile.id}", "${profile.displayName}", "${profile.emails[0].value}", "${profile.photos[0].value}")`;
-//         connection.query(sql, (err, data) => {
-//             if(err){
-//                 callback(err, null);
-//             } else {
-//                 callback(null, data);
-//             }
-//         });
-// }
-
-// const getUserInfo = function(id, callback){
-//     let sql =  `SELECT * FROM Users WHERE google_id = "${id}"`;
-//     connection.query(sql, (err, data) => {
-//         if(err){
-//             callback(err, null)
-//         } else {
-//             callback(null, data)
-//         }
-//     })
-// }
-    
-// exports.checkUser = checkUser;    
 exports.User = User;
 exports.Venue = Venue;
 exports.Showcase = Showcase;
