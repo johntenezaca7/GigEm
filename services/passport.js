@@ -10,8 +10,6 @@ passport.serializeUser((user, done ) => {
     user = user.googleId || user
     console.log('seralizing', user)
 
-
-
     done(null, user);
 });
 
@@ -24,17 +22,14 @@ passport.use(new GoogleStrategy({
     clientID: keys.googleClientID,
     clientSecret: keys.googleClientSecret,
     callbackURL: '/auth/google/callback',
-    proxy: true,
-    scope: [
-    'profile', 
-    'https://www.googleapis.com/auth/user.emails.read'
-    ], 
+    proxy: true
   },
 
   async (accessToken, refreshToken, params, profile, done) => {
     console.log('passport user id: ', profile.id);
     profile.accessToken = accessToken;
     profile.expires_in = params.expires_in;
+    
     if (refreshToken !== undefined) profile.refreshToken = refreshToken;
   
     // console.log(profile)
