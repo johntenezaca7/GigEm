@@ -5,9 +5,7 @@ const db = require('../db/index');
 
 
 passport.serializeUser((user, done ) => {
-    console.log('user has been serialized!')
-    // let username = user.google_id;
-    console.log(user);
+    console.log('seralizing', user.id)
     user = user.id || null
     done(null, user);
 });
@@ -33,26 +31,19 @@ passport.use(new GoogleStrategy({
     profile.accessToken = accessToken;
     profile.expires_in = params.expires_in;
     if (refreshToken !== undefined) profile.refreshToken = refreshToken;
-    // console.log('profile', profile)
-    // send to db
+    // console.log(profile)
     db.User.findOne({where : {googleId: profile.id}})
       .then(function(obj) {
-        // if that obj exists
-        if (obj) {
-          return obj.update({
-            accessToken : profile.accessToken, 
-            expires_in : profile.expires_in, 
-            refreshToken : profile.refreshToken,
-            profileJSON : profile._json
-          })
+        if (obj.googleId) {
+            done(null, obj.googleId)
         } else {
-          return User.create({
-            googleId : profile.id,
-            accessToken : profile.accessToken, 
-            expires_in : profile.expires_in, 
-            refreshToken : profile.refreshToken,
-            profileJSON : profile._json
-          })
+            db.User.create({
+                // accessToken: accessToken,
+               googleId: profile.id,
+               name: profile.displayName,
+               email: profile.emails[0].value,
+            //    photo: profile.photots[0].value
+                })    
         }
       })
       .then(done(null, profile))

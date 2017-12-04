@@ -32,7 +32,7 @@ let User = connection.define('User', {
     autoIncrement: true,
   },
   googleId: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     defaultValue: null
   },
   isBand: {
@@ -86,24 +86,24 @@ let User = connection.define('User', {
 });
 
 // // force: true will drop the table if it already exists
-User.sync(forceObj).then(() => {
-  console.log('SYNC USERS________')
-  // Table created
-  return User.create({
-    googleId: 123456,
-    isBand: '1',
-    name: 'FunkMonkey',
-    description: 'off the vine',
-    email: 'monkey123@gmail.com',
-    phone: 5129208888,
-    age: 22,
-    zip: 23456,
-    city: "Dallas",
-    state: "TX",
-    photo: 'pic.jpeg',
-    status: 'cool'
-  });
-});
+// User.sync(forceObj).then(() => {
+//   console.log('SYNC USERS________')
+//   // Table created
+//   return User.create({
+//     googleId: 123456,
+//     isBand: '1',
+//     name: 'FunkMonkey',
+//     description: 'off the vine',
+//     email: 'monkey123@gmail.com',
+//     phone: 5129208888,
+//     age: 22,
+//     zip: 23456,
+//     city: "Dallas",
+//     state: "TX",
+//     photo: 'pic.jpeg',
+//     status: 'cool'
+//   });
+// });
 
 let Venue = connection.define('Venue', {
   id: {
@@ -137,18 +137,18 @@ let Venue = connection.define('Venue', {
   }
 });
 
-Venue.sync({forceObj}).then(() => {
-  console.log('SYNC VENUES-----------------------')
-  // Table created
-  return Venue.create({
-    name: 'Good Room',
-    description: 'its alright',
-    zip: 23456,
-    city: "Brooklyn",
-    state: "NY",
-    location: 'right here',
-  });
-});
+// Venue.sync({forceObj}).then(() => {
+//   console.log('SYNC VENUES-----------------------')
+//   // Table created
+//   return Venue.create({
+//     name: 'Good Room',
+//     description: 'its alright',
+//     zip: 23456,
+//     city: "Brooklyn",
+//     state: "NY",
+//     location: 'right here',
+//   });
+// });
 
 let Showcase = connection.define('Showcase', {
   id: {
@@ -223,21 +223,21 @@ Showcase.belongsTo(Venue);
 Showcase.belongsTo(User);
 // User.hasMany(Showcase);
 
-Showcase.sync(forceObj).then(() => {
-  console.log('SYNC SHOWCASES-----------------------')
-  // Table created
-  return Showcase.create({
-    name: 'Festivus',
-    description: 'for the rest of us',
-    zip: 23456,
-    city: "Dallas",
-    state: "TX",
-    isCommitted: '1',
-    photo: 'pic.jpeg',
-    minCommits: 10,
-    commits: 11
-  });
-});
+// Showcase.sync(forceObj).then(() => {
+//   console.log('SYNC SHOWCASES-----------------------')
+//   // Table created
+//   return Showcase.create({
+//     name: 'Festivus',
+//     description: 'for the rest of us',
+//     zip: 23456,
+//     city: "Dallas",
+//     state: "TX",
+//     isCommitted: '1',
+//     photo: 'pic.jpeg',
+//     minCommits: 10,
+//     commits: 11
+//   });
+// });
 
 // Showcase.findAll({ include: [ Venue, User ] }).then(showcases => {
 //   console.log(JSON.stringify(showcases))
@@ -261,14 +261,14 @@ let Properties = connection.define('Properties', {
 
 Properties.belongsTo(User);
 
-Properties.sync(forceObj).then(() => {
-  console.log('SYNC PROPERTIES-----------------------')
-  // Table created
-  return Properties.create({
-    linkUrl: 'bandsite.com',
-    description: 'woah what a great link'
-  });
-});
+// Properties.sync(forceObj).then(() => {
+//   console.log('SYNC PROPERTIES-----------------------')
+//   // Table created
+//   return Properties.create({
+//     linkUrl: 'bandsite.com',
+//     description: 'woah what a great link'
+//   });
+// });
 
 
 let Attendance = connection.define('Attendance', {
@@ -283,11 +283,11 @@ let Attendance = connection.define('Attendance', {
 Attendance.belongsTo(User);
 Attendance.belongsTo(Showcase);
 
-Attendance.sync(forceObj).then(() => {
-  console.log('SYNC IN Atttendance-----------------------')
-  // Table created
-  return Attendance.create({});
-});
+// Attendance.sync(forceObj).then(() => {
+//   console.log('SYNC IN Atttendance-----------------------')
+//   // Table created
+//   return Attendance.create({});
+// });
 
 
 

@@ -1,8 +1,8 @@
 .landingcontainer {
   background-image: url('../Assets/talkingheads-live.jpg');
-  background-size: auto;
+  background-size: cover;
   background-repeat: no-repeat;
-	background-position: center top; 
+  background-position: center top; 
   box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.2), 0 0px 40px 0 rgb(0, 0, 0);
 }
 

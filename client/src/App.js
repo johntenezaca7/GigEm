@@ -30,7 +30,7 @@ class App extends Component {
   
   componentDidMount(){
     this.props.fetchUser();
-    this.props.fetchEvents();
+    // this.props.fetchEvents();
   }
 
   render() {

@@ -10,16 +10,6 @@ export default class UserDashboard extends React.Component {
         this.state = {};
     }
 
-    // componentWillMount() {
-    //   fetchEvents();
-    // }
-
-    fetchEvents(e) {
-      e.preventDefault();
-      this.props.onFetchClick();
-    }
-
-
     render() {
 
       return (
