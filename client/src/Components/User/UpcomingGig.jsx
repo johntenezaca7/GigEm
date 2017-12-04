@@ -10,7 +10,7 @@ export default class UpcomingGig extends React.Component {
 
 
     render() {
-        //console.log('Upcoming Gig this.props: ', this.props);
+        console.log('Upcoming Gig this.props: ', this.props);
         return (
             <div className="container border p-3" key={this.props.gig.id}>
                 <div className="row">
