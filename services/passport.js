@@ -37,6 +37,7 @@ passport.use(new GoogleStrategy({
     // console.log(profile)
     db.User.findOne({where : {googleId: profile.id}})
       .then(function(obj) {
+<<<<<<< HEAD
         if (obj.googleId) {
             done(null, obj.googleId)
         } else {
@@ -47,6 +48,29 @@ passport.use(new GoogleStrategy({
                email: profile.emails[0].value,
             //    photo: profile.photots[0].value
                 })       
+=======
+       
+        // if that obj exists
+        if (obj) {  
+          console.log('found User:', obj)
+          return obj.update({
+            // accessToken : profile.accessToken, 
+            // expires_in : profile.expires_in, 
+            // refreshToken : profile.refreshToken,
+            // profileJSON : profile._json
+          })
+        } else {
+            // console.log('no db.User entry found');
+            // console.log('profile: ', profile);
+          return db.User.create({
+            googleId : profile.id,
+            name: profile.displayName,
+            // accessToken : profile.accessToken, 
+            // expires_in : profile.expires_in, 
+            // refreshToken : profile.refreshToken,
+            // profileJSON : profile._json
+          })
+>>>>>>> getitauth
         }
       })
       .then((profile) => done(null, profile))
