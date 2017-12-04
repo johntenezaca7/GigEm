@@ -8,45 +8,52 @@ passport.serializeUser((user, done ) => {
     console.log('user has been serialized!')
     // let username = user.google_id;
     console.log(user);
-    user = user[0].google_id || null
+    user = user.id || null
     done(null, user);
 });
 
-passport.deserializeUser((id, done) => {
-    db.checkUser(id, (err, user) => {
-       done(err, user);
-    })
-       
-});
+passport.deserializeUser(function(obj, done) {
+    console.log('deserializeUser')
+    done(null, obj);
+  });
 
 passport.use(new GoogleStrategy({
     clientID: keys.googleClientID,
     clientSecret: keys.googleClientSecret,
     callbackURL: '/auth/google/callback',
-    proxy: true
+    proxy: true,
+    scope: [
+    'profile', 
+    'https://www.googleapis.com/auth/user.emails.read'
+    ], 
   },
-    (accessToken, refreshToken, profile, done) => {
-    //    console.log(profile)
-        const id = profile.id
-        db.checkUser(id, (err, data) => {
-            if(err){
-                console.log(err)
-            } else {
-                if(data.length > 0){
-                    console.log('User is in the DB')
-                    return done(null, data)
-            } else {
-                console.log('adding new users');
-                db.newUser(profile, (err, data) =>{
-                    if(err){
-                        console.log('err trying to add new user', err);
-                    } else {
-                        console.log('NEW USER ADDED!!', data)
-                        done(null, data )
-                    }
-                })
-            }
-            }
-        });
-    }
-));
+
+  function(accessToken, refreshToken, params, profile, done) {
+    //   console.log(profile);
+    profile.accessToken = accessToken;
+    profile.expires_in = params.expires_in;
+    if (refreshToken !== undefined) profile.refreshToken = refreshToken;
+    // console.log('profile', profile)
+    // send to db
+    db.User.findOne({where : {googleId: profile.id}})
+      .then(function(obj) {
+        // if that obj exists
+        if (obj) {
+          return obj.update({
+            accessToken : profile.accessToken, 
+            expires_in : profile.expires_in, 
+            refreshToken : profile.refreshToken,
+            profileJSON : profile._json
+          })
+        } else {
+          return User.create({
+            googleId : profile.id,
+            accessToken : profile.accessToken, 
+            expires_in : profile.expires_in, 
+            refreshToken : profile.refreshToken,
+            profileJSON : profile._json
+          })
+        }
+      })
+      .then(done(null, profile))
+    }))
