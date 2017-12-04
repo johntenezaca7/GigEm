@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { fetchUserProfile } from '../../actions/index';
 
 class UserProfile extends React.Component {
     constructor(props) {
@@ -6,7 +8,18 @@ class UserProfile extends React.Component {
         this.state = {};
     }
 
+
+    componentWillMount() {
+        this.props.onFetchClick();
+      }
+  
+      fetchEvents(e) {
+        e.preventDefault();
+        this.props.onFetchClick();
+      }
+
     render() {
+      console.log('userProfile props: ', this.props);
         return (
             <div>
               <div className="row">
@@ -29,4 +42,22 @@ class UserProfile extends React.Component {
     }
 }
 
-export default UserProfile;
+function mapStateToProps( state){
+    return {
+
+    profile : state.profile,
+    
+     }
+  }
+  
+  const mapDispatchToProps = dispatch => {
+    //console.log('mapdispatch to props: ', dispatch);
+    return {
+      onFetchClick: id => {
+        //console.log('onFetchClick id: ', id)
+        dispatch(fetchUserProfile())
+      }
+    }
+  }
+
+  export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
