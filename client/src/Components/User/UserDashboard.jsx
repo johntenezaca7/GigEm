@@ -15,9 +15,9 @@ class UserDashboard extends React.Component {
         this.state = {};
     }
 
-    // componentWillMount() {
-    //   fetchEvents();
-    // }
+    componentWillMount() {
+      this.props.onFetchClick();
+    }
 
     fetchEvents(e) {
       e.preventDefault();
@@ -25,7 +25,7 @@ class UserDashboard extends React.Component {
     }
 
     render() {
-
+      console.log('userdashboard props', this.props);
       return (
         <div>
           <div className="row">
@@ -36,13 +36,13 @@ class UserDashboard extends React.Component {
               <button className="btn btn-danger my-2 my-sm-0" onClick={(e) => this.fetchEvents(e)} >Fetch Events</button>
               {
                 this.props.events
-                  .filter((x) => x.is_committed === 1)
+                  .filter((x) => x.isCommitted === true)
                   .map((x) => <UpcomingGig key={x.id} gig={x} />)
               }
               <h2>Potential Gigs</h2>
               {
                 this.props.events
-                  .filter((x) => x.is_committed === 0)
+                  .filter((x) => x.isCommitted === false)
                   .map((x) => <PotentialGig key={x.id} gig={x} />)
               }
             </div>

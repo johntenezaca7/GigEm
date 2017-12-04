@@ -30,26 +30,28 @@ passport.use(new GoogleStrategy({
   },
 
   function(accessToken, refreshToken, params, profile, done) {
-    // console.log('passport use profile: ', profile);
+    console.log('passport user id: ', profile.id);
     profile.accessToken = accessToken;
     profile.expires_in = params.expires_in;
     if (refreshToken !== undefined) profile.refreshToken = refreshToken;
     // console.log('profile', profile)
     // send to db
-    db.User.findOne({where : {googleId: toString(profile.id)}})
+    db.User.findOne({where : {googleId: profile.id}})
       .then(function(obj) {
         console.log('db.User.findOne: ', obj);
         // if that obj exists
         if (obj) {  
-          return obj.update({
-            // accessToken : profile.accessToken, 
-            // expires_in : profile.expires_in, 
-            // refreshToken : profile.refreshToken,
-            // profileJSON : profile._json
-          })
+        //   return obj.update({
+        //     // accessToken : profile.accessToken, 
+        //     // expires_in : profile.expires_in, 
+        //     // refreshToken : profile.refreshToken,
+        //     // profileJSON : profile._json
+        //   })
+            return obj;
         } else {
             console.log('no db.User entry found');
-            console.log('profile: ', profile);
+            //console.log('profile: ', profile);\
+            console.log('profile.id: ', profile.id);
           return db.User.create({
             googleId : profile.id,
             name: profile.displayName,
