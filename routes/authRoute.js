@@ -10,7 +10,7 @@ module.exports = (app, db) => {
     )
 
     app.get('/checking',(req, res) => {
-        res.send({data:"prod"})
+        res.send({data:"prodUTION"})
     })
 
     app.get('/auth/google/callback',
