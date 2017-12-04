@@ -26,12 +26,11 @@ class UserProfile extends React.Component {
                 <div className="col-1">
                 </div>
                 <div className="col-6">
-                  <h1 className="display-4">User Profile</h1>
+                  <h1 className="display-4">User Profile - {this.props.profile.name}</h1>
                     <div className="container mx-auto">
                       <img src="./Assets/userLogo.svg" width="200px" height="200px" alt="Bandname"/>
                     </div>
-                    <h3>User Zip</h3>
-                    <h3>Age: User Zip</h3>
+                    <h3>{this.props.profile.email}</h3>
                     Upcoming Shows Component Placeholder
                     <h3>Potential Gigs</h3>
                     Potential Gigs Placeholder

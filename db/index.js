@@ -302,9 +302,9 @@ Attendance.belongsTo(Showcase);
 // });
 
 exports.User = User;
-// exports.Venue = Venue;
-// exports.Showcase = Showcase;
-// exports.Properties = Properties;
-// exports.Attendance = Attendance;
+exports.Venue = Venue;
+exports.Showcase = Showcase;
+exports.Properties = Properties;
+exports.Attendance = Attendance;
 exports.connection = connection;
    
