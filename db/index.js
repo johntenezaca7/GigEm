@@ -31,22 +31,6 @@ let User = connection.define('User', {
     primaryKey: true,
     autoIncrement: true,
   },
-  // accessToken: {
-  //   type: Sequelize.STRING,
-  //   defaultValue: null
-  // },
-  // expires_in: {
-  //   type: Sequelize.DATE,
-  //   defaultValue: null
-  // },
-  // refreshToken: {
-  //   type: Sequelize.STRING,
-  //   defaultValue: null
-  // },
-  // profileJSON: {
-  //   type: Sequelize.STRING,
-  //   defaultValue: null
-  // },
   googleId: {
     type: Sequelize.STRING,
     defaultValue: null
@@ -101,25 +85,6 @@ let User = connection.define('User', {
   },
 });
 
-// // force: true will drop the table if it already exists
-// User.sync(forceObj).then(() => {
-//   console.log('SYNC USERS________')
-//   // Table created
-//   return User.create({
-//     googleId: 123456,
-//     isBand: '1',
-//     name: 'FunkMonkey',
-//     description: 'off the vine',
-//     email: 'monkey123@gmail.com',
-//     phone: 5129208888,
-//     age: 22,
-//     zip: 23456,
-//     city: "Dallas",
-//     state: "TX",
-//     photo: 'pic.jpeg',
-//     status: 'cool'
-//   });
-// });
 
 
 
