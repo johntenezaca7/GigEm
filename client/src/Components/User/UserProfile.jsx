@@ -1,11 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchUserProfile } from '../../actions/index';
+import { editUserProfile } from '../../actions/index';
+
+import { /* RIEToggle, */ RIEInput /*, RIETextArea, RIENumber, RIETags, RIESelect */} from 'riek'
+import _ from 'lodash'
 
 class UserProfile extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = this.props;
     }
 
 
@@ -13,12 +17,14 @@ class UserProfile extends React.Component {
         this.props.onFetchClick();
       }
   
-      fetchEvents(e) {
-        e.preventDefault();
-        this.props.onFetchClick();
-      }
+      // fetch(e) {
+      //   e.preventDefault();
+      //   this.props.onFetchClick();
+      //   // this.setState({profile: this.props.profile});
+      // }
 
     render() {
+
       console.log('userProfile props: ', this.props);
         return (
             <div>
@@ -30,7 +36,11 @@ class UserProfile extends React.Component {
                     <div className="container mx-auto">
                       <img src="./Assets/userLogo.svg" width="200px" height="200px" alt="Bandname"/>
                     </div>
-                    <h3>{this.props.profile.email}</h3>
+                    <h3><RIEInput 
+                      value={this.props.profile.email || 'No email'}
+                      change={(e) => this.props.editUserProfile(e)}
+                      propName='email'
+                      validate={_.isString} /></h3>
                     Upcoming Shows Component Placeholder
                     <h3>Potential Gigs</h3>
                     Potential Gigs Placeholder
@@ -55,6 +65,10 @@ function mapStateToProps( state){
       onFetchClick: id => {
         //console.log('onFetchClick id: ', id)
         dispatch(fetchUserProfile())
+      },
+      editUserProfile: (e) => {
+        dispatch(editUserProfile(e))
+        // this.forceUpdate();
       }
     }
   }
