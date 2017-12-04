@@ -3,11 +3,7 @@ const passport = require('passport');
 
 module.exports = (app, db) => {
 
-    app.get('/auth/google',(
-        () => {
-            console.log('checking get')
-        next()
-        } ),
+    app.get('/auth/google',
         passport.authenticate('google', {
             scope: ['profile', 'email']
         }), 
