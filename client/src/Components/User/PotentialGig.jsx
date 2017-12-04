@@ -6,6 +6,7 @@ export default class PotentialGig extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            commits: this.props.gig.commits
         }
     }
 
@@ -13,11 +14,17 @@ export default class PotentialGig extends React.Component {
         console.log('potentialgig: ', e);
         console.log('gig id: ', this.props.gig.id);
         console.log('user id: ', this.props.user);
-        axios.post('/api/commit', {'user': this.props.user, 'gig': this.props.gig.id} ).then(this.setState({committed: 'committed!'}))
+        axios.post('/api/commit', {'user': this.props.user, 'gig': this.props.gig.id} )
+            .then(this.setState({
+                committed: 'committed!',
+            commits: this.state.commits + 1}))
     }
 
     uncommitEvent(e) {
-        axios.post('/api/uncommit', {'user': this.props.user, 'gig': this.props.gig.id} ).then(this.setState({committed: 'not committed!'}))
+        axios.post('/api/uncommit', {'user': this.props.user, 'gig': this.props.gig.id} )
+        .then(this.setState({
+            committed: 'not committed!',
+            commits: this.state.commits - 1}))
     }
 
     checkAttendances(e) {
@@ -56,7 +63,7 @@ export default class PotentialGig extends React.Component {
                     <div className="col-2 align-self-start">
                         {this.props.gig.name}<br />
                       
-                      <div className="text-primary">{this.props.gig.commits} of {this.props.gig.min_commits} commits!</div>
+                      <div className="text-primary">{this.state.commits} of {this.props.gig.min_commits} commits!</div>
                     </div>
                     <div className="col-lg-5 justify-content-md-center">
                       <ProgressComponent percent={percent} />
