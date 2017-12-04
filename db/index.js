@@ -101,24 +101,27 @@ let User = connection.define('User', {
   },
 });
 
-User.sync(forceObj).then(() => {
-  console.log('SYNC USERS________')
-  // Table created
-  return User.create({
-    googleId: 123456,
-    isBand: '1',
-    name: 'FunkMonkey',
-    description: 'off the vine',
-    email: 'monkey123@gmail.com',
-    phone: 5129208888,
-    age: 22,
-    zip: 23456,
-    city: "Dallas",
-    state: "TX",
-    photo: 'pic.jpeg',
-    status: 'cool'
-  });
-});
+// // force: true will drop the table if it already exists
+// User.sync(forceObj).then(() => {
+//   console.log('SYNC USERS________')
+//   // Table created
+//   return User.create({
+//     googleId: 123456,
+//     isBand: '1',
+//     name: 'FunkMonkey',
+//     description: 'off the vine',
+//     email: 'monkey123@gmail.com',
+//     phone: 5129208888,
+//     age: 22,
+//     zip: 23456,
+//     city: "Dallas",
+//     state: "TX",
+//     photo: 'pic.jpeg',
+//     status: 'cool'
+//   });
+// });
+
+
 
 let Venue = connection.define('Venue', {
   id: {
@@ -152,18 +155,18 @@ let Venue = connection.define('Venue', {
   }
 });
 
-Venue.sync({forceObj}).then(() => {
-  console.log('SYNC VENUES-----------------------')
-  // Table created
-  return Venue.create({
-    name: 'Good Room',
-    description: 'its alright',
-    zip: 23456,
-    city: "Brooklyn",
-    state: "NY",
-    location: 'right here',
-  });
-});
+// Venue.sync({forceObj}).then(() => {
+//   console.log('SYNC VENUES-----------------------')
+//   // Table created
+//   return Venue.create({
+//     name: 'Good Room',
+//     description: 'its alright',
+//     zip: 23456,
+//     city: "Brooklyn",
+//     state: "NY",
+//     location: 'right here',
+//   });
+// });
 
 let Showcase = connection.define('Showcase', {
   id: {
@@ -236,21 +239,21 @@ let Showcase = connection.define('Showcase', {
 Showcase.belongsTo(Venue);
 Showcase.belongsTo(User);
 
-Showcase.sync(forceObj).then(() => {
-  console.log('SYNC SHOWCASES-----------------------')
-  // Table created
-  return Showcase.create({
-    name: 'Festivus',
-    description: 'for the rest of us',
-    zip: 23456,
-    city: "Dallas",
-    state: "TX",
-    isCommitted: '1',
-    photo: 'pic.jpeg',
-    minCommits: 10,
-    commits: 11
-  });
-});
+// Showcase.sync(forceObj).then(() => {
+//   console.log('SYNC SHOWCASES-----------------------')
+//   // Table created
+//   return Showcase.create({
+//     name: 'Festivus',
+//     description: 'for the rest of us',
+//     zip: 23456,
+//     city: "Dallas",
+//     state: "TX",
+//     isCommitted: '1',
+//     photo: 'pic.jpeg',
+//     minCommits: 10,
+//     commits: 11
+//   });
+// });
 
 let Properties = connection.define('Properties', {
   id: {
@@ -270,14 +273,14 @@ let Properties = connection.define('Properties', {
 
 Properties.belongsTo(User);
 
-Properties.sync(forceObj).then(() => {
-  console.log('SYNC PROPERTIES-----------------------')
-  // Table created
-  return Properties.create({
-    linkUrl: 'bandsite.com',
-    description: 'woah what a great link'
-  });
-});
+// Properties.sync(forceObj).then(() => {
+//   console.log('SYNC PROPERTIES-----------------------')
+//   // Table created
+//   return Properties.create({
+//     linkUrl: 'bandsite.com',
+//     description: 'woah what a great link'
+//   });
+// });
 
 
 let Attendance = connection.define('Attendance', {
@@ -292,11 +295,11 @@ let Attendance = connection.define('Attendance', {
 Attendance.belongsTo(User);
 Attendance.belongsTo(Showcase);
 
-Attendance.sync(forceObj).then(() => {
-  console.log('SYNC IN Atttendance-----------------------')
-  // Table created
-  return Attendance.create({});
-});
+// Attendance.sync(forceObj).then(() => {
+//   console.log('SYNC IN Atttendance-----------------------')
+//   // Table created
+//   return Attendance.create({});
+// });
 
 exports.User = User;
 exports.Venue = Venue;
