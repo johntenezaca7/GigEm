@@ -5,7 +5,9 @@ import axios from 'axios';
 export default class PotentialGig extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            committed: 'not committed!'
+        }
     }
 
     updateEvent(e) {
@@ -13,6 +15,22 @@ export default class PotentialGig extends React.Component {
         console.log('gig id: ', this.props.gig.id);
         console.log('user id: ', this.props.user);
         axios.post('/api/commit', {'user': this.props.user, 'gig': this.props.gig.id} ).then(this.setState({}))
+    }
+
+    checkAttendances(e) {
+        axios.post('/api/commitCheck', {'user': this.props.user, 'gig': this.props.gig.id} )
+        .then((data) => {
+            console.log('check attendances return data: ', data.data)
+            if (data.data) {
+                this.setState({committed: 'committed'})
+            } else {
+                this.setState({committed: 'not committed!' })
+            }
+        })
+    }
+
+    componentWillMount() {
+        this.checkAttendances();
     }
 
     render() {
@@ -35,8 +53,7 @@ export default class PotentialGig extends React.Component {
                       {this.props.gig.end_date}
                     </div>
                     <div className="col-1 col-md-auto align-self-end" align="right">
-                        <div>Committed /<br /> 
-                        Not committed</div>
+                        <div>{this.state.committed}</div>
                         <div><button className="btn btn-info my-2 my-sm-0" onClick={this.updateEvent.bind(this)}>Commit</button></div>
                     </div>
                 </div>

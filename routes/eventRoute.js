@@ -42,8 +42,18 @@ const sql = `INSERT INTO Event (venue_id, user_id, name, description, photo, sta
       UserId: req.body.user,
       ShowcaseId: req.body.gig
     }).then((data) => res.send(data));
+  });
 
-    // res.send('ok');
+  app.post('/api/commitCheck', (req, res) => {
+    console.log('attempting to check if user has committed to event');
+    console.log(req.body);
+    dbDef.Attendance.findOne({ where: {
+      UserId: req.body.user,
+      ShowcaseId: req.body.gig
+    }}).then((data) => {
+      console.log('found one');
+      res.send(data)
+    })
   });
   
   app.post('/api/addevent', (req, res) =>{
