@@ -9,6 +9,10 @@ module.exports = (app, db) => {
         }), 
     )
 
+    app.get('/checking',(req, res) => {
+        res.send({data:"prod"})
+    })
+
     app.get('/auth/google/callback',
         passport.authenticate('google'),
             (req, res) => {
