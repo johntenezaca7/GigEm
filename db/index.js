@@ -1,7 +1,7 @@
 const mysql = require('mysql2');
 const config = require('../config/dbconfig');
 const Sequelize = require('sequelize');
-const keys = require('./config/keys')
+const keys = require('../config/keys')
 
 
 
