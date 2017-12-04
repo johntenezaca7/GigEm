@@ -31,22 +31,22 @@ let User = connection.define('User', {
     primaryKey: true,
     autoIncrement: true,
   },
-  // accessToken: {
-  //   type: Sequelize.STRING,
-  //   defaultValue: null
-  // },
-  // expires_in: {
-  //   type: Sequelize.DATE,
-  //   defaultValue: null
-  // },
-  // refreshToken: {
-  //   type: Sequelize.STRING,
-  //   defaultValue: null
-  // },
-  // profileJSON: {
-  //   type: Sequelize.STRING,
-  //   defaultValue: null
-  // },
+  accessToken: {
+    type: Sequelize.STRING,
+    defaultValue: null
+  },
+  expires_in: {
+    type: Sequelize.DATE,
+    defaultValue: null
+  },
+  refreshToken: {
+    type: Sequelize.STRING,
+    defaultValue: null
+  },
+  profileJSON: {
+    type: Sequelize.STRING,
+    defaultValue: null
+  },
   googleId: {
     type: Sequelize.STRING,
     defaultValue: null
