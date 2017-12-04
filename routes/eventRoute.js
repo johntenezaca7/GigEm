@@ -22,7 +22,8 @@ const sql = `INSERT INTO Event (venue_id, user_id, name, description, photo, sta
   (${req.body.venue_id},${req.body.user_id},"${req.body.name}","${req.body.description}","${req.body.photo}",${req.body.start_date},"${req.body.start_time}",${req.body.end_date},${req.body.final_commit_date},"${req.body.city}","${req.body.state}",${req.body.zip},"${req.body.is_committed}",${req.body.price},${req.body.min_commits},${req.body.commits})`;
   const joinsql = `INSERT INTO Event (venue_id, user_id, name, description, photo, start_date, start_time, end_date, final_commit_date, city, state, zip, is_committed, price,min_commits,commits) VALUES
   (${req.body.venue_id},${req.body.user_id},"${req.body.name}","${req.body.description}","${req.body.photo}",${req.body.start_date},"${req.body.start_time}",${req.body.end_date},${req.body.final_commit_date},"${req.body.city}","${req.body.state}",${req.body.zip},"${req.body.is_committed}",${req.body.price},${req.body.min_commits},${req.body.commits})`;
-    return db.connection.query(sql, (err, data) => {
+  
+  return db.connection.query(sql, (err, data) => {
       if (err) console.log('getAllEvent Error: ', err);
       callback(err, data);
     })
@@ -38,10 +39,33 @@ const sql = `INSERT INTO Event (venue_id, user_id, name, description, photo, sta
   
   app.post('/addevent', (req, res) =>{
     console.log(req.body);
-    addEvent(req, (err, data) => {
-      if (err) res.json(err);
-      
+    // ${req.body.venue_id},${req.body.user_id},"${req.body.name}","${req.body.description}","${req.body.photo}",${req.body.start_date},"${req.body.start_time}",${req.body.end_date},${req.body.final_commit_date},"${req.body.city}","${req.body.state}",${req.body.zip},"${req.body.is_committed}",${req.body.price},${req.body.min_commits},${req.body.commits
+    // req.body.description
+    dbDef.Showcase.create({
+      name: req.body.name,
+      description: req.body.description,
+      photo: req.body.photo,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
+      finalCommitDate: req.body.finalCommitDate,
+      city: req.body.city,
+      state: req.body.state,
+      zip: req.body.zip,
+      isCommitted: req.body.isCommitted,
+      price: req.body.price,
+      minCommits: req.body.minCommits,
+      commits: req.body.commits,
+      venueId: req.body.venueId,
+      userId: req.body.userId      
+    })
+    .then((data) => {
+      console.log('ADD EVENT DATA RESONSE: ', data.dataValues);
       res.send(data);
-    });
+    })
+    // addEvent(req, (err, data) => {
+    //   if (err) res.json(err);
+      
+    //   res.send(data);
+    // });
   });
 }
