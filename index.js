@@ -25,7 +25,8 @@ app.use(passport.session());
 // remove when sequlize is updated
 require('./routes/authRoute')(app, db)
 require('./routes/venueRoute')(app, db)
-// require('./routes/eventRoute')(app, db)
+require('./routes/eventRoute')(app, db)
+require('./routes/profileRoute')(app, db)
 
 
 if (process.env.NODE_ENV === 'production') {

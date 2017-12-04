@@ -5,11 +5,11 @@ const db = require('../db/index');
 
 
 passport.serializeUser((user, done ) => {
-
-    console.log('seralizing', user.id)
-    user = user.id || null
-
-
+    console.log('user has been serialized!')
+    // let username = user.google_id;
+    // if (user) console.log(user);
+    // if (!user) console.log('no sure in deserialized user';)
+    user = user ? user : null
     done(null, user);
 });
 
@@ -34,34 +34,24 @@ passport.use(new GoogleStrategy({
     profile.accessToken = accessToken;
     profile.expires_in = params.expires_in;
     if (refreshToken !== undefined) profile.refreshToken = refreshToken;
-    // console.log(profile)
+    // console.log('profile', profile)
+    // send to db
     db.User.findOne({where : {googleId: profile.id}})
       .then(function(obj) {
-<<<<<<< HEAD
-        if (obj.googleId) {
-            done(null, obj.googleId)
-        } else {
-            db.User.create({
-                // accessToken: accessToken,
-               googleId: profile.id,
-               name: profile.displayName,
-               email: profile.emails[0].value,
-            //    photo: profile.photots[0].value
-                })       
-=======
-       
+        //console.log('db.User.findOne: ', obj);
         // if that obj exists
         if (obj) {  
-          console.log('found User:', obj)
-          return obj.update({
-            // accessToken : profile.accessToken, 
-            // expires_in : profile.expires_in, 
-            // refreshToken : profile.refreshToken,
-            // profileJSON : profile._json
-          })
+        //   return obj.update({
+        //     // accessToken : profile.accessToken, 
+        //     // expires_in : profile.expires_in, 
+        //     // refreshToken : profile.refreshToken,
+        //     // profileJSON : profile._json
+        //   })
+            return obj;
         } else {
-            // console.log('no db.User entry found');
-            // console.log('profile: ', profile);
+            console.log('no db.User entry found');
+            //console.log('profile: ', profile);\
+            console.log('profile.id: ', profile.id);
           return db.User.create({
             googleId : profile.id,
             name: profile.displayName,
@@ -70,7 +60,6 @@ passport.use(new GoogleStrategy({
             // refreshToken : profile.refreshToken,
             // profileJSON : profile._json
           })
->>>>>>> getitauth
         }
       })
       .then((profile) => done(null, profile))
