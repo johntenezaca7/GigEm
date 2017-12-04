@@ -5,6 +5,7 @@ const Sequelize = require('sequelize');
 const connection = new Sequelize(config.database, config.user, config.password, {
     host: config.host,
     dialect: 'mysql',
+    logging: false,
     pool: {
       max: 5,
       min: 0,
@@ -371,9 +372,20 @@ Attendance.sync(forceObj).then(() => {
 //     });
 // }
 
-const checkUser = (id, callback) => User.findAll({where: {googleId: id}}).then((user) => {
-  callback(user);
-});
+// const checkUser = (id, callback) => {
+//   User.findAll({where: {googleId: id}})
+//     .then((user, err) => {
+//       console.log(user);
+//       if (user.length === 0) {
+//         console.log('user not found');
+//         callback(user);
+//       } else {
+//         console.log('attempting to checkUser');
+//         callback(user);
+
+//       }
+//     })
+// };
     
 // const newUser = function(profile, callback){
 //         let sql = `INSERT INTO Users(google_id, name, email, photo) VALUES("${profile.id}", "${profile.displayName}", "${profile.emails[0].value}", "${profile.photos[0].value}")`;
@@ -397,7 +409,7 @@ const checkUser = (id, callback) => User.findAll({where: {googleId: id}}).then((
 //     })
 // }
     
-exports.checkUser = checkUser;    
+// exports.checkUser = checkUser;    
 exports.User = User;
 exports.Venue = Venue;
 exports.Showcase = Showcase;

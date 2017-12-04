@@ -7,12 +7,12 @@ module.exports = (app, db) => {
         passport.authenticate('google', {
             scope: ['profile', 'email']
         }), 
-    ); 
+    )
 
     app.get('/auth/google/callback',
         passport.authenticate('google'),
             (req, res) => {
-                res.redirect('/userdashboard')
+                res.redirect('/user')
             }
     );
 
