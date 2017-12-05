@@ -1,7 +1,8 @@
 import React from 'react';
+import GigText from './GigText';
+
 import { connect } from 'react-redux';
-import { fetchUserProfile } from '../../actions/index';
-import { editUserProfile } from '../../actions/index';
+import { /* fetchUser, fetchUserProfile, fetchEvents, checkAttendance, */ editUserProfile } from '../../actions/index';
 
 import { /* RIEToggle, */ RIEInput /*, RIETextArea, RIENumber, RIETags, RIESelect */} from 'riek'
 import _ from 'lodash'
@@ -12,25 +13,18 @@ class UserProfile extends React.Component {
         this.state = this.props;
     }
 
-
-    componentWillMount() {
-        this.props.onFetchClick();
-      }
-  
-      // fetch(e) {
-      //   e.preventDefault();
-      //   this.props.onFetchClick();
-      //   // this.setState({profile: this.props.profile});
-      // }
+    // componentWillMount() {
+    //   this.props.init();
+    // }
 
     render() {
 
       console.log('userProfile props: ', this.props);
         return (
           <div>
-<div class="alert alert-primary text-center" role="alert">
-  Edit your profile by clicking on the text fields!
-</div>
+            <div className="alert alert-primary text-center" role="alert">
+              Edit your profile by clicking on the text fields!
+            </div>
                 <div className="row">
                   {/* <div className="col col-1">
                   </div> */}
@@ -69,38 +63,51 @@ class UserProfile extends React.Component {
                           </div>
                         </h2>
                       <h3>Upcoming Shows</h3>
-                      Upcoming Shows Component Placeholder
-                      <h3>Potential Gigs</h3>
-                      Potential Gigs Placeholder
-                  </div>
+                      <div className="col col-md-auto">
+                        {this.props.events
+                          .filter((x) => x.isCommitted === true)
+                          .filter((x) => this.props.attendance.includes(x.id))
+                          .map((x) => <GigText user={this.props.auth.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
+                        }
+                        <h3>Potential Gigs</h3>
+                        {this.props.events
+                          .filter((x) => x.isCommitted === false)
+                          .filter((x) => this.props.attendance.includes(x.id))
+                          .map((x) => <GigText user={this.props.auth.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
+                        }
+                      </div>
+                    </div>
                   <div className="col-5 m-5">
                   <RIEInput 
                     value={this.props.profile.description || 'Write your description here!'}
                     change={(e) => this.props.editUserProfile(e)}
                     propName='description'
                     validate={_.isString} />
+                  </div>
+              </div>
             </div>
-          </div>
-        </div>
         )
     }
 }
 
-function mapStateToProps( state){
+function mapStateToProps({events, attendance, profile, auth }){
     return {
-
-    profile : state.profile,
-    
+      attendance: attendance,
+      events: events,
+      profile : profile,
+      auth: auth
      }
   }
   
   const mapDispatchToProps = dispatch => {
     //console.log('mapdispatch to props: ', dispatch);
     return {
-      onFetchClick: id => {
-        //console.log('onFetchClick id: ', id)
-        dispatch(fetchUserProfile())
-      },
+      // init: (e) => {
+      //   dispatch(fetchUser())
+      //   .then(() => fetchUserProfile())
+      //   .then(() => fetchEvents())
+      //   .then(() => checkAttendance())
+      // },
       editUserProfile: (e) => {
         dispatch(editUserProfile(e))
         // this.forceUpdate();
