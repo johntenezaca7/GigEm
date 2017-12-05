@@ -13,8 +13,8 @@ module.exports = (app, db) => {
   })
 
   app.post('/api/task/editprofile', async (req, res) => {
-    console.log('req.body: ', req.body);
-    console.log(`attempting to update with ${JSON.stringify(req.body.item)}`);
+    // console.log('req.body: ', req.body);
+    // console.log(`attempting to update with ${JSON.stringify(req.body.item)}`);
     await dbDef.User.findOne({where: {googleId: req.user.googleId}})
     .then((data) => {
       data.update(

@@ -30,6 +30,10 @@ class App extends Component {
   }
   
   componentDidMount(){
+
+    this.props.fetchUserProfile();
+    this.props.fetchEvents();
+    this.props.checkAttendance()
     this.props.fetchUser();
     // this.props.fetchEvents();
   }
