@@ -20,6 +20,7 @@ import UserProfile from './Components/User/UserProfile';
 import UserDashboard from './Components/User/UserDashboard';
 import BandDashboard from './Components/Band/BandDashboard';
 import LandingPage from './Components/LandingPage';
+// import MyEvents from './Components/User/MyEvents';
 
 
 class App extends Component {
@@ -42,7 +43,7 @@ class App extends Component {
 
           <Route exact path="/user" render={() => <div><Navbar /><UserDashboard /></div>} />
           <Route exact path="/userprofile" render={() => <div><Navbar /><UserProfile /></div>} />
-          <Route exact path="/myshows" render={() => <div><Navbar /><div>Placeholder for filtered shows.</div></div>} />
+          {/* <Route exact path="/myshows" render={() => <div><Navbar /><div><MyEvents /></div></div>} /> */}
 
           <Route exact path="/band" render={() => <div><Navbar /><BandDashboard /></div>} />
           <Route exact path="/bandprofile" render={() => <div><Navbar /><BandProfile /></div>} />

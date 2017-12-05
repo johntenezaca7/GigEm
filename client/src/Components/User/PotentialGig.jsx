@@ -1,8 +1,12 @@
 import React from 'react';
 import ProgressComponent from './ProgressComponent';
-import axios from 'axios';
+// import axios from 'axios';
 
-export default class PotentialGig extends React.Component {
+import { connect } from 'react-redux';
+import { commitToEvent, uncommitFromEvent, checkAttendance } from '../../actions/index';
+
+
+class PotentialGig extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -10,51 +14,22 @@ export default class PotentialGig extends React.Component {
         }
     }
 
-    commitEvent(e) {
-        console.log('potentialgig: ', e);
-        console.log('gig id: ', this.props.gig.id);
-        console.log('user id: ', this.props.user);
-        axios.post('/api/commit', {'user': this.props.user, 'gig': this.props.gig.id} )
-            .then(this.setState({
-                committed: 'committed!',
-            commits: this.state.commits + 1}))
-    }
-
-    uncommitEvent(e) {
-        axios.post('/api/uncommit', {'user': this.props.user, 'gig': this.props.gig.id} )
-        .then(this.setState({
-            committed: 'not committed!',
-            commits: this.state.commits - 1}))
-    }
-
-    checkAttendances(e) {
-        axios.post('/api/commitCheck', {'user': this.props.user, 'gig': this.props.gig.id} )
-        .then((data) => {
-            // console.log('check attendances return data: ', data.data)
-            if (data.data) {
-                // console.log('shouldve found data: ', data.data);
-                this.setState({committed: 'committed'})
-            } else {
-                // console.log('no data found');
-                this.setState({committed: 'not committed!' })
-            }
-        })
-    }
-
-    componentDidMount() {
-        this.checkAttendances();
-    }
-
     renderButton() {
+        console.log('render button this.state: ', this.state);
+        console.log('render button props: ', this.props);
         if (this.state.committed === "not committed!") {
-            return (<div><button className="btn btn-info my-2 my-sm-0" onClick={this.commitEvent.bind(this)}>Commit</button></div>)
+            return (<div><button className="btn btn-info my-2 my-sm-0" onClick={(e) => this.props.onCommitClick(this.props.user, this.props.gig.id)}>Commit</button></div>)
         } else {
-            return (<div><button className="btn btn-warning my-2 my-sm-0" onClick={this.uncommitEvent.bind(this)}>Uncommit</button></div>)
+            return (<div><button className="btn btn-warning my-2 my-sm-0" onClick={(e) => this.props.onUncommitClick(this.props.user, this.props.gig.id)}>Uncommit</button></div>)
         }
     }
 
+    componentWillMount() {
+        this.props.checkAttendanceDispatch(this.props.user, this.props.gig.id)
+    }
+
     render() {
-        // console.log('potentialGig props: ', this.props);
+        console.log('potentialGig props: ', this.props);
         console.log('potentialGig state: ', this.state);
         let percent = ((this.props.gig.commits / this.props.gig.min_commits)*100);
         return (
@@ -62,7 +37,6 @@ export default class PotentialGig extends React.Component {
                 <div className="row">
                     <div className="col-2 align-self-start">
                         {this.props.gig.name}<br />
-                      
                       <div className="text-primary">{this.state.commits} of {this.props.gig.min_commits} commits!</div>
                     </div>
                     <div className="col-lg-5 justify-content-md-center">
@@ -83,3 +57,28 @@ export default class PotentialGig extends React.Component {
         )
     } 
 }
+
+function mapStateToProps({ events, auth }){
+    return { 
+      events: events,
+      auth: auth
+    }
+  }
+
+const mapDispatchToProps = dispatch => {
+    //console.log('mapdispatch to props: ', dispatch);
+    return {
+      onCommitClick: (user, gig) => {
+        //console.log('onFetchClick id: ', id)
+        dispatch(commitToEvent(user, gig))
+      },
+      onUncommitClick: (user, gig) => {
+        dispatch(uncommitFromEvent(user, gig))
+      },
+      checkAttendanceDispatch: (user, gig) => {
+        dispatch(checkAttendance(user, gig))
+      }
+    }
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(PotentialGig);

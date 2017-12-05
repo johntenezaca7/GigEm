@@ -36,7 +36,17 @@ const sql = `INSERT INTO Event (venue_id, user_id, name, description, photo, sta
     })
   });
 
+  app.post('/api/myEvents', (req, res) =>{
+    dbDef.Showcase.findAll({include: [{Model: dbDef.Attendance}]})
+    .then((data) => {
+      // console.log('found showcases: ', console.log(data))
+      console.log('myevents data: ', data);
+      res.send(data);
+    })
+  });
+
   app.post('/api/commit', (req, res) => {
+    console.log('in commit api');
     console.log(req.body);
     dbDef.Attendance.create({
       UserId: req.body.user,
@@ -45,8 +55,6 @@ const sql = `INSERT INTO Event (venue_id, user_id, name, description, photo, sta
     .then((data) => res.send(data))
     dbDef.Showcase.findOne({where: {'id': req.body.gig}})
     .then((show) => {
-      console.log('attempting to update the show');
-      console.log('show: ', show);
       show.update({
         commits: show.dataValues.commits + 1
       })
@@ -69,8 +77,8 @@ const sql = `INSERT INTO Event (venue_id, user_id, name, description, photo, sta
   });
 
   app.post('/api/commitCheck', (req, res) => {
-    // console.log('attempting to check if user has committed to event');
-    // console.log(req.body);
+    console.log('attempting to check if user has committed to event');
+    console.log(req.body);
     dbDef.Attendance.findOne({ where: {
       UserId: req.body.user,
       ShowcaseId: req.body.gig

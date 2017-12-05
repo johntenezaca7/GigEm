@@ -25,7 +25,7 @@ class UserDashboard extends React.Component {
     }
 
     render() {
-      console.log('userdashboard props', this.props);
+      // console.log('userdashboard props', this.props);
       return (
         <div>
           <div className="row">
@@ -34,11 +34,11 @@ class UserDashboard extends React.Component {
             <div className="col">
             <h2>Upcoming Gig'em Shows</h2>
               <button className="btn btn-danger my-2 my-sm-0" onClick={(e) => this.fetchEvents(e)} >Fetch Events</button>
-              {
+              {/* {
                 this.props.events
                   .filter((x) => x.isCommitted === true)
                   .map((x) => <UpcomingGig key={x.id} gig={x} />)
-              }
+              } */}
               <h2>Potential Gigs</h2>
               {
                 this.props.events
