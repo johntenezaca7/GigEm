@@ -7,7 +7,7 @@ const db = require('../db/index');
 passport.serializeUser((user, done ) => {
 
 
-    user = user.googleId || user
+    user = user || user
     console.log('seralizing', user)
 
 
