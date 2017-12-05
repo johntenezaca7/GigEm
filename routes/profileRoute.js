@@ -1,7 +1,6 @@
 const dbDef = require('../db/index');
 
 module.exports = (app, db) => {
-<<<<<<< HEAD
   app.get('/api/profile', (req, res) => {
     console.log('attempting to serve profile route');
     console.log(req.user.googleId);
@@ -11,18 +10,6 @@ module.exports = (app, db) => {
       //console.log('found user ', console.log(data));
       res.send(data);
     })
-=======
-  app.post('/profile', (req, res) => {
-    // console.log('attempting to serve profile route');
-    console.log('BODYY',req.body);
-
-    res.send({hello:'PROFILEROUTES'})
-    // dbDef.User.findOne({where: {googleId: req.user.googleId}})
-    // .then((data) => {
-    //   console.log('found user ', console.log(data));
-    //   res.send(data);
-    // })
->>>>>>> eventform
   })
 
   app.post('/api/task/editprofile', async (req, res) => {

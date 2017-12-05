@@ -4,8 +4,8 @@ import GigText from './GigText';
 import { connect } from 'react-redux';
 import { /* fetchUser, fetchUserProfile, fetchEvents, checkAttendance, */ editUserProfile } from '../../actions/index';
 
-import { /* RIEToggle, */ RIEInput /*, RIETextArea, RIENumber, RIETags, RIESelect */} from 'riek'
-import _ from 'lodash'
+import { /* RIEToggle, */ RIEInput /*, RIETextArea, RIENumber, RIETags, RIESelect */} from 'riek';
+import _ from 'lodash';
 
 class UserProfile extends React.Component {
     constructor(props) {
