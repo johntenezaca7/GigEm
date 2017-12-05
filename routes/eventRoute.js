@@ -11,14 +11,17 @@ module.exports = (app, db) => {
     })
   });
 
+  // dbDef.User.findAll()
+  // .then(data => console.log(data));
+
   app.get('/eventsByBand', (req, res) =>{
     console.log(req.query);
     dbDef.Showcase.findAll({
-      where: { userId: req.query.userId },
-      include: [ { model: User, as: 'id' } ]
+      where: { UserId: req.query.userId },
+      include: [ { model: dbDef.User} ]
  })
     .then((data) => {
-      console.log('found events: ', console.log(data));
+      console.log('found events: ', data);
       res.send(data);
     })
   });
