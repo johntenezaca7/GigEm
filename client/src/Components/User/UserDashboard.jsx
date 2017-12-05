@@ -1,6 +1,6 @@
 import React from 'react';
 
-// import UpcomingGig from './UpcomingGig';
+import UpcomingGig from './UpcomingGig';
 import PotentialGig from './PotentialGig';
 
 // import axios from 'axios'
@@ -23,8 +23,8 @@ class UserDashboard extends React.Component {
     }
 
     componentDidMount() {
-      console.log('UserDashboard.jsx this.props.auth.id in componentWillMount() method');
-      console.log(this.props.auth.id);
+      // console.log('UserDashboard.jsx this.props.auth.id in componentWillMount() method');
+      // console.log(this.props.auth.id);
       this.props.checkAttendanceDispatch(this.props.auth.id);
     }
 
@@ -40,11 +40,11 @@ class UserDashboard extends React.Component {
             <div className="col">
             <h2>Upcoming Gig'em Shows</h2>
               <button className="btn btn-danger my-2 my-sm-0" onClick={(e) => this.fetchEvents(e)} >Fetch Events</button>
-              {/* {
+              {
                 this.props.events
                   .filter((x) => x.isCommitted === true)
-                  .map((x) => <UpcomingGig key={x.id} gig={x} />)
-              } */}
+                  .map((x) => <UpcomingGig user={this.props.auth.id} key={x.id} gig={x} usercommitted={this.props.attendance.find((a) => a.UserId === this.props.auth.id && a.ShowcaseId === x.id)} />)
+              }
               <h2>Potential Gigs</h2>
               {
                 this.props.events

@@ -1,50 +1,37 @@
 import React from 'react';
 import ProgressComponent from './ProgressComponent';
-// import axios from 'axios';
 
+import { connect } from 'react-redux';
+import { commitToEvent, uncommitFromEvent } from '../../actions/index';
 
-export default class UpcomingGig extends React.Component {
+class UpcomingGig extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            usercommitted: this.props.usercommitted
+        };
     }
-
-
-    // commitEvent(e) {
-    //     axios.post('/api/commit', {'user': this.props.user, 'gig': this.props.gig.id} ).then(this.setState({committed: 'committed!'}))
-    // }
-
-    // uncommitEvent(e) {
-    //     axios.post('/api/uncommit', {'user': this.props.user, 'gig': this.props.gig.id} ).then(this.setState({committed: 'not committed!'}))
-    // }
-
-    // checkAttendances(e) {
-    //     axios.post('/api/commitCheck', {'user': this.props.user, 'gig': this.props.gig.id} )
-    //     .then((data) => {
-    //         // console.log('check attendances return data: ', data.data)
-    //         if (data.data) {
-    //             // console.log('shouldve found data: ', data.data);
-    //             this.setState({committed: 'committed'})
-    //         } else {
-    //             // console.log('no data found');
-    //             this.setState({committed: 'not committed!' })
-    //         }
-    //     })
-    // }
 
     renderButton() {
-        if (this.committed === "not committed!") {
-            return (<div><button className="btn btn-info my-2 my-sm-0" /* onClick={this.commitEvent.bind(this)} */>Commit</button></div>)
-        } else {
-            return (<div><button className="btn btn-warning my-2 my-sm-0" /* onClick={this.uncommitEvent.bind(this)} */>Uncommit</button></div>)
+        console.log('PotentialGig.jsx this.props in renderButton() method')
+        console.log(this.props); 
+        if (!this.state.usercommitted) {
+            return (<div><button className="btn btn-info my-2 my-sm-0" onClick={(e) => this.commitButton(e, this.props.auth.id, this.props.gig.id)}>Commit</button></div>)
+        } else if (this.state.usercommitted) {
+            return (<div><button className="btn btn-warning my-2 my-sm-0" onClick={(e) => this.uncommitButton(e, this.props.auth.id, this.props.gig.id)}>Uncommit</button></div>)
         }
     }
+    
+    commitButton(e, user, gig) {
+        // e.preventDefault();
+        this.props.onCommitClick(user, gig)
+        this.setState({usercommitted: !this.state.usercommitted});
+    }
 
-
-    // componentDidMount() {
-    //     this.checkAttendances();
-    // }
-
+    uncommitButton(e, user, gig) {
+        this.props.onUncommitClick(user, gig)
+        this.setState({usercommitted: !this.state.usercommitted});
+    }
 
     render() {
         // console.log('Upcoming Gig this.props: ', this.props);
@@ -56,7 +43,7 @@ export default class UpcomingGig extends React.Component {
                       {this.props.gig.city}<br />
                       Fully Commited 🎉
                     </div>
-                    <div className="col-lg-7 justify-content-md-center">
+                    <div className="col-lg-5 justify-content-md-center">
                       <ProgressComponent percent={100} />
                     </div>
                     <div className="col col-md-auto align-self-end" align="right">
@@ -74,3 +61,26 @@ export default class UpcomingGig extends React.Component {
         )
     } 
 }
+
+function mapStateToProps({ auth, attendance }){
+    return { 
+      attendance: attendance,
+      auth: auth
+    }
+  }
+
+
+const mapDispatchToProps = dispatch => {
+    //console.log('mapdispatch to props: ', dispatch);
+    return {
+      onCommitClick: (user, gig) => {
+        //console.log('onFetchClick id: ', id)
+        dispatch(commitToEvent(user, gig))
+      },
+      onUncommitClick: (user, gig) => {
+        dispatch(uncommitFromEvent(user, gig))
+      }
+    }
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(UpcomingGig);
