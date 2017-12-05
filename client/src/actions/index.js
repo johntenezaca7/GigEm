@@ -17,6 +17,14 @@ export const fetchEvents = () => async dispatch => {
     dispatch({ type: types.FETCH_EVENTS, payload: res.data })
 }
 
+export const fetchMyEvents = () => async dispatch => {
+// console.log('fetching events');
+    // eslint-disable-next-line
+    const res = await axios.get('/api/myEvents')
+    // eslint-disable-next-line
+    dispatch({ type: types.FETCH_EVENTS, payload: res.data })
+}
+
 export const commitToEvent = (user, gig) => async dispatch => {
     console.log('attempting to commit to event: ', user, 'with user id: ', gig);
     const res = await axios.post('/api/commit', {'user': user, 'gig': gig} );

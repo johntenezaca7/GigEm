@@ -38,12 +38,16 @@ const sql = `INSERT INTO Event (venue_id, user_id, name, description, photo, sta
       UserId: req.body.user,
       ShowcaseId: req.body.gig
     })
+    
     .then(dbDef.Attendance.findAll({ where: {
       UserId: req.body.user
-    }}).then((attendance) => {
-      // console.log(attendance);
-      attendance ? res.send(attendance) : res.send(attendance)
-    }))
+      }}).then((attendance) => {
+        let returnValue = attendance.reduce((memo, item) => {
+          memo.push(item.ShowcaseId)
+          return memo;
+        }, [attendance[0].ShowcaseId]);
+        attendance ? res.send(returnValue) : res.send(returnValue)}
+      ))
 
     dbDef.Showcase.findOne({where: {'id': req.body.gig}})
     .then((show) => {
@@ -56,19 +60,23 @@ const sql = `INSERT INTO Event (venue_id, user_id, name, description, photo, sta
   app.post('/api/uncommit', (req, res) => {
     console.log('/api/uncommit UserId', req.body.user);
     console.log('/api/uncommit ShowcaseId', req.body.gig);
-        dbDef.Attendance.findOne({
+    dbDef.Attendance.findOne({
       where: {
         UserId: req.body.user, 
         ShowcaseID: req.body.gig
       }
     })
-      .then((attendanceItem) => attendanceItem.destroy())
-      .then(dbDef.Attendance.findAll({ where: {
-        UserId: req.body.user
-      }}).then((attendance) => {
-        // console.log(attendance);
-        attendance ? res.send(attendance) : res.send(attendance)
-      }))
+    .then((attendanceItem) => attendanceItem ? attendanceItem.destroy(): null)
+      
+        .then(dbDef.Attendance.findAll({ where: {
+          UserId: req.body.user
+          }}).then((attendance) => {
+            let returnValue = attendance.reduce((memo, item) => {
+              memo.push(item.ShowcaseId)
+              return memo;
+            }, [attendance[0].ShowcaseId]);
+            attendance ? res.send(returnValue) : res.send(returnValue)}
+          ))
 
     dbDef.Showcase.findOne({
       where: {'id': req.body.gig
@@ -81,14 +89,17 @@ const sql = `INSERT INTO Event (venue_id, user_id, name, description, photo, sta
   });
 
   app.post('/api/commitCheck', (req, res) => {
-    console.log('eventRoute.js: attempting to check if user has committed to event');
-    console.log('eventRoute.js req.body:')
-    console.log(req.body);
+    // console.log('eventRoute.js: attempting to check if user has committed to event');
+    // console.log('eventRoute.js req.body:')
+    // console.log(req.body);
     
     dbDef.Attendance.findAll()
     .then((attendance) => {
-      // console.log(attendance);
-      attendance ? res.send(attendance) : res.send(attendance)
+      let returnValue = attendance.reduce((memo, item) => {
+        memo.push(item.ShowcaseId)
+        return memo;
+      }, [attendance[0].ShowcaseId]);
+      attendance ? res.send(returnValue) : res.send(returnValue)
     })
   })
 
@@ -96,20 +107,20 @@ const sql = `INSERT INTO Event (venue_id, user_id, name, description, photo, sta
   // .then(data => console.log(data));
 
   app.get('/eventsByBand', (req, res) =>{
-    console.log(req.query);
+    // console.log(req.query);
     dbDef.Showcase.findAll({
       where: { UserId: req.query.userId },
       include: [ { model: dbDef.User} ]
  })
     .then((data) => {
-      console.log('found events: ', data);
+      // console.log('found events: ', data);
       res.send(data);
     })
   });
   
   // Add Showcase Event and respond with added event obj 
   app.post('/addevent', (req, res) =>{
-    console.log("REQQQQ BODYYYYYYY ", req.body);
+    // console.log("REQQQQ BODYYYYYYY ", req.body);
     dbDef.Showcase.create({
       name: req.body.name,
       description: req.body.description,

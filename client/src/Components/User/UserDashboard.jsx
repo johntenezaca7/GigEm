@@ -6,7 +6,7 @@ import PotentialGig from './PotentialGig';
 // import axios from 'axios'
 
 import { connect } from 'react-redux';
-import { fetchEvents, checkAttendance } from '../../actions/index';
+import { fetchMyEvents, checkAttendance } from '../../actions/index';
 
 
 class UserDashboard extends React.Component {
@@ -43,13 +43,13 @@ class UserDashboard extends React.Component {
               {
                 this.props.events
                   .filter((x) => x.isCommitted === true)
-                  .map((x) => <UpcomingGig user={this.props.auth.id} key={x.id} gig={x} usercommitted={this.props.attendance.find((a) => a.UserId === this.props.auth.id && a.ShowcaseId === x.id)} />)
+                  .map((x) => <UpcomingGig user={this.props.auth.id} key={x.id} gig={x} usercommitted={this.props.attendance.find((a) => a && a.UserId === this.props.auth.id && a.ShowcaseId === x.id)} />)
               }
               <h2>Potential Gigs</h2>
               {
                 this.props.events
                   .filter((x) => x.isCommitted === false)
-                  .map((x) => <PotentialGig user={this.props.auth.id} key={x.id} gig={x} usercommitted={this.props.attendance.find((a) => a.UserId === this.props.auth.id && a.ShowcaseId === x.id)}/>)
+                  .map((x) => <PotentialGig user={this.props.auth.id} key={x.id} gig={x} usercommitted={this.props.attendance.find((a) => a && a.UserId === this.props.auth.id && a.ShowcaseId === x.id)}/>)
               }
             </div>
           </div>
@@ -71,7 +71,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onFetchClick: id => {
       //console.log('onFetchClick id: ', id)
-      dispatch(fetchEvents())
+      dispatch(fetchMyEvents())
     },
     checkAttendanceDispatch: (user) => {
       dispatch(checkAttendance(user))
