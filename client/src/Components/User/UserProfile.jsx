@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchUserProfile } from '../../actions/index';
-import { editUserProfile } from '../../actions/index';
+import { /* fetchUser, fetchUserProfile, fetchEvents, checkAttendance, */ editUserProfile } from '../../actions/index';
 
 import { /* RIEToggle, */ RIEInput /*, RIETextArea, RIENumber, RIETags, RIESelect */} from 'riek'
 import _ from 'lodash'
@@ -12,23 +11,16 @@ class UserProfile extends React.Component {
         this.state = this.props;
     }
 
-
-    componentWillMount() {
-        this.props.onFetchClick();
-      }
-  
-      // fetch(e) {
-      //   e.preventDefault();
-      //   this.props.onFetchClick();
-      //   // this.setState({profile: this.props.profile});
-      // }
+    // componentWillMount() {
+    //   this.props.init();
+    // }
 
     render() {
 
       console.log('userProfile props: ', this.props);
         return (
           <div>
-<div class="alert alert-primary text-center" role="alert">
+<div className="alert alert-primary text-center" role="alert">
   Edit your profile by clicking on the text fields!
 </div>
                 <div className="row">
@@ -86,21 +78,24 @@ class UserProfile extends React.Component {
     }
 }
 
-function mapStateToProps( state){
+function mapStateToProps({events, attendance, profile, auth }){
     return {
-
-    profile : state.profile,
-    
+      attendance: attendance,
+      events: events,
+      profile : profile,
+      auth: auth
      }
   }
   
   const mapDispatchToProps = dispatch => {
     //console.log('mapdispatch to props: ', dispatch);
     return {
-      onFetchClick: id => {
-        //console.log('onFetchClick id: ', id)
-        dispatch(fetchUserProfile())
-      },
+      // init: (e) => {
+      //   dispatch(fetchUser())
+      //   .then(() => fetchUserProfile())
+      //   .then(() => fetchEvents())
+      //   .then(() => checkAttendance())
+      // },
       editUserProfile: (e) => {
         dispatch(editUserProfile(e))
         // this.forceUpdate();
