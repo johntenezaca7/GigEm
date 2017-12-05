@@ -15,8 +15,8 @@ class GigText extends React.Component {
     }
 
     renderButton() {
-        // console.log('PotentialGig.jsx this.props in renderButton() method')
-        // console.log(this.props); 
+        console.log('GigText.jsx this.props in renderButton() method')
+        console.log(this.props); 
         if (!this.state.usercommitted) {
             return (<div><button className="btn btn-danger btn-sm" onClick={(e) => this.commitButton(e, this.props.auth.id, this.props.gig.id)}>Recommit</button></div>)
         } else if (this.state.usercommitted) {
@@ -26,11 +26,14 @@ class GigText extends React.Component {
 
     commitButton(e, user, gig) {
         // e.preventDefault();
+        // e.stopPropagation();
         this.props.onCommitClick(user, gig)
         this.setState({usercommitted: !this.state.usercommitted});
     }
 
     uncommitButton(e, user, gig) {
+        // e.preventDefault();
+        // e.stopPropagation();
         this.props.onUncommitClick(user, gig)
         this.setState({usercommitted: !this.state.usercommitted});
     }
@@ -40,19 +43,19 @@ class GigText extends React.Component {
         // console.log('potentialGig state: ', this.state);
         // let percent = ((this.state.commits / this.props.gig.min_commits)*100);
         return (
-            <div className="container small border w-15">
-                <div className="row w-15">
-                    <div className="col-2 align-self-start">
+            <div className="container small border m-2">
+                <div className="row">
+                    <div className="col">
                         {this.props.gig.name}<br />
                       <div className="text-primary">{this.props.gig.commits} of {this.props.gig.min_commits} commits!</div>
                     </div>
-                    <div className="col col-md-auto" align="right">
+                    <div className="col">
                         {this.props.gig.city}<br />
                         Daterange placeholder<br />
                       {/* {this.props.gig.start_date} to<br />
                       {this.props.gig.end_date} */}
                     </div>
-                    <div className="col-1 align-self-right content-align-right">
+                    <div className="col text-right align-self-center">
                         {this.renderButton()}
                     </div>
                 </div>

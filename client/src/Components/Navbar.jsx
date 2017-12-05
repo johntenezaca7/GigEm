@@ -28,9 +28,9 @@ class Navbar extends React.Component {
           return (
             <div>
               {/* <td> */}
-                <Link to="/myshows">
+                {/* <Link to="/myshows">
                   <button className="btn btn-primary my-2 my-sm-0" type="submit">My Shows</button>
-                </Link>
+                </Link> */}
               {/* </td> */}
               {/* <td> */}
                 {/* <Link to="/api/logout"> */}
@@ -66,6 +66,11 @@ class Navbar extends React.Component {
                 <table>
                   <tbody>
                     <tr>
+                    <td>
+                      <Link to="/user">
+                        <button className="btn btn-info my-2 my-sm-0" type="submit">User Dashboard</button>
+                      </Link>
+                      </td>
                     <td>
                       <Link to="/band">
                         <button className="btn btn-info my-2 my-sm-0" type="submit">View Band Routes</button>

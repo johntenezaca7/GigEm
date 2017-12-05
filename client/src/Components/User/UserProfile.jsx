@@ -4,7 +4,7 @@ import GigText from './GigText';
 import { connect } from 'react-redux';
 import { /* fetchUser, fetchUserProfile, fetchEvents, checkAttendance, */ editUserProfile } from '../../actions/index';
 
-import { /* RIEToggle, */ RIEInput /*, RIETextArea, RIENumber, RIETags, RIESelect */} from 'riek'
+import { /* RIEToggle, */ RIEInput, RIETextArea, /*RIENumber, RIETags, RIESelect */} from 'riek'
 import _ from 'lodash'
 
 class UserProfile extends React.Component {
@@ -28,7 +28,7 @@ class UserProfile extends React.Component {
                 <div className="row">
                   {/* <div className="col col-1">
                   </div> */}
-                  <div className="col col-5 m-5 ">
+                  <div className="col col-3">
                     <h1 className="display-4">
                     User Profile - <RIEInput 
                         value={this.props.profile.name || 'No username!'}
@@ -54,7 +54,7 @@ class UserProfile extends React.Component {
                               validate={_.isString} />,
                           </div>
                           <div className="col col-md-auto">
-                            <RIEInput 
+                            <RIEInput
                               value={this.props.profile.state || 'state.'}
                               change={(e) => this.props.editUserProfile(e)}
                               propName='state'
@@ -62,8 +62,8 @@ class UserProfile extends React.Component {
                           </div>
                           </div>
                         </h2>
-                      <h3>Upcoming Shows</h3>
                       <div className="col col-md-auto">
+                      <h3>Upcoming Shows</h3>
                         {this.props.events
                           .filter((x) => x.isCommitted === true)
                           .filter((x) => this.props.attendance.includes(x.id))
@@ -78,7 +78,7 @@ class UserProfile extends React.Component {
                       </div>
                     </div>
                   <div className="col-5 m-5">
-                  <RIEInput 
+                  <RIETextArea
                     value={this.props.profile.description || 'Write your description here!'}
                     change={(e) => this.props.editUserProfile(e)}
                     propName='description'
