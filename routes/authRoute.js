@@ -36,7 +36,7 @@ module.exports = (app, db) => {
     };
     
     app.get('/api/current_user', (req, res) => {
-        console.log('getting current user', req)
+        console.log('getting current user', req.user)
         res.send(req.user)
    
     });
