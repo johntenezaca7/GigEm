@@ -15,6 +15,10 @@ class UserDashboard extends React.Component {
         this.state = {};
         this.props.onFetchClick();
 
+
+    componentWillMount() {
+      this.props.onFetchClick();
+
     }
 
     fetchEvents(e) {

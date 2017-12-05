@@ -2,7 +2,7 @@
 node_modules
 package-lock.json
 
-keys.js
+dev.js
 
 -- to run schema.sql from command line --
 mysql -h (keys.dbHost) -u vengeance -p
