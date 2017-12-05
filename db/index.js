@@ -5,20 +5,6 @@ const keys = require('../config/keys')
 
 
 
-if(process.env.NODE_ENV === 'production') {
-  const connection = new Sequelize(`mysql://[${keys.dbUsername}]:[${keys.dbPassword}]:[${config.port}]/[${config.database}]`, {
-    host: config.host,
-    dialect: 'mysql',
-    logging: false,
-    pool: {
-      max: 5,
-      min: 0,
-      acquire: 30000,
-      idle: 10000
-    }
-  });  
-}
-
 const connection = new Sequelize(config.database, config.user, config.password, {
     host: config.host,
     dialect: 'mysql',
