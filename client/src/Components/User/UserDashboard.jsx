@@ -1,22 +1,20 @@
 import React from 'react';
 
-import UpcomingGig from './UpcomingGig';
+// import UpcomingGig from './UpcomingGig';
 import PotentialGig from './PotentialGig';
 
 // import axios from 'axios'
 
 import { connect } from 'react-redux';
-import { fetchEvents } from '../../actions/index';
+import { fetchEvents, checkAttendance } from '../../actions/index';
 
 
 class UserDashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
-    }
+        this.props.onFetchClick();
 
-    componentWillMount() {
-      this.props.onFetchClick();
     }
 
     fetchEvents(e) {
@@ -24,8 +22,16 @@ class UserDashboard extends React.Component {
       this.props.onFetchClick();
     }
 
+    componentDidMount() {
+      console.log('UserDashboard.jsx this.props.auth.id in componentWillMount() method');
+      console.log(this.props.auth.id);
+      this.props.checkAttendanceDispatch(this.props.auth.id);
+    }
+
     render() {
-      // console.log('userdashboard props', this.props);
+      // console.log('UserDashboard.jsx this.props.auth in render() method:')
+      // console.log(this.props.auth);
+
       return (
         <div>
           <div className="row">
@@ -43,7 +49,7 @@ class UserDashboard extends React.Component {
               {
                 this.props.events
                   .filter((x) => x.isCommitted === false)
-                  .map((x) => <PotentialGig user={this.props.auth.id} key={x.id} gig={x} />)
+                  .map((x) => <PotentialGig user={this.props.auth.id} key={x.id} gig={x} usercommitted={this.props.attendance.find((a) => a.UserId === this.props.auth.id && a.ShowcaseId === x.id)}/>)
               }
             </div>
           </div>
@@ -52,8 +58,9 @@ class UserDashboard extends React.Component {
     }
 }
 
-function mapStateToProps({ events, auth }){
+function mapStateToProps({ events, auth, attendance }){
   return { 
+    attendance: attendance,
     events: events,
     auth: auth
   }
@@ -65,6 +72,9 @@ const mapDispatchToProps = dispatch => {
     onFetchClick: id => {
       //console.log('onFetchClick id: ', id)
       dispatch(fetchEvents())
+    },
+    checkAttendanceDispatch: (user) => {
+      dispatch(checkAttendance(user))
     }
   }
 }

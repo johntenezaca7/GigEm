@@ -40,19 +40,25 @@ const sql = `INSERT INTO Event (venue_id, user_id, name, description, photo, sta
     dbDef.Showcase.findAll({include: [{Model: dbDef.Attendance}]})
     .then((data) => {
       // console.log('found showcases: ', console.log(data))
-      console.log('myevents data: ', data);
+      // console.log('myevents data: ', data);
       res.send(data);
     })
   });
 
   app.post('/api/commit', (req, res) => {
-    console.log('in commit api');
-    console.log(req.body);
+    console.log('/api/commit UserId', req.body.user);
+    console.log('/api/commit ShowcaseId', req.body.gig);
     dbDef.Attendance.create({
       UserId: req.body.user,
       ShowcaseId: req.body.gig
     })
-    .then((data) => res.send(data))
+    .then(dbDef.Attendance.findAll({ where: {
+      UserId: req.body.user
+    }}).then((attendance) => {
+      // console.log(attendance);
+      attendance ? res.send(attendance) : res.send(attendance)
+    }))
+
     dbDef.Showcase.findOne({where: {'id': req.body.gig}})
     .then((show) => {
       show.update({
@@ -62,41 +68,50 @@ const sql = `INSERT INTO Event (venue_id, user_id, name, description, photo, sta
   });
 
   app.post('/api/uncommit', (req, res) => {
-    console.log(req.body);
-    dbDef.Attendance.findOne({
-      where: {UserId: req.body.user, ShowcaseID: req.body.gig}})
+    console.log('/api/uncommit UserId', req.body.user);
+    console.log('/api/uncommit ShowcaseId', req.body.gig);
+        dbDef.Attendance.findOne({
+      where: {
+        UserId: req.body.user, 
+        ShowcaseID: req.body.gig
+      }
+    })
       .then((attendanceItem) => attendanceItem.destroy())
-        .then(res.send('ok'));
-    dbDef.Showcase.findOne({where: {'id': req.body.gig}})
-        .then((show) => {
-          console.log('attempting to update the show');
-          console.log('show: ', show);
-          show.update({
-            commits: show.dataValues.commits - 1
-          })})
+      .then(dbDef.Attendance.findAll({ where: {
+        UserId: req.body.user
+      }}).then((attendance) => {
+        // console.log(attendance);
+        attendance ? res.send(attendance) : res.send(attendance)
+      }))
+
+    dbDef.Showcase.findOne({
+      where: {'id': req.body.gig
+    }})
+      .then((show) => {
+        show.update({
+          commits: show.dataValues.commits - 1
+        })})
+    
   });
 
   app.post('/api/commitCheck', (req, res) => {
-    console.log('attempting to check if user has committed to event');
+    console.log('eventRoute.js: attempting to check if user has committed to event');
+    console.log('eventRoute.js req.body:')
     console.log(req.body);
-    dbDef.Attendance.findOne({ where: {
-      UserId: req.body.user,
-      ShowcaseId: req.body.gig
-    }}).then((data) => {
-      if (data) {
-        res.send(data)
-      } else {
-        res.send('null');
-      }
+    
+    dbDef.Attendance.findAll()
+    .then((attendance) => {
+      // console.log(attendance);
+      attendance ? res.send(attendance) : res.send(attendance)
     })
-  });
+  })
   
   app.post('/api/addevent', (req, res) =>{
     console.log(req.body);
     addEvent(req, (err, data) => {
       if (err) res.json(err);
       
-      res.send(data);
+      data ? res.send(data) : res.send(null);
     });
   });
 }

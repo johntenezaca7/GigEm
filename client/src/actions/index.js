@@ -24,14 +24,14 @@ export const commitToEvent = (user, gig) => async dispatch => {
 }
 
 export const uncommitFromEvent = (user, gig) => async dispatch => {
-    const res = await axios.post('/api/commit', {'user': user, 'gig': gig} );
+    const res = await axios.post('/api/uncommit', {'user': user, 'gig': gig} );
     dispatch({ type: types.UNCOMMIT_FROM_EVENT, payload: res.data })
 }
 
 export const checkAttendance = (user, gig) => async dispatch => {
-    console.log(`action checkAttendance: user: ${user}, gig: ${gig}`);
-    console.log('attempting to check attendance form actions');  // adding this fixed something. :/
-    const res = await axios.post('/api/commitCheck', {'user': user, 'gig': gig})
+    // console.log(`action checkAttendance: user: ${user}, gig: ${gig}`);
+    // console.log('attempting to check attendance form actions');  // adding this fixed something. :/
+    const res = await axios.post('/api/commitCheck', {'user': user})
     dispatch({ type: types.CHECK_ATTENDANCE, payload: res.data })
 
 }

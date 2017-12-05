@@ -33,7 +33,7 @@ export default class UpcomingGig extends React.Component {
     // }
 
     renderButton() {
-        if (this.state.committed === "not committed!") {
+        if (this.committed === "not committed!") {
             return (<div><button className="btn btn-info my-2 my-sm-0" /* onClick={this.commitEvent.bind(this)} */>Commit</button></div>)
         } else {
             return (<div><button className="btn btn-warning my-2 my-sm-0" /* onClick={this.uncommitEvent.bind(this)} */>Uncommit</button></div>)

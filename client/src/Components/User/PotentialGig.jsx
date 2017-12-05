@@ -3,41 +3,50 @@ import ProgressComponent from './ProgressComponent';
 // import axios from 'axios';
 
 import { connect } from 'react-redux';
-import { commitToEvent, uncommitFromEvent, checkAttendance } from '../../actions/index';
+import { commitToEvent, uncommitFromEvent } from '../../actions/index';
 
 
 class PotentialGig extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            commits: this.props.gig.commits
+            commits: this.props.gig.commits,
+            usercommitted: this.props.usercommitted
         }
     }
 
     renderButton() {
-        console.log('render button this.state: ', this.state);
-        console.log('render button props: ', this.props);
-        if (this.state.committed === "not committed!") {
-            return (<div><button className="btn btn-info my-2 my-sm-0" onClick={(e) => this.props.onCommitClick(this.props.user, this.props.gig.id)}>Commit</button></div>)
-        } else {
-            return (<div><button className="btn btn-warning my-2 my-sm-0" onClick={(e) => this.props.onUncommitClick(this.props.user, this.props.gig.id)}>Uncommit</button></div>)
+        console.log('PotentialGig.jsx this.props in renderButton() method')
+        console.log(this.props); 
+        if (!this.state.usercommitted) {
+            return (<div><button className="btn btn-info my-2 my-sm-0" onClick={(e) => this.commitButton(e, this.props.auth.id, this.props.gig.id)}>Commit</button></div>)
+        } else if (this.state.usercommitted) {
+            return (<div><button className="btn btn-warning my-2 my-sm-0" onClick={(e) => this.uncommitButton(e, this.props.auth.id, this.props.gig.id)}>Uncommit</button></div>)
         }
     }
 
-    componentWillMount() {
-        this.props.checkAttendanceDispatch(this.props.user, this.props.gig.id)
+    commitButton(e, user, gig) {
+        // e.preventDefault();
+        this.props.onCommitClick(user, gig)
+        this.setState({usercommitted: !this.state.usercommitted});
+    }
+
+    uncommitButton(e, user, gig) {
+        this.props.onUncommitClick(user, gig)
+        this.setState({usercommitted: !this.state.usercommitted});
     }
 
     render() {
-        console.log('potentialGig props: ', this.props);
-        console.log('potentialGig state: ', this.state);
+        // console.log('PotentialGig.jsx props in render() method: ', this.props);
+        // console.log('potentialGig state: ', this.state);
+
         let percent = ((this.props.gig.commits / this.props.gig.min_commits)*100);
         return (
             <div className="container border p-3 ">
                 <div className="row">
                     <div className="col-2 align-self-start">
                         {this.props.gig.name}<br />
-                      <div className="text-primary">{this.state.commits} of {this.props.gig.min_commits} commits!</div>
+                      <div className="text-primary">{this.props.gig.commits} of {this.props.gig.min_commits} commits!</div>
                     </div>
                     <div className="col-lg-5 justify-content-md-center">
                       <ProgressComponent percent={percent} />
@@ -58,9 +67,9 @@ class PotentialGig extends React.Component {
     } 
 }
 
-function mapStateToProps({ events, auth }){
+function mapStateToProps({ auth, attendance }){
     return { 
-      events: events,
+      attendance: attendance,
       auth: auth
     }
   }
@@ -74,9 +83,6 @@ const mapDispatchToProps = dispatch => {
       },
       onUncommitClick: (user, gig) => {
         dispatch(uncommitFromEvent(user, gig))
-      },
-      checkAttendanceDispatch: (user, gig) => {
-        dispatch(checkAttendance(user, gig))
       }
     }
   }
