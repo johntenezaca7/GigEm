@@ -4,7 +4,7 @@ const Sequelize = require('sequelize');
 const keys = require('../config/keys')
 
 
-
+console.log('config', config)
 const connection = new Sequelize(config.database, config.user, config.password, {
     host: config.host,
     dialect: 'mysql',
