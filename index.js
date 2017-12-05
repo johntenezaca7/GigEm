@@ -11,7 +11,7 @@ require('./services/passport');
 var app = express();
 
 app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }))
+
 
 app.use(cookieSession({
 		maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -23,7 +23,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // remove when sequlize is updated
-require('./routes/authRoute')(app, db)
+require('./routes/authRoute')(app)
 require('./routes/venueRoute')(app, db)
 require('./routes/eventRoute')(app, db)
 require('./routes/profileRoute')(app, db)
