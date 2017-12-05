@@ -1,6 +1,5 @@
 import React from 'react';
 import ProgressComponent from './ProgressComponent';
-// import axios from 'axios';
 
 import { connect } from 'react-redux';
 import { commitToEvent, uncommitFromEvent } from '../../actions/index';
