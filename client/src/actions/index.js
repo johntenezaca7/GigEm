@@ -27,9 +27,9 @@ export const fetchBandInfo = () => async dispatch => {
 }
 
 
-export const fetchUserProfile = () => async dispatch => {
+export const fetchUserProfile = (googleId) => async dispatch => {
     // eslint-disable-next-line
-    const res = await axios.get('/profile')
+    const res = await axios.post('/profile', { APPLE: googleId})
     // eslint-disable-next-line
     dispatch({ type: FETCH_USER_PROFILE, payload: res.data })
 }
