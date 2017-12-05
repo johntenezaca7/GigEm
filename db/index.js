@@ -242,17 +242,18 @@ Showcase.belongsTo(User);
 // Showcase.sync(forceObj).then(() => {
 //   console.log('SYNC SHOWCASES-----------------------')
 //   // Table created
-//   return Showcase.create({
-//     name: 'Festivus',
-//     description: 'for the rest of us',
-//     zip: 23456,
-//     city: "Dallas",
-//     state: "TX",
-//     isCommitted: '1',
-//     photo: 'pic.jpeg',
-//     minCommits: 10,
-//     commits: 11
-//   });
+  // return
+  //  Showcase.create({
+  //   name: 'Festivus',
+  //   description: 'for the rest of us',
+  //   zip: 23456,
+  //   city: "Dallas",
+  //   state: "TX",
+  //   isCommitted: false,
+  //   photo: 'pic.jpeg',
+  //   minCommits: 10,
+  //   commits: 11
+  // });
 // });
 
 let Properties = connection.define('Properties', {

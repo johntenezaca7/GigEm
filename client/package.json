@@ -8,17 +8,12 @@
     },
     "/api/*": {
       "target": "http://localhost:5000"
-    },
-    "/events": {
-      "target": "http://localhost:5000"
-    },
-    "/profile": {
-      "target": "http://localhost:5000"
     }
   },
   "dependencies": {
     "axios": "^0.17.1",
     "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
     "module-alias": "^2.0.3",
     "moment": "^2.19.3",
     "rc-progress": "^2.2.5",
@@ -28,7 +23,8 @@
     "react-redux": "^5.0.6",
     "react-scripts": "1.0.17",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "riek": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
