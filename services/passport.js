@@ -5,8 +5,6 @@ const db = require('../db/index');
 
 
 passport.serializeUser((user, done ) => {
-
-
     user = user.googleId || user
     console.log('seralizing', user)
 
@@ -24,26 +22,17 @@ passport.use(new GoogleStrategy({
     callbackURL: '/auth/google/callback',
     proxy: true
   },
-
-  async (accessToken, refreshToken, params, profile, done) => {
-    console.log('passport user id: ', profile.id);
-    profile.accessToken = accessToken;
-    profile.expires_in = params.expires_in;
+    async (accessToken, refreshToken, params, profile, done) => {
     
-    if (refreshToken !== undefined) profile.refreshToken = refreshToken;
-  
-    // console.log(profile)
-   const existingUser = await db.User.findOne({where : {googleId: profile.id}});
-        if(existingUser){
-            return done(null, existingUser)
-        }
-      
-    const newUser = await  db.User.create({
-               googleId: profile.id,
-               name: profile.displayName,
-               email: profile.emails[0].value
-            })
-         done(null, newUser)
-        }
-    )
-);
+        const existingUser = await db.User.findOne({where : {googleId: profile.id}});
+            if(existingUser){
+                return done(null, existingUser)
+            };   
+         const newUser = await  db.User.create({
+                    googleId: profile.id,
+                    name: profile.displayName,
+                    email: profile.emails[0].value
+                })
+         done(null, newUser);
+    }
+));
