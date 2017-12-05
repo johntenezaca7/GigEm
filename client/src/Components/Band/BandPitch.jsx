@@ -1,17 +1,38 @@
 import React from 'react';
+import { connect } from 'react-redux';
 // import ProgressComponent from './ProgressComponent';
 import Datetime from 'react-datetime';
+import * as actions from '../../actions'
 
-export default class BandPitch extends React.Component {
+
+class BandPitch extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
     }
-    
 
+    componentDidMount() {
+      console.log('DID MOUNT',this.props)
+    }
+    
+    autoPopForm(e) {
+      e.preventDefault();
+      console.log('auto pop',this.props.auth)
+      this.props.fetchUserProfile(this.props.auth)
+      
+    }
+    
     render() {
+        // (e) => {
+        console.log("USER INFOSSSS: ", this.props)
+        //   this.props.fetchUserProfile(this.props.auth)
+        // }
+        // this.props.fetchUserProfile(this.props.auth)
+        
+  
+      // console.log("STATE: ", this.state);
         return (
-            <div className="container container-fluid border p-3 small">
+            <div className="container container-fluid border p-3 small" onClick={this.autoPopForm.bind(this)}>
                 <div className="row">
                 {/* <div className="container-fluid border p-3 small"> */}
                     <div className="col-sm">
@@ -68,3 +89,13 @@ export default class BandPitch extends React.Component {
         )
     } 
 }
+
+function mapStateToProps(state) {
+  // console.log('REDUCERS STATES:', state)
+  return {
+    auth: state.auth,
+    userInfo: state.profile
+  }
+}
+
+export default  connect(mapStateToProps, actions)(BandPitch);
