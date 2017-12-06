@@ -18,10 +18,6 @@ class BandPitch extends React.Component {
           temp: "",
           
         };
-        // this.hangleChange = this.hangleChange.bind(this);
-        // this.hangleSubmit = this.hangleSubmit.bind(this);
-        
-        // this.getInfo = this.getInfo.bind(this)
     }
 
 
@@ -45,7 +41,8 @@ class BandPitch extends React.Component {
     }
 
     handleSubmit(e) {
-      console.log("USBMITTED SHOWCASE: ", this.state.temp)
+      e.preventDefault();
+      console.log("SUBMITTED SHOWCASE: ", this.state.temp)
     }
         
         render() {      
@@ -56,6 +53,22 @@ class BandPitch extends React.Component {
                 <div className="row">
                 {/* <div className="container-fluid border p-3 small"> */}
                     <div className="col-sm">
+                      <form onSubmit={this.handleSubmit.bind(this)} >
+                      <div>
+                        <label>First Name</label>
+                        <div>
+                          <Field
+                            name="firstName"
+                            component="input"
+                            type="text"
+                            placeholder="First Name"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <button type="submit" >Submit</button>
+                      </div>
+                      </form>
                         <div className="form-inline">
                           {/* <div className="col col-md-auto"> */}
                           <div>
@@ -112,6 +125,12 @@ class BandPitch extends React.Component {
         )
     } 
 }
+
+BandPitch = reduxForm({
+  form: 'pitchGigForm'
+  // fields: ['name', 'description','photo','startDate' ,'endDate','startTime','finalCommitDate','city','state','zip','price','minCommits','bandId','venueId','venueName'],
+  // validate: validateGigForm
+})(BandPitch);
 
 function mapStateToProps(state) {
   // console.log('REDUCERS STATES IN BADPITCH:', state)

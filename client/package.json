@@ -25,6 +25,7 @@
     "react-share": "^1.18.0",
     "react-social": "^1.10.0",
     "redux": "^3.7.2",
+    "redux-form": "^7.2.0",
     "redux-thunk": "^2.2.0",
     "riek": "^1.1.0"
   },
