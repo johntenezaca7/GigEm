@@ -13,8 +13,8 @@ class UpcomingGig extends React.Component {
     }
 
     renderButton() {
-        console.log('PotentialGig.jsx this.props in renderButton() method')
-        console.log(this.props); 
+        // console.log('PotentialGig.jsx this.props in renderButton() method')
+        // console.log(this.props); 
         if (!this.state.usercommitted) {
             return (<div><button className="btn btn-info my-2 my-sm-0" onClick={(e) => this.commitButton(e, this.props.auth.id, this.props.gig.id)}>Commit</button></div>)
         } else if (this.state.usercommitted) {

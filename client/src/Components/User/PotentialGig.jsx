@@ -36,8 +36,8 @@ class PotentialGig extends React.Component {
     }
 
     render() {
-        console.log('PotentialGig.jsx props in render() method: ', this.props);
-        console.log('potentialGig state: ', this.state);
+        // console.log('PotentialGig.jsx props in render() method: ', this.props);
+        // console.log('potentialGig state: ', this.state);
 
         let percent = ((this.state.commits / this.props.gig.min_commits)*100);
         return (

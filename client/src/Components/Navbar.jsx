@@ -45,60 +45,60 @@ class Navbar extends React.Component {
     render() {
       console.log('navbar this.props', this.props);
         return (
-            <div>
-              <nav className="navbar navbar-expand-lg navbar-light bg-light">
-              {/* <a className="navbar-brand">Navbar</a> */}
-              <Link to="/">
+          <div>
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                {/* <a className="navbar-brand">Navbar</a> */}
+                <Link to="/">
                 <img src="./Assets/userLogo.svg" width="40px" height="40px" alt="User Logo" />
-              </Link>
+                </Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span className="navbar-toggler-icon"></span>
+                <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav mr-auto">
-                  <li className="nav-item active">
-                    <a className="nav-link">
-                    <h1>{this.props.auth ? this.props.auth : 'Anonymous User'}</h1>
-                    <span className="sr-only">(current)</span>
-                    </a>
-                  </li>
-                </ul>
-                <table>
-                  <tbody>
-                    <tr>
-                    <td>
-                      <Link to="/band">
-                        <button className="btn btn-info my-2 my-sm-0" type="submit">View Band Routes</button>
-                      </Link>
-                      </td>
-                    <td>
-                      <Link to="/bandprofile">
-                        <button className="btn btn-danger my-2 my-sm-0" type="submit">Band Profile</button>
-                      </Link>
-                    </td>
-                    <td>
-                      <Link to="/userprofile">
-                        <button className="btn btn-danger my-2 my-sm-0" type="submit">User Profile</button>
-                      </Link>
-                    </td>
-                      <td>
-                       {this.renderContent()}
-                      </td> 
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+                  <ul className="navbar-nav mr-auto">
+                      <li className="nav-item active">
+                        <a className="nav-link">
+                            <h1>{this.props.auth ? "Welcome," : 'Anonymous User'}</h1>
+                            <span className="sr-only">(current)</span>
+                        </a>
+                      </li>
+                  </ul>
+                  <table>
+                      <tbody>
+                        <tr>
+                            <td>
+                              <Link to="/band">
+                              <button className="btn btn-info my-2 my-sm-0" type="submit">View Band Routes</button>
+                              </Link>
+                            </td>
+                            <td>
+                              <Link to="/bandprofile">
+                              <button className="btn btn-danger my-2 my-sm-0" type="submit">Band Profile</button>
+                              </Link>
+                            </td>
+                            <td>
+                              <Link to="/userprofile">
+                              <button className="btn btn-danger my-2 my-sm-0" type="submit">User Profile</button>
+                              </Link>
+                            </td>
+                            <td>
+                              {this.renderContent()}
+                            </td>
+                        </tr>
+                      </tbody>
+                  </table>
+                </div>
             </nav>
           </div>
         )
     }
 }
 
-function mapStateToProps({ auth }){
-  //console.log('map:', auth)
+function mapStateToProps(state){
+  console.log('map:', state)
     return { 
-      auth: auth
-      //userInfo: 'info'
+      auth: state.auth
+    
     }
 }
 
