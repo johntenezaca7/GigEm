@@ -26,20 +26,26 @@ import LandingPage from './Components/LandingPage';
 class App extends Component {
   constructor(props){
     super(props);
-    this.state = {}
+    this.state = {
+      user:''
+    }
   }
   
   componentDidMount(){
 
-    this.props.fetchUserProfile();
+    this.props.fetchUser();
     this.props.fetchEvents();
     this.props.checkAttendance()
-    this.props.fetchUser();
-  
-  }
 
+  
+    
+  }
+  
+  
   render() {
-    // console.log('PROPS IN APP:', this.props)
+    // console.log('USER',this.props.auth)
+    this.props.fetchUserProfile(this.props.auth);
+
     return (
       <Router>
       <div>
@@ -62,12 +68,12 @@ class App extends Component {
   }
 }
 
-// function mapStateToProps(state) {
-//   // console.log('REDUCERS STATES:', state)
-//   return {
-//     auth: state.auth,
+function mapStateToProps(state) {
+  // console.log('REDUCERS STATES:', state)
+  return {
+    auth: state.auth,
     
-//   }
-// }
+  }
+}
 
-export default connect(null, actions)(App);
+export default connect(mapStateToProps, actions)(App);

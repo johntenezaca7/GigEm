@@ -29,13 +29,13 @@ class UserProfile extends React.Component {
                       <div className="nested">
                         <div>
                           <div>
-                                 Username:
                                 <RIEInput 
-                                value={this.props.profile.name || 'No username!'}
+                                value={ this.props.info.name || 'No username!'}
                                 change={(e) => this.props.editUserProfile(e)}
                                 propName='name'
                                 validate={_.isString} />
                                 <img src="./Assets/userLogo.svg" width="200px" height="200px" alt="Bandname"/>  
+                                
                             </div>
                             <div>
                                 <RIEInput 
@@ -53,7 +53,7 @@ class UserProfile extends React.Component {
                             </div>
                             <div>
                                 <RIEInput 
-                                value={this.props.profile.email || 'No email'}
+                                value={this.props.info.email || 'No email'}
                                 change={(e) => this.props.editUserProfile(e)}
                                 propName='email'
                                 validate={_.isString} />
@@ -94,12 +94,13 @@ class UserProfile extends React.Component {
     }
 }
 
-function mapStateToProps({events, attendance, profile, auth }){
+function mapStateToProps({events, attendance, profile, auth, info }){
     return {
       attendance: attendance,
       events: events,
       profile : profile,
-      auth: auth
+      auth: auth,
+      info: info
      }
   }
   

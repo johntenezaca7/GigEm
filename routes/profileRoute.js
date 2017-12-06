@@ -3,11 +3,11 @@ const dbDef = require('../db/index');
 module.exports = (app, db) => {
   app.post('/api/profile', (req, res) => {
     // console.log('attempting to serve profile route');
-    // console.log('DATATAT',req.body.params.googleId);
+    console.log('DATATAT',req.body);
 
     // res.send(req.body)
 
-    dbDef.User.findOne({where: {googleId: req.body.params.googleId}})
+    dbDef.User.findOne({where: {googleId: req.body.params}})
     .then((data) => {
       // console.log('found user ', data);
       res.send(data);

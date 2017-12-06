@@ -12,7 +12,7 @@ module.exports = (app, db) => {
     app.get('/auth/google/callback',
         passport.authenticate('google'),
             (req, res) => {
-                res.redirect('/user')
+                res.redirect('/userProfile')
             }
     );
 
@@ -26,7 +26,9 @@ module.exports = (app, db) => {
             console.log('NOT LOGGED IN')
         } else {
             console.log('getting current user', req.user)
-        } });
-
+        } 
+        res.send(req.user)
+    });
+     
 
 };

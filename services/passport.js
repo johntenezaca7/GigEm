@@ -8,9 +8,6 @@ passport.serializeUser((user, done ) => {
 
     user = user.googleId || user
 
-
-
-
     console.log('seralizing', user)
 
     done(null, user);
@@ -32,7 +29,7 @@ passport.use(new GoogleStrategy({
     
   },
     async (accessToken, refreshToken, params, profile, done) => {
-    
+        console.log('get photo',profile)
         const existingUser = await db.User.findOne({where : {googleId: profile.id}});
             if(existingUser){
                 return done(null, existingUser)
@@ -40,7 +37,8 @@ passport.use(new GoogleStrategy({
          const newUser = await  db.User.create({
                     googleId: profile.id,
                     name: profile.displayName,
-                    email: profile.emails[0].value
+                    email: profile.emails[0].value,
+                    photo: profile.photos[0].value
                 })
          done(null, newUser);
     }

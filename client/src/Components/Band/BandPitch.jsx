@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+// import { Field, reduxForm } from 'redux-form';
 // import ProgressComponent from './ProgressComponent';
 import Datetime from 'react-datetime';
 
 import * as actions from '../../actions'
+import { networkInterfaces } from 'os';
 
 
 class BandPitch extends React.Component {
@@ -24,20 +25,16 @@ class BandPitch extends React.Component {
     }
 
 
-    // componentDidMount() {
-    //   console.log("HEREEEEE", this.props);
-    //   this.props.fetchUserProfile(this.props.user)
+    
+    // componentWillReceiveProps(nextProps){
+    //   if (nextProps.user !== "" && this.state.temp !== nextProps.user) {
+    //     console.log("SIDUBVIWEUBIVEWUYGBYEIUWY")
+    //     this.props.fetchUserProfile(nextProps.user);
+    //     this.setState({
+    //       temp: nextProps.user
+    //     })
+    //   }
     // }
-
-    componentWillReceiveProps(nextProps){
-  
-      if (nextProps.user !== "" && this.state.temp !== nextProps.user) {
-        this.props.fetchUserProfile(nextProps.user);
-        this.setState({
-          temp: nextProps.user
-        })
-      }
-    }
 
     validateGigForm() {
       console.log('LET ME VALIDATE YOU');
@@ -52,8 +49,7 @@ class BandPitch extends React.Component {
     }
         
         render() {      
-        // console.log("IN RENDER", this.props);
-        console.log("IN PROPS FROM STORE", this.props.userInfo);
+      
         
         return (
             <div className="container container-fluid border p-3 small" >
@@ -118,17 +114,17 @@ class BandPitch extends React.Component {
 }
 
 function mapStateToProps(state) {
-  console.log('REDUCERS STATES IN BADPITCH:', state)
+  // console.log('REDUCERS STATES IN BADPITCH:', state)
   return {
     auth: state.auth,
     userInfo: state.info
   }
 }
 
-BandPitch = reduxForm({
-  form: 'pitchGigForm'
-  // fields: ['name', 'description','photo','startDate' ,'endDate','startTime','finalCommitDate','city','state','zip','price','minCommits','bandId','venueId','venueName'],
-  // validate: validateGigForm
-})(BandPitch);
+// BandPitch = reduxForm({
+//   form: 'pitchGigForm'
+//   // fields: ['name', 'description','photo','startDate' ,'endDate','startTime','finalCommitDate','city','state','zip','price','minCommits','bandId','venueId','venueName'],
+//   // validate: validateGigForm
+// })(BandPitch);
 
 export default  connect(mapStateToProps, actions)(BandPitch);
