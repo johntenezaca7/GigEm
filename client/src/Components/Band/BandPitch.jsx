@@ -8,31 +8,37 @@ import * as actions from '../../actions'
 class BandPitch extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+          user: '',
+          getFunc: '',
+          fetched: false,
+          temp: ""
+        };
+        
+        // this.getInfo = this.getInfo.bind(this)
     }
 
-    componentDidMount() {
-      console.log('DID MOUNT',this.props)
-    }
-    
-    autoPopForm(e) {
-      e.preventDefault();
-      console.log('auto pop',this.props.auth)
-      this.props.fetchUserProfile(this.props.auth)
-      
-    }
-    
-    render() {
-        // (e) => {
-        console.log("USER INFOSSSS: ", this.props)
-        //   this.props.fetchUserProfile(this.props.auth)
-        // }
-        // this.props.fetchUserProfile(this.props.auth)
-        
+
+    // componentDidMount() {
+    //   console.log("HEREEEEE", this.props);
+    //   this.props.fetchUserProfile(this.props.user)
+    // }
+
+    componentWillReceiveProps(nextProps){
   
-      // console.log("STATE: ", this.state);
+      if (nextProps.user !== "" && this.state.temp !== nextProps.user) {
+        this.props.fetchUserProfile(nextProps.user);
+        this.setState({
+          temp: nextProps.user
+        })
+      }
+  
+    }
+        
+        render() {      
+        
         return (
-            <div className="container container-fluid border p-3 small" onClick={this.autoPopForm.bind(this)}>
+            <div className="container container-fluid border p-3 small" >
                 <div className="row">
                 {/* <div className="container-fluid border p-3 small"> */}
                     <div className="col-sm">
@@ -91,7 +97,7 @@ class BandPitch extends React.Component {
 }
 
 function mapStateToProps(state) {
-  // console.log('REDUCERS STATES:', state)
+  console.log('REDUCERS STATES IN BADPITC:', state)
   return {
     auth: state.auth,
     userInfo: state.profile

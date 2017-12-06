@@ -19,7 +19,7 @@ class UserProfile extends React.Component {
 
     render() {
 
-      console.log('userProfile props: ', this.props);
+      console.log('userProfile props:PROFILE ', this.props);
         return (
           <div>
             <div className="alert alert-primary text-center" role="alert">

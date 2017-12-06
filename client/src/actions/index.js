@@ -22,6 +22,7 @@ export const fetchMyEvents = () => async dispatch => {
     // eslint-disable-next-line
     const res = await axios.get('/api/myEvents')
     // eslint-disable-next-line
+  
     dispatch({ type: types.FETCH_EVENTS, payload: res.data })
 }
 
@@ -54,8 +55,10 @@ export const fetchBandInfo = () => async dispatch => {
 
 export const fetchUserProfile = (googleId) => async dispatch => {
     // eslint-disable-next-line
-    const res = await axios.get('/api/profile')
+    const res = await axios.post('/api/profile', {params: googleId})
     // eslint-disable-next-line
+
+    // console.log('DATATBAK', res)
     dispatch({ type: types.FETCH_USER_PROFILE, payload: res.data })
 }
 
