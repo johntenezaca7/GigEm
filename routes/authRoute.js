@@ -1,5 +1,5 @@
 const passport = require('passport');
-
+const dbDef = require('../db/index');
 
 module.exports = (app, db) => {
 
@@ -20,7 +20,6 @@ module.exports = (app, db) => {
         req.logout();
         res.redirect('/');
     });
-   
     app.get('/api/current_user', (req, res) => {
         if(!req.user){
             console.log('NOT LOGGED IN')
@@ -29,6 +28,11 @@ module.exports = (app, db) => {
         } 
         res.send(req.user)
     });
-     
+
+    app.get('/api/all_users', (req, res) => {
+        // console.log('getting current user', req.user)
+        dbDef.User.findAll({})
+        .then((users) => res.send(users))
+    });
 
 };

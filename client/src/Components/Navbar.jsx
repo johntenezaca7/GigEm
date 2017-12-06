@@ -18,88 +18,121 @@ class Navbar extends React.Component {
           return(
             <div>
               {/* <td> */}
-                {/* <Link to="/auth/google"> */}
                 <a href="/auth/google"><button className="btn btn-warning my-2 my-sm-0" type="submit">Login With Google</button></a>
-                {/* </Link> */}
-              {/* </td> */}
             </div>
           );
         default:
           return (
             <div>
               {/* <td> */}
-                <Link to="/myshows">
-                  <button className="btn btn-primary my-2 my-sm-0" type="submit">My Shows</button>
-                </Link>
-              {/* </td> */}
-              {/* <td> */}
-                {/* <Link to="/api/logout"> */}
                   <a href="/api/logout"><button className="btn btn-warning my-2 my-sm-0" type="submit">Logout</button></a>
-                {/* </Link> */}
-              {/* </td> */}
           </div>
           )
       }
     }
     
     render() {
-      // console.log('navbar this.props', this.props);
+      if (this.props.auth.isBand) {
+        return (
+        <div>
+        <nav className="navbar navbar-expand-lg navbar-light bg-warning">
+        {/* <a className="navbar-brand">Navbar</a> */}
+        <Link to="/">
+          <img src="../Assets/userLogo.svg" width="40px" height="40px" alt="User Logo" />
+        </Link>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item active">
+              <a className="nav-link">
+              <h1>Gig'em Band: {this.props.auth.name ? this.props.auth.name : 'Anonymous User'}</h1>
+              <span className="sr-only">(current)</span>
+              </a>
+            </li>
+          </ul>
+          <table>
+            <tbody>
+              <tr>
+              <td>
+                <Link to="/band/upcoming">
+                  <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">Upcoming Gigs</button>
+                </Link>
+                <Link to="/band/finalize">
+                  <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">Gigs to Finalize</button>
+                </Link>
+                <Link to="/band/potential">
+                  <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">Potential Gigs</button>
+                </Link>
+                <Link to="/band/pitch">
+                  <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">Pitch a Gig</button>
+                </Link>
+                <Link to={`/bandprofile/${this.props.auth.id}`}>
+                  <button className="btn btn-success my-2 my-sm-0 m-1" type="submit">My Profile</button>
+                </Link>
+              </td>
+                <td>
+                 {this.renderContent()}
+                </td> 
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </nav>
+    </div>)
+      } else {
         return (
           <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                {/* <a className="navbar-brand">Navbar</a> */}
-                <Link to="/">
-                <img src="./Assets/userLogo.svg" width="40px" height="40px" alt="User Logo" />
-                </Link>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            {/* <a className="navbar-brand">Navbar</a> */}
+            <Link to="/">
+              <img src="./Assets/userLogo.svg" width="40px" height="40px" alt="User Logo" />
+            </Link>
+              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul className="navbar-nav mr-auto">
-                      <li className="nav-item active">
-                        <a className="nav-link">
-                            <h1>{this.props.user.name ? `Welcome, ${this.props.user.name}` : ''}</h1>
-                            <span className="sr-only">(current)</span>
-                        </a>
-                      </li>
-                  </ul>
-                  <table>
-                      <tbody>
-                        <tr>
-                            <td>
-                              <Link to="/band">
-                              <button className="btn btn-info my-2 my-sm-0" type="submit">View Band Routes</button>
-                              </Link>
-                            </td>
-                            <td>
-                              <Link to="/bandprofile">
-                              <button className="btn btn-danger my-2 my-sm-0" type="submit">Band Profile</button>
-                              </Link>
-                            </td>
-                            <td>
-                              <Link to="/userprofile">
-                              <button className="btn btn-danger my-2 my-sm-0" type="submit">User Profile</button>
-                              </Link>
-                            </td>
-                            <td>
-                              {this.renderContent()}
-                            </td>
-                        </tr>
-                      </tbody>
-                  </table>
-                </div>
-            </nav>
-          </div>
-        )
+              </button>
+              <div className="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul className="navbar-nav mr-auto">
+<li className="nav-item active">
+<a className="nav-link">
+<h1>{this.props.user.name ? `Welcome, ${this.props.user.name}` : ''}</h1>
+<span className="sr-only">(current)</span>
+</a>
+</li>
+              </ul>
+              <table>
+                <tbody>
+                  <tr>
+                  <td>
+                    <Link to="/user">
+                      <button className="btn btn-info my-2 my-sm-0 m-3" type="submit">Dashboard</button>
+                    </Link>
+                    </td>
+                  <td>
+                    <Link to="/profile">
+                      <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">My Profile</button>
+                    </Link>
+                  </td>
+                    <td>
+                     {this.renderContent()}
+                    </td> 
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </nav>
+        </div>
+      )
+      }
     }
 }
 
-function mapStateToProps(state){
-  // console.log('map:', state)
+function mapStateToProps({ auth }){
+  //console.log('map:', auth)
     return { 
-      auth: state.auth,
-      user: state.info
-    
+      auth: auth
+      //userInfo: 'info'
     }
 }
 

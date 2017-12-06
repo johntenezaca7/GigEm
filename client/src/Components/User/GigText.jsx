@@ -1,16 +1,9 @@
 import React from 'react';
-import {  ShareButtons, ShareCounts, generateShareIcon } from 'react-share';
 // import ProgressComponent from './ProgressComponent';
 
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { commitToEvent, uncommitFromEvent } from '../../actions/index';
-
-const FacebookIcon = generateShareIcon('facebook');
-const TwitterIcon = generateShareIcon('twitter');
-const WhatsappIcon = generateShareIcon('whatsapp');
-const GooglePlusIcon = generateShareIcon('google');
-const RedditIcon = generateShareIcon('reddit');
-const TumblrIcon = generateShareIcon('tumblr');
 
 
 class GigText extends React.Component {
@@ -23,7 +16,7 @@ class GigText extends React.Component {
     }
 
     renderButton() {
-        // console.log('PotentialGig.jsx this.props in renderButton() method')
+        // console.log('GigText.jsx this.props in renderButton() method')
         // console.log(this.props); 
         if (!this.state.usercommitted) {
             return (<div><button className="btn btn-danger btn-sm" onClick={(e) => this.commitButton(e, this.props.auth.id, this.props.gig.id)}>Recommit</button></div>)
@@ -34,11 +27,14 @@ class GigText extends React.Component {
 
     commitButton(e, user, gig) {
         // e.preventDefault();
+        // e.stopPropagation();
         this.props.onCommitClick(user, gig)
         this.setState({usercommitted: !this.state.usercommitted});
     }
 
     uncommitButton(e, user, gig) {
+        // e.preventDefault();
+        // e.stopPropagation();
         this.props.onUncommitClick(user, gig)
         this.setState({usercommitted: !this.state.usercommitted});
     }
@@ -47,21 +43,22 @@ class GigText extends React.Component {
         // console.log('GigText.jsx props in render() method: ', this.props);
         // console.log('potentialGig state: ', this.state);
         // let percent = ((this.state.commits / this.props.gig.min_commits)*100);
-       
         return (
-            <div>
-                <div className="gig-text-wrapper">
-                    <div>
-                        {this.props.gig.name}<br />
-                      <div className="text-primary">{this.props.gig.commits} of {this.props.gig.min_commits} commits!</div>
+            <div className="container small border m-2">
+                <div className="row">
+                    <div className="col">
+                    <Link to={`/showdetails/${this.props.gig.id}`}>
+                      {this.props.gig.name}<br />
+                    </Link>
+                      <div className="text-success">{this.props.gig.commits} of {this.props.gig.min_commits} commits!</div>
                     </div>
-                    <div>
-                        {this.props.gig.city}<br />
+                    <div className="col">
+                        {`${this.props.gig.city}, ${this.props.gig.state}`}<br />
                         Daterange placeholder<br />
                       {/* {this.props.gig.start_date} to<br />
                       {this.props.gig.end_date} */}
                     </div>
-                    <div>
+                    <div className="col text-right align-self-center">
                         {this.renderButton()}
                     </div>
                     <div>
@@ -82,10 +79,11 @@ class GigText extends React.Component {
     } 
 }
 
-function mapStateToProps({ auth, attendance }){
+function mapStateToProps({ auth, attendance, users }){
     return { 
       attendance: attendance,
-      auth: auth
+      auth: auth,
+      users: users
     }
   }
 
