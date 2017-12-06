@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import {
     BrowserRouter as Router,
@@ -14,14 +15,15 @@ import BandPotentialGig from './BandPotentialGig';
 import BandToFinalize from './BandToFinalize'
 import BandPitch from './BandPitch';
 
-
-export default class BandDashboard extends React.Component {
+ class BandDashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
     }
 
     render() {
+
+      // console.log('USE:', this.props.user)
     return (
         <Router>
             <div>
@@ -62,8 +64,17 @@ export default class BandDashboard extends React.Component {
                   <div className="text-center">
                       <h1 className="display-4">Pitch a Gig</h1>
                     </div>
-                  <BandPitch /></div>} />
+                  <BandPitch user={this.props.user} /></div>} />
             </div>
         </Router>
     )}
 }
+
+function mapStateToProps(state) {
+  return {
+    user: state.auth
+  }
+}
+
+
+export default connect(mapStateToProps)(BandDashboard);

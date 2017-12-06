@@ -22,6 +22,7 @@ export const fetchMyEvents = () => async dispatch => {
     // eslint-disable-next-line
     const res = await axios.get('/api/myEvents')
     // eslint-disable-next-line
+  
     dispatch({ type: types.FETCH_EVENTS, payload: res.data })
 }
 
@@ -34,6 +35,18 @@ export const commitToEvent = (user, gig) => async dispatch => {
 export const uncommitFromEvent = (user, gig) => async dispatch => {
     const res = await axios.post('/api/uncommit', {'user': user, 'gig': gig} );
     dispatch({ type: types.UNCOMMIT_FROM_EVENT, payload: res.data })
+}
+
+export const addNewEvent = (event) => async dispatch => {
+    console.log('attempting to add showcase event: ', event);
+    const res = await axios.post('/addevent', {'info': event} );
+    dispatch({ type: types.ADD_EVENT, payload: res.data })
+}
+
+export const addNewVenue = (venue) => async dispatch => {
+    console.log('attempting to add venue: ', venue);
+    const res = await axios.post('/venues', {'info': venue} );
+    dispatch({ type: types.ADD_VENUE, payload: res.data })
 }
 
 export const checkAttendance = (user, gig) => async dispatch => {
@@ -52,10 +65,12 @@ export const fetchBandInfo = () => async dispatch => {
 }
 
 
-export const fetchUserProfile = () => async dispatch => {
+export const fetchUserProfile = (googleId) => async dispatch => {
     // eslint-disable-next-line
-    const res = await axios.get('/api/profile')
+    const res = await axios.post('/api/profile', {params: googleId})
     // eslint-disable-next-line
+
+    // console.log('DATATBAK', res)
     dispatch({ type: types.FETCH_USER_PROFILE, payload: res.data })
 }
 

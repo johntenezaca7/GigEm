@@ -1,17 +1,62 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
 // import ProgressComponent from './ProgressComponent';
 import Datetime from 'react-datetime';
 
-export default class BandPitch extends React.Component {
+import * as actions from '../../actions'
+
+
+class BandPitch extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+          user: '',
+          getFunc: '',
+          fetched: false,
+          temp: "",
+          
+        };
+        // this.hangleChange = this.hangleChange.bind(this);
+        // this.hangleSubmit = this.hangleSubmit.bind(this);
+        
+        // this.getInfo = this.getInfo.bind(this)
     }
-    
 
-    render() {
+
+    // componentDidMount() {
+    //   console.log("HEREEEEE", this.props);
+    //   this.props.fetchUserProfile(this.props.user)
+    // }
+
+    componentWillReceiveProps(nextProps){
+  
+      if (nextProps.user !== "" && this.state.temp !== nextProps.user) {
+        this.props.fetchUserProfile(nextProps.user);
+        this.setState({
+          temp: nextProps.user
+        })
+      }
+    }
+
+    validateGigForm() {
+      console.log('LET ME VALIDATE YOU');
+    };
+
+    handleChange(e) {
+      this.setState({temp: e.target.temp})
+    }
+
+    handleSubmit(e) {
+      console.log("USBMITTED SHOWCASE: ", this.state.temp)
+    }
+        
+        render() {      
+        // console.log("IN RENDER", this.props);
+        console.log("IN PROPS FROM STORE", this.props.userInfo);
+        
         return (
-            <div className="container container-fluid border p-3 small">
+            <div className="container container-fluid border p-3 small" >
                 <div className="row">
                 {/* <div className="container-fluid border p-3 small"> */}
                     <div className="col-sm">
@@ -23,7 +68,8 @@ export default class BandPitch extends React.Component {
                           {/* </div> */}
                           {/* <div className="col "> */}
                           
-                            <input type="email" className="form-control mt-1 form-control-sm justify-content-end" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+                            <input type="email" className="form-control mt-1 form-control-sm justify-content-end" 
+                            id="exampleInputEmail1" aria-describedby="emailHelp" placeholder={this.state.temp.email} />
                           {/* </div> */}
                         </div>
                         <div className="form-inline">
@@ -37,7 +83,8 @@ export default class BandPitch extends React.Component {
                         <div className="form-inline ">
                           {/* <div className="col col-md-auto"> */}
                           <label>Notes</label>
-                            <input type="email" className="form-control mt-1 form-control-sm  justify-content-end" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+                            <input type="email" className="form-control mt-1 form-control-sm  justify-content-end" 
+                            id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
                         </div>
 
                     </div>
@@ -47,7 +94,8 @@ export default class BandPitch extends React.Component {
                               <label className="text-left">Commits Needed</label>
                             {/* </div> */}
                             {/* <div className="col"> */}
-                              <input type="email" className="form-control mt-1 form-control-sm justify-content-right" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+                              <input type="email" className="form-control mt-1 form-control-sm justify-content-right" 
+                              id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
                             {/* </div> */}
                         </div>
                         <div className="form-inline">
@@ -68,3 +116,19 @@ export default class BandPitch extends React.Component {
         )
     } 
 }
+
+function mapStateToProps(state) {
+  console.log('REDUCERS STATES IN BADPITCH:', state)
+  return {
+    auth: state.auth,
+    userInfo: state.info
+  }
+}
+
+BandPitch = reduxForm({
+  form: 'pitchGigForm'
+  // fields: ['name', 'description','photo','startDate' ,'endDate','startTime','finalCommitDate','city','state','zip','price','minCommits','bandId','venueId','venueName'],
+  // validate: validateGigForm
+})(BandPitch);
+
+export default  connect(mapStateToProps, actions)(BandPitch);

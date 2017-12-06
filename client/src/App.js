@@ -35,10 +35,11 @@ class App extends Component {
     this.props.fetchEvents();
     this.props.checkAttendance()
     this.props.fetchUser();
-    // this.props.fetchEvents();
+  
   }
 
   render() {
+    // console.log('PROPS IN APP:', this.props)
     return (
       <Router>
       <div>
@@ -60,5 +61,13 @@ class App extends Component {
     );
   }
 }
+
+// function mapStateToProps(state) {
+//   // console.log('REDUCERS STATES:', state)
+//   return {
+//     auth: state.auth,
+    
+//   }
+// }
 
 export default connect(null, actions)(App);
