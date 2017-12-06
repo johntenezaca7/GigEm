@@ -16,8 +16,8 @@ class GigText extends React.Component {
     }
 
     renderButton() {
-        console.log('GigText.jsx this.props in renderButton() method')
-        console.log(this.props); 
+        // console.log('GigText.jsx this.props in renderButton() method')
+        // console.log(this.props); 
         if (!this.state.usercommitted) {
             return (<div><button className="btn btn-danger btn-sm" onClick={(e) => this.commitButton(e, this.props.auth.id, this.props.gig.id)}>Recommit</button></div>)
         } else if (this.state.usercommitted) {

@@ -1,7 +1,7 @@
 import { FETCH_USER } from '../actions/types';
 
 
-export default function(state = 7, action) {
+export default function(state = [], action) {
     // console.log('authReducer action: ', action);
     switch(action.type) {
         case FETCH_USER:
