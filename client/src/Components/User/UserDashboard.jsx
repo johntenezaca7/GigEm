@@ -15,7 +15,7 @@ class UserDashboard extends React.Component {
         this.state = {};
         this.props.onFetchClick();
 
-
+    }
     componentWillMount() {
       this.props.onFetchClick();
 
@@ -31,6 +31,7 @@ class UserDashboard extends React.Component {
       // console.log(this.props.auth.id);
       this.props.checkAttendanceDispatch(this.props.auth.id);
     }
+  
 
     render() {
       // console.log('UserDashboard.jsx this.props.auth in render() method:')

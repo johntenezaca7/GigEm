@@ -1,8 +1,16 @@
 import React from 'react';
+import {  ShareButtons, ShareCounts, generateShareIcon } from 'react-share';
 // import ProgressComponent from './ProgressComponent';
 
 import { connect } from 'react-redux';
 import { commitToEvent, uncommitFromEvent } from '../../actions/index';
+
+const FacebookIcon = generateShareIcon('facebook');
+const TwitterIcon = generateShareIcon('twitter');
+const WhatsappIcon = generateShareIcon('whatsapp');
+const GooglePlusIcon = generateShareIcon('google');
+const RedditIcon = generateShareIcon('reddit');
+const TumblrIcon = generateShareIcon('tumblr');
 
 
 class GigText extends React.Component {
@@ -39,21 +47,33 @@ class GigText extends React.Component {
         // console.log('GigText.jsx props in render() method: ', this.props);
         // console.log('potentialGig state: ', this.state);
         // let percent = ((this.state.commits / this.props.gig.min_commits)*100);
+       
         return (
-            <div className="container small border w-15">
-                <div className="row w-15">
-                    <div className="col-2 align-self-start">
+            <div>
+                <div className="gig-text-wrapper">
+                    <div>
                         {this.props.gig.name}<br />
                       <div className="text-primary">{this.props.gig.commits} of {this.props.gig.min_commits} commits!</div>
                     </div>
-                    <div className="col col-md-auto" align="right">
+                    <div>
                         {this.props.gig.city}<br />
                         Daterange placeholder<br />
                       {/* {this.props.gig.start_date} to<br />
                       {this.props.gig.end_date} */}
                     </div>
-                    <div className="col-1 align-self-right content-align-right">
+                    <div>
                         {this.renderButton()}
+                    </div>
+                    <div>
+                      Share this event!
+                      <div className="social-media">
+                         <FacebookIcon size={32} round={true} />
+                         <TwitterIcon size={32} round={true} /> 
+                         <GooglePlusIcon size={32} round={true}/> 
+                         <WhatsappIcon size={32} round={true} />
+                         <RedditIcon size={32} round={true} />
+                         <TumblrIcon size={32} round={true} />
+                      </div>
                     </div>
                 </div>
             </div>
