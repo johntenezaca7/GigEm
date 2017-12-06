@@ -58,7 +58,7 @@ class Navbar extends React.Component {
                   <ul className="navbar-nav mr-auto">
                       <li className="nav-item active">
                         <a className="nav-link">
-                            <h1>{this.props.auth ? "Welcome," : 'Anonymous User'}</h1>
+                            <h1>{this.props.user.name ? `Welcome, ${this.props.user.name}` : ''}</h1>
                             <span className="sr-only">(current)</span>
                         </a>
                       </li>
@@ -95,9 +95,10 @@ class Navbar extends React.Component {
 }
 
 function mapStateToProps(state){
-  console.log('map:', state)
+  // console.log('map:', state)
     return { 
-      auth: state.auth
+      auth: state.auth,
+      user: state.info
     
     }
 }

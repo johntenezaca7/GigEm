@@ -27,7 +27,7 @@ export const fetchMyEvents = () => async dispatch => {
 }
 
 export const commitToEvent = (user, gig) => async dispatch => {
-    console.log('attempting to commit to event: ', user, 'with user id: ', gig);
+    // console.log('attempting to commit to event: ', user, 'with user id: ', gig);
     const res = await axios.post('/api/commit', {'user': user, 'gig': gig} );
     dispatch({ type: types.COMMIT_TO_EVENT, payload: res.data })
 }
@@ -66,11 +66,12 @@ export const fetchBandInfo = () => async dispatch => {
 
 
 export const fetchUserProfile = (googleId) => async dispatch => {
-    // eslint-disable-next-line
+    // eslint-disable-next-lin
+    // console.log('GOOGLID :' ,googleId)
     const res = await axios.post('/api/profile', {params: googleId})
     // eslint-disable-next-line
 
-    // console.log('DATATBAK', res)
+
     dispatch({ type: types.FETCH_USER_PROFILE, payload: res.data })
 }
 
