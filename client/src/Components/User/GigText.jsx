@@ -1,6 +1,7 @@
 import React from 'react';
 // import ProgressComponent from './ProgressComponent';
 
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { commitToEvent, uncommitFromEvent } from '../../actions/index';
 
@@ -46,8 +47,10 @@ class GigText extends React.Component {
             <div className="container small border m-2">
                 <div className="row">
                     <div className="col">
-                        {this.props.gig.name}<br />
-                      <div className="text-primary">{this.props.gig.commits} of {this.props.gig.min_commits} commits!</div>
+                    <Link to={`/showdetails/${this.props.gig.id}`}>
+                      {this.props.gig.name}<br />
+                    </Link>
+                      <div className="text-success">{this.props.gig.commits} of {this.props.gig.min_commits} commits!</div>
                     </div>
                     <div className="col">
                         {`${this.props.gig.city}, ${this.props.gig.state}`}<br />
@@ -65,10 +68,11 @@ class GigText extends React.Component {
     } 
 }
 
-function mapStateToProps({ auth, attendance }){
+function mapStateToProps({ auth, attendance, users }){
     return { 
       attendance: attendance,
-      auth: auth
+      auth: auth,
+      users: users
     }
   }
 

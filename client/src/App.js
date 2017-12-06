@@ -45,15 +45,11 @@ class App extends Component {
 
           <Route exact path="/user" render={() => <div><Navbar /><UserDashboard /></div>} />
           <Route exact path="/userprofile" render={() => <div><Navbar /><UserProfile /></div>} />
-          <Route path="/showdetails/:showId" 
-          // render={() => {
-          //   console.log('route this: ', this);
-          // return(<div><Navbar /><div><ShowDescription/></div></div>)
-          // }} /> */}
-          component={ShowDescription} />
+          <Route path="/showdetails/:showId" component={ShowDescription} />
+          <Route path="/bandprofile/:bandId" component={BandProfile} />
 
           <Route exact path="/band" render={() => <div><Navbar /><BandDashboard /></div>} />
-          <Route exact path="/bandprofile" render={() => <div><Navbar /><BandProfile /></div>} />
+
           <Route exact path="/band/upcoming" render={() => <div><Navbar /><BandDashboard tab="upcoming" /></div>} />
           <Route exact path="/band/finalize" render={() => <div><Navbar /><BandDashboard tab="finalize" /></div>} />
           <Route exact path="/band/potential" render={() => <div><Navbar /><BandDashboard tab="potential" /></div>} />

@@ -1,5 +1,5 @@
 const passport = require('passport');
-
+const dbDef = require('../db/index');
 
 module.exports = (app, db) => {
 
@@ -34,8 +34,12 @@ module.exports = (app, db) => {
     app.get('/api/current_user', (req, res) => {
         // console.log('getting current user', req.user)
         res.send(req.user)
-   
     });
 
+    app.get('/api/all_users', (req, res) => {
+        // console.log('getting current user', req.user)
+        dbDef.User.findAll({})
+        .then((users) => res.send(users))
+    });
 
 };
