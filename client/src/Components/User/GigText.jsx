@@ -50,7 +50,7 @@ class GigText extends React.Component {
                       <div className="text-primary">{this.props.gig.commits} of {this.props.gig.min_commits} commits!</div>
                     </div>
                     <div className="col">
-                        {this.props.gig.city}<br />
+                        {`${this.props.gig.city}, ${this.props.gig.state}`}<br />
                         Daterange placeholder<br />
                       {/* {this.props.gig.start_date} to<br />
                       {this.props.gig.end_date} */}

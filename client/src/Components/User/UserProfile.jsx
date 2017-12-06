@@ -2,7 +2,7 @@ import React from 'react';
 import GigText from './GigText';
 
 import { connect } from 'react-redux';
-import { /* fetchUser, fetchUserProfile, fetchEvents, checkAttendance, */ editUserProfile } from '../../actions/index';
+import { /* fetchUser, fetchUserProfile,*/ fetchEvents, checkAttendance, editUserProfile } from '../../actions/index';
 
 import { /* RIEToggle, */ RIEInput, RIETextArea, /*RIENumber, RIETags, RIESelect */} from 'riek'
 import _ from 'lodash'
@@ -13,9 +13,9 @@ class UserProfile extends React.Component {
         this.state = this.props;
     }
 
-    // componentWillMount() {
-    //   this.props.init();
-    // }
+    componentWillMount() {
+      this.props.init();
+    }
 
     render() {
 
@@ -102,11 +102,14 @@ function mapStateToProps({events, attendance, profile, auth }){
   const mapDispatchToProps = dispatch => {
     //console.log('mapdispatch to props: ', dispatch);
     return {
-      // init: (e) => {
+      init: (e) => {
       //   dispatch(fetchUser())
       //   .then(() => fetchUserProfile())
-      //   .then(() => fetchEvents())
-      //   .then(() => checkAttendance())
+      //   .then(() => 
+      dispatch(fetchEvents())
+      dispatch(checkAttendance())
+      },
+      //   
       // },
       editUserProfile: (e) => {
         dispatch(editUserProfile(e))

@@ -1,6 +1,7 @@
 import React from 'react';
 import ProgressComponent from './ProgressComponent';
 
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { commitToEvent, uncommitFromEvent } from '../../actions/index';
 
@@ -44,7 +45,9 @@ class PotentialGig extends React.Component {
             <div className="container border p-3 ">
                 <div className="row">
                     <div className="col-2 align-self-start">
-                        {this.props.gig.name}<br />
+                    <Link to="/showdetails/{this.props.gig.id}">
+                      {this.props.gig.name}<br />
+                    </Link><br />
                       <div className="text-primary">{this.props.gig.commits} of {this.props.gig.min_commits} commits!</div>
                     </div>
                     <div className="col-lg-5 justify-content-md-center">

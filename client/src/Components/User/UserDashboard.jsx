@@ -6,14 +6,14 @@ import PotentialGig from './PotentialGig';
 // import axios from 'axios'
 
 import { connect } from 'react-redux';
-import { fetchMyEvents, checkAttendance } from '../../actions/index';
+import { fetchEvents, checkAttendance } from '../../actions/index';
 
 
 class UserDashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
-        this.props.onFetchClick();
+        this.props.init();
 
     }
 
@@ -43,13 +43,13 @@ class UserDashboard extends React.Component {
               {
                 this.props.events
                   .filter((x) => x.isCommitted === true)
-                  .map((x) => <UpcomingGig user={this.props.auth.id} key={x.id} gig={x} usercommitted={this.props.attendance.find((a) => a && a.UserId === this.props.auth.id && a.ShowcaseId === x.id)} />)
+                  .map((x) => <UpcomingGig user={this.props.auth.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)} />)
               }
               <h2>Potential Gigs</h2>
               {
                 this.props.events
                   .filter((x) => x.isCommitted === false)
-                  .map((x) => <PotentialGig user={this.props.auth.id} key={x.id} gig={x} usercommitted={this.props.attendance.find((a) => a && a.UserId === this.props.auth.id && a.ShowcaseId === x.id)}/>)
+                  .map((x) => <PotentialGig user={this.props.auth.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
               }
             </div>
           </div>
@@ -69,12 +69,19 @@ function mapStateToProps({ events, auth, attendance }){
 const mapDispatchToProps = dispatch => {
   //console.log('mapdispatch to props: ', dispatch);
   return {
+    init: (e) => {
+      //   dispatch(fetchUser())
+      //   .then(() => fetchUserProfile())
+      //   .then(() => 
+      dispatch(fetchEvents())
+      dispatch(checkAttendance())
+    },
     onFetchClick: id => {
       //console.log('onFetchClick id: ', id)
-      dispatch(fetchMyEvents())
+      dispatch(fetchEvents());
     },
     checkAttendanceDispatch: (user) => {
-      dispatch(checkAttendance(user))
+      dispatch(checkAttendance())
     }
   }
 }

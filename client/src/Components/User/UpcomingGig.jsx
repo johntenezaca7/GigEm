@@ -1,6 +1,13 @@
 import React from 'react';
 import ProgressComponent from './ProgressComponent';
 
+import {
+    // BrowserRouter as Router,
+    // Route,
+    Link
+  } from 'react-router-dom'
+
+
 import { connect } from 'react-redux';
 import { commitToEvent, uncommitFromEvent } from '../../actions/index';
 
@@ -16,7 +23,12 @@ class UpcomingGig extends React.Component {
         console.log('PotentialGig.jsx this.props in renderButton() method')
         console.log(this.props); 
         if (!this.state.usercommitted) {
-            return (<div><button className="btn btn-info my-2 my-sm-0" onClick={(e) => this.commitButton(e, this.props.auth.id, this.props.gig.id)}>Commit</button></div>)
+            return (
+                <div>
+                    <button className="btn btn-info my-2 my-sm-0" onClick={(e) => this.commitButton(e, this.props.auth.id, this.props.gig.id)}>
+                        Commit
+                    </button>
+                </div>)
         } else if (this.state.usercommitted) {
             return (<div><button className="btn btn-warning my-2 my-sm-0" onClick={(e) => this.uncommitButton(e, this.props.auth.id, this.props.gig.id)}>Uncommit</button></div>)
         }
@@ -39,7 +51,9 @@ class UpcomingGig extends React.Component {
             <div className="container border p-3" key={this.props.gig.id}>
                 <div className="row">
                     <div className="col-2 align-self-start">
+                    <Link to={`/showdetails/${this.props.gig.id}`}>
                       {this.props.gig.name}<br />
+                    </Link>
                       {this.props.gig.city}<br />
                       Fully Commited 🎉
                     </div>
