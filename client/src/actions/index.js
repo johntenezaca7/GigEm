@@ -37,6 +37,18 @@ export const uncommitFromEvent = (user, gig) => async dispatch => {
     dispatch({ type: types.UNCOMMIT_FROM_EVENT, payload: res.data })
 }
 
+export const addNewEvent = (event) => async dispatch => {
+    console.log('attempting to add showcase event: ', event);
+    const res = await axios.post('/addevent', {'info': event} );
+    dispatch({ type: types.ADD_EVENT, payload: res.data })
+}
+
+export const addNewVenue = (venue) => async dispatch => {
+    console.log('attempting to add venue: ', venue);
+    const res = await axios.post('/venues', {'info': venue} );
+    dispatch({ type: types.ADD_VENUE, payload: res.data })
+}
+
 export const checkAttendance = (user, gig) => async dispatch => {
     // console.log(`action checkAttendance: user: ${user}, gig: ${gig}`);
     // console.log('attempting to check attendance form actions');  // adding this fixed something. :/

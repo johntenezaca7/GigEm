@@ -6,3 +6,5 @@ export const EDIT_USER_PROFILE = 'edit_user_profile';
 export const COMMIT_TO_EVENT = 'commit_to_event';
 export const UNCOMMIT_FROM_EVENT = 'uncommit_from_event';
 export const CHECK_ATTENDANCE = 'check_attendance';
+export const ADD_EVENT = 'add_event';
+export const ADD_VENUE = 'add_venue';
