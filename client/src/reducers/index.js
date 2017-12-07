@@ -3,7 +3,7 @@ import authReducer from './authReducers';
 import eventsReducer from './eventsReducers';
 import eventReducer from './eventReducers';
 import attendanceReducer from './attendanceReducer';
-import profileReducer from './profileReducers';
+// import profileReducer from './profileReducers';
 import usersReducer from './usersReducers';
 import userInfo from './userInfo';
 
@@ -12,7 +12,7 @@ export default combineReducers({
     attendance: attendanceReducer,
     events: eventsReducer,
     event: eventReducer,
-    profile: profileReducer,
+    // profile: profileReducer,
     users: usersReducer,
     info: userInfo
 })
