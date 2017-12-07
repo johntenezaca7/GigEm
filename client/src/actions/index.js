@@ -17,6 +17,14 @@ export const fetchEvents = () => async dispatch => {
     dispatch({ type: types.FETCH_EVENTS, payload: res.data })
 }
 
+export const fetchVenues = () => async dispatch => {
+    // console.log('fetching events');
+    // eslint-disable-next-line
+    const res = await axios.get('/api/getAllVenues')
+    // eslint-disable-next-line
+    dispatch({ type: types.FETCH_VENUES, payload: res.data })
+}
+
 export const fetchMyEvents = () => async dispatch => {
 // console.log('fetching events');
     // eslint-disable-next-line
@@ -39,13 +47,16 @@ export const uncommitFromEvent = (user, gig) => async dispatch => {
 
 export const addNewEvent = (event) => async dispatch => {
     console.log('attempting to add showcase event: ', event);
-    const res = await axios.post('/addevent', {'info': event} );
+    const res = await axios.post('/api/addEvent', {'info': event} );
+        console.log('TESSSSS', res.data)
+
     dispatch({ type: types.ADD_EVENT, payload: res.data })
 }
 
-export const addNewVenue = (venue) => async dispatch => {
-    console.log('attempting to add venue: ', venue);
-    const res = await axios.post('/venues', {'info': venue} );
+export const addNewVenue = (event) => async dispatch => {
+    console.log('attempting to add venue: ', event);
+    const res = await axios.post('/api/addVenue', {'info': event} );
+    console.log(res);
     dispatch({ type: types.ADD_VENUE, payload: res.data })
 }
 
