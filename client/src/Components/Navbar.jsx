@@ -38,18 +38,9 @@ class Navbar extends React.Component {
           )
       }
     }
-    // }
-    
-    // componentDidMount() {
-    //   console.log(this.props);
-    //   console.log('attempging to init with: ', this.props.auth);
-    //   this.props.init(this.props.auth);
-    // }
+
 
     render() {
-      // console.log('navbar auth:');
-      // console.log(this.props);
-      
       if (this.props.info.isBand) {
         return (
         <div>
@@ -109,12 +100,44 @@ class Navbar extends React.Component {
             </Link>
               <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
-
-    }
+              </button>
+              <div className="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul className="navbar-nav mr-auto">
+                <li className="nav-item active">
+                  <a className="nav-link">
+                  <h1>{this.props.auth.name ? this.props.auth.name : 'Anonymous User'}</h1>
+                  <span className="sr-only">(current)</span>
+                  </a>
+                </li>
+              </ul>
+              <table>
+                <tbody>
+                  <tr>
+                  <td>
+                    <Link to="/user">
+                      <button className="btn btn-info my-2 my-sm-0 m-3" type="submit">Dashboard</button>
+                    </Link>
+                    </td>
+                  <td>
+                    <Link to="/profile">
+                      <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">My Profile</button>
+                    </Link>
+                  </td>
+                    <td>
+                     {this.renderContent()}
+                    </td> 
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </nav>
+        </div>
+      )
+      }
+  }
 }
-
+ 
 function mapStateToProps({ auth, info, users }){
-  //console.log('map:', auth)
     return { 
       auth: auth,
       info: info,

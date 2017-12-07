@@ -4,7 +4,7 @@ import Navbar from './Navbar'
 import GigText from './User/GigText'
 
 import { connect } from 'react-redux';
-import { fetchEvents, fetchAllUsers } from '../actions/index';
+import { fetchEvents, fetchAllUsers, editUserProfile, fetchUserProfile } from '../actions/index';
 
 class BandProfile extends React.Component {
     constructor(props) {
@@ -67,6 +67,15 @@ class BandProfile extends React.Component {
                   </div>
                 </div>
               </div>
+
+              <div className="alert alert-warning text-center" role="alert">
+              <div>
+              <button className="btn btn-success my-2 my-sm-0" onClick={(e) => this.props.editUserProfile({'isBand': false})}>
+                Change User Type to User
+              </button>
+              </div>
+              </div>
+
             </div>
         )
       } else {
@@ -89,6 +98,10 @@ const mapDispatchToProps = dispatch => {
     init: (e) => {
       dispatch(fetchEvents())
       dispatch(fetchAllUsers())
+    },
+    editUserProfile: (e) => {
+      dispatch(editUserProfile(e))
+      .then(() => dispatch(fetchUserProfile()))
     }
   }
 }
