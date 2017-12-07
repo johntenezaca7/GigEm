@@ -25,7 +25,7 @@ class BandProfile extends React.Component {
                 <div className="bandProfile-wrapper">
                     <div>
                     </div>
-                    <div className="bandContent-wrapper">
+                    <div className="bandContent-wrapper ">
                         <div>
                           <h4>Band Profile - {selectedUser.name}</h4>
                             <img src="../Assets/bandLogo.svg" width="200px" height="200px" alt="Bandname"/><br />
@@ -36,30 +36,32 @@ class BandProfile extends React.Component {
                           <p>Qui ea eripuit disputationi, ex mea eius liber. Ea wisi detracto molestiae pri, cu erat tempor sadipscing sit. Usu minim liber sadipscing in. Nisl prompta inimicus sea ea. Eam autem meliore delicatissimi ne, mea an consul electram laboramus. Ex quo aeterno electram principes.</p>
                         </div>
                          <div>
-                          <h3>Upcoming Shows</h3>
-                            {this.props.events
-                              .filter((x) => x.isCommitted === true)
-                              .map((x) => <GigText user={selectedUser.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
-                            }
+                            <h3>Upcoming Shows</h3>
+                              <div className="band-show-scroll">
+                                {this.props.events
+                                  .filter((x) => x.isCommitted === true)
+                                  .map((x) => <GigText user={selectedUser.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
+                                }
+                              </div>
+                              <br/>
+                              <br/>
                             <h3>Potential Gigs</h3>
-                            {this.props.events
-                              .filter((x) => x.isCommitted === false)
-                              .map((x) => <GigText user={selectedUser.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
-                            }
-                          </div>
+                            <div className="band-show-scroll">
+                                {this.props.events
+                                  .filter((x) => x.isCommitted === false)
+                                  .map((x) => <GigText user={selectedUser.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
+                                }
+                              </div>
+                            </div>
                           <div className="band-media">
-                            <div className="container">
                               <h3>Video Placeholder</h3>
-                              <img src="../Assets/videoPlayer.svg" align="center" width="300px" height="300px" alt="videoplayer" />
-                            </div>
-                            <div className="container">
-                              <h3>Audio Placeholder</h3>
-                              <img src="../Assets/videoPlayer.svg" align="center" width="300px" height="300px" alt="videoplayer" />
-                            </div>
-                            <div className="container">
-                              <h3>Audio Placeholder</h3>
-                              <img src="../Assets/videoPlayer.svg" align="center" width="300px" height="300px" alt="videoplayer" />
-                            </div>
+                              <div className="side-scrolling">
+                                <img src="../Assets/videoPlayer.svg" align="center" width="300px" height="300px" alt="videoplayer" />
+                            
+                                <img src="../Assets/videoPlayer.svg" align="center" width="300px" height="300px" alt="videoplayer" />
+          
+                                <img src="../Assets/videoPlayer.svg" align="center" width="300px" height="300px" alt="videoplayer" />
+                              </div>
                           </div>
                           
                         </div>

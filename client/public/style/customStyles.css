@@ -52,6 +52,11 @@
 100% {opacity:0}
 }
 
+.navbar {
+	background-color: #FF9900;
+}
+
+
 .arrows path.a1 {
 	animation-delay:-1s;
 	-webkit-animation-delay:-1s; /* Safari 和 Chrome */
@@ -83,7 +88,7 @@
 	grid-auto-rows: minmax(100, auto);
 	justify-items: stretch;
 	align-items: stretch;
-	padding: 1cm 2cm 2cm 1cm;
+	padding: .5cm 2cm 2cm 1cm;
 
 }
 
@@ -104,10 +109,21 @@
 	grid-auto-rows: minmax(100, auto);
 	justify-items: stretch;
 	align-items: stretch;
-	/* margin: 20px */
+	padding: 1cm 2cm 4cm 2cm;
 
 }
 
+.band-show-scroll{
+	width: auto;
+    height: 300px;
+    overflow: scroll;
+}
+.side-scrolling{
+	width: auto;
+	height: 300px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
 
 .userProfile-wrapper > div {
 	background: #ddd;
@@ -127,7 +143,7 @@
 	align-self: start;
 }
 .band-media {
-	align-self: start;
+	/* align-self: start; */
 }
 .nested > div {
 	/* background: #eee; */
@@ -154,6 +170,9 @@
 	padding:1em;
 	grid-gap: 1em;
 	align-items: stretch;
+	width: auto;
+    height: 650px;
+    overflow: scroll;
 }
 .inside-wall > div {
 	background: #eee;
@@ -166,4 +185,7 @@
 	grid-gap: 1em;
 	background: rgb(248, 236, 236);
 	align-items: stretch;
+}
+.band-dashboard{
+	padding: 2cm 9cm 2cm 5cm;
 }

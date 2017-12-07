@@ -39,7 +39,7 @@ import BandPitch from './BandPitch';
       console.log('DASH PROPS:', this.props);
     return (
         <Router>
-            <div>
+            <div className="band-dashboard">
                 <Route exact path="/band" render={() => 
                   <div>
                     {/* <BandNavTabs  tab="upcoming"/> */}
@@ -73,7 +73,7 @@ import BandPitch from './BandPitch';
                     <BandPotentialGig />
                   </div>} />
                 <Route exact path="/band/pitch" render={() => <div>
-                  <BandNavTabs tab="pitch" />
+                  {/* <BandNavTabs tab="pitch" /> */}
                   <div className="text-center">
                       <h1 className="display-4">Pitch a Gig</h1>
                     </div>
