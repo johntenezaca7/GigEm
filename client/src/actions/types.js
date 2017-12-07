@@ -8,3 +8,4 @@ export const UNCOMMIT_FROM_EVENT = 'uncommit_from_event';
 export const CHECK_ATTENDANCE = 'check_attendance';
 export const ADD_EVENT = 'add_event';
 export const ADD_VENUE = 'add_venue';
+export const FETCH_ALL_USERS = 'fetch_all_users';
