@@ -39,13 +39,16 @@ export const uncommitFromEvent = (user, gig) => async dispatch => {
 
 export const addNewEvent = (event) => async dispatch => {
     console.log('attempting to add showcase event: ', event);
-    const res = await axios.post('/addevent', {'info': event} );
+    const res = await axios.post('/api/addEvent', {'info': event.eventName} );
+        console.log('TESSSSS', res.data)
+
     dispatch({ type: types.ADD_EVENT, payload: res.data })
 }
 
 export const addNewVenue = (venue) => async dispatch => {
     console.log('attempting to add venue: ', venue);
     const res = await axios.post('/venues', {'info': venue} );
+    console.log(res);
     dispatch({ type: types.ADD_VENUE, payload: res.data })
 }
 
