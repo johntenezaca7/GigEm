@@ -42,7 +42,7 @@ import BandPitch from './BandPitch';
             <div>
                 <Route exact path="/band" render={() => 
                   <div>
-                    <BandNavTabs  tab="upcoming"/>
+                    {/* <BandNavTabs  tab="upcoming"/> */}
                     <div className="text-center">
                       <h1 className="display-4">Upcoming Gigs</h1>
                     </div>
@@ -50,7 +50,7 @@ import BandPitch from './BandPitch';
                   </div>} />
                 <Route exact path="/band/upcoming" render={() => 
                   <div>
-                    <BandNavTabs tab="upcoming" />
+                    {/* <BandNavTabs tab="upcoming" /> */}
                     <div className="text-center">
                       <h1 className="display-4">Upcoming Gigs</h1>
                     </div>
@@ -58,7 +58,7 @@ import BandPitch from './BandPitch';
                   </div>} />
                 <Route exact path="/band/finalize" render={() => 
                   <div>
-                    <BandNavTabs tab="finalize" />
+                    {/* <BandNavTabs tab="finalize" /> */}
                     <div className="text-center">
                       <h1 className="display-4">Gigs to Finalize</h1>
                     </div>
@@ -66,7 +66,7 @@ import BandPitch from './BandPitch';
                   </div>} />
                 <Route exact path="/band/potential" render={() => 
                   <div>
-                    <BandNavTabs tab="potential" />
+                    {/* <BandNavTabs tab="potential" /> */}
                     <div className="text-center">
                       <h1 className="display-4">Potential Gigs</h1>
                     </div>
