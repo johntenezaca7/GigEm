@@ -18,7 +18,7 @@ export const fetchEvents = () => async dispatch => {
 }
 
 export const fetchVenues = () => async dispatch => {
-    // console.log('fetching events');
+    console.log('fetching venues');
     // eslint-disable-next-line
     const res = await axios.get('/api/getAllVenues')
     // eslint-disable-next-line

@@ -27,9 +27,17 @@ import BandPitch from './BandPitch';
 
     handleSubmit(event) {
       // event.preventDefault()
+      event.UserId = this.props.bandInfo.id;      
       console.log("SUBMITTED", event );
-      this.props.addNewVenue(event)      
-      this.props.addNewEvent(event)
+      this.props.addNewVenue(event)
+      .then(() => {
+        console.log("PROMISED EVENT", event);
+        event.VenueId = this.props.venueInfo.id;
+        this.props.addNewEvent(event);
+      })
+      
+        // this.props.addNewEvent(event)
+          
       // this.props.addNewEvent(this.values.eventName);
 
     };
@@ -85,7 +93,9 @@ import BandPitch from './BandPitch';
 
 function mapStateToProps(state) {
   return {
-    user: state.auth
+    user: state.auth,
+    bandInfo: state.info,
+    venueInfo: state.venues
   }
 }
 
