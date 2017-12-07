@@ -1,15 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-<<<<<<< 19d95d59a11dbeabe252b2732b8b8971e9297bc3
 import { Field, reduxForm, Fields } from 'redux-form';
 // import ProgressComponent from './ProgressComponent';
 import Datetime from 'react-datetime';
 import DateRangePickerWrapper from './DateRangePickerWrapper';
-=======
-import { Field, reduxForm } from 'redux-form';
-// import ProgressComponent from './ProgressComponent';
-import Datetime from 'react-datetime';
->>>>>>> uncomments in bandpitch
 
 import * as actions from '../../actions'
 import { networkInterfaces } from 'os';
@@ -91,17 +85,12 @@ const renderDates = fields => (
                     placeholder="My Garage "
                   />
               </div>
-<<<<<<< d352743c6426f3bd042b030d036dad458a9a5824
-                  <Datetime />
-
-=======
               <div>
                 <label>Start Date</label>
                   <div className="col">
                     <Datetime />
                   </div>
               </div>
->>>>>>> bandpitch submit button updates venues & showcases
               <div>
                 <label>City</label>
                   <Field
