@@ -27,16 +27,7 @@ class Navbar extends React.Component {
         default:
           return (
             <div>
-              {/* <td> */}
-                <Link to="/myshows">
-                  <button className="btn btn-primary my-2 my-sm-0" type="submit">My Shows</button>
-                </Link>
-              {/* </td> */}
-              {/* <td> */}
-                {/* <Link to="/api/logout"> */}
                   <a href="/api/logout"><button className="btn btn-warning my-2 my-sm-0" type="submit">Logout</button></a>
-                {/* </Link> */}
-              {/* </td> */}
           </div>
           )
       }
@@ -66,6 +57,11 @@ class Navbar extends React.Component {
                   <table>
                       <tbody>
                         <tr>
+                              <td>
+                              <Link to="/myshows">
+                              <button className="btn btn-primary my-2 my-sm-0" type="submit">Artist Registration</button>
+                              </Link>
+                              </td>
                             <td>
                               <Link to="/band">
                               <button className="btn btn-info my-2 my-sm-0" type="submit">View Band Routes</button>
@@ -73,12 +69,12 @@ class Navbar extends React.Component {
                             </td>
                             <td>
                               <Link to="/bandprofile">
-                              <button className="btn btn-danger my-2 my-sm-0" type="submit">Band Profile</button>
+                              <button className="btn btn-danger my-2 my-sm-0" type="submit">Artist Profile</button>
                               </Link>
                             </td>
                             <td>
                               <Link to="/userprofile">
-                              <button className="btn btn-danger my-2 my-sm-0" type="submit">User Profile</button>
+                              <button className="btn btn-info my-2 my-sm-0" type="submit">User Profile</button>
                               </Link>
                             </td>
                             <td>
