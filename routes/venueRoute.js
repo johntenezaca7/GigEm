@@ -1,21 +1,25 @@
 const dbDef = require('../db/index');
+const Sequelize = require('sequelize');
+
 
 module.exports = (app, db) => {
 
-  const getAllVenues = (callback) => {
-    const sql = `SELECT * FROM Venues`;
-    return db.connection.query(sql, (err, data) => {
-      if (err) console.log('getAllVenue Error: ', err);
-      callback(err, data);
-    })
-  };
+  // const getAllVenues = (callback) => {
+  //   const sql = `SELECT * FROM Venues`;
+  //   return db.connection.query(sql, (err, data) => {
+  //     if (err) console.log('getAllVenue Error: ', err);
+  //     callback(err, data);
+  //   })
+  // };
 
 
   // get all venues works!
   app.get('/api/getAllVenues', (req, res) =>{
     dbDef.Venue.findAll({})
+    // dbDef.Venue.aggregate('name', 'DISTINCT', { plain: false })
+    // attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('name')), 'name']]
     .then((data) => {
-      console.log('found venues: ', console.log(data));
+      // console.log('found venues: ', console.log(data));
       res.send(data);
     })
   });
@@ -26,11 +30,11 @@ module.exports = (app, db) => {
     console.log("REQ VENUE BODYYYYYY ", req.body);
     dbDef.Venue.create({
       name: req.body.info.venueName,
-      description: req.body.description,
-      city: req.body.city,
-      state: req.body.state,
-      zip: req.body.zip,
-      location: req.body.location    
+      description: req.body.info.venueDescription,
+      city: req.body.info.city,
+      state: req.body.info.state,
+      zip: req.body.info.zip,
+      location: req.body.info.location    
     })
     .then((data) => {
       res.send(data);
