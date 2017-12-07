@@ -20,7 +20,7 @@ class UserProfile extends React.Component {
 
     renderProfileType() {
       // console.log('renderProfileType this.props', this.props);
-      if (this.props.profile.isBand) {
+      if (this.props.info.isBand) {
         return (`Band`)
       } else {
         return (`User`)
@@ -115,11 +115,10 @@ class UserProfile extends React.Component {
     }
 }
 
-function mapStateToProps({events, attendance, auth, info, profile }){
+function mapStateToProps({events, attendance, auth, info  }){
     return {
       attendance: attendance,
       events: events,
-      profile: profile,
       info: info
      }
   }
@@ -139,12 +138,3 @@ function mapStateToProps({events, attendance, auth, info, profile }){
   }
 
   export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
-
-
-  // <div className="nested">
-                      
-                    
-                    
-              
-                 
-  //             </div>
