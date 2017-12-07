@@ -26,14 +26,14 @@ class Navbar extends React.Component {
           return(
             <div>
               {/* <td> */}
-                <a href="/auth/google"><button className="btn btn-warning my-2 my-sm-0" type="submit">Login With Google</button></a>
+                <a href="/auth/google"><button className="btn btn-danger my-2 my-sm-0" type="submit">Login With Google</button></a>
             </div>
           );
         default:
           return (
             <div>
 
-                  <a href="/api/logout"><button className="btn btn-warning my-2 my-sm-0" type="submit">Logout</button></a>
+                  <a href="/api/logout"><button className="btn btn-danger my-2 my-sm-0" type="submit">Logout</button></a>
           </div>
           )
       }
@@ -44,7 +44,7 @@ class Navbar extends React.Component {
       if (this.props.info.isBand) {
         return (
         <div>
-        <nav className="navbar navbar-expand-lg navbar-light bg-warning">
+        <nav className="navbar navbar-expand-lg navbar-light ">
         {/* <a className="navbar-brand">Navbar</a> */}
         <Link to="/">
           <img src="../Assets/userLogo.svg" width="40px" height="40px" alt="User Logo" />
@@ -78,7 +78,7 @@ class Navbar extends React.Component {
                   <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">Pitch a Gig</button>
                 </Link>
                 <Link to={`/bandprofile/${this.props.info.id}`}>
-                  <button className="btn btn-success my-2 my-sm-0 m-1" type="submit">My Profile</button>
+                  <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">My Profile</button>
                 </Link>
               </td>
                 <td>

@@ -89,34 +89,45 @@ class UserProfile extends React.Component {
                     <h1> Past Shows </h1>
                     <div className="inside-wall">
                       <div className="each-h-block">
-                        Show 1 
-                          <div>
-                          </div>
+                        Show 1
                         </div>
+                      <div>Show 1 </div>
+                      <div>Show 1 </div>
+                      <div>Show 1 </div>
+                      <div>Show 1 </div>
+                      <div>Show 1 </div>
+                      <div>Show 1 </div>
+                      <div>Show 1 </div>
+                      <div>Show 1 </div>
+                      <div>Show 1 </div>
+                      <div>Show 1 </div>
+                      <div>Show 1 </div>
+                      <div>Show 1 </div>
                       <div>Show 1 </div>
                       <div>Show 1 </div>
                     </div>
                   </div>
                   <div>
-                    <div>
-                       
                         <h3>Upcoming Shows</h3>
+                         <div className="band-show-scroll">
                           {this.props.events
                             .filter((x) => x.isCommitted === true)
                             .filter((x) => this.props.attendance.includes(x.id))
                             .map((x) => <GigText user={this.props.info.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
                           }
-                     
+                          </div>
                           <br />
                         <h3>Potential Gigs</h3>
-                        {this.props.events
-                          .filter((x) => x.isCommitted === false)
-                          .filter((x) => this.props.attendance.includes(x.id))
-                          .map((x) => <GigText user={this.props.info.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
-                        }
-                     
+                         <div className="band-show-scroll">   
+                          {this.props.events
+                            .filter((x) => x.isCommitted === false)
+                            .filter((x) => this.props.attendance.includes(x.id))
+                            .map((x) => <GigText user={this.props.info.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
+                          }
+                          </div>
                       </div>
-                  </div>
+                      
+                
               </div>
 
               <div className="alert alert-warning text-center" role="alert">
