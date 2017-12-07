@@ -7,20 +7,6 @@ import Datetime from 'react-datetime';
 import * as actions from '../../actions'
 import { networkInterfaces } from 'os';
 
-
-// class BandPitch extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//           user: '',
-//           getFunc: '',
-//           fetched: false,
-//           temp: "",
-//           name: ''
-          
-//         };
-//     }
-
 let BandPitch = props => {
               
   console.log('props', props)
@@ -67,6 +53,19 @@ BandPitch = reduxForm({
 })(BandPitch);
 
 export default BandPitch;
+
+// class BandPitch extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//           user: '',
+//           getFunc: '',
+//           fetched: false,
+//           temp: "",
+//           name: ''
+          
+//         };
+//     }
 
 // function mapStateToProps(state) {
 //   // console.log('REDUCERS STATES IN BADPITCH:', state)
