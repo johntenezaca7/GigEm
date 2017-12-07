@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import * as actions from '../../actions';
+
 
 import {
     BrowserRouter as Router,
@@ -19,16 +21,21 @@ import BandPitch from './BandPitch';
     constructor(props) {
         super(props);
         this.state = {};
+        
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    handleSubmit(values) {
-      // e.preventDefault();
-      console.log("SUBMITTED", arguments);
+    handleSubmit(event) {
+      // event.preventDefault()
+      console.log("SUBMITTED", event );
+      this.props.addNewEvent(event)
+      // this.props.addNewEvent(this.values.eventName);
+
     };
 
     render() {
 
-      // console.log('USE:', this.props.user)
+      console.log('DASH PROPS:', this.props);
     return (
         <Router>
             <div>
@@ -82,4 +89,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps)(BandDashboard);
+export default connect(mapStateToProps, actions)(BandDashboard);

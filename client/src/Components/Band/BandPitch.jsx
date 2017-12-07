@@ -31,12 +31,21 @@ let BandPitch = props => {
           <div className="col-sm">
             <form  onSubmit={props.handleSubmit} >
               <div>
-                <label>First Name</label>
+                <label>Event Name</label>
                   <Field
-                    name="firstName"
+                    name="eventName"
                     component="input"
                     type="text"
                     placeholder="D-lon Musk "
+                  />
+              </div>
+              <div>
+                <label>Venue Name</label>
+                  <Field
+                    name="venueName"
+                    component="input"
+                    type="text"
+                    placeholder="My Garage "
                   />
               </div>
               <div>
