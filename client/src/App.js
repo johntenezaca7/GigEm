@@ -30,13 +30,15 @@ class App extends Component {
   }
   
   componentDidMount(){
-    this.props.fetchUserProfile();
     this.props.fetchEvents();
     this.props.checkAttendance()
-    this.props.fetchUser();
+    this.props.fetchUser()
+    this.props.fetchUserProfile()
+    this.props.fetchAllUsers()
   }
 
   render() {
+
     return (
       <Router>
       <div>
@@ -44,7 +46,7 @@ class App extends Component {
           <Route exact path="/" render={() => <div><LandingPage /></div>} />
 
           <Route exact path="/user" render={() => <div><Navbar /><UserDashboard /></div>} />
-          <Route exact path="/profile" render={() => <div><Navbar /><UserProfile /></div>} />
+          <Route exact path="/userprofile" render={() => <div><Navbar /><UserProfile /></div>} />
           <Route path="/showdetails/:showId" component={ShowDescription} />
           <Route path="/bandprofile/:bandId" component={BandProfile} />
 

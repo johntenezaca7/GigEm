@@ -4,7 +4,8 @@ import eventsReducer from './eventsReducers';
 import eventReducer from './eventReducers';
 import attendanceReducer from './attendanceReducer';
 import profileReducer from './profileReducers';
-import usersReducer from './userInfo';
+import usersReducer from './usersReducers';
+import userInfo from './userInfo';
 
 export default combineReducers({
     auth: authReducer,
@@ -13,5 +14,5 @@ export default combineReducers({
     event: eventReducer,
     profile: profileReducer,
     users: usersReducer,
-    info: 'info'
+    info: userInfo
 })

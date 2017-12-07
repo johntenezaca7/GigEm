@@ -44,7 +44,7 @@ class UserDashboard extends React.Component {
             </div>
             <div className="col">
             <h2>Upcoming Gig'em Shows</h2>
-              <button className="btn btn-danger my-2 my-sm-0" onClick={(e) => this.fetchEvents(e)} >Fetch Events</button>
+              {/* <button className="btn btn-danger my-2 my-sm-0" onClick={(e) => this.fetchEvents(e)} >Fetch Events</button> */}
               {
                 this.props.events
                   .filter((x) => x.isCommitted === true)

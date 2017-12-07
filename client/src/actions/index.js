@@ -54,7 +54,6 @@ export const checkAttendance = (user, gig) => async dispatch => {
     // console.log('attempting to check attendance form actions');  // adding this fixed something. :/
     const res = await axios.post('/api/commitCheck', {'user': user})
     dispatch({ type: types.CHECK_ATTENDANCE, payload: res.data })
-
 }
 
 export const fetchBandInfo = () => async dispatch => {
@@ -64,15 +63,20 @@ export const fetchBandInfo = () => async dispatch => {
     dispatch({ type: types.FETCH_BAND_INFO, payload: res.data })
 }
 
-
-export const fetchUserProfile = (googleId) => async dispatch => {
-    // eslint-disable-next-lin
-    // console.log('GOOGLID :' ,googleId)
-    const res = await axios.post('/api/profile', {params: googleId})
+export const fetchUserProfile = () => async dispatch => {
     // eslint-disable-next-line
-
-
+    const res = await axios.get('/api/profile')
+    console.log('attempting to fetch user profile / action')
+    // eslint-disable-next-line
     dispatch({ type: types.FETCH_USER_PROFILE, payload: res.data })
+}
+
+export const editUserProfile = (item) => async dispatch => {
+    console.log(`editUserProfile item: ${item}`);
+    // eslint-disable-next-line
+    const res = await axios.post(`/api/task/editprofile`, {item});
+    // this.forceRender();
+    dispatch({ type: types.EDIT_USER_PROFILE, payload: res.data })
 }
 
 export const fetchAllUsers = () => async dispatch => {
@@ -82,11 +86,3 @@ export const fetchAllUsers = () => async dispatch => {
     dispatch({ type: types.FETCH_ALL_USERS, payload: res.data })
 }
 
-export const editUserProfile = (item) => async dispatch => {
-    // console.log('editUserProfile task: ', item)
-    // console.log('editUserProfile Value: ', value);
-    console.log('editUserProfile item: ', item);
-    const res = await axios.post(`/api/task/editprofile`, {item});
-    // this.forceRender();
-    dispatch({ type: types.EDIT_USER_PROFILE, payload: res.data })
-}

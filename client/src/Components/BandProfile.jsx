@@ -10,13 +10,12 @@ class BandProfile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
-        this.props.init();
     }
 
     render() {
-      // console.log(this.props);
-      let selectedUser = (this.props.users.length > 1 && this.props.auth.googleId) ? this.props.users.filter((x) => x.id === this.props.match.params.bandId) : null;
-      // console.log(selectedUser);
+      console.log('bandprofile props: ', this.props);
+      let selectedUser = this.props.users.filter((x) => x.id === parseInt(this.props.match.params.bandId,10))[0];
+      console.log('selectedUser: ', selectedUser);
       if (selectedUser) {
         return (
             <div>

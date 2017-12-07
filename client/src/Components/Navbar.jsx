@@ -7,8 +7,16 @@ import {
 } from 'react-router-dom'
 
 import { connect } from 'react-redux';
+import { /* fetchUser, fetchUserProfile, fetchEvents, checkAttendance, */ fetchUserProfile } from '../actions/index';
+
+
 
 class Navbar extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.props.fetchProfile(this.props.auth);
+  }
     
     renderContent(){
       switch(this.props.auth){
@@ -30,9 +38,19 @@ class Navbar extends React.Component {
           )
       }
     }
+    // }
     
+    // componentDidMount() {
+    //   console.log(this.props);
+    //   console.log('attempging to init with: ', this.props.auth);
+    //   this.props.init(this.props.auth);
+    // }
+
     render() {
-      if (this.props.auth.isBand) {
+      // console.log('navbar auth:');
+      // console.log(this.props);
+      
+      if (this.props.info.isBand) {
         return (
         <div>
         <nav className="navbar navbar-expand-lg navbar-light bg-warning">
@@ -47,7 +65,7 @@ class Navbar extends React.Component {
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
               <a className="nav-link">
-              <h1>Gig'em Band: {this.props.auth.name ? this.props.auth.name : 'Anonymous User'}</h1>
+              <h1>Gig'em Band: {this.props.info.name ? this.props.info.name : 'Anonymous User'}</h1>
               <span className="sr-only">(current)</span>
               </a>
             </li>
@@ -68,7 +86,7 @@ class Navbar extends React.Component {
                 <Link to="/band/pitch">
                   <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">Pitch a Gig</button>
                 </Link>
-                <Link to={`/bandprofile/${this.props.auth.id}`}>
+                <Link to={`/bandprofile/${this.props.info.id}`}>
                   <button className="btn btn-success my-2 my-sm-0 m-1" type="submit">My Profile</button>
                 </Link>
               </td>
@@ -96,7 +114,7 @@ class Navbar extends React.Component {
               <ul className="navbar-nav mr-auto">
 <li className="nav-item active">
 <a className="nav-link">
-<h1>{this.props.user.name ? `Welcome, ${this.props.user.name}` : ''}</h1>
+<h1>{this.props.info.name ? `Welcome, ${this.props.info.name}` : ''}</h1>
 <span className="sr-only">(current)</span>
 </a>
 </li>
@@ -110,7 +128,7 @@ class Navbar extends React.Component {
                     </Link>
                     </td>
                   <td>
-                    <Link to="/profile">
+                    <Link to="/userprofile">
                       <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">My Profile</button>
                     </Link>
                   </td>
@@ -128,13 +146,23 @@ class Navbar extends React.Component {
     }
 }
 
-function mapStateToProps({ auth }){
+function mapStateToProps({ auth, info, users }){
   //console.log('map:', auth)
     return { 
-      auth: auth
+      auth: auth,
+      info: info,
+      users: users
       //userInfo: 'info'
     }
 }
 
-export default  connect(mapStateToProps)(Navbar);
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchProfile: (googleId) => {
+      dispatch(fetchUserProfile(googleId))
+    },
+  }
+}
+
+export default  connect(mapStateToProps, mapDispatchToProps)(Navbar);
 

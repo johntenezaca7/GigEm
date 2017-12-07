@@ -1,9 +1,19 @@
 import React from 'react';
 // import ProgressComponent from './ProgressComponent';
+import {  /* ShareButtons, ShareCounts, */ generateShareIcon } from 'react-share';
+
 
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { commitToEvent, uncommitFromEvent } from '../../actions/index';
+
+
+const FacebookIcon = generateShareIcon('facebook');
+const TwitterIcon = generateShareIcon('twitter');
+const WhatsappIcon = generateShareIcon('whatsapp');
+const GooglePlusIcon = generateShareIcon('google');
+const RedditIcon = generateShareIcon('reddit');
+const TumblrIcon = generateShareIcon('tumblr');
 
 
 class GigText extends React.Component {

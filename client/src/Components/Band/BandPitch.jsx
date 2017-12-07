@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Datetime from 'react-datetime';
 
 import * as actions from '../../actions'
-import { networkInterfaces } from 'os';
+// import { networkInterfaces } from 'os';
 
 
 class BandPitch extends React.Component {
