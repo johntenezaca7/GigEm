@@ -16,35 +16,28 @@ import * as actions from './actions';
 
 import Navbar from './Components/Navbar'
 import BandProfile from './Components/BandProfile';
+import ShowDescription from './Components/ShowDescription';
 import UserProfile from './Components/User/UserProfile';
 import UserDashboard from './Components/User/UserDashboard';
 import BandDashboard from './Components/Band/BandDashboard';
 import LandingPage from './Components/LandingPage';
-// import MyEvents from './Components/User/MyEvents';
 
 
 class App extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      user:''
-    }
+    this.state = {}
   }
   
   componentDidMount(){
-
-    this.props.fetchUser();
     this.props.fetchEvents();
     this.props.checkAttendance()
-
-  
-    
+    this.props.fetchUser()
+    this.props.fetchUserProfile()
+    this.props.fetchAllUsers()
   }
-  
-  
+
   render() {
-    // console.log('USER',this.props.auth)
-    this.props.fetchUserProfile(this.props.auth);
 
     return (
       <Router>
@@ -54,10 +47,11 @@ class App extends Component {
 
           <Route exact path="/user" render={() => <div><Navbar /><UserDashboard /></div>} />
           <Route exact path="/userprofile" render={() => <div><Navbar /><UserProfile /></div>} />
-          {/* <Route exact path="/myshows" render={() => <div><Navbar /><div><MyEvents /></div></div>} /> */}
+          <Route path="/showdetails/:showId" component={ShowDescription} />
+          <Route path="/bandprofile/:bandId" component={BandProfile} />
 
           <Route exact path="/band" render={() => <div><Navbar /><BandDashboard /></div>} />
-          <Route exact path="/bandprofile" render={() => <div><Navbar /><BandProfile /></div>} />
+
           <Route exact path="/band/upcoming" render={() => <div><Navbar /><BandDashboard tab="upcoming" /></div>} />
           <Route exact path="/band/finalize" render={() => <div><Navbar /><BandDashboard tab="finalize" /></div>} />
           <Route exact path="/band/potential" render={() => <div><Navbar /><BandDashboard tab="potential" /></div>} />
@@ -68,12 +62,4 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  // console.log('REDUCERS STATES:', state)
-  return {
-    auth: state.auth,
-    
-  }
-}
-
-export default connect(mapStateToProps, actions)(App);
+export default connect(null, actions)(App);

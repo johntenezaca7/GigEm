@@ -4,15 +4,15 @@ module.exports = (app, db) => {
 
   const addEvent = (req, callback) => {
     // console.log('REK',req)
-const sql = `INSERT INTO Event (venue_id, user_id, name, description, photo, start_date, start_time, end_date, final_commit_date, city, state, zip, is_committed, price,min_commits,commits) VALUES
-  (${req.body.venue_id},${req.body.user_id},"${req.body.name}","${req.body.description}","${req.body.photo}",${req.body.start_date},"${req.body.start_time}",${req.body.end_date},${req.body.final_commit_date},"${req.body.city}","${req.body.state}",${req.body.zip},"${req.body.is_committed}",${req.body.price},${req.body.min_commits},${req.body.commits})`;
-  const joinsql = `INSERT INTO Event (venue_id, user_id, name, description, photo, start_date, start_time, end_date, final_commit_date, city, state, zip, is_committed, price,min_commits,commits) VALUES
-  (${req.body.venue_id},${req.body.user_id},"${req.body.name}","${req.body.description}","${req.body.photo}",${req.body.start_date},"${req.body.start_time}",${req.body.end_date},${req.body.final_commit_date},"${req.body.city}","${req.body.state}",${req.body.zip},"${req.body.is_committed}",${req.body.price},${req.body.min_commits},${req.body.commits})`;
-    return db.connection.query(sql, (err, data) => {
-      if (err) console.log('getAllEvent Error: ', err);
-      callback(err, data);
-    })
-  };
+    const sql = `INSERT INTO Event (venue_id, user_id, name, description, photo, start_date, start_time, end_date, final_commit_date, city, state, zip, is_committed, price,min_commits,commits) VALUES
+    (${req.body.venue_id},${req.body.user_id},"${req.body.name}","${req.body.description}","${req.body.photo}",${req.body.start_date},"${req.body.start_time}",${req.body.end_date},${req.body.final_commit_date},"${req.body.city}","${req.body.state}",${req.body.zip},"${req.body.is_committed}",${req.body.price},${req.body.min_commits},${req.body.commits})`;
+    const joinsql = `INSERT INTO Event (venue_id, user_id, name, description, photo, start_date, start_time, end_date, final_commit_date, city, state, zip, is_committed, price,min_commits,commits) VALUES
+    (${req.body.venue_id},${req.body.user_id},"${req.body.name}","${req.body.description}","${req.body.photo}",${req.body.start_date},"${req.body.start_time}",${req.body.end_date},${req.body.final_commit_date},"${req.body.city}","${req.body.state}",${req.body.zip},"${req.body.is_committed}",${req.body.price},${req.body.min_commits},${req.body.commits})`;
+      return db.connection.query(sql, (err, data) => {
+        if (err) console.log('getAllEvent Error: ', err);
+        callback(err, data);
+      })
+    };
 
   app.get('/api/events', (req, res) =>{
     dbDef.Showcase.findAll({})
@@ -39,15 +39,14 @@ const sql = `INSERT INTO Event (venue_id, user_id, name, description, photo, sta
       ShowcaseId: req.body.gig
     })
     
-    .then(dbDef.Attendance.findAll({ where: {
-      UserId: req.body.user
-      }}).then((attendance) => {
-        let returnValue = attendance.reduce((memo, item) => {
-          memo.push(item.ShowcaseId)
-          return memo;
-        }, [attendance[0].ShowcaseId]);
-        attendance ? res.send(returnValue) : res.send(returnValue)}
-      ))
+    .then(dbDef.Attendance.findAll()
+    .then((attendance) => {
+      let returnValue = attendance.reduce((memo, item) => {
+        memo.push(item.ShowcaseId)
+        return memo;
+      }, []);
+      attendance ? res.send(returnValue) : res.send(returnValue)
+    }))
 
     dbDef.Showcase.findOne({where: {'id': req.body.gig}})
     .then((show) => {
@@ -66,17 +65,15 @@ const sql = `INSERT INTO Event (venue_id, user_id, name, description, photo, sta
         ShowcaseID: req.body.gig
       }
     })
-    .then((attendanceItem) => attendanceItem ? attendanceItem.destroy(): null)
-      
-        .then(dbDef.Attendance.findAll({ where: {
-          UserId: req.body.user
-          }}).then((attendance) => {
-            let returnValue = attendance.reduce((memo, item) => {
-              memo.push(item.ShowcaseId)
-              return memo;
-            }, [attendance[0].ShowcaseId]);
-            attendance ? res.send(returnValue) : res.send(returnValue)}
-          ))
+    .then((attendanceItem) => { if (attendanceItem) attendanceItem.destroy() } ) 
+    .then(dbDef.Attendance.findAll()
+    .then((attendance) => {
+      let returnValue = attendance.reduce((memo, item) => {
+        memo.push(item.ShowcaseId)
+        return memo;
+      }, []);
+      attendance ? res.send(returnValue) : res.send(returnValue)
+    }))
 
     dbDef.Showcase.findOne({
       where: {'id': req.body.gig
@@ -98,7 +95,7 @@ const sql = `INSERT INTO Event (venue_id, user_id, name, description, photo, sta
       let returnValue = attendance.reduce((memo, item) => {
         memo.push(item.ShowcaseId)
         return memo;
-      }, [attendance[0].ShowcaseId]);
+      }, []);
       attendance ? res.send(returnValue) : res.send(returnValue)
     })
   })
