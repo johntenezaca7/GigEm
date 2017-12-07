@@ -26,12 +26,84 @@ let BandPitch = props => {
                   />
               </div>
               <div>
-                <label>Venue Name</label>
+              <div>
+                <label>Description</label>
+                  <Field
+                    name="eventDescription"
+                    component="textarea"
+                    // type="text"
+                    placeholder="Describe your event.. "
+                  />
+              </div>
+              <div>
+                <label htmlFor="hasVenue">Check if there is no planned venue for your event?</label>
+                <div>
+                  <Field name="hasVenue" id="hasVenue" component="input" type="checkbox"/>
+                </div>
+              </div>
+              <label>Venue Name</label>
                   <Field
                     name="venueName"
                     component="input"
                     type="text"
                     placeholder="My Garage "
+                  />
+              </div>
+              <div>
+              <label>Venue Description</label>
+                  <Field
+                    name="venueDescription"
+                    component="textarea"
+                    // type="text"
+                    placeholder="My Garage "
+                  />
+              </div>
+              <div>
+                <label>Start Date</label>
+                  <div className="col">
+                    <Datetime />
+                  </div>
+              </div>
+              <div>
+                <label>City</label>
+                  <Field
+                    name="city"
+                    component="input"
+                    type="text"
+                    placeholder="D-lon Musk "
+                  />
+              </div>
+              <div>
+                <label>State</label>
+                  <Field
+                    name="state"
+                    component="input"
+                    type="text"
+                    placeholder="D-lon Musk "
+                  />
+              </div>
+              <div>
+                <label>zip code</label>
+                  <Field
+                    name="zip"
+                    component="input"
+                    type="integer"
+                    placeholder="12345"
+                  />
+              </div>
+              <div>
+                <label htmlFor="isCommitted">Is Your Event Already Fully Committed</label>
+                <div>
+                  <Field name="isCommitted" id="isCommitted" component="input" type="checkbox"/>
+                </div>
+              </div>
+              <div>
+                <label>Minimum Attendance</label>
+                  <Field
+                    name="minCommits"
+                    component="input"
+                    type="integer"
+                    placeholder="5"
                   />
               </div>
               <div>
