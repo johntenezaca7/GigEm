@@ -12,11 +12,7 @@ module.exports = (app, db) => {
     app.get('/auth/google/callback',
         passport.authenticate('google'),
             (req, res) => {
-<<<<<<< 779d08ce2fa6d0bec83b85ff105aced3c73e3f5b
                 res.redirect('/userProfile')
-=======
-                res.redirect('/userprofile')
->>>>>>> fixed reduxform package
             }
     );
 
@@ -31,13 +27,8 @@ module.exports = (app, db) => {
         } else {
             console.log('getting current user', req.user)
         } 
-<<<<<<< 779d08ce2fa6d0bec83b85ff105aced3c73e3f5b
         res.send(req.user)
     });
      
-=======
-    });
-
->>>>>>> fixed reduxform package
 
 };

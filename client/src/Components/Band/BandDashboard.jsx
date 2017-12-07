@@ -21,6 +21,11 @@ import BandPitch from './BandPitch';
         this.state = {};
     }
 
+    handleSubmit(values) {
+      // e.preventDefault();
+      console.log("SUBMITTED", arguments);
+    };
+
     render() {
 
       // console.log('USE:', this.props.user)
@@ -64,7 +69,7 @@ import BandPitch from './BandPitch';
                   <div className="text-center">
                       <h1 className="display-4">Pitch a Gig</h1>
                     </div>
-                  <BandPitch user={this.props.user} /></div>} />
+                  <BandPitch user={this.props.user} onSubmit={this.handleSubmit}/></div>} />
             </div>
         </Router>
     )}
