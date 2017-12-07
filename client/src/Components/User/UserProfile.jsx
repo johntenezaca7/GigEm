@@ -14,13 +14,13 @@ class UserProfile extends React.Component {
         this.props.init();
     }
 
-    // componentWillMount() {
-    //   this.props.init();
-    // }
+    componentWillMount() {
+      this.props.init();
+    }
 
     renderProfileType() {
       // console.log('renderProfileType this.props', this.props);
-      if (this.props.profile.isBand) {
+      if (this.props.info.isBand) {
         return (`Band`)
       } else {
         return (`User`)
@@ -29,6 +29,7 @@ class UserProfile extends React.Component {
 
     render() {
       console.log('userProfile props: ', this.props);
+      if(this.props.info){
         return (
           <div>
             <div className="alert alert-primary text-center" role="alert">
@@ -36,69 +37,85 @@ class UserProfile extends React.Component {
                 Edit your profile by clicking on the text fields!
               </div>
             </div>
-
-                <div className="row">
-                  {/* <div className="col col-1">
-                  </div> */}
-                  <div className="col col-3">
-                    <div><h1 className="display-4">
-                    User Profile - <RIEInput 
-                        value={this.props.info.name || 'No username!'}
-                        change={(e) => this.props.editUserProfile(e)}
-                        propName='name'
-                        validate={_.isString} /></h1></div>
-                      <div className="lead">
-                      Profile Type - {this.renderProfileType()}
-                      </div>
-                      <div className="container mx-auto m-3">
-                        <img src="./Assets/userLogo.svg" width="200px" height="200px" alt="Bandname"/>
-                      </div>
-                      <h3><RIEInput 
-                        value={this.props.info.email || 'No email'}
-                        change={(e) => this.props.editUserProfile(e)}
-                        propName='email'
-                        validate={_.isString} /></h3>
-                        
-                        <h2>
-                          <div className="row">
-                          <div className="col col-md-auto">
-                            <RIEInput 
-                              value={this.props.info.city || 'city'}
-                              change={(e) => this.props.editUserProfile(e)}
-                              propName='city'
-                              validate={_.isString} />,
+                <div className="userProfile-wrapper"> 
+                  <div className="user-side-bar nested">
+                      <div>
+                        <div>
+                          User Profile - 
+                          <RIEInput 
+                          value={this.props.info.name || 'No username!'}
+                          change={(e) => this.props.editUserProfile(e)}
+                          propName='name'
+                          validate={_.isString} />
+                        </div>
+                        <div>
+                          Profile Type - {this.renderProfileType()}
+                        </div>
+                        <div>
+                         <img src="./Assets/userLogo.svg" width="200px" height="200px" alt="Bandname"/>
+                        </div>
+                        <div>
+                          <RIEInput 
+                            value={this.props.info.email || 'No email'}
+                            change={(e) => this.props.editUserProfile(e)}
+                            propName='email'
+                            validate={_.isString} />
+                        </div>
+                        <div>
+                          <RIEInput 
+                          value={this.props.info.city || 'city'}
+                          change={(e) => this.props.editUserProfile(e)}
+                          propName='city'
+                          validate={_.isString} />
                           </div>
-                          <div className="col col-md-auto">
+                         
+                          <div>
                             <RIEInput
-                              value={this.props.info.state || 'state.'}
+                              value={this.props.info.state || 'state'}
                               change={(e) => this.props.editUserProfile(e)}
                               propName='state'
                               validate={_.isString} />
+                          </div>   
+                        </div>
+                        <div >
+                          <RIETextArea
+                          value={this.props.info.description || 'Write your description here!'}
+                          change={(e) => this.props.editUserProfile(e)}
+                          propName='description'
+                          validate={_.isString} />
+                        </div>
+                  </div>
+                  <div>
+                    <h1> Past Shows </h1>
+                    <div className="inside-wall">
+                      <div className="each-h-block">
+                        Show 1 
+                          <div>
                           </div>
-                          </div>
-                        </h2>
-                      <div className="col col-md-auto">
-                      <h3>Upcoming Shows</h3>
-                        {this.props.events
-                          .filter((x) => x.isCommitted === true)
-                          .filter((x) => this.props.attendance.includes(x.id))
-                          .map((x) => <GigText user={this.props.info.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
-                        }
+                        </div>
+                      <div>Show 1 </div>
+                      <div>Show 1 </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                       
+                        <h3>Upcoming Shows</h3>
+                          {this.props.events
+                            .filter((x) => x.isCommitted === true)
+                            .filter((x) => this.props.attendance.includes(x.id))
+                            .map((x) => <GigText user={this.props.info.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
+                          }
+                     
+                          <br />
                         <h3>Potential Gigs</h3>
                         {this.props.events
                           .filter((x) => x.isCommitted === false)
                           .filter((x) => this.props.attendance.includes(x.id))
                           .map((x) => <GigText user={this.props.info.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
                         }
+                     
                       </div>
-                      
-                    </div>
-                  <div className="col-5 m-5">
-                  <RIETextArea
-                    value={this.props.info.description || 'Write your description here!'}
-                    change={(e) => this.props.editUserProfile(e)}
-                    propName='description'
-                    validate={_.isString} />
                   </div>
               </div>
 
@@ -112,6 +129,10 @@ class UserProfile extends React.Component {
 
             </div>
         )
+      } else {
+        return(<div> </div>)
+
+      }
     }
 }
 
@@ -140,11 +161,3 @@ function mapStateToProps({events, attendance, auth, info, profile }){
 
   export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
 
-
-  // <div className="nested">
-                      
-                    
-                    
-              
-                 
-  //             </div>

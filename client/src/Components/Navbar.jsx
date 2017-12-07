@@ -38,7 +38,7 @@ class Navbar extends React.Component {
           )
       }
     }
-    // }
+  
     
     // componentDidMount() {
     //   console.log(this.props);
@@ -103,14 +103,17 @@ class Navbar extends React.Component {
         return (
           <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            {/* <a className="navbar-brand">Navbar</a> */}
-            <Link to="/">
-              <img src="./Assets/userLogo.svg" width="40px" height="40px" alt="User Logo" />
-            </Link>
-              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+           
+             <Link to="/">
+                <img src="./Assets/userLogo.svg" width="40px" height="40px" alt="User Logo" />
+                </Link>
+              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"/>
                 <span className="navbar-toggler-icon"></span>
-
+                </nav>
+          </div>
+          )
     }
+}
 }
 
 function mapStateToProps({ auth, info, users }){
