@@ -78,13 +78,36 @@
 
 .userProfile-wrapper{
 	display: grid;
-	grid-template-columns: 1fr 2fr 1fr;
+	grid-template-columns: 20% 42%  35%;
+	grid-gap: 2em;
+	grid-auto-rows: minmax(100, auto);
+	justify-items: stretch;
+	align-items: stretch;
+	padding: 1cm 2cm 2cm 1cm;
+
+}
+
+.bandProfile-wrapper{
+	display: grid;
+	grid-template-columns: 10% 75% 10%;
 	grid-gap: 1em;
 	grid-auto-rows: minmax(100, auto);
 	justify-items: stretch;
 	align-items: stretch;
+	margin: 20px
 
 }
+.bandContent-wrapper{
+	display: grid;
+	grid-template-columns: 20% 50%  30%;
+	grid-gap: 2em;
+	grid-auto-rows: minmax(100, auto);
+	justify-items: stretch;
+	align-items: stretch;
+	/* margin: 20px */
+
+}
+
 
 .userProfile-wrapper > div {
 	background: #ddd;
@@ -103,7 +126,9 @@
 .up-comingShows {
 	align-self: start;
 }
-
+.band-media {
+	align-self: start;
+}
 .nested > div {
 	/* background: #eee; */
 	background: #ddd;

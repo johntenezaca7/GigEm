@@ -22,59 +22,50 @@ class BandProfile extends React.Component {
               <div>
                 <Navbar />
               </div>
-              <h1 className="display-4 text-center">Band Profile - {selectedUser.name}</h1>
-              <div className="row">
-                <div className="col-1">
-                </div>
-                <div className="col-2">
-                  <div>
-                    <div className="container mx-auto">
-                    <img src="../Assets/bandLogo.svg" width="200px" height="200px" alt="Bandname"/><br />
-                    </div>
+                <div className="bandProfile-wrapper">
                     <div>
-                    {`${selectedUser.city}, ${selectedUser.state}`}
                     </div>
-                    <div>
-                    <h3>Upcoming Shows</h3>
-                      {this.props.events
-                        .filter((x) => x.isCommitted === true)
-                        .map((x) => <GigText user={selectedUser.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
-                      }
-                      <h3>Potential Gigs</h3>
-                      {this.props.events
-                        .filter((x) => x.isCommitted === false)
-                        .map((x) => <GigText user={selectedUser.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
-                      }
-                    </div>
+                    <div className="bandContent-wrapper">
+                        <div>
+                          <h4>Band Profile - {selectedUser.name}</h4>
+                            <img src="../Assets/bandLogo.svg" width="200px" height="200px" alt="Bandname"/><br />
+                            <div>
+                            {`${selectedUser.city}, ${selectedUser.state}`}
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, eam ex saperet labores inimicus, nam stet natum dissentiet at. Odio sumo qui id, nam lorem hendrerit ei, ut dicam commodo vis. No pri natum apeirian consulatu, sed at solet option efficiantur. An ius oporteat oportere repudiandae. Te mea inani honestatis.</p>
+                          <p>Qui ea eripuit disputationi, ex mea eius liber. Ea wisi detracto molestiae pri, cu erat tempor sadipscing sit. Usu minim liber sadipscing in. Nisl prompta inimicus sea ea. Eam autem meliore delicatissimi ne, mea an consul electram laboramus. Ex quo aeterno electram principes.</p>
+                        </div>
+                         <div>
+                          <h3>Upcoming Shows</h3>
+                            {this.props.events
+                              .filter((x) => x.isCommitted === true)
+                              .map((x) => <GigText user={selectedUser.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
+                            }
+                            <h3>Potential Gigs</h3>
+                            {this.props.events
+                              .filter((x) => x.isCommitted === false)
+                              .map((x) => <GigText user={selectedUser.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
+                            }
+                          </div>
+                          <div className="band-media">
+                            <div className="container">
+                              <h3>Video Placeholder</h3>
+                              <img src="../Assets/videoPlayer.svg" align="center" width="300px" height="300px" alt="videoplayer" />
+                            </div>
+                            <div className="container">
+                              <h3>Audio Placeholder</h3>
+                              <img src="../Assets/videoPlayer.svg" align="center" width="300px" height="300px" alt="videoplayer" />
+                            </div>
+                            <div className="container">
+                              <h3>Audio Placeholder</h3>
+                              <img src="../Assets/videoPlayer.svg" align="center" width="300px" height="300px" alt="videoplayer" />
+                            </div>
+                          </div>
+                          
+                        </div>
+                        <div>
+                        </div>
                   </div>
-                </div>
-                <div className="col-1">
-                </div>
-                <div className="col-6">
-                  <p>Lorem ipsum dolor sit amet, eam ex saperet labores inimicus, nam stet natum dissentiet at. Odio sumo qui id, nam lorem hendrerit ei, ut dicam commodo vis. No pri natum apeirian consulatu, sed at solet option efficiantur. An ius oporteat oportere repudiandae. Te mea inani honestatis.</p>
-                  <p>Qui ea eripuit disputationi, ex mea eius liber. Ea wisi detracto molestiae pri, cu erat tempor sadipscing sit. Usu minim liber sadipscing in. Nisl prompta inimicus sea ea. Eam autem meliore delicatissimi ne, mea an consul electram laboramus. Ex quo aeterno electram principes.</p>
-                  <div className="container">
-                    <h3>Video Placeholder</h3>
-                    <img src="./Assets/videoPlayer.svg" align="center" width="300px" height="300px" alt="videoplayer" />
-                  </div>
-                  <div className="container">
-                    <h3>Audio Placeholder</h3>
-                    <img src="./Assets/videoPlayer.svg" align="center" width="300px" height="300px" alt="videoplayer" />
-                  </div>
-                  <div className="container">
-                    <h3>Audio Placeholder</h3>
-                    <img src="./Assets/videoPlayer.svg" align="center" width="300px" height="300px" alt="videoplayer" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="alert alert-warning text-center" role="alert">
-              <div>
-              <button className="btn btn-success my-2 my-sm-0" onClick={(e) => this.props.editUserProfile({'isBand': false})}>
-                Change User Type to User
-              </button>
-              </div>
-              </div>
 
             </div>
         )
