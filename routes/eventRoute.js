@@ -120,21 +120,21 @@ module.exports = (app, db) => {
     console.log("REQQQQ BODYYYYYYY ", req.body);
     dbDef.Showcase.create({
       name: req.body.info.eventName,
-      description: req.body.description,
-      photo: req.body.photo,
-      startDate: req.body.startDate,
-      endDate: req.body.endDate,
-      startTime: req.body.startTime,
-      finalCommitDate: req.body.finalCommitDate,
-      city: req.body.city,
-      state: req.body.state,
-      zip: req.body.zip,
-      isCommitted: req.body.isCommitted,
-      price: req.body.price,
-      minCommits: req.body.minCommits,
-      commits: req.body.commits,
-      VenueId: req.body.venueId,
-      UserId: req.body.userId      
+      description: req.body.info.eventDescription,
+      photo: req.body.info.photo,
+      startDate: req.body.info.startDate,
+      endDate: req.body.info.endDate,
+      startTime: req.body.info.startTime,
+      finalCommitDate: req.body.info.finalCommitDate,
+      city: req.body.info.city,
+      state: req.body.info.state,
+      zip: req.body.info.zip,
+      isCommitted: req.body.info.isCommitted,
+      price: req.body.info.price,
+      minCommits: req.body.info.minCommits,
+      commits: req.body.info.commits,
+      VenueId: req.body.info.VenueId,
+      UserId: req.body.info.UserId      
     })
     .then((data) => {
       res.send(data);

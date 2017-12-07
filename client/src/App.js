@@ -35,6 +35,7 @@ class App extends Component {
     this.props.fetchUser()
     this.props.fetchUserProfile()
     this.props.fetchAllUsers()
+    this.props.fetchVenues()
   }
 
   render() {

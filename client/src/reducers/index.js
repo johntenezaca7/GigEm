@@ -5,6 +5,7 @@ import eventReducer from './eventReducers';
 import attendanceReducer from './attendanceReducer';
 // import profileReducer from './profileReducers';
 import usersReducer from './usersReducers';
+import venueReducer from './venueReducers';
 import userInfo from './userInfo';
 import profileReducer from './profileReducers';
 import {reducer as formReducer} from 'redux-form';
@@ -16,6 +17,7 @@ export default combineReducers({
     event: eventReducer,
     // profile: profileReducer,
     users: usersReducer,
+    venues: venueReducer,
     info: userInfo,
     profile: profileReducer,
     info: userInfo,
