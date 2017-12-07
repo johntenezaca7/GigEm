@@ -18,6 +18,6 @@ export default combineReducers({
     users: usersReducer,
     info: userInfo,
     profile: profileReducer,
-    info: userInfo,
+    // info: userInfo,
     form: formReducer
 })
