@@ -1,3 +1,5 @@
+const dbDef = require('../db/index');
+
 module.exports = (app, db) => {
 
   const getAllVenues = (callback) => {
@@ -8,30 +10,30 @@ module.exports = (app, db) => {
     })
   };
 
-  const addVenue = (req, callback) => {
-    const sql = `INSERT INTO Venues (name, description, city, state, zip, location) VALUES 
-    ("${req.body.name}", "${req.body.description}", "${req.body.city}", "${req.body.state}", ${req.body.zip}, "${req.body.location}")`;
-    return db.connection.query(sql, (err, data) => {
-      if (err) console.log('addVenue Error: ', err);
-      callback(err, data);
-    })
-  };
+
   // get all venues works!
-  app.get('/venues', (req, res) =>{
-    getAllVenues((err, data) => {
-      if (err) res.json(err);
+  app.get('/api/getAllVenues', (req, res) =>{
+    dbDef.Venue.findAll({})
+    .then((data) => {
+      console.log('found venues: ', console.log(data));
       res.send(data);
-    });
+    })
   });
 
   // add venue works with SQL
-  app.post('/venues', (req, res) =>{
+  app.post('/api/addVenue', (req, res) =>{
     console.log('venue route working')
-    // res.send({hi:'new venue added'})
-    addVenue(req, (err, data) => {
-      if (err) res.json(err);
-      
+    console.log("REQ VENUE BODYYYYYY ", req.body);
+    dbDef.Venue.create({
+      name: req.body.info.venueName,
+      description: req.body.description,
+      city: req.body.city,
+      state: req.body.state,
+      zip: req.body.zip,
+      location: req.body.location    
+    })
+    .then((data) => {
       res.send(data);
-    });
+    })
   });
 }

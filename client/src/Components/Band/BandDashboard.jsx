@@ -28,6 +28,7 @@ import BandPitch from './BandPitch';
     handleSubmit(event) {
       // event.preventDefault()
       console.log("SUBMITTED", event );
+      this.props.addNewVenue(event)      
       this.props.addNewEvent(event)
       // this.props.addNewEvent(this.values.eventName);
 
