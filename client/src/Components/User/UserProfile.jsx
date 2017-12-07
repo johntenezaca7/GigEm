@@ -36,6 +36,7 @@ class UserProfile extends React.Component {
                 Edit your profile by clicking on the text fields!
               </div>
             </div>
+
                 <div className="row">
                   {/* <div className="col col-1">
                   </div> */}
@@ -108,6 +109,7 @@ class UserProfile extends React.Component {
               </button>
               </div>
               </div>
+
             </div>
         )
     }

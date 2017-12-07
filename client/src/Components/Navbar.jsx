@@ -32,7 +32,7 @@ class Navbar extends React.Component {
         default:
           return (
             <div>
-              {/* <td> */}
+
                   <a href="/api/logout"><button className="btn btn-warning my-2 my-sm-0" type="submit">Logout</button></a>
           </div>
           )
@@ -109,40 +109,7 @@ class Navbar extends React.Component {
             </Link>
               <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
-              </button>
-              <div className="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul className="navbar-nav mr-auto">
-<li className="nav-item active">
-<a className="nav-link">
-<h1>{this.props.info.name ? `Welcome, ${this.props.info.name}` : ''}</h1>
-<span className="sr-only">(current)</span>
-</a>
-</li>
-              </ul>
-              <table>
-                <tbody>
-                  <tr>
-                  <td>
-                    <Link to="/user">
-                      <button className="btn btn-info my-2 my-sm-0 m-3" type="submit">Dashboard</button>
-                    </Link>
-                    </td>
-                  <td>
-                    <Link to="/userprofile">
-                      <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">My Profile</button>
-                    </Link>
-                  </td>
-                    <td>
-                     {this.renderContent()}
-                    </td> 
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </nav>
-        </div>
-      )
-      }
+
     }
 }
 

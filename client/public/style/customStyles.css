@@ -78,9 +78,11 @@
 
 .userProfile-wrapper{
 	display: grid;
-	grid-template-columns: 1fr 3fr;
+	grid-template-columns: 1fr 2fr 1fr;
 	grid-gap: 1em;
-	grid-auto-rows: minmax(100px, auto);
+	grid-auto-rows: minmax(100, auto);
+	justify-items: stretch;
+	align-items: stretch;
 
 }
 
@@ -91,6 +93,15 @@
 .userProfile-wrapper >div:nth-child(odd){
 	background: #eee;
 	padding:1em;
+}
+
+
+.user-side-bar {
+	align-self: start;
+}
+
+.up-comingShows {
+	align-self: start;
 }
 
 .nested > div {
@@ -110,4 +121,24 @@
 .social-media {
 	display: flex;
 	flex-direction: row;
+}
+
+.inside-wall {
+	display: grid;
+	grid-auto-columns: 1fr;
+	padding:1em;
+	grid-gap: 1em;
+	align-items: stretch;
+}
+.inside-wall > div {
+	background: #eee;
+	padding:1em;
+}
+.each-h-block {
+	display: grid;
+	grid-auto-columns: 1fr;
+	padding:1em;
+	grid-gap: 1em;
+	background: rgb(248, 236, 236);
+	align-items: stretch;
 }
