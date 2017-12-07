@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import * as actions from '../../actions';
+
 
 import {
     BrowserRouter as Router,
@@ -19,11 +21,22 @@ import BandPitch from './BandPitch';
     constructor(props) {
         super(props);
         this.state = {};
+        
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
+
+    handleSubmit(event) {
+      // event.preventDefault()
+      console.log("SUBMITTED", event );
+      this.props.addNewVenue(event)      
+      this.props.addNewEvent(event)
+      // this.props.addNewEvent(this.values.eventName);
+
+    };
 
     render() {
 
-      // console.log('USE:', this.props.user)
+      console.log('DASH PROPS:', this.props);
     return (
         <Router>
             <div>
@@ -64,7 +77,7 @@ import BandPitch from './BandPitch';
                   <div className="text-center">
                       <h1 className="display-4">Pitch a Gig</h1>
                     </div>
-                  <BandPitch user={this.props.user} /></div>} />
+                  <BandPitch user={this.props.user} onSubmit={this.handleSubmit}/></div>} />
             </div>
         </Router>
     )}
@@ -77,4 +90,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps)(BandDashboard);
+export default connect(mapStateToProps, actions)(BandDashboard);

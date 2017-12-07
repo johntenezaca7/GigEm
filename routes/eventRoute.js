@@ -2,17 +2,17 @@ const dbDef = require('../db/index');
 
 module.exports = (app, db) => {
 
-  const addEvent = (req, callback) => {
-    // console.log('REK',req)
-    const sql = `INSERT INTO Event (venue_id, user_id, name, description, photo, start_date, start_time, end_date, final_commit_date, city, state, zip, is_committed, price,min_commits,commits) VALUES
-    (${req.body.venue_id},${req.body.user_id},"${req.body.name}","${req.body.description}","${req.body.photo}",${req.body.start_date},"${req.body.start_time}",${req.body.end_date},${req.body.final_commit_date},"${req.body.city}","${req.body.state}",${req.body.zip},"${req.body.is_committed}",${req.body.price},${req.body.min_commits},${req.body.commits})`;
-    const joinsql = `INSERT INTO Event (venue_id, user_id, name, description, photo, start_date, start_time, end_date, final_commit_date, city, state, zip, is_committed, price,min_commits,commits) VALUES
-    (${req.body.venue_id},${req.body.user_id},"${req.body.name}","${req.body.description}","${req.body.photo}",${req.body.start_date},"${req.body.start_time}",${req.body.end_date},${req.body.final_commit_date},"${req.body.city}","${req.body.state}",${req.body.zip},"${req.body.is_committed}",${req.body.price},${req.body.min_commits},${req.body.commits})`;
-      return db.connection.query(sql, (err, data) => {
-        if (err) console.log('getAllEvent Error: ', err);
-        callback(err, data);
-      })
-    };
+  // const addEvent = (req, callback) => {
+  //   console.log('REK',req);
+  //   const sql = `INSERT INTO Event (venue_id, user_id, name, description, photo, start_date, start_time, end_date, final_commit_date, city, state, zip, is_committed, price,min_commits,commits) VALUES
+  //     (${req.body.venue_id},${req.body.user_id},"${req.body.name}","${req.body.description}","${req.body.photo}",${req.body.start_date},"${req.body.start_time}",${req.body.end_date},${req.body.final_commit_date},"${req.body.city}","${req.body.state}",${req.body.zip},"${req.body.is_committed}",${req.body.price},${req.body.min_commits},${req.body.commits})`;
+  //   const joinsql = `INSERT INTO Event (venue_id, user_id, name, description, photo, start_date, start_time, end_date, final_commit_date, city, state, zip, is_committed, price,min_commits,commits) VALUES
+  //     (${req.body.venue_id},${req.body.user_id},"${req.body.name}","${req.body.description}","${req.body.photo}",${req.body.start_date},"${req.body.start_time}",${req.body.end_date},${req.body.final_commit_date},"${req.body.city}","${req.body.state}",${req.body.zip},"${req.body.is_committed}",${req.body.price},${req.body.min_commits},${req.body.commits})`;
+  //   return db.connection.query(sql, (err, data) => {
+  //     if (err) console.log('getAllEvent Error: ', err);
+  //     callback(err, data);
+  //   })
+  // };
 
   app.get('/api/events', (req, res) =>{
     dbDef.Showcase.findAll({})
@@ -116,10 +116,10 @@ module.exports = (app, db) => {
   });
   
   // Add Showcase Event and respond with added event obj 
-  app.post('/addevent', (req, res) =>{
-    // console.log("REQQQQ BODYYYYYYY ", req.body);
+  app.post('/api/addEvent', (req, res) =>{
+    console.log("REQQQQ BODYYYYYYY ", req.body);
     dbDef.Showcase.create({
-      name: req.body.name,
+      name: req.body.info.eventName,
       description: req.body.description,
       photo: req.body.photo,
       startDate: req.body.startDate,

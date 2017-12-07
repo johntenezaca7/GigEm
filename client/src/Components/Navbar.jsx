@@ -38,18 +38,9 @@ class Navbar extends React.Component {
           )
       }
     }
-  
-    
-    // componentDidMount() {
-    //   console.log(this.props);
-    //   console.log('attempging to init with: ', this.props.auth);
-    //   this.props.init(this.props.auth);
-    // }
+
 
     render() {
-      // console.log('navbar auth:');
-      // console.log(this.props);
-      
       if (this.props.info.isBand) {
         return (
         <div>
@@ -109,15 +100,14 @@ class Navbar extends React.Component {
                 </Link>
               <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"/>
                 <span className="navbar-toggler-icon"></span>
+
                 </nav>
           </div>
           )
     }
 }
 }
-
 function mapStateToProps({ auth, info, users }){
-  //console.log('map:', auth)
     return { 
       auth: auth,
       info: info,

@@ -1,130 +1,137 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 // import ProgressComponent from './ProgressComponent';
 import Datetime from 'react-datetime';
 
 import * as actions from '../../actions'
 // import { networkInterfaces } from 'os';
 
-
-class BandPitch extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          user: '',
-          getFunc: '',
-          fetched: false,
-          temp: "",
-          
-        };
-        // this.hangleChange = this.hangleChange.bind(this);
-        // this.hangleSubmit = this.hangleSubmit.bind(this);
-        
-        // this.getInfo = this.getInfo.bind(this)
-    }
-
-
+let BandPitch = props => {
+              
+  console.log('props', props)
+  return (
     
-    // componentWillReceiveProps(nextProps){
-    //   if (nextProps.user !== "" && this.state.temp !== nextProps.user) {
-    //     console.log("SIDUBVIWEUBIVEWUYGBYEIUWY")
-    //     this.props.fetchUserProfile(nextProps.user);
-    //     this.setState({
-    //       temp: nextProps.user
-    //     })
-    //   }
-    // }
-
-    validateGigForm() {
-      console.log('LET ME VALIDATE YOU');
-    };
-
-    handleChange(e) {
-      this.setState({temp: e.target.temp})
-    }
-
-    handleSubmit(e) {
-      console.log("USBMITTED SHOWCASE: ", this.state.temp)
-    }
-        
-        render() {      
-      
-        
-        return (
-            <div className="container container-fluid border p-3 small" >
-                <div className="row">
-                {/* <div className="container-fluid border p-3 small"> */}
-                    <div className="col-sm">
-                        <div className="form-inline">
-                          {/* <div className="col col-md-auto"> */}
-                          <div>
-                            <label className="text-left">Location</label>
-                          </div>
-                          {/* </div> */}
-                          {/* <div className="col "> */}
-                          
-                            <input type="email" className="form-control mt-1 form-control-sm justify-content-end" 
-                            id="exampleInputEmail1" aria-describedby="emailHelp" placeholder={this.state.temp.email} />
-                          {/* </div> */}
-                        </div>
-                        <div className="form-inline">
-                          {/* <div className="col col-md-auto"> */}
-                            <label >Available Dates</label>
-                          {/* </div> */}
-                          {/* <div className="col"> */}
-                            <Datetime />
-                          {/* </div> */}
-                        </div>
-                        <div className="form-inline ">
-                          {/* <div className="col col-md-auto"> */}
-                          <label>Notes</label>
-                            <input type="email" className="form-control mt-1 form-control-sm  justify-content-end" 
-                            id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-                        </div>
-
-                    </div>
-                    <div className="col-sm text-right">
-                        <div className="form-inline">
-                            {/* <div className="col col-6"> */}
-                              <label className="text-left">Commits Needed</label>
-                            {/* </div> */}
-                            {/* <div className="col"> */}
-                              <input type="email" className="form-control mt-1 form-control-sm justify-content-right" 
-                              id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-                            {/* </div> */}
-                        </div>
-                        <div className="form-inline">
-                          {/* <div className="col"> */}
-                            <label>By</label>
-                            {/* <div className="col align-self-end text-right"> */}
-                            <Datetime />
-                          {/* </div> */}
-                        </div>
-                        <div className="button-block">
-                          <button type="submit" className ="btn btn-secondary">Submit</button>
-                        </div>
-                    </div>
-                </div> 
+    <div className="container container-fluid border p-3 small" >
+        <div className="row">
+          <div className="col-sm">
+            <form  onSubmit={props.handleSubmit} >
+              <div>
+                <label>Event Name</label>
+                  <Field
+                    name="eventName"
+                    component="input"
+                    type="text"
+                    placeholder="D-lon Musk "
+                  />
               </div>
-            // </div>
+              <div>
+                <label>Venue Name</label>
+                  <Field
+                    name="venueName"
+                    component="input"
+                    type="text"
+                    placeholder="My Garage "
+                  />
+              </div>
+              <div>
+                <button type="submit" >Submit</button>
+              </div>
+            </form>
+          </div> 
+        </div>
+      </div>
 
-        )
-    } 
-}
+  )
+} 
+//}
 
-function mapStateToProps(state) {
-  // console.log('REDUCERS STATES IN BADPITCH:', state)
-  return {
-    auth: state.auth,
-    userInfo: state.info
-  }
-}
+BandPitch = reduxForm({
+  form: 'pitchGigForm'
+  // fields: ['name', 'description','photo','startDate' ,'endDate','startTime','finalCommitDate','city','state','zip','price','minCommits','bandId','venueId','venueName'],
+  // validate: validateGigForm
+})(BandPitch);
 
-// BandPitch = reduxForm({
-//   form: 'pitchGigForm'
-//   // fields: ['name', 'description','photo','startDate' ,'endDate','startTime','finalCommitDate','city','state','zip','price','minCommits','bandId','venueId','venueName'],
-//   // validate: validateGigForm
-// })(BandPitch);
+export default BandPitch;
 
-export default  connect(mapStateToProps, actions)(BandPitch);
+// class BandPitch extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//           user: '',
+//           getFunc: '',
+//           fetched: false,
+//           temp: "",
+//           name: ''
+          
+//         };
+//     }
+
+// function mapStateToProps(state) {
+//   // console.log('REDUCERS STATES IN BADPITCH:', state)
+//   return {
+//     auth: state.auth,
+//     userInfo: state.info
+//   }
+// }
+
+// const asyncValidate = (values) => {
+//     return Promise.reject('errors');
+  
+// }
+
+// connect(mapStateToProps, actions)(BandPitch);
+
+
+// <div className="form-inline">
+//                           {/* <div className="col col-md-auto"> */}
+//                           <div>
+//                             <label className="text-left">Location</label>
+//                           </div>
+//                           {/* </div> */}
+//                           {/* <div className="col "> */}
+                          
+//                             <input type="email" className="form-control mt-1 form-control-sm justify-content-end" 
+//                             id="exampleInputEmail1" aria-describedby="emailHelp" placeholder='hi' />
+//                           {/* </div> */}
+//                         </div>
+//                         <div className="form-inline">
+//                           {/* <div className="col col-md-auto"> */}
+//                             <label >Available Dates</label>
+//                           {/* </div> */}
+//                           {/* <div className="col"> */}
+//                             <Datetime />
+//                           {/* </div> */}
+//                         </div>
+//                         <div className="form-inline ">
+//                           {/* <div className="col col-md-auto"> */}
+//                           <label>Notes</label>
+//                             <input type="email" className="form-control mt-1 form-control-sm  justify-content-end" 
+//                             id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+//                         </div>
+
+//                     </div>
+//                     <div className="col-sm text-right">
+//                         <div className="form-inline">
+//                             {/* <div className="col col-6"> */}
+//                               <label className="text-left">Commits Needed</label>
+//                             {/* </div> */}
+//                             {/* <div className="col"> */}
+//                               <input type="email" className="form-control mt-1 form-control-sm justify-content-right" 
+//                               id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+//                             {/* </div> */}
+//                         </div>
+//                         <div className="form-inline">
+//                           {/* <div className="col"> */}
+//                             <label>By</label>
+//                             {/* <div className="col align-self-end text-right"> */}
+//                             <Datetime />
+//                           {/* </div> */}
+//                         </div>
+//                         <div className="button-block">
+//                           <button type="submit" className ="btn btn-secondary">Submit</button>
+//                         </div>
+//                     </div>
+//                 </div> 
+//               </div>
+//             // </div
