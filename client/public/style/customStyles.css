@@ -27,7 +27,9 @@
 	margin-left: -30px;
 	bottom: 20px;
 }
-
+.img-fluid {
+	color:#FF9900;
+}
 .arrows path {
 	stroke: #FF9900;
 	fill: transparent;
@@ -53,7 +55,7 @@
 }
 
 .navbar {
-	background-color: #FF9900;
+	background-color: rgb(255, 185, 144);
 }
 
 
@@ -78,6 +80,7 @@
 	grid-gap: 1em;
 	padding:1em;
 	grid-auto-rows: minmax(100px, auto);
+	border-radius: 15px 50px 30px;
 
 }
 
@@ -89,28 +92,35 @@
 	justify-items: stretch;
 	align-items: stretch;
 	padding: .5cm 2cm 2cm 1cm;
+	
+
 
 }
 
 .bandProfile-wrapper{
 	display: grid;
 	grid-template-columns: 10% 75% 10%;
-	grid-gap: 1em;
+	/* grid-gap: 1em; */
 	grid-auto-rows: minmax(100, auto);
 	justify-items: stretch;
 	align-items: stretch;
 	margin: 20px
 
 }
-.bandContent-wrapper{
+.bandContent-wrapper {
 	display: grid;
-	grid-template-columns: 20% 50%  30%;
-	grid-gap: 2em;
+	grid-template-columns: 25% 55%  30%;
+	grid-gap: 4em;
 	grid-auto-rows: minmax(100, auto);
 	justify-items: stretch;
 	align-items: stretch;
-	padding: 1cm 2cm 4cm 2cm;
+	padding: 1cm 2cm 4cm 1cm;
 
+}
+.bandContent-wrapper > div {
+	background: rgb(255, 237, 222);
+	padding:1em;
+	border-radius: 15px 50px 30px;
 }
 
 .band-show-scroll{
@@ -118,6 +128,21 @@
     height: 300px;
     overflow: scroll;
 }
+
+.upComing-Po-Gigs {
+	display: grid;
+	grid-template-columns: 50% 53%;
+	grid-auto-rows: minmax(100, auto);
+	grid-gap: 2em;
+	padding: 2cm 6cm 2cm 5cm;
+}
+.user-show-scroll{
+	width: auto;
+    height: 700px;
+	overflow: scroll;
+
+}
+
 .side-scrolling{
 	width: auto;
 	height: 300px;
@@ -128,27 +153,32 @@
 .userProfile-wrapper > div {
 	background: #ddd;
 	padding:1em;
+	border-radius: 15px 50px 30px;
 }
 .userProfile-wrapper >div:nth-child(odd){
-	background: #eee;
+	background: rgb(246, 246, 246);
 	padding:1em;
+	border-radius: 15px 50px 30px;
 }
 
 
 .user-side-bar {
 	align-self: start;
+	/* border-radius: 15px 50px 30px;s */
 }
 
 .up-comingShows {
 	align-self: start;
 }
 .band-media {
-	/* align-self: start; */
+	align-self: start;
 }
 .nested > div {
 	/* background: #eee; */
-	background: #ddd;
+	/* background: rgb(255, 252, 252); */
 	padding:1em;
+	border-radius: 15px 50px 30px;
+
 }
 
 .gig-text-wrapper {
@@ -177,6 +207,8 @@
 .inside-wall > div {
 	background: #eee;
 	padding:1em;
+	border-radius: 25px;
+
 }
 .each-h-block {
 	display: grid;
@@ -185,6 +217,7 @@
 	grid-gap: 1em;
 	background: rgb(248, 236, 236);
 	align-items: stretch;
+	
 }
 .band-dashboard{
 	padding: 2cm 9cm 2cm 5cm;

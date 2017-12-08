@@ -48,7 +48,7 @@ class Navbar extends React.Component {
         <nav className="navbar navbar-expand-lg navbar-light ">
         {/* <a className="navbar-brand">Navbar</a> */}
         <Link to="/">
-          <img src="../Assets/userLogo.svg" width="40px" height="40px" alt="User Logo" />
+          <img src="../Assets/party.svg" width="40px" height="40px" alt="User Logo" />
         </Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
@@ -97,7 +97,7 @@ class Navbar extends React.Component {
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
             {/* <a className="navbar-brand">Navbar</a> */}
             <Link to="/">
-              <img src="./Assets/userLogo.svg" width="40px" height="40px" alt="User Logo" />
+              <img src="./Assets/party.svg" width="40px" height="40px" alt="User Logo" />
             </Link>
               <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
@@ -106,7 +106,8 @@ class Navbar extends React.Component {
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item active">
                   <a className="nav-link">
-                  <h1>{this.props.auth.name ? this.props.auth.name : 'Anonymous User'}</h1>
+                
+                  <h2>{this.props.info.name ? `Welcome, ${this.props.info.name}` : 'Anonymous User'}</h2>
                   <span className="sr-only">(current)</span>
                   </a>
                 </li>
@@ -117,10 +118,8 @@ class Navbar extends React.Component {
                   <td>
                     <Link to="/user">
                       <button className="btn btn-info my-2 my-sm-0 m-3" type="submit">Dashboard</button>
-                    </Link>
-                    </td>
-                  <td>
-                    <Link to="/profile">
+                    </Link> 
+                    <Link to="/userprofile">
                       <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">My Profile</button>
                     </Link>
                   </td>
