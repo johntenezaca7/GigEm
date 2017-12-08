@@ -77,13 +77,13 @@ export const fetchBandInfo = () => async dispatch => {
 export const fetchUserProfile = () => async dispatch => {
     // eslint-disable-next-line
     const res = await axios.get('/api/profile')
-    console.log('attempting to fetch user profile / action')
+    // console.log('attempting to fetch user profile / action')
     // eslint-disable-next-line
     dispatch({ type: types.FETCH_USER_PROFILE, payload: res.data })
 }
 
 export const editUserProfile = (item) => async dispatch => {
-    console.log(`editUserProfile item: ${item}`);
+    // console.log(`editUserProfile item: ${item}`);
     // eslint-disable-next-line
     const res = await axios.post(`/api/task/editprofile`, {item});
     // this.forceRender();

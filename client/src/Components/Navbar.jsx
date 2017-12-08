@@ -106,7 +106,7 @@ class Navbar extends React.Component {
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item active">
                   <a className="nav-link">
-                  <h1>{this.props.auth.name ? this.props.auth.name : 'Anonymous User'}</h1>
+                  <h1>{this.props.info.name ? this.props.info.name : 'Anonymous User'}</h1>
                   <span className="sr-only">(current)</span>
                   </a>
                 </li>
@@ -116,11 +116,11 @@ class Navbar extends React.Component {
                   <tr>
                   <td>
                     <Link to="/user">
-                      <button className="btn btn-info my-2 my-sm-0 m-3" type="submit">Dashboard</button>
+                      <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">Dashboard</button>
                     </Link>
                     </td>
                   <td>
-                    <Link to="/profile">
+                    <Link to="/userprofile">
                       <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">My Profile</button>
                     </Link>
                   </td>
