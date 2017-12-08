@@ -88,7 +88,19 @@ let User = connection.define('User', {
   },
 });
 
-
+// User.sync({forceObj}).then(() => {
+//   console.log('SYNC USERS-----------------------')
+//   // Table created
+//   return User.create({
+//     isBand: '1',
+//     name: 'Steve The Guitar',
+//     description: 'part man, mostly guitar',
+//     email: 'steve@guitar.com',
+//     zip: 23456,
+//     city: "Brooklyn",
+//     state: "NY"
+//   });
+// });
 
 
 let Venue = connection.define('Venue', {
@@ -210,18 +222,18 @@ Showcase.belongsTo(User);
 // Showcase.sync(forceObj).then(() => {
 //   console.log('SYNC SHOWCASES-----------------------')
 //   // Table created
-  // return
-  //  Showcase.create({
-  //   name: 'Festivus',
-  //   description: 'for the rest of us',
-  //   zip: 23456,
-  //   city: "Dallas",
-  //   state: "TX",
-  //   isCommitted: false,
-  //   photo: 'pic.jpeg',
-  //   minCommits: 10,
-  //   commits: 11
-  // });
+//   return
+//    Showcase.create({
+//     name: 'Festivus',
+//     description: 'for the rest of us',
+//     zip: 23456,
+//     city: "Dallas",
+//     state: "TX",
+//     isCommitted: false,
+//     photo: 'pic.jpeg',
+//     minCommits: 10,
+//     commits: 11
+//   });
 // });
 
 let Properties = connection.define('Properties', {
@@ -246,6 +258,7 @@ Properties.belongsTo(User);
 //   console.log('SYNC PROPERTIES-----------------------')
 //   // Table created
 //   return Properties.create({
+//     UserId: '1',
 //     linkUrl: 'bandsite.com',
 //     description: 'woah what a great link'
 //   });
@@ -267,7 +280,10 @@ Attendance.belongsTo(Showcase);
 // Attendance.sync(forceObj).then(() => {
 //   console.log('SYNC IN Atttendance-----------------------')
 //   // Table created
-//   return Attendance.create({});
+//   return Attendance.create({
+//     // UserId: '1',
+//     // ShowcaseId: '1'
+//   });
 // });
 
 exports.User = User;
