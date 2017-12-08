@@ -109,7 +109,7 @@ class Navbar extends React.Component {
                 
                   <h2>{this.props.info.name ? `Welcome, ${this.props.info.name}` : 'Anonymous User'}</h2>
 
-                  <h1>{this.props.info.name ? this.props.info.name : 'Anonymous User'}</h1>
+                  {/* <h1>{this.props.info.name ? this.props.info.name : 'Anonymous User'}</h1> */}
                   <span className="sr-only">(current)</span>
                   </a>
                 </li>
