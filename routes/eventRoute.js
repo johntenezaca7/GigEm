@@ -123,10 +123,17 @@ module.exports = (app, db) => {
       name: req.body.info.eventName,
       description: req.body.info.eventDescription,
       photo: req.body.info.photo,
+<<<<<<< d352743c6426f3bd042b030d036dad458a9a5824
       startDate: req.body.info.start,
       endDate: req.body.info.end,
       startTime: req.body.info.startTime,
       finalCommitDate: req.body.info.end,
+=======
+      startDate: req.body.info.startDate,
+      endDate: req.body.info.endDate,
+      startTime: req.body.info.startTime,
+      finalCommitDate: req.body.info.finalCommitDate,
+>>>>>>> bandpitch submit button updates venues & showcases
       city: req.body.info.city,
       state: req.body.info.state,
       zip: req.body.info.zip,

@@ -85,8 +85,17 @@ const renderDates = fields => (
                     placeholder="My Garage "
                   />
               </div>
+<<<<<<< d352743c6426f3bd042b030d036dad458a9a5824
                   <Datetime />
 
+=======
+              <div>
+                <label>Start Date</label>
+                  <div className="col">
+                    <Datetime />
+                  </div>
+              </div>
+>>>>>>> bandpitch submit button updates venues & showcases
               <div>
                 <label>City</label>
                   <Field

@@ -28,7 +28,11 @@ import BandPitch from './BandPitch';
     handleSubmit(event) {
       // event.preventDefault()
       event.UserId = this.props.bandInfo.id;      
+<<<<<<< d352743c6426f3bd042b030d036dad458a9a5824
       console.log("SUBMITTED PROPS", this.props );
+=======
+      console.log("SUBMITTED", event );
+>>>>>>> bandpitch submit button updates venues & showcases
       this.props.addNewVenue(event)
       .then(() => {
         console.log("PROMISED EVENT", event);
