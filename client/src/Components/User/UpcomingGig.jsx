@@ -67,7 +67,7 @@ class UpcomingGig extends React.Component {
                         <div className="col-lg-5 justify-content-md-center">
                         <ProgressComponent percent={100} />
                         </div>
-                        <div className="col col-md-auto align-self-end" align="right">
+                        <div className="col col-md-auto" align="right">
                         {/* {this.props.gig.final_commit_date}<br /> */}
                         {/* {this.props.gig.venue_id}<br /> */}
                         Venue Placeholder<br />

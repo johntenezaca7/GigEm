@@ -135,7 +135,7 @@ module.exports = (app, db) => {
       minCommits: req.body.minCommits,
       commits: req.body.commits,
       VenueId: req.body.venueId,
-      UserId: req.body.userId      
+      UserId: req.body.user      
     })
     .then((data) => {
       res.send(data);
