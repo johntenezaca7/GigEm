@@ -29,11 +29,13 @@ class PotentialGig extends React.Component {
     commitButton(e, user, gig) {
         // e.preventDefault();
         this.props.onCommitClick(user, gig)
+        this.setState({commits: this.state.commits + 1})
         this.setState({usercommitted: !this.state.usercommitted});
     }
 
     uncommitButton(e, user, gig) {
         this.props.onUncommitClick(user, gig)
+        this.setState({commits: this.state.commits - 1});
         this.setState({usercommitted: !this.state.usercommitted});
     }
 
@@ -50,7 +52,7 @@ class PotentialGig extends React.Component {
                         <Link to={`/showdetails/${this.props.gig.id}`}>
                         {this.props.gig.name}<br />
                     </Link><br />
-                        <div className="text-success">{this.props.gig.commits} of {this.props.gig.min_commits} commits!</div>
+                        <div className="text-success">{this.state.commits} of {this.props.gig.min_commits} commits!</div>
                         </div>
                         <div className="col-lg-5 justify-content-md-center">
                         <ProgressComponent percent={percent} />
