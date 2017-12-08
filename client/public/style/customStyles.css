@@ -201,13 +201,15 @@
 	grid-gap: 1em;
 	align-items: stretch;
 	width: auto;
-    height: 650px;
-    overflow: scroll;
+    height: 620px;
+	overflow: scroll;
+	
 }
 .inside-wall > div {
 	background: #eee;
 	padding:1em;
 	border-radius: 25px;
+	
 
 }
 .each-h-block {
