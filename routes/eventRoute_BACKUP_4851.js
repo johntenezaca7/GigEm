@@ -41,9 +41,7 @@ module.exports = (app, db) => {
     
     .then(dbDef.Attendance.findAll()
     .then((attendance) => {
-      let returnValue = attendance
-      .filter((x) => x.UserId === req.user)
-      .reduce((memo, item) => {
+      let returnValue = attendance.reduce((memo, item) => {
         memo.push(item.ShowcaseId)
         return memo;
       }, []);
@@ -70,9 +68,7 @@ module.exports = (app, db) => {
     .then((attendanceItem) => { if (attendanceItem) attendanceItem.destroy() } ) 
     .then(dbDef.Attendance.findAll()
     .then((attendance) => {
-      let returnValue = attendance
-      .filter((x) => x.UserId === req.user)
-      .reduce((memo, item) => {
+      let returnValue = attendance.reduce((memo, item) => {
         memo.push(item.ShowcaseId)
         return memo;
       }, []);
@@ -93,15 +89,15 @@ module.exports = (app, db) => {
     // console.log('eventRoute.js: attempting to check if user has committed to event');
     // console.log('eventRoute.js req.body:')
     // console.log(req.body);
+    
     dbDef.Attendance.findAll()
     .then((attendance) => {
-      let returnValue = attendance
-      .filter((x) => x.UserId === req.user)
-      .reduce((memo, item) => {
-        memo.push(item.ShowcaseId)
-        return memo;
-      }, []);
-      attendance ? res.send(returnValue) : res.send(returnValue)
+      // let returnValue = attendance.reduce((memo, item) => {
+      //   memo.push(item.ShowcaseId)
+      //   return memo;
+      // }, []);
+      // attendance ? res.send(returnValue) : res.send(returnValue)
+      attendance ? res.send(attendance) : res.send('err: no attendance items found.');
     })
   })
 
@@ -125,6 +121,30 @@ module.exports = (app, db) => {
     console.log("REQQQQ BODYYYYYYY ", req.body);
     dbDef.Showcase.create({
       name: req.body.info.eventName,
+<<<<<<< HEAD
+      description: req.body.info.eventDescription,
+      photo: req.body.info.photo,
+<<<<<<< HEAD
+      startDate: req.body.info.start,
+      endDate: req.body.info.end,
+      startTime: req.body.info.startTime,
+      finalCommitDate: req.body.info.end,
+=======
+      startDate: req.body.info.startDate,
+      endDate: req.body.info.endDate,
+      startTime: req.body.info.startTime,
+      finalCommitDate: req.body.info.finalCommitDate,
+>>>>>>> 44a6b3572bc1338385acc1661e4a2df448a19522
+      city: req.body.info.city,
+      state: req.body.info.state,
+      zip: req.body.info.zip,
+      isCommitted: req.body.info.isCommitted,
+      price: req.body.info.price,
+      minCommits: req.body.info.minCommits,
+      commits: req.body.info.commits,
+      VenueId: req.body.info.VenueId,
+      UserId: req.body.info.UserId      
+=======
       description: req.body.description,
       photo: req.body.photo,
       startDate: req.body.startDate,
@@ -140,6 +160,7 @@ module.exports = (app, db) => {
       commits: req.body.commits,
       VenueId: req.body.venueId,
       UserId: req.body.user      
+>>>>>>> minor fixes.
     })
     .then((data) => {
       res.send(data);

@@ -27,9 +27,25 @@ class UserProfile extends React.Component {
       }
     }
 
+    renderChangeButton() {
+      if (this.props.info.isBand) {
+        return (
+          <button className="btn btn-success my-2 my-sm-0" onClick={(e) => this.props.editUserProfile({'isBand': false})}>
+          Change User Type to User
+          </button>
+        )
+      } else {
+          return (
+            <button className="btn btn-success my-2 my-sm-0" onClick={(e) => this.props.editUserProfile({'isBand': true})}>
+            Change User Type to Band
+            </button>
+          )
+      }
+    }
+
     render() {
-      // console.log('userProfile props: ', this.props);
-      let userAttendance = this.props.attendance.length > 0 ? this.props.attendance.map(x => x = x.ShowcaseId) : [];
+      console.log('userProfile props: ', this.props);
+      let userAttendance = this.props.attendance.length > 0 ? this.props.attendance : [];
       // console.log(userAttendance);
       if(this.props.info){
         return (
@@ -133,9 +149,7 @@ class UserProfile extends React.Component {
 
               <div className="alert alert-warning text-center" role="alert">
               <div>
-              <button className="btn btn-success my-2 my-sm-0" onClick={(e) => this.props.editUserProfile({'isBand': true})}>
-                Change User Type to Band
-              </button>
+                        {this.renderChangeButton()}
               </div>
               </div>
 

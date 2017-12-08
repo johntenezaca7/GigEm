@@ -41,9 +41,7 @@ module.exports = (app, db) => {
     
     .then(dbDef.Attendance.findAll()
     .then((attendance) => {
-      let returnValue = attendance
-      .filter((x) => x.UserId === req.user)
-      .reduce((memo, item) => {
+      let returnValue = attendance.reduce((memo, item) => {
         memo.push(item.ShowcaseId)
         return memo;
       }, []);
@@ -70,9 +68,7 @@ module.exports = (app, db) => {
     .then((attendanceItem) => { if (attendanceItem) attendanceItem.destroy() } ) 
     .then(dbDef.Attendance.findAll()
     .then((attendance) => {
-      let returnValue = attendance
-      .filter((x) => x.UserId === req.user)
-      .reduce((memo, item) => {
+      let returnValue = attendance.reduce((memo, item) => {
         memo.push(item.ShowcaseId)
         return memo;
       }, []);
@@ -93,15 +89,15 @@ module.exports = (app, db) => {
     // console.log('eventRoute.js: attempting to check if user has committed to event');
     // console.log('eventRoute.js req.body:')
     // console.log(req.body);
+    
     dbDef.Attendance.findAll()
     .then((attendance) => {
-      let returnValue = attendance
-      .filter((x) => x.UserId === req.user)
-      .reduce((memo, item) => {
-        memo.push(item.ShowcaseId)
-        return memo;
-      }, []);
-      attendance ? res.send(returnValue) : res.send(returnValue)
+      // let returnValue = attendance.reduce((memo, item) => {
+      //   memo.push(item.ShowcaseId)
+      //   return memo;
+      // }, []);
+      // attendance ? res.send(returnValue) : res.send(returnValue)
+      attendance ? res.send(attendance) : res.send('err: no attendance items found.');
     })
   })
 
