@@ -10,7 +10,7 @@ import {
   } from 'react-router-dom'
 
 // import Navbar from '../Navbar';
-import BandNavTabs from './BandNavTabs';
+// import BandNavTabs from './BandNavTabs';
 
 import BandUpcomingGig from './BandUpcomingGig';
 import BandPotentialGig from './BandPotentialGig';

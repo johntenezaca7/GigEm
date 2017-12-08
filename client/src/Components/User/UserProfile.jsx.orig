@@ -28,9 +28,15 @@ class UserProfile extends React.Component {
     }
 
     render() {
+<<<<<<< HEAD
+      console.log('userProfile props: ', this.props);
+      let userAttendance = this.props.attendance.length ?   this.props.attendance.map(x => x = x.ShowcaseId) : [];
+      console.log(userAttendance);
+=======
       // console.log('userProfile props: ', this.props);
-      let userAttendance = this.props.attendance.length > 0 ? this.props.attendance : [];
+      let userAttendance = this.props.attendance.length > 0 ? this.props.attendance.map(x => x = x.ShowcaseId) : [];
       // console.log(userAttendance);
+>>>>>>> minor fixes.
       if(this.props.info){
         return (
           <div>

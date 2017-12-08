@@ -41,7 +41,7 @@ class Navbar extends React.Component {
 
 
     render() {
-      console.log('navbar props', this.props)
+      // console.log('navbar props', this.props)
       if (this.props.info.isBand) {
         return (
         <div>
