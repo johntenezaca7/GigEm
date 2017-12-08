@@ -101,7 +101,7 @@ module.exports = (app, db) => {
       //   memo.push(item.ShowcaseId)
       //   return memo;
       // }, []);
-      console.log('commitCheck returnValue: ', returnValue);
+      // console.log('commitCheck returnValue: ', returnValue);
       attendance ? res.send(returnValue) : res.send(returnValue)
     })
   })
