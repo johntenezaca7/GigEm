@@ -38,26 +38,32 @@ class UserDashboard extends React.Component {
       // console.log(this.props.auth);
 
       return (
-        <div>
-          <div className="row">
-            <div className="col col-1">
+        <div >
+           <div className="upComing-Po-Gigs">
+             <div>
+                <h2>Upcoming Gig'em Shows</h2>
+                  <div className="user-show-scroll">
+                      {/* <button className="btn btn-danger my-2 my-sm-0" onClick={(e) => this.fetchEvents(e)} >Fetch Events</button> */}
+                      {
+                        this.props.events
+                          .filter((x) => x.isCommitted === true)
+                          .map((x) => <UpcomingGig user={this.props.auth.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)} />)
+                      }
+                  </div> 
+             </div> 
+             <div>
+                <div>
+                  <h2>Potential Gigs</h2>
+                    <div className="user-show-scroll">
+                      {
+                        this.props.events
+                          .filter((x) => x.isCommitted === false)
+                          .map((x) => <PotentialGig user={this.props.auth.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
+                      }
+                  </div>
+                </div>
             </div>
-            <div className="col">
-            <h2>Upcoming Gig'em Shows</h2>
-              {/* <button className="btn btn-danger my-2 my-sm-0" onClick={(e) => this.fetchEvents(e)} >Fetch Events</button> */}
-              {
-                this.props.events
-                  .filter((x) => x.isCommitted === true)
-                  .map((x) => <UpcomingGig user={this.props.auth.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)} />)
-              }
-              <h2>Potential Gigs</h2>
-              {
-                this.props.events
-                  .filter((x) => x.isCommitted === false)
-                  .map((x) => <PotentialGig user={this.props.auth.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
-              }
-            </div>
-          </div>
+        </div>
         </div>
       )
     }
