@@ -27,10 +27,32 @@ class UserProfile extends React.Component {
       }
     }
 
+    renderChangeButton() {
+      if (this.props.info.isBand) {
+        return (
+          <button className="btn btn-success my-2 my-sm-0" onClick={(e) => this.props.editUserProfile({'isBand': false})}>
+          Change User Type to User
+          </button>
+        )
+      } else {
+          return (
+            <button className="btn btn-success my-2 my-sm-0" onClick={(e) => this.props.editUserProfile({'isBand': true})}>
+            Change User Type to Band
+            </button>
+          )
+      }
+    }
+
     render() {
       // console.log('userProfile props: ', this.props);
-      let userAttendance = this.props.attendance.length > 0 ? this.props.attendance : [];
-      // console.log(userAttendance);
+      let userAttendance = this.props.attendance.length > 0 ? 
+      this.props.attendance
+      .filter((x) => x.UserId === this.props.info.id) 
+      .map((x) => x = x.ShowcaseId) : [];
+      
+      
+      console.log('userAttendance: ', userAttendance);
+      console.log('events: ', this.props.events)
       if(this.props.info){
         return (
           <div>
@@ -113,17 +135,15 @@ class UserProfile extends React.Component {
                         <h3>Upcoming Shows</h3>
                          <div className="band-show-scroll">
                           {this.props.events
-                            .filter((x) => x.isCommitted === true)
-                            .filter((x) => userAttendance.includes(x.id))
+                            .filter((x) => userAttendance.includes(x.id) && x.isCommitted === true)
                             .map((x) => <GigText user={this.props.info.id} key={x.id} gig={x} usercommitted={userAttendance.includes(x.id)}/>)
                           }
                           </div>
                           <br />
                         <h3>Potential Gigs</h3>
                         <div className="band-show-scroll">
-                          {this.props.events
-                            .filter((x) => x.isCommitted === false)
-                            .filter((x) => userAttendance.includes(x.id))
+                        {this.props.events
+                            .filter((x) => userAttendance.includes(x.id) && x.isCommitted === false)
                             .map((x) => <GigText user={this.props.info.id} key={x.id} gig={x} usercommitted={userAttendance.includes(x.id)}/>)
                           }
                           </div>
@@ -134,9 +154,7 @@ class UserProfile extends React.Component {
 
               <div className="alert alert-warning text-center" role="alert">
               <div>
-              <button className="btn btn-success my-2 my-sm-0" onClick={(e) => this.props.editUserProfile({'isBand': true})}>
-                Change User Type to Band
-              </button>
+                        {this.renderChangeButton()}
               </div>
               </div>
 

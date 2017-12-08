@@ -26,12 +26,12 @@ class UpcomingGig extends React.Component {
         if (!this.state.usercommitted) {
             return (
                 <div>
-                    <button className="btn btn-info my-2 my-sm-0" onClick={(e) => this.commitButton(e, this.props.auth.id, this.props.gig.id)}>
+                    <button className="btn btn-info my-2 my-sm-0" onClick={(e) => this.commitButton(e, this.props.info.id, this.props.gig.id)}>
                         Commit
                     </button>
                 </div>)
         } else if (this.state.usercommitted) {
-            return (<div><button className="btn btn-warning my-2 my-sm-0" onClick={(e) => this.uncommitButton(e, this.props.auth.id, this.props.gig.id)}>Uncommit</button></div>)
+            return (<div><button className="btn btn-warning my-2 my-sm-0" onClick={(e) => this.uncommitButton(e, this.props.info.id, this.props.gig.id)}>Uncommit</button></div>)
         }
     }
     
@@ -84,11 +84,12 @@ class UpcomingGig extends React.Component {
     } 
 }
 
-function mapStateToProps({ auth, attendance, users }){
+function mapStateToProps({ auth, attendance, users, info }){
     return { 
       attendance: attendance,
       auth: auth,
-      users: users
+      users: users,
+      info: info
     }
   }
 
