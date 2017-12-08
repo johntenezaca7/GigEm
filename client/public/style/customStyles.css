@@ -222,3 +222,29 @@
 .band-dashboard{
 	padding: 2cm 9cm 2cm 5cm;
 }
+
+/* 
+INSERT INTO Showcases SET 
+	name = "Smashing Pumkins",
+	 description ="The Smashing Pumpkins are an American alternative rock band from Chicago, Illinois, formed in 1988. Formed by frontman Billy Corgan and James Iha, the band included D'arcy Wretzky and Jimmy Chamberlin in its original incarnation. ",
+	photo ="", 
+	startDate= 'Jan 14, 2018 ', 
+	startTime = '7:00 PM', 
+	endDate = '', 
+	finalCommitDate = 'Dec 25, 2017', 
+	age= 21, 
+	city='Brooklyn', 
+	state='NY', zip = 12249, 
+	isCommitted = 0,
+	price=15, 
+	minCommits = 50,
+	commits = 60, 
+
+
+	INSERT INTO Venues SET
+	 name  = "TBA Brooklyn",    
+	description ="Atmospheric nightclub & coffeehouse in a former garage featuring music, drinks & various events.",
+	city  = "Brooklyn",      
+	state = "NY",     
+	zip = 11249,      
+	location = "395 Wythe Ave, Brooklyn, NY 11249"; */
