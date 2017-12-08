@@ -36,7 +36,7 @@ import BandPitch from './BandPitch';
 
     render() {
 
-      console.log('DASH PROPS:', this.props);
+      // console.log('DASH PROPS:', this.props);
     return (
         <Router>
             <div className="band-dashboard">
