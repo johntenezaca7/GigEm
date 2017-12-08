@@ -26,16 +26,13 @@ export const fetchVenues = () => async dispatch => {
 }
 
 export const fetchMyEvents = () => async dispatch => {
-// console.log('fetching events');
     // eslint-disable-next-line
     const res = await axios.get('/api/myEvents')
     // eslint-disable-next-line
-  
     dispatch({ type: types.FETCH_EVENTS, payload: res.data })
 }
 
 export const commitToEvent = (user, gig) => async dispatch => {
-    // console.log('attempting to commit to event: ', user, 'with user id: ', gig);
     const res = await axios.post('/api/commit', {'user': user, 'gig': gig} );
     dispatch({ type: types.COMMIT_TO_EVENT, payload: res.data })
 }
@@ -61,8 +58,6 @@ export const addNewVenue = (event) => async dispatch => {
 }
 
 export const checkAttendance = (user, gig) => async dispatch => {
-    // console.log(`action checkAttendance: user: ${user}, gig: ${gig}`);
-    // console.log('attempting to check attendance form actions');  // adding this fixed something. :/
     const res = await axios.post('/api/commitCheck', {'user': user})
     dispatch({ type: types.CHECK_ATTENDANCE, payload: res.data })
 }
