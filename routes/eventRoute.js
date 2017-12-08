@@ -41,7 +41,9 @@ module.exports = (app, db) => {
     
     .then(dbDef.Attendance.findAll()
     .then((attendance) => {
-      let returnValue = attendance.reduce((memo, item) => {
+      let returnValue = attendance
+      .filter((x) => x.UserId === req.user)
+      .reduce((memo, item) => {
         memo.push(item.ShowcaseId)
         return memo;
       }, []);
@@ -68,7 +70,9 @@ module.exports = (app, db) => {
     .then((attendanceItem) => { if (attendanceItem) attendanceItem.destroy() } ) 
     .then(dbDef.Attendance.findAll()
     .then((attendance) => {
-      let returnValue = attendance.reduce((memo, item) => {
+      let returnValue = attendance
+      .filter((x) => x.UserId === req.user)
+      .reduce((memo, item) => {
         memo.push(item.ShowcaseId)
         return memo;
       }, []);
@@ -91,7 +95,9 @@ module.exports = (app, db) => {
     // console.log(req.body);
     dbDef.Attendance.findAll()
     .then((attendance) => {
-      let returnValue = attendance.reduce((memo, item) => {
+      let returnValue = attendance
+      .filter((x) => x.UserId === req.user)
+      .reduce((memo, item) => {
         memo.push(item.ShowcaseId)
         return memo;
       }, []);
