@@ -1,13 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, Fields } from 'redux-form';
 // import ProgressComponent from './ProgressComponent';
 import Datetime from 'react-datetime';
+import DateRangePickerWrapper from './DateRangePickerWrapper';
 
 import * as actions from '../../actions'
 import { networkInterfaces } from 'os';
 
 let BandPitch = props => {
+
+const renderDates = fields => (    
+  <DateRangePickerWrapper
+  startDateFieldName="start"
+  endDateFieldName="end"
+  {...fields}
+/>
+);
+// const formatDates = (value, name) => {
+// return moment(value);
+// };
+// const normalizeDates = (name, value) => {
+// return value.format();
+// };
+
               
   console.log('props', props)
   return (
@@ -16,6 +32,17 @@ let BandPitch = props => {
         <div className="row">
           <div className="col-sm">
             <form  onSubmit={props.handleSubmit} >
+            <div>
+                <label>Start Date</label>
+                  <div className="col">
+                    <Fields
+                      names={['start', 'end']}
+                      component={renderDates}
+                      // normalize={normalizeDates}
+                      // format={formatDates}
+                    />  
+                  </div>
+              </div>
               <div>
                 <label>Event Name</label>
                   <Field
@@ -58,12 +85,8 @@ let BandPitch = props => {
                     placeholder="My Garage "
                   />
               </div>
-              <div>
-                <label>Start Date</label>
-                  <div className="col">
-                    <Datetime />
-                  </div>
-              </div>
+                  <Datetime />
+
               <div>
                 <label>City</label>
                   <Field
