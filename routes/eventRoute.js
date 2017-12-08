@@ -89,15 +89,13 @@ module.exports = (app, db) => {
     // console.log('eventRoute.js: attempting to check if user has committed to event');
     // console.log('eventRoute.js req.body:')
     // console.log(req.body);
-    
     dbDef.Attendance.findAll()
     .then((attendance) => {
-      // let returnValue = attendance.reduce((memo, item) => {
-      //   memo.push(item.ShowcaseId)
-      //   return memo;
-      // }, []);
-      // attendance ? res.send(returnValue) : res.send(returnValue)
-      attendance ? res.send(attendance) : res.send('err: no attendance items found.');
+      let returnValue = attendance.reduce((memo, item) => {
+        memo.push(item.ShowcaseId)
+        return memo;
+      }, []);
+      attendance ? res.send(returnValue) : res.send(returnValue)
     })
   })
 
