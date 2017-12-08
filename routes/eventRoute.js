@@ -123,10 +123,17 @@ module.exports = (app, db) => {
       name: req.body.info.eventName,
       description: req.body.info.eventDescription,
       photo: req.body.info.photo,
+<<<<<<< HEAD
       startDate: req.body.info.start,
       endDate: req.body.info.end,
       startTime: req.body.info.startTime,
       finalCommitDate: req.body.info.end,
+=======
+      startDate: req.body.info.startDate,
+      endDate: req.body.info.endDate,
+      startTime: req.body.info.startTime,
+      finalCommitDate: req.body.info.finalCommitDate,
+>>>>>>> 44a6b3572bc1338385acc1661e4a2df448a19522
       city: req.body.info.city,
       state: req.body.info.state,
       zip: req.body.info.zip,
