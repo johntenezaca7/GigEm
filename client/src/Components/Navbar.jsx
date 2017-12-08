@@ -108,6 +108,8 @@ class Navbar extends React.Component {
                   <a className="nav-link">
                 
                   <h2>{this.props.info.name ? `Welcome, ${this.props.info.name}` : 'Anonymous User'}</h2>
+
+                  <h1>{this.props.info.name ? this.props.info.name : 'Anonymous User'}</h1>
                   <span className="sr-only">(current)</span>
                   </a>
                 </li>
@@ -117,8 +119,7 @@ class Navbar extends React.Component {
                   <tr>
                   <td>
                     <Link to="/user">
-                      <button className="btn btn-info my-2 my-sm-0 m-3" type="submit">Dashboard</button>
-                    </Link> 
+
                     <Link to="/userprofile">
                       <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">My Profile</button>
                     </Link>

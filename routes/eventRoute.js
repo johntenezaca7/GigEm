@@ -92,11 +92,12 @@ module.exports = (app, db) => {
     
     dbDef.Attendance.findAll()
     .then((attendance) => {
-      let returnValue = attendance.reduce((memo, item) => {
-        memo.push(item.ShowcaseId)
-        return memo;
-      }, []);
-      attendance ? res.send(returnValue) : res.send(returnValue)
+      // let returnValue = attendance.reduce((memo, item) => {
+      //   memo.push(item.ShowcaseId)
+      //   return memo;
+      // }, []);
+      // attendance ? res.send(returnValue) : res.send(returnValue)
+      attendance ? res.send(attendance) : res.send('err: no attendance items found.');
     })
   })
 
