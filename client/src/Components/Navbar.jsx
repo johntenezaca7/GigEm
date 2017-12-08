@@ -119,9 +119,9 @@ class Navbar extends React.Component {
                   <tr>
                   <td>
                     <Link to="/user">
+
                     <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">Dashboard</button>
                     </Link>
-
                     <Link to="/userprofile">
                       <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">My Profile</button>
                     </Link>
