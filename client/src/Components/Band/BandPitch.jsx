@@ -1,9 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
+<<<<<<< 19d95d59a11dbeabe252b2732b8b8971e9297bc3
 import { Field, reduxForm, Fields } from 'redux-form';
 // import ProgressComponent from './ProgressComponent';
 import Datetime from 'react-datetime';
 import DateRangePickerWrapper from './DateRangePickerWrapper';
+=======
+import { Field, reduxForm } from 'redux-form';
+// import ProgressComponent from './ProgressComponent';
+import Datetime from 'react-datetime';
+>>>>>>> uncomments in bandpitch
 
 import * as actions from '../../actions'
 import { networkInterfaces } from 'os';
