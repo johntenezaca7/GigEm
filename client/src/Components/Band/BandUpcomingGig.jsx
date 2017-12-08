@@ -10,11 +10,11 @@ class UpcomingGig extends React.Component {
     }
     
     renderIndividualUpcomingGig(gig) {
-      console.log(gig);
+      console.log('gig to render: ', gig);
         return (                
         <div className="row" key={gig.id}>
         <div className="col align-self-start">
-          Clark<br />
+          gig.UserId<br />
           Fully Commited 🎉
         </div>
         <div className="col-lg-8 justify-content-md-center">
@@ -58,11 +58,13 @@ class UpcomingGig extends React.Component {
     }
 
     render() {
-        // console.log('bandupcominggig props: ', this.props);
+        console.log('bandupcominggig props: ', this.props);
+        console.log('current user id: ', this.props.info.id);
         if (this.props.events) {
           return (
               <div className="container">
-                {this.props.events.filter((x) => (x.UserId === 125 /* this.id && x.isCommitted === true */ ))
+                {this.props.events    //.filter((x) => (x.UserId === this.props.info.id /* this.id && x.isCommitted === true */ ))
+                // .forEach((x) => console.log(x))
                 .map((x) => this.renderIndividualUpcomingGig(x))
                 }    
               </div>
