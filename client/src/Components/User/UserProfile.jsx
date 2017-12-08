@@ -29,6 +29,8 @@ class UserProfile extends React.Component {
 
     render() {
       console.log('userProfile props: ', this.props);
+      let userAttendance = this.props.attendance.length > 0 ? this.props.attendance.map(x => x = x.ShowcaseId) : [];
+      console.log(userAttendance);
       if(this.props.info){
         return (
           <div>
@@ -103,16 +105,16 @@ class UserProfile extends React.Component {
                         <h3>Upcoming Shows</h3>
                           {this.props.events
                             .filter((x) => x.isCommitted === true)
-                            .filter((x) => this.props.attendance.includes(x.id))
-                            .map((x) => <GigText user={this.props.info.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
+                            .filter((x) => userAttendance.includes(x.id))
+                            .map((x) => <GigText user={this.props.info.id} key={x.id} gig={x} usercommitted={userAttendance.includes(x.id)}/>)
                           }
                      
                           <br />
                         <h3>Potential Gigs</h3>
                         {this.props.events
                           .filter((x) => x.isCommitted === false)
-                          .filter((x) => this.props.attendance.includes(x.id))
-                          .map((x) => <GigText user={this.props.info.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
+                          .filter((x) => userAttendance.includes(x.id))
+                          .map((x) => <GigText user={this.props.info.id} key={x.id} gig={x} usercommitted={userAttendance.includes(x.id)}/>)
                         }
                      
                       </div>
