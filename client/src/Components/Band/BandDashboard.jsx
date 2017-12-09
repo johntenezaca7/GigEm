@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import moment from 'moment'
+import moment from 'moment';
+import { SubmissionError } from 'redux-form';
 
 
 
@@ -33,14 +34,22 @@ import BandPitch from './BandPitch';
     handleSubmit(event) {
       // event.preventDefault()
       event.UserId = this.props.bandInfo.id;
-      event.finalCommitDate = this.state.finalCommitDate;      
+      event.finalCommitDate = this.state.finalCommitDate; 
       console.log("SUBMITTED", event );
-      this.props.addNewVenue(event)
-      .then(() => {
-        console.log("PROMISED EVENT", event);
-        event.VenueId = this.props.venueInfo.id;
-        this.props.addNewEvent(event);
-      })
+      
+      if (!event.eventName) {
+        throw new SubmissionError({ eventName: <b>YOUR EVENT NEEDS A NAME</b>, _error: 'Submission failed!' })   
+      } else if (!event.start) {
+        throw new SubmissionError({ start: <b>YOUR EVENT NEEDS A START DATE</b>, _error: 'Submission failed!' })   
+      }  else if (!event.minCommits) {
+        throw new SubmissionError({ minCommits: <b>YOUR EVENT NEEDS A MIN ATTENDANCE</b>, _error: 'Submission failed!' })   
+      }      
+      // this.props.addNewVenue(event)
+      // .then(() => {
+      //   console.log("PROMISED EVENT", event);
+      //   event.VenueId = this.props.venueInfo.id;
+      //   this.props.addNewEvent(event);
+      // })
     };
 
     dateGrab(date) {
