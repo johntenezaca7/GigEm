@@ -13,7 +13,7 @@ class PotentialGig extends React.Component {
             commits: this.props.gig.commits,
             usercommitted: this.props.usercommitted
         }
-        this.props.init();
+        // this.props.init();
     }
 
     renderButton() {
