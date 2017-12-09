@@ -237,7 +237,7 @@ INSERT INTO Showcases SET
 	age= 21, 
 	city='Brooklyn', 
 	state='NY', zip = 12249, 
-	isCommitted = 0,
+	isCommitted = 1,
 	price=15, 
 	minCommits = 50,
 	commits = 60, 

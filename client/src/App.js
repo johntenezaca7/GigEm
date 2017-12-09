@@ -47,7 +47,7 @@ class App extends Component {
           <Route exact path="/" render={() => <div><LandingPage /></div>} />
 
           <Route exact path="/user" render={() => <div><Navbar /><UserDashboard /></div>} />
-          <Route exact path="/userprofile" render={() => <div><Navbar /><UserProfile /></div>} />
+          <Route exact path="/userprofile" render={() => <div><Navbar /> <UserProfile /> </div>} />
           <Route path="/showdetails/:showId" component={ShowDescription} />
           <Route path="/bandprofile/:bandId" component={BandProfile} />
 
@@ -63,4 +63,13 @@ class App extends Component {
   }
 }
 
-export default connect(null, actions)(App);
+function mapStateToProps({ auth, info, users }){
+  return { 
+    auth: auth,
+    info: info,
+    users: users
+    //userInfo: 'info'
+  }
+}
+
+export default connect(mapStateToProps, actions)(App);
