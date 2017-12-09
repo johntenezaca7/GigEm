@@ -50,17 +50,9 @@ class UserProfile extends React.Component {
       .filter((x) => x.UserId === this.props.info.id) 
       .map((x) => x = x.ShowcaseId) : [];
       
-      
-      console.log('userAttendance: ', userAttendance);
-      console.log('events: ', this.props.events)
       if(this.props.info){
         return (
           <div>
-            <div className="alert alert-primary text-center" role="alert">
-              <div>
-                Edit your profile by clicking on the text fields!
-              </div>
-            </div>
                 <div className="userProfile-wrapper"> 
                   <div className="user-side-bar nested">
                       <div>
@@ -151,13 +143,6 @@ class UserProfile extends React.Component {
                       
                 
               </div>
-
-              <div className="alert alert-warning text-center" role="alert">
-              <div>
-                        {this.renderChangeButton()}
-              </div>
-              </div>
-
             </div>
         )
       } else {

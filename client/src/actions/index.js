@@ -97,3 +97,4 @@ export const fetchAllUsers = () => async dispatch => {
     dispatch({ type: types.FETCH_ALL_USERS, payload: res.data })
 }
 
+

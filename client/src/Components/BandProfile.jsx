@@ -69,13 +69,7 @@ class BandProfile extends React.Component {
 
                         </div>
                   </div>
-                  <div className="alert alert-warning text-center" role="alert">
-              <div>
-              <button className="btn btn-success my-2 my-sm-0" onClick={(e) => this.props.editUserProfile({'isBand': false})}>
-                Change User Type to Band
-              </button>
-              </div>
-              </div>
+                
             </div>
         )
       } else {
