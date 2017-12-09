@@ -28,7 +28,7 @@ class BandProfile extends React.Component {
                     <div className="bandContent-wrapper ">
                         <div>
                           <h4>Band Profile - {selectedUser.name}</h4>
-                            <img src="../Assets/bandLogo.svg" width="200px" height="200px" alt="Bandname"/><br />
+                            <img src="../Assets/bandLogo.svg" className="grid-image" alt="Bandname"/><br />
                             <div>
                             {`${selectedUser.city}, ${selectedUser.state}`}
                             </div>
@@ -57,12 +57,12 @@ class BandProfile extends React.Component {
                             </div>
                           <div className="band-media">
                               <h3>Video Placeholder</h3>
-                              <div className="side-scrolling border border-dark m-2 text-center">
-                                <img src="../Assets/videoPlayer.svg" align="center" width="200px" height="200px" alt="videoplayer" />
+                              <div className="side-scrolling border border-dark text-center">
+                                <img src="../Assets/videoPlayer.svg" className="grid-image" alt="videoplayer" />
                             
-                                <img src="../Assets/videoPlayer.svg" align="center" width="200px" height="200px" alt="videoplayer" />
+                                <img src="../Assets/videoPlayer.svg" className="grid-image" alt="videoplayer" />
           
-                                <img src="../Assets/videoPlayer.svg" align="center" width="200px" height="200px" alt="videoplayer" />
+                                <img src="../Assets/videoPlayer.svg" className="grid-image" alt="videoplayer" />
                               </div>
                           </div>
                           

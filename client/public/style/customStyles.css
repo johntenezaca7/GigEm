@@ -101,19 +101,35 @@
 	grid-auto-rows: minmax(100, auto);
 	justify-items: stretch;
 	align-items: stretch;
-	margin: 20px
+	margin: 10px
 
 }
+
 .bandContent-wrapper {
 	display: grid;
 	grid-template-columns: 25% 55%  30%;
-	grid-gap: 4em;
+	grid-gap: 1em;
 	grid-auto-rows: minmax(100, auto);
 	justify-items: stretch;
 	align-items: stretch;
-	padding: 1cm 2cm 4cm 1cm;
+	/* padding: 1cm 2cm 4cm 1cm; */
 
 }
+
+.band-media {
+	display: grid;
+	/* grid-template-columns: 25% 55%  30%; */
+	/* grid-gap: 4em; */
+	grid-auto-rows: minmax(100, auto);
+	justify-items: stretch;
+	align-items: stretch;
+	/* padding: 1cm 2cm 4cm 1cm; */
+	background: rgb(255, 237, 222);
+	/* padding:1em; */
+	border-radius: 15px 50px 30px;
+}
+
+
 .bandContent-wrapper > div {
 	background: rgb(255, 237, 222);
 	padding:1em;
@@ -124,6 +140,14 @@
 	width: auto;
     height: 300px;
     overflow: scroll;
+}
+
+.grid-image {
+  flex: 0 auto;
+	/* margin: 0 auto; */
+	align-items: stretch;
+  padding: 5px 5px 5px 5px;
+  width: 100%;
 }
 
 .upComing-Po-Gigs {
@@ -142,7 +166,7 @@
 
 .side-scrolling{
 	width: auto;
-	height: 300px;
+	height: auto;
 	overflow-y: scroll;
 	overflow-x: hidden;
 }
@@ -152,6 +176,7 @@
 	padding:1em;
 	border-radius: 15px 50px 30px;
 }
+
 .userProfile-wrapper >div:nth-child(odd){
 	background: rgb(246, 246, 246);
 	padding:1em;
@@ -167,9 +192,8 @@
 .up-comingShows {
 	align-self: start;
 }
-.band-media {
-	align-self: start;
-}
+
+
 .nested > div {
 	/* background: #eee; */
 	/* background: rgb(255, 252, 252); */
