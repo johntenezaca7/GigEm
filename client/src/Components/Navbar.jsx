@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 
 import { connect } from 'react-redux';
-import {  fetchUser, fetchUserProfile, fetchEvents, fetchAllUsers, checkAttendance,   editUserProfile } from '../actions/index';
+import {  fetchUserProfile, fetchEvents, fetchAllUsers, editUserProfile } from '../actions/index';
 
 
 

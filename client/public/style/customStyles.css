@@ -123,7 +123,7 @@
 	grid-auto-rows: minmax(100, auto);
 	justify-items: stretch;
 	align-items: stretch;
-	/* padding: 1cm 2cm 4cm 1cm; */
+	/* padding: 1cm 2cm 1cm 1cm; */
 	background: rgb(255, 237, 222);
 	/* padding:1em; */
 	border-radius: 15px 50px 30px;

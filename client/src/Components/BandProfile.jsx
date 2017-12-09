@@ -1,7 +1,8 @@
 import React from 'react';
 
 import Navbar from './Navbar'
-import GigText from './User/GigText'
+import PotentialGig from './User/PotentialGig'
+import UpcomingGig from './User/UpcomingGig'
 
 import { connect } from 'react-redux';
 import { fetchEvents, fetchAllUsers, editUserProfile, fetchUserProfile } from '../actions/index';
@@ -42,16 +43,14 @@ class BandProfile extends React.Component {
                               <div className="band-show-scroll border border-dark m-2">
                                 {this.props.events
                                   .filter((x) => x.isCommitted === true)
-                                  .map((x) => <GigText user={selectedUser.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
+                                  .map((x) => <UpcomingGig user={selectedUser.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
                                 }
                               </div>
-                              <br/>
-                              <br/>
                             <h3>Potential Gigs</h3>
                             <div className="band-show-scroll border border-dark m-2">
                                 {this.props.events
                                   .filter((x) => x.isCommitted === false)
-                                  .map((x) => <GigText user={selectedUser.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
+                                  .map((x) => <PotentialGig user={selectedUser.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
                                 }
                               </div>
                             </div>

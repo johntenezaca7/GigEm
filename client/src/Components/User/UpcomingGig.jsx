@@ -50,34 +50,37 @@ class UpcomingGig extends React.Component {
         // console.log('Upcoming Gig this.props: ', this.props);
         if (this.props.users.length > 0) {
             return (
-                <div className="container border p-3" key={this.props.gig.id}>
-                    <div className="row">
-                        <div className="col-2 align-self-start">
-                        <div>
-                        <Link to={`/bandprofile/${this.props.gig.id}`}>
+                <div className="container border p-3 m-1 small" key={this.props.gig.id}>
+                    <div className="potential-gig-wrapper">
+                        <div className="potential-gig-band-name">
+                          <Link to={`/bandprofile/${this.props.gig.id}`}>
                             <h3>{this.props.users.filter((x) => x.id = this.props.gig.id)[0].name}</h3>
-                        </Link>
+                          </Link>
                         </div>
-                        <Link to={`/showdetails/${this.props.gig.id}`}>
-                        {this.props.gig.name}<br />
-                        </Link>
-                        {this.props.gig.city}<br />
-                        Fully Commited 🎉
+                        <div className="potential-gig-event-name">
+                          <Link to={`/showdetails/${this.props.gig.id}`}>
+                            {this.props.gig.name}<br />
+                          </Link>
                         </div>
-                        <div className="col-lg-5 justify-content-md-center">
-                        <ProgressComponent percent={100} />
+
+                        <div className="potential-gig-daterange">
+                          {/* {this.props.gig.final_commit_date}<br /> */}
+                          {/* {this.props.gig.venue_id}<br /> */}
+                          Venue Placeholder<br />
+                          Doors @ {this.props.gig.start_time}
                         </div>
-                        <div className="col col-md-auto" align="right">
-                        {/* {this.props.gig.final_commit_date}<br /> */}
-                        {/* {this.props.gig.venue_id}<br /> */}
-                        Venue Placeholder<br />
-                        Doors @ {this.props.gig.start_time}
+                        <div className="text-success potential-gig-commit-number">
+                          {this.props.gig.city}<br />
+                            Fully Commited 🎉
                         </div>
-                        <div className="col col-md-auto align-self-right content-align-right">
+                        <div className="potential-gig-progress-bar">
+                          <ProgressComponent percent={100} />
+                        </div>
+                        <div className="potential-gig-commit-button">
                             {this.renderButton()}
                         </div>
                         </div>
-                    </div>)
+              </div>)
         } else {
             return(<div></div>)
         }
