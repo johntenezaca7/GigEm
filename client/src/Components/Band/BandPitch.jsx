@@ -11,22 +11,28 @@ import { networkInterfaces } from 'os';
 
 let BandPitch = props => {
 
-const renderDates = fields => (    
+const renderDates = fields => {
+  console.log("DATESSSS ARGS: ",fields);
+  return  (    
   <DateRangePickerWrapper
   startDateFieldName="start"
   endDateFieldName="end"
   {...fields}
 />
-);
+)};
+const renderDate = ({ input, label, type, meta }) => {
 
-const renderDate = ({ input, label, type, meta }) => (
+  console.log("renderDate args: ", arguments)
+// const renderDate = fields => (
+  return (
   <SingleDatePicker
+  //{...fields}
     date={input.value}
     focused={meta.active}
     onDateChange={value => input.onChange({ value })}
     onFocusChange={({ focused }) => input.onFocus({ focused })}
   />
-);
+)};
 // const formatDates = (value, name) => {
 // return moment(value);
 // };
