@@ -44,12 +44,12 @@ import BandPitch from './BandPitch';
       }  else if (!event.minCommits) {
         throw new SubmissionError({ minCommits: <b>YOUR EVENT NEEDS A MIN ATTENDANCE</b>, _error: 'Submission failed!' })   
       }      
-      // this.props.addNewVenue(event)
-      // .then(() => {
-      //   console.log("PROMISED EVENT", event);
-      //   event.VenueId = this.props.venueInfo.id;
-      //   this.props.addNewEvent(event);
-      // })
+      this.props.addNewVenue(event)
+      .then(() => {
+        console.log("PROMISED EVENT", event);
+        event.VenueId = this.props.venueInfo.id;
+        this.props.addNewEvent(event);
+      })
     };
 
     dateGrab(date) {
