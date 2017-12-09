@@ -50,7 +50,16 @@ const renderDate = ({ input, label, type, meta }) => {
         <div className="row">
           <div className="col-sm">
             <form  onSubmit={props.handleSubmit} >
-            <div>
+            <div className="col">
+                <label>Event Name</label>
+                  <Field
+                    name="eventName"
+                    component="input"
+                    type="text"
+                    placeholder="D-lon Musk "
+                  />
+              </div>
+              <div>
                 <label>Start Date ....and...End Date</label>
                   <div className="col">
                     <Fields
@@ -62,28 +71,8 @@ const renderDate = ({ input, label, type, meta }) => {
                   </div>
               </div>
               <div>
-              <label>Last Day to Finalize Show</label>
-              <div className="col">
-                <Field
-                  name="finaldate"
-                  component={renderDate}
-                  // normalize={normalizeDate}
-                  // format={formatDate}
-                />
-              </div>
-              </div>
               <div>
-                <label>Event Name</label>
-                  <Field
-                    name="eventName"
-                    component="input"
-                    type="text"
-                    placeholder="D-lon Musk "
-                  />
-              </div>
-              <div>
-              <div>
-                <label>Description</label>
+                <label>Event Description</label>
                   <Field
                     name="eventDescription"
                     component="textarea"
@@ -115,11 +104,25 @@ const renderDate = ({ input, label, type, meta }) => {
                   />
               </div>
               <div>
-                <label>Start Date</label>
-                  <div className="col">
-                    <Datetime />
-                  </div>
+              <label>Show Starts</label>
+                  <Field
+                    name="startTime"
+                    component="input"
+                    type="text"
+                    placeholder="8:00 PM"
+                  />
               </div>
+              <div>
+              <label>Last Day to Finalize Show</label>
+              <div className="col">
+                <Field
+                  name="finaldate"
+                  component={renderDate}
+                  // normalize={normalizeDate}
+                  // format={formatDate}
+                />
+              </div>
+              </div >
               <div>
                 <label>City</label>
                   <Field

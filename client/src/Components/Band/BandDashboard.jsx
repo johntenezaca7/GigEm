@@ -45,7 +45,7 @@ import BandPitch from './BandPitch';
 
     dateGrab(date) {
       date = date.format();
-      console.log('GRABBBBINNNGGG ', date);
+      // console.log('GRABBBBINNNGGG ', date);
       this.setState({
         finalCommitDate: date
       })
