@@ -208,7 +208,7 @@ let Showcase = connection.define('Showcase', {
   },
   minCommits: {
     type: Sequelize.INTEGER,
-    defaultValue: 0
+    defaultValue: 1
   },
   commits: {
     type: Sequelize.INTEGER,
