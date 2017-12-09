@@ -31,7 +31,7 @@ class DateRangePickerWrapper extends React.Component {
   }
 
   render() {
-      console.log("DATE RANGE PROPS: ", this.props);
+      // console.log("DATE RANGE PROPS: ", this.props);
     const startDate = this.props[this.props.startDateFieldName].input.value || null;
     const endDate = this.props[this.props.endDateFieldName].input.value || null;
 
