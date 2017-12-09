@@ -2,6 +2,7 @@ import React from 'react';
 //import { connect } from 'react-redux';
 import { Field, reduxForm, Fields } from 'redux-form';
 // import ProgressComponent from './ProgressComponent';
+import moment from 'moment'
 import Datetime from 'react-datetime';
 import DateRangePickerWrapper from './DateRangePickerWrapper';
 import SingleDatePicker from './SingleDatePicker';
@@ -11,23 +12,30 @@ import SingleDatePicker from './SingleDatePicker';
 
 let BandPitch = props => {
 
-const renderDates = fields => (    
+const renderDates = fields => {
+  console.log("DATESSSS ARGS: ",fields);
+  return  (    
   <DateRangePickerWrapper
   startDateFieldName="start"
   endDateFieldName="end"
   {...fields}
 />
-);
+)};
+const renderDate = ({ input, label, type, meta }) => {
 
-const renderDate = ({ input, label, type, meta }) => (
+  console.log("renderDate args: ", arguments)
+// const renderDate = fields => (
+  return (
   <SingleDatePicker
+  //{...fields}
     date={input.value}
     focused={meta.active}
     onDateChange={value => input.onChange({ value })}
     onFocusChange={({ focused }) => input.onFocus({ focused })}
+    dateGrab={props.dateGrab}
   />
-);
-// const formatDates = (value, name) => {
+)};
+// const formatDate = (value, name) => {
 // return moment(value);
 // };
 // const normalizeDates = (name, value) => {
@@ -42,7 +50,16 @@ const renderDate = ({ input, label, type, meta }) => (
         <div className="row">
           <div className="col-sm">
             <form  onSubmit={props.handleSubmit} >
-            <div>
+            <div className="col">
+                <label>Event Name</label>
+                  <Field
+                    name="eventName"
+                    component="input"
+                    type="text"
+                    placeholder="D-lon Musk "
+                  />
+              </div>
+              <div>
                 <label>Start Date ....and...End Date</label>
                   <div className="col">
                     <Fields
@@ -54,28 +71,8 @@ const renderDate = ({ input, label, type, meta }) => (
                   </div>
               </div>
               <div>
-              <label>Last Day to Finalize Show</label>
-              <div className="col">
-                <Field
-                  name="final"
-                  component={renderDate}
-                  // normalize={normalizeDate}
-                  // format={formatDate}
-                />
-              </div>
-              </div>
               <div>
-                <label>Event Name</label>
-                  <Field
-                    name="eventName"
-                    component="input"
-                    type="text"
-                    placeholder="D-lon Musk "
-                  />
-              </div>
-              <div>
-              <div>
-                <label>Description</label>
+                <label>Event Description</label>
                   <Field
                     name="eventDescription"
                     component="textarea"
@@ -107,11 +104,25 @@ const renderDate = ({ input, label, type, meta }) => (
                   />
               </div>
               <div>
-                <label>Start Date</label>
-                  <div className="col">
-                    <Datetime />
-                  </div>
+              <label>Show Starts</label>
+                  <Field
+                    name="startTime"
+                    component="input"
+                    type="text"
+                    placeholder="8:00 PM"
+                  />
               </div>
+              <div>
+              <label>Last Day to Finalize Show</label>
+              <div className="col">
+                <Field
+                  name="finaldate"
+                  component={renderDate}
+                  // normalize={normalizeDate}
+                  // format={formatDate}
+                />
+              </div>
+              </div >
               <div>
                 <label>City</label>
                   <Field

@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
+import moment from 'moment'
+
 
 
 import {
@@ -20,14 +22,18 @@ import BandPitch from './BandPitch';
  class BandDashboard extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+          finalCommitDate: ''
+        };
         
-        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.dateGrab = this.dateGrab.bind(this);
     }
 
     handleSubmit(event) {
       // event.preventDefault()
-      event.UserId = this.props.bandInfo.id;      
+      event.UserId = this.props.bandInfo.id;
+      event.finalCommitDate = this.state.finalCommitDate;      
       console.log("SUBMITTED", event );
       this.props.addNewVenue(event)
       .then(() => {
@@ -35,12 +41,15 @@ import BandPitch from './BandPitch';
         event.VenueId = this.props.venueInfo.id;
         this.props.addNewEvent(event);
       })
-      
-        // this.props.addNewEvent(event)
-          
-      // this.props.addNewEvent(this.values.eventName);
-
     };
+
+    dateGrab(date) {
+      date = date.format();
+      // console.log('GRABBBBINNNGGG ', date);
+      this.setState({
+        finalCommitDate: date
+      })
+    }
 
     render() {
 
@@ -85,7 +94,9 @@ import BandPitch from './BandPitch';
                   <div className="text-center">
                       <h1 className="display-4">Pitch a Gig</h1>
                     </div>
-                  <BandPitch user={this.props.user} onSubmit={this.handleSubmit}/></div>} />
+                  <BandPitch user={this.props.user} 
+                  onSubmit={this.handleSubmit}
+                  dateGrab={this.dateGrab}/></div>} />
             </div>
         </Router>
     )}
