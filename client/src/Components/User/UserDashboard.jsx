@@ -62,18 +62,19 @@ class UserDashboard extends React.Component {
                       }
                   </div>
                 </div>
-            </div>
-        </div>
+              </div>
+           </div>
         </div>
       )
     }
 }
 
-function mapStateToProps({ events, auth, attendance }){
+function mapStateToProps({ events, auth, attendance, info }){
   return { 
     attendance: attendance,
     events: events,
-    auth: auth
+    auth: auth,
+    info: info
   }
 }
 
