@@ -20,9 +20,9 @@ class PotentialGig extends React.Component {
         // console.log('PotentialGig.jsx this.props in renderButton() method')
         // console.log(this.props); 
         if (!this.state.usercommitted) {
-            return (<div><button className="btn btn-info my-2 my-sm-0" onClick={(e) => this.commitButton(e, this.props.info.id, this.props.gig.id)}>Commit</button></div>)
+            return (<div><button className="btn btn-primary btn-sm" onClick={(e) => this.commitButton(e, this.props.info.id, this.props.gig.id)}>Commit</button></div>)
         } else if (this.state.usercommitted) {
-            return (<div><button className="btn btn-warning my-2 my-sm-0" onClick={(e) => this.uncommitButton(e, this.props.info.id, this.props.gig.id)}>Uncommit</button></div>)
+            return (<div><button className="btn btn-warning btn-sm" onClick={(e) => this.uncommitButton(e, this.props.info.id, this.props.gig.id)}>Uncommit</button></div>)
         }
     }
 
@@ -43,27 +43,31 @@ class PotentialGig extends React.Component {
                 if (this.props.users.length > 0) {
             let percent = ((this.state.commits / this.props.gig.min_commits)*100);
             return (
-                <div className="container border p-3 ">
-                    <div className="row">
-                        <div className="col-2 align-self-start">
-                        <Link to={`/bandprofile/${this.props.gig.id}`}>
+                <div className="container border p-3 m-1 small">
+                    <div className="potential-gig-wrapper">
+                        <div className="potential-gig-band-name">
+                            <Link to={`/bandprofile/${this.props.gig.id}`}>
                                 <h3>{this.props.users.filter((x) => x.id = this.props.gig.id)[0].name}</h3>
                             </Link>
-                        <Link to={`/showdetails/${this.props.gig.id}`}>
-                        {this.props.gig.name}<br />
-                    </Link><br />
-                        <div className="text-success">{this.state.commits} of {this.props.gig.min_commits} commits!</div>
                         </div>
-                        <div className="col-lg-5 justify-content-md-center">
-                        <ProgressComponent percent={percent} />
+                        <div className="potential-gig-event-name">
+                            <Link to={`/showdetails/${this.props.gig.id}`}>
+                              {this.props.gig.name}<br />
+                            </Link><br />
                         </div>
-                        <div className="col col-md-auto" align="right">
-                            {this.props.gig.city}<br />
+                        <div className="potential-gig-daterange">
+                            {this.props.gig.city ? this.props.gig.city : 'No city specified.'}<br />
                             Daterange placeholder<br />
-                        {/* {this.props.gig.start_date} to<br />
-                        {this.props.gig.end_date} */}
+                            {/* {this.props.gig.start_date} to<br />
+                            {this.props.gig.end_date} */}
                         </div>
-                        <div className="col-1 col-md-auto align-self-right content-align-right">
+                        <div className="text-success potential-gig-commit-number"> 
+                          {this.state.commits} of {this.props.gig.min_commits} commits!
+                        </div>
+                        <div className="potential-gig-progress-bar">
+                          <ProgressComponent percent={percent} />
+                        </div>
+                        <div className="potential-gig-commit-button">
                             {this.renderButton()}
                         </div>
                     </div>

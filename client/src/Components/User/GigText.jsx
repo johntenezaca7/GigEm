@@ -54,12 +54,13 @@ class GigText extends React.Component {
         // console.log('potentialGig state: ', this.state);
         // let percent = ((this.state.commits / this.props.gig.min_commits)*100);
         return (
-            <div className="gig-text-wrapper">
+            <div className="container border p-3 m-1 small">
             
-                    <div className="col">
-                    <Link to={`/showdetails/${this.props.gig.id}`}>
-                      {this.props.gig.name}<br />
-                    </Link>
+                    <div className="potential-gig-wrapper">
+                    
+                        <Link to={`/showdetails/${this.props.gig.id}`}>
+                            {this.props.gig.name}<br />
+                        </Link>
                       <div className="text-success">{this.props.gig.commits} of {this.props.gig.min_commits} commits!</div>
                     </div>
                     <div className="col">
@@ -71,7 +72,7 @@ class GigText extends React.Component {
                     <div className="col text-right align-self-center">
                         {this.renderButton()}
                     </div>
-                    <div>
+                    <div className="col col-md-auto small">
                       Share this event!
                       <div className="social-media">
                          <FacebookIcon size={32} round={true} />

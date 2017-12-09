@@ -1,7 +1,7 @@
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import React from 'react';
-import { SingleDatePicker, START_DATE, END_DATE } from 'react-dates';
+import { SingleDatePicker, /*START_DATE, END_DATE */ } from 'react-dates';
 
 class SingleDatePickerWrapper extends React.Component {
     constructor(props) {
