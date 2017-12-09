@@ -17,7 +17,7 @@ class UpcomingGig extends React.Component {
         this.state = {
             usercommitted: this.props.usercommitted
         };
-        this.props.init();
+        // this.props.init();
     }
 
     renderButton() {

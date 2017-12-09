@@ -10,13 +10,23 @@ import { fetchEvents, fetchAllUsers, editUserProfile, fetchUserProfile } from '.
 class BandProfile extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+        };
+    
     }
 
     render() {
       console.log('bandprofile props: ', this.props);
-      let selectedUser = this.props.users.filter((x) => x.id === parseInt(this.props.match.params.bandId,10))[0];
+      console.log('matched url user: ', parseInt(this.props.match.params.bandId,10))
+      var selectedUser = this.props.users.filter((x) => x.id === parseInt(this.props.match.params.bandId,10))[0];
+      if (!selectedUser && !this.props.user) selectedUser = {id: -1}
+      let eventsCommitMap = this.props.events
+        .filter((x) => x.isCommitted === true && x.UserId === selectedUser.id)
+      let eventsPotentialMap = this.props.events
+        .filter((x) => x.isCommitted === false && x.UserId === selectedUser.id)
       console.log('selectedUser: ', selectedUser);
+      console.log('events potential map: ', eventsPotentialMap)
+
       if (selectedUser) {
         return (
             <div>
@@ -41,17 +51,15 @@ class BandProfile extends React.Component {
                          <div>
                             <h3>Upcoming Shows</h3>
                               <div className="band-show-scroll border border-dark m-2">
-                                {this.props.events
-                                  .filter((x) => x.isCommitted === true)
+                                { eventsCommitMap
                                   .map((x) => <UpcomingGig user={selectedUser.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
                                 }
                               </div>
                             <h3>Potential Gigs</h3>
                             <div className="band-show-scroll border border-dark m-2">
-                                {this.props.events
-                                  .filter((x) => x.isCommitted === false)
+                                { eventsPotentialMap
                                   .map((x) => <PotentialGig user={selectedUser.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
-                                }
+                                } */}
                               </div>
                             </div>
                           <div className="band-media">
