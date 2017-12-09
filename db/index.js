@@ -75,8 +75,8 @@ let User = connection.define('User', {
     defaultValue: ''
   },
   photo: {
-    type: Sequelize.STRING,
-    defaultValue: ''
+    type: Sequelize.BLOB,
+    defaultValue: null
   },
   status: {
     type: Sequelize.STRING,
@@ -163,8 +163,8 @@ let Showcase = connection.define('Showcase', {
     defaultValue: ''
   },
   photo: {
-    type: Sequelize.STRING,
-    defaultValue: ''
+    type: Sequelize.BLOB,
+    defaultValue: null
   },
   startDate: {
     type: Sequelize.DATE,
@@ -230,7 +230,6 @@ Showcase.belongsTo(User);
 //     city: "Dallas",
 //     state: "TX",
 //     isCommitted: false,
-//     photo: 'pic.jpeg',
 //     minCommits: 10,
 //     commits: 11
 //   });
