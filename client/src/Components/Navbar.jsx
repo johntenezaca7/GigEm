@@ -35,7 +35,6 @@ class Navbar extends React.Component {
         default:
           return (
             <div>
-
                   <a href="/api/logout"><button className="btn btn-danger my-2 my-sm-0" type="submit">Logout</button></a>
           </div>
           )
@@ -120,10 +119,9 @@ class Navbar extends React.Component {
                       </Link>
                     </td>
                       <td>
-                      {this.renderContent()}
+                         {this.renderContent()}
                       </td> 
-                      <td>
-                      </td>
+                  
                       <td>
                           {this.renderChangeButton()}
                         </td>
@@ -166,7 +164,7 @@ class Navbar extends React.Component {
                             </Link>
                           </td>
                           <td>
-                          {this.renderContent()}
+                            {this.renderContent()}
                           </td> 
                           <td>
                             {this.renderChangeButton()}
