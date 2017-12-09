@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, Fields } from 'redux-form';
 // import ProgressComponent from './ProgressComponent';
+import moment from 'moment'
 import Datetime from 'react-datetime';
 import DateRangePickerWrapper from './DateRangePickerWrapper';
 import SingleDatePicker from './SingleDatePicker';
@@ -31,9 +32,10 @@ const renderDate = ({ input, label, type, meta }) => {
     focused={meta.active}
     onDateChange={value => input.onChange({ value })}
     onFocusChange={({ focused }) => input.onFocus({ focused })}
+    dateGrab={props.dateGrab}
   />
 )};
-// const formatDates = (value, name) => {
+// const formatDate = (value, name) => {
 // return moment(value);
 // };
 // const normalizeDates = (name, value) => {
@@ -63,7 +65,7 @@ const renderDate = ({ input, label, type, meta }) => {
               <label>Last Day to Finalize Show</label>
               <div className="col">
                 <Field
-                  name="final"
+                  name="finaldate"
                   component={renderDate}
                   // normalize={normalizeDate}
                   // format={formatDate}
