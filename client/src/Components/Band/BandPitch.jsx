@@ -1,13 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
+//import { connect } from 'react-redux';
 import { Field, reduxForm, Fields } from 'redux-form';
 // import ProgressComponent from './ProgressComponent';
 import Datetime from 'react-datetime';
 import DateRangePickerWrapper from './DateRangePickerWrapper';
 import SingleDatePicker from './SingleDatePicker';
 
-import * as actions from '../../actions'
-import { networkInterfaces } from 'os';
+//import * as actions from '../../actions'
+//import { networkInterfaces } from 'os';
 
 let BandPitch = props => {
 

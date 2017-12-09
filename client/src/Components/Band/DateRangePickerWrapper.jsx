@@ -2,6 +2,7 @@ import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import React from 'react';
 import { DateRangePicker, SingleDatePicker, START_DATE, END_DATE } from 'react-dates';
+// import DateRangePicker from './SingleDatePicker'
 
 class DateRangePickerWrapper extends React.Component {
   constructor(props) {

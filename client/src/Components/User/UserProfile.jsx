@@ -1,5 +1,7 @@
 import React from 'react';
-import GigText from './GigText';
+// import GigText from './GigText';
+import PotentialGig from './PotentialGig';
+import UpcomingGig from './UpcomingGig';
 
 import { connect } from 'react-redux';
 import { /* fetchUser, */ fetchUserProfile, fetchEvents, checkAttendance, editUserProfile } from '../../actions/index';
@@ -68,7 +70,7 @@ class UserProfile extends React.Component {
                           Profile Type - {this.renderProfileType()}
                         </div>
                         <div>
-                         <img src="./Assets/userLogo.svg" width="200px" height="200px" alt="Bandname"/>
+                         <img src="./Assets/userLogo.svg" className="grid-image" alt="Bandname"/>
                         </div>
                         <div>
                           <RIEInput 
@@ -128,7 +130,7 @@ class UserProfile extends React.Component {
                          <div className="band-show-scroll">
                           {this.props.events
                             .filter((x) => userAttendance.includes(x.id) && x.isCommitted === true)
-                            .map((x) => <GigText user={this.props.info.id} key={x.id} gig={x} usercommitted={userAttendance.includes(x.id)}/>)
+                            .map((x) => <UpcomingGig user={this.props.info.id} key={x.id} gig={x} usercommitted={userAttendance.includes(x.id)}/>)
                           }
                           </div>
                           <br />
@@ -136,7 +138,7 @@ class UserProfile extends React.Component {
                         <div className="band-show-scroll">
                         {this.props.events
                             .filter((x) => userAttendance.includes(x.id) && x.isCommitted === false)
-                            .map((x) => <GigText user={this.props.info.id} key={x.id} gig={x} usercommitted={userAttendance.includes(x.id)}/>)
+                            .map((x) => <PotentialGig user={this.props.info.id} key={x.id} gig={x} usercommitted={userAttendance.includes(x.id)}/>)
                           }
                           </div>
                       </div>
