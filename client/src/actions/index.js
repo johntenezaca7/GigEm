@@ -48,7 +48,7 @@ export const uncommitFromEvent = (user, gig) => async dispatch => {
 export const addNewEvent = (event) => async dispatch => {
     console.log('attempting to add showcase event: ', event);
     const res = await axios.post('/api/addEvent', {'info': event} );
-        console.log('TESSSSS', res.data)
+        console.log('ADD EVENT ACT: ', res.data)
 
     dispatch({ type: types.ADD_EVENT, payload: res.data })
 }

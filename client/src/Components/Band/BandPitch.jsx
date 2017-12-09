@@ -4,6 +4,7 @@ import { Field, reduxForm, Fields } from 'redux-form';
 // import ProgressComponent from './ProgressComponent';
 import Datetime from 'react-datetime';
 import DateRangePickerWrapper from './DateRangePickerWrapper';
+import SingleDatePicker from './SingleDatePicker';
 
 import * as actions from '../../actions'
 import { networkInterfaces } from 'os';
@@ -16,6 +17,15 @@ const renderDates = fields => (
   endDateFieldName="end"
   {...fields}
 />
+);
+
+const renderDate = ({ input, label, type, meta }) => (
+  <SingleDatePicker
+    date={input.value}
+    focused={meta.active}
+    onDateChange={value => input.onChange({ value })}
+    onFocusChange={({ focused }) => input.onFocus({ focused })}
+  />
 );
 // const formatDates = (value, name) => {
 // return moment(value);
@@ -33,7 +43,7 @@ const renderDates = fields => (
           <div className="col-sm">
             <form  onSubmit={props.handleSubmit} >
             <div>
-                <label>Start Date</label>
+                <label>Start Date ....and...End Date</label>
                   <div className="col">
                     <Fields
                       names={['start', 'end']}
@@ -42,6 +52,17 @@ const renderDates = fields => (
                       // format={formatDates}
                     />  
                   </div>
+              </div>
+              <div>
+              <label>Last Day to Finalize Show</label>
+              <div className="col">
+                <Field
+                  name="final"
+                  component={renderDate}
+                  // normalize={normalizeDate}
+                  // format={formatDate}
+                />
+              </div>
               </div>
               <div>
                 <label>Event Name</label>
