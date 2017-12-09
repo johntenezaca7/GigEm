@@ -10,20 +10,74 @@ import SingleDatePicker from './SingleDatePicker';
 //import * as actions from '../../actions'
 //import { networkInterfaces } from 'os';
 
+const validate = values => {
+  console.log("VALIDATE VALUES: ", values);
+  const errors = {}
+  if (!values.eventName) {
+    errors.name = 'Required'
+  } 
+  else if (values.eventName.length < 15) {
+    errors.name = 'Must be over 15 characters'
+  }
+  // if (!values.email) {
+  //   errors.email = 'Required'
+  // } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+  //   errors.email = 'Invalid email address'
+  // }
+  // if (!values.age) {
+  //   errors.age = 'Required'
+  // } else if (isNaN(Number(values.age))) {
+  //   errors.age = 'Must be a number'
+  // } else if (Number(values.age) < 18) {
+  //   errors.age = 'Sorry, you must be at least 18 years old'
+  // }
+  return errors
+}
+
+// const warn = values => {
+//   const warnings = {}
+//   if (values.age < 19) {
+//     warnings.age = 'Hmm, you seem a bit young...'
+//   }
+//   return warnings
+// }
+
+const renderField = ({
+  input,
+  label,
+  type,
+  meta: { touched, error, warning }
+}) => {
+  console.log("RENDERFIELD: input: ", input, " label: ", label, " type: ", type)
+  return (
+  <div>
+    <label>{label}</label>
+    <div>
+      <input {...input} placeholder={label} type={type} />
+      {touched &&
+        ((error && <span>{error}</span>) ||
+          (warning && <span>{warning}</span>))}
+    </div>
+  </div>
+)}
+
+
 let BandPitch = props => {
 
 const renderDates = fields => {
   console.log("DATESSSS ARGS: ",fields);
-  return  (    
+  return  (
+  <div>    
   <DateRangePickerWrapper
   startDateFieldName="start"
   endDateFieldName="end"
   {...fields}
 />
+</div>
 )};
 const renderDate = ({ input, label, type, meta }) => {
 
-  console.log("renderDate args: ", arguments)
+  console.log("renderDate args: ", input)
 // const renderDate = fields => (
   return (
   <SingleDatePicker
@@ -51,20 +105,23 @@ const renderDate = ({ input, label, type, meta }) => {
           <div className="col-sm">
             <form  onSubmit={props.handleSubmit} >
             <div className="col">
-                <label>Event Name</label>
+                {/* <label>Event Name*</label> */}
                   <Field
                     name="eventName"
-                    component="input"
+                    component={renderField}
+                    // component="input"
                     type="text"
+                    label="Event Name"
                     placeholder="D-lon Musk "
                   />
               </div>
               <div>
-                <label>Start Date ....and...End Date</label>
+                <label>Select Event Start Date and End Date If Applicable</label>
                   <div className="col">
                     <Fields
                       names={['start', 'end']}
                       component={renderDates}
+                      // label="Pick Event Start Date and End Date If Applicable"
                       // normalize={normalizeDates}
                       // format={formatDates}
                     />  
@@ -76,12 +133,13 @@ const renderDate = ({ input, label, type, meta }) => {
                   <Field
                     name="eventDescription"
                     component="textarea"
+                    // label="Event Description"
                     // type="text"
                     placeholder="Describe your event.. "
                   />
               </div>
               <div>
-                <label htmlFor="hasVenue">Check if there is no planned venue for your event?</label>
+                <label htmlFor="hasVenue">Check box if there is NOT a planned venue for your event?</label>
                 <div>
                   <Field name="hasVenue" id="hasVenue" component="input" type="checkbox"/>
                 </div>
@@ -90,6 +148,7 @@ const renderDate = ({ input, label, type, meta }) => {
                   <Field
                     name="venueName"
                     component="input"
+                    // label="Venue Name"
                     type="text"
                     placeholder="My Garage "
                   />
@@ -99,6 +158,7 @@ const renderDate = ({ input, label, type, meta }) => {
                   <Field
                     name="venueDescription"
                     component="textarea"
+                    // label="Venue Description"
                     // type="text"
                     placeholder="My Garage "
                   />
@@ -128,6 +188,7 @@ const renderDate = ({ input, label, type, meta }) => {
                   <Field
                     name="city"
                     component="input"
+                    // label="City"
                     type="text"
                     placeholder="D-lon Musk "
                   />
@@ -138,11 +199,11 @@ const renderDate = ({ input, label, type, meta }) => {
                     name="state"
                     component="input"
                     type="text"
-                    placeholder="D-lon Musk "
+                    placeholder="ST"
                   />
               </div>
               <div>
-                <label>zip code</label>
+                <label>Zip Code</label>
                   <Field
                     name="zip"
                     component="input"
@@ -178,9 +239,8 @@ const renderDate = ({ input, label, type, meta }) => {
 //}
 
 BandPitch = reduxForm({
-  form: 'pitchGigForm'
-  // fields: ['name', 'description','photo','startDate' ,'endDate','startTime','finalCommitDate','city','state','zip','price','minCommits','bandId','venueId','venueName'],
-  // validate: validateGigForm
+  form: 'pitchGigForm',
+  validate
 })(BandPitch);
 
 export default BandPitch;
