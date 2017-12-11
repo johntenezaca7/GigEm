@@ -2,6 +2,17 @@ const mysql = require('mysql2');
 const config = require('../config/dbconfig');
 const Sequelize = require('sequelize');
 const keys = require('../config/keys')
+var firebase = require("firebase");
+
+var fireConfig = config.firebase;
+firebase.initializeApp(fireConfig);
+
+var fireDatabase = firebase.database();
+
+fireDatabase.ref().set({
+  username: "Jim",
+  email: 'email'
+});
 
 
 console.log('config', config)
@@ -16,6 +27,8 @@ const connection = new Sequelize(config.database, config.user, config.password, 
       idle: 10000
     }
   });  
+
+
 
 let forceObj = {force: false};
     
