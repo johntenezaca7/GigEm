@@ -7,6 +7,7 @@ import PotentialGig from './PotentialGig';
 
 import { connect } from 'react-redux';
 import { fetchEvents, checkAttendance } from '../../actions/index';
+import Map from '../googleMaps';
 
 
 class UserDashboard extends React.Component {
@@ -39,6 +40,12 @@ class UserDashboard extends React.Component {
 
       return (
         <div >
+          <Map    
+            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+            loadingElement={<div style={{ height: `100%` }} />}
+            containerElement={<div style={{ height: `400px` }} />}
+            mapElement={<div style={{ height: `100%` }} />}
+            />
            <div className="upComing-Po-Gigs">
              <div>
                 <h2>Upcoming Gig'em Shows</h2>

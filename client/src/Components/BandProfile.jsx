@@ -6,6 +6,7 @@ import UpcomingGig from './User/UpcomingGig'
 
 import { connect } from 'react-redux';
 import { fetchEvents, fetchAllUsers, editUserProfile, fetchUserProfile } from '../actions/index';
+import Profile from './ProfilePage';
 
 class BandProfile extends React.Component {
     constructor(props) {
@@ -39,7 +40,8 @@ class BandProfile extends React.Component {
                     <div className="bandContent-wrapper ">
                         <div>
                           <h4>Band Profile - {selectedUser.name}</h4>
-                            <img src="../Assets/bandLogo.svg" className="grid-image" alt="Bandname"/><br />
+                            <Profile />
+                          
                             <div>
                             {`${selectedUser.city}, ${selectedUser.state}`}
                             </div>

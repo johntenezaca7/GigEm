@@ -15,7 +15,7 @@ fireDatabase.ref().set({
 });
 
 
-console.log('config', config)
+
 const connection = new Sequelize(config.database, config.user, config.password, {
     host: config.host,
     dialect: 'mysql',

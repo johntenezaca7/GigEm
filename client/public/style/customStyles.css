@@ -91,9 +91,14 @@
 	grid-auto-rows: minmax(100, auto);
 	justify-items: stretch;
 	align-items: stretch;
-	/* padding: .5cm 2cm 2cm 1cm; */
+	padding: .5cm 2cm 2cm 1cm;
 }
 
+.user-profile-image {
+	width: 185px;
+	height:200px;
+	border-radius: 50%;
+}
 .bandProfile-wrapper{
 	display: grid;
 	grid-template-columns: 10% 75% 10%;
