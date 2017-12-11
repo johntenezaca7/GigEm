@@ -8,6 +8,7 @@ import { /* fetchUser, */ fetchUserProfile, fetchEvents, checkAttendance, editUs
 
 import { /* RIEToggle, */ RIEInput, RIETextArea, /*RIENumber, RIETags, RIESelect */} from 'riek'
 import _ from 'lodash'
+import Profile from '../ProfilePage';
 
 class UserProfile extends React.Component {
     constructor(props) {
@@ -59,7 +60,7 @@ class UserProfile extends React.Component {
                   <div className="user-side-bar nested">
                       <div>
                         <div>
-                          User Profile - 
+                          Username: 
                           <RIEInput 
                           value={this.props.info.name || 'No username!'}
                           change={(e) => this.props.editUserProfile(e)}
@@ -70,7 +71,7 @@ class UserProfile extends React.Component {
                           Profile Type - {this.renderProfileType()}
                         </div>
                         <div>
-                         <img src="./Assets/userLogo.svg" className="grid-image" alt="Bandname"/>
+                         <Profile />
                         </div>
                         <div>
                           <RIEInput 
