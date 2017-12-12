@@ -13,5 +13,14 @@ module.exports = {
     projectId: "gigem-185b4",
     storageBucket: keys.firebase.storageBucket,
     messagingSenderId: keys.firebase.messagingSenderId
+  },
+  mailer: {
+    user: keys.mailer.user,
+    pass: keys.mailer.pass
+
+  },
+  twilioMess: {
+    accountSID: keys.twilioMess.accountSID,
+    authToken: keys.twilioMess.authToken
   }
 }

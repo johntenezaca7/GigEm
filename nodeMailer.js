@@ -1,3 +1,5 @@
+const config = require('./config/dbconfig')
+
 module.exports = (app) => {
 
 const nodemailer = require('nodemailer');
@@ -8,8 +10,8 @@ let transporter = nodemailer.createTransport({
     port: 465,
     secure: true, // true for 465, false for other ports
     auth: {
-        user: "gigemnews@gmail.com", // generated ethereal user
-        pass: "gignation11"  // generated ethereal password
+        user: config.mailer.user, // generated ethereal user
+        pass: config.mailer.pass  // generated ethereal password
     }
 });
 
