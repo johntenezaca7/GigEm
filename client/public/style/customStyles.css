@@ -97,8 +97,21 @@
 .user-profile-image {
 	width: 185px;
 	height:200px;
-	border-radius: 50%;
+	border-radius: 30%;
 }
+
+.google-maps{
+	padding:1em;
+	display: grid;
+	grid-template-columns: 27% 160%  15%;
+	width: 900px;
+}
+
+
+.inside-map{
+	justify-items: center;
+}
+
 .bandProfile-wrapper{
 	display: grid;
 	grid-template-columns: 10% 75% 10%;
@@ -164,7 +177,7 @@
 }
 .user-show-scroll{
 	width: auto;
-    height: 700px;
+    height: 400px;
 	overflow: scroll;
 
 }
