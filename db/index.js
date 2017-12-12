@@ -2,17 +2,17 @@ const mysql = require('mysql2');
 const config = require('../config/dbconfig');
 const Sequelize = require('sequelize');
 const keys = require('../config/keys')
-var firebase = require("firebase");
+// var firebase = require("firebase");
 
-var fireConfig = config.firebase;
-firebase.initializeApp(fireConfig);
+// var fireConfig = config.firebase;
+// firebase.initializeApp(fireConfig);
 
-var fireDatabase = firebase.database();
+// var fireDatabase = firebase.database();
 
-fireDatabase.ref().set({
-  username: "Jim",
-  email: 'email'
-});
+// // fireDatabase.ref().set({
+// //   username: "Jim",
+// //   email: 'email'
+// // });
 
 
 

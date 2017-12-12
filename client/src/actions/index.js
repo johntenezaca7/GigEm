@@ -92,4 +92,8 @@ export const fetchAllUsers = () => async dispatch => {
     dispatch({ type: types.FETCH_ALL_USERS, payload: res.data })
 }
 
+export const savePhoto = (imageURL) => async dispatch =>{
+    const res = await axios.post('/api/save_photo', {img: imageURL});
 
+    dispatch({ type: types.SAVE_PHOTO, pyaload: res.data})
+}

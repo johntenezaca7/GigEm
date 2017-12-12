@@ -32,6 +32,7 @@
     "eslint": "^4.12.0",
     "express": "^4.16.2",
     "firebase": "^4.8.0",
+    "gig-em": "file:client",
     "jquery": "^3.2.1",
     "module-alias": "^2.0.3",
     "moment": "^2.19.3",

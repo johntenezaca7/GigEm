@@ -93,7 +93,7 @@ class Navbar extends React.Component {
                   <ul className="navbar-nav mr-auto">
                     <li className="nav-item active">
                       <a className="nav-link">
-                      <h2>Gig'em Band: {this.props.info.name ? this.props.info.name : 'Anonymous User'}</h2>
+                      <h2>Gig'em Band: {this.props.info.name ? this.props.info.name : "Welcome to Gig'em"}</h2>
                       <span className="sr-only">(current)</span>
                       </a>
                     </li>

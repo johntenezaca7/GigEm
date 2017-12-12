@@ -1,5 +1,4 @@
 import React from 'react';
-// import GigText from './GigText';
 import PotentialGig from './PotentialGig';
 import UpcomingGig from './UpcomingGig';
 
@@ -8,7 +7,15 @@ import { /* fetchUser, */ fetchUserProfile, fetchEvents, checkAttendance, editUs
 
 import { /* RIEToggle, */ RIEInput, RIETextArea, /*RIENumber, RIETags, RIESelect */} from 'riek'
 import _ from 'lodash'
+
 import Profile from '../ProfilePage';
+// import FileUploader from 'react-firebase-file-uploader';
+
+
+// ref.orderByChild("height").equalTo(25).on("child_added", function(snapshot) {
+//   console.log(snapshot.key);
+// });
+
 
 class UserProfile extends React.Component {
     constructor(props) {
@@ -47,7 +54,7 @@ class UserProfile extends React.Component {
     }
 
     render() {
-      // console.log('userProfile props: ', this.props);
+      console.log('userProfile props: ', this.props);
       let userAttendance = this.props.attendance.length > 0 ? 
       this.props.attendance
       .filter((x) => x.UserId === this.props.info.id) 
@@ -71,7 +78,7 @@ class UserProfile extends React.Component {
                           Profile Type - {this.renderProfileType()}
                         </div>
                         <div>
-                         <Profile />
+                         <Profile photo={this.props.info.photo}/>
                         </div>
                         <div>
                           <RIEInput 
@@ -118,12 +125,7 @@ class UserProfile extends React.Component {
                       <div>Show 1 </div>
                       <div>Show 1 </div>
                       <div>Show 1 </div>
-                      <div>Show 1 </div>
-                      <div>Show 1 </div>
-                      <div>Show 1 </div>
-                      <div>Show 1 </div>
-                      <div>Show 1 </div>
-                      <div>Show 1 </div>
+                 
                     </div>
                   </div>
                   <div>
