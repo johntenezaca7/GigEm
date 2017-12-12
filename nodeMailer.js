@@ -15,7 +15,7 @@ let transporter = nodemailer.createTransport({
 
 app.post('/api/sendEmail', (req, res) => {
     // setup email data with unicode symbols
-    console.log("EMAIL REQQQ: ", req);
+    console.log("EMAIL REQQQ: ", req.body);
     let mailOptions = {
         from: '"GigEm GigsYou 👻" <foo@blurdybloop.com>', // sender address
         to: 'bigdmcb@gmail.com', // list of receivers

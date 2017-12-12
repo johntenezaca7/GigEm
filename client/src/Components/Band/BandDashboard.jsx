@@ -48,10 +48,11 @@ import BandPitch from './BandPitch';
       }      
       this.props.addNewVenue(event)
       .then(() => {
-        console.log("PROMISED EVENT", event);
+        // console.log("PROMISED EVENT", event);
         event.VenueId = this.props.venueInfo.id;
         this.props.addNewEvent(event)
         .then(() => {
+          console.log("PROMISED PROPS BEFORE EMAIL", this.props);
           this.props.sendNewEventEmail(event);
         });
       })
