@@ -6,6 +6,7 @@ var authToken = config.twilioMess.authToken;   // Your Auth Token from www.twili
 
 var client = new twilio(accountSid, authToken);
 
+
 client.messages.create({
     body: 'Hello from GigEm again',
     to: '+15129208543 ',  // Text this number
