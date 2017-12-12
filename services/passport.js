@@ -3,7 +3,6 @@ const keys = require('../config/keys');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const db = require('../db/index');
 
-console.log('INSIDE PASSPORTT')
 passport.serializeUser((user, done ) => {
 
     user = user.googleId || user
@@ -29,7 +28,7 @@ passport.use(new GoogleStrategy({
     
   },
     async (accessToken, refreshToken, params, profile, done) => {
-        console.log('get photo',profile)
+       
         const existingUser = await db.User.findOne({where : {googleId: profile.id}});
             if(existingUser){
                 return done(null, existingUser)
@@ -38,7 +37,6 @@ passport.use(new GoogleStrategy({
                     googleId: profile.id,
                     name: profile.displayName,
                     email: profile.emails[0].value,
-                    photo: profile.photos[0].value
                 })
          done(null, newUser);
     }

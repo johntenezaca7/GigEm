@@ -1,34 +1,28 @@
 import React, { Component } from 'react';
-import firebase from 'firebase';
+import firebase from '../fireB/firebase';
 import FileUploader from 'react-firebase-file-uploader';
+import { connect } from 'react-redux';
+import * as actions from '../actions/index';
 
-import keys from './../firebase/fKeys';
+var database = firebase.database();
 
-const config = {
-  apiKey: keys.apiKey,
-  authDomain: keys.authDomain,
-  databaseURL: keys.databaseURL,
-  storageBucket: keys.storageBucket
-};
-
-
-firebase.initializeApp(config);
-
-var fireDatabase = firebase.database();
-
-fireDatabase.ref().set({
-  username: "Jim",
-  email: 'email'
-});
 
 class ProfilePage extends Component {
-  state = {
-    username: '',
-    avatar: '',
-    isUploading: false,
-    progress: 0,
-    avatarURL: ''
-  };
+    constructor(props){
+        super(props);
+        this.state = {
+            username: '',
+            avatar: '', 
+            isUploading: false,
+            progress: 0,
+            avatarURL: ''
+        }
+        this.handleChangeUsername = this.handleChangeUsername.bind(this);
+        this.handleUploadStart = this.handleUploadStart.bind(this);
+        this.handleProgress = this.handleProgress.bind(this);
+        this.handleUploadError = this.handleUploadError.bind(this);
+        this.handleUploadSuccess = this.handleUploadSuccess.bind(this);
+    }
 
   handleChangeUsername = (event) => this.setState({username: event.target.value});
   handleUploadStart = () => this.setState({isUploading: true, progress: 0});
@@ -38,18 +32,44 @@ class ProfilePage extends Component {
     console.error(error);
   }
   handleUploadSuccess = (filename) => {
-    this.setState({avatar: filename, progress: 100, isUploading: false});
-    firebase.storage().ref('images').child(filename).getDownloadURL().then(url => this.setState({avatarURL: url}));
+      
+    this.setState({
+        avatar: filename, 
+        progress: 100, 
+        isUploading: false
+    });
+
+    firebase.storage().ref('images')
+        .child(filename).getDownloadURL()
+            .then(url => {
+                this.setState({
+                avatarURL: url
+            });
+            database.ref().set({
+                name: {
+                   userId: this.props.info.googleId,
+                   url: url
+                }
+            });
+            this.props.savePhoto(url)
+
+        })
   };
 
+
+
+
   render() {
+    // console.log('actions', this.props)
     return (
       <div>
         <form>
-         
-          {this.state.avatarURL &&
-            <img src={this.state.avatarURL} className="user-profile-image"/>
-          }
+        
+             {this.props.info.photo ?
+                <img src={this.props.info.photo} className="user-profile-image"/>  :
+                <img src={this.state.avatarURL} className="user-profile-image"/> 
+             }          
+
           <FileUploader
             accept="image/*"
             name="avatar"
@@ -66,4 +86,11 @@ class ProfilePage extends Component {
   }
 }
 
-export default ProfilePage;
+function mapStateToProps({info}){
+    return { 
+      info: info,
+    }
+}
+
+
+export default connect(mapStateToProps, actions)(ProfilePage);

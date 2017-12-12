@@ -9,11 +9,19 @@ module.exports = (app, db) => {
     })
   })
 
+  app.post('/api/save_photo', (req, res) => {
+    console.log('SAVE PHOTO', req.body.img)
+
+    dbDef.User.findOne({ where: {googleId: req.user}})
+      .then((data) => {
+          data.update({
+           photo: req.body.img 
+          })
+      })
+  });
+
   app.post('/api/task/editprofile', async (req, res) => {
-    console.log('attempting to update profile');
-    console.log('req.body: ', req.body);
-    // console.log('req.body: ', req.body);
-    // console.log(`attempting to update with ${JSON.stringify(req.body.item)}`);
+  
     await dbDef.User.findOne({where: {googleId: req.user}})
     .then((data) => {
       data.update(
