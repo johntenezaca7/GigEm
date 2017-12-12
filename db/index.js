@@ -142,6 +142,10 @@ let Venue = connection.define('Venue', {
     type: Sequelize.STRING,
     defaultValue: ''
   },
+  address: {
+    type: Sequelize.STRING,
+    defaultValue: ''
+  },
   zip: {
     type: Sequelize.INTEGER,
     defaultValue: null
@@ -161,7 +165,7 @@ let Venue = connection.define('Venue', {
 //     zip: 23456,
 //     city: "Brooklyn",
 //     state: "NY",
-//     location: 'right here',
+//     location: 'right here'
 //   });
 // });
 
@@ -208,6 +212,10 @@ let Showcase = connection.define('Showcase', {
     defaultValue: ''
   },
   state: {
+    type: Sequelize.STRING,
+    defaultValue: ''
+  },
+  address: {
     type: Sequelize.STRING,
     defaultValue: ''
   },
@@ -313,14 +321,14 @@ let Attendance = connection.define('Attendance', {
 Attendance.belongsTo(User);
 Attendance.belongsTo(Showcase);
 
-// Attendance.sync(forceObj).then(() => {
-//   console.log('SYNC IN Atttendance-----------------------')
-//   // Table created
-//   return Attendance.create({
-//     // UserId: '1',
-//     // ShowcaseId: '1'
-//   });
-// });
+Attendance.sync(forceObj).then(() => {
+  console.log('SYNC IN Atttendance-----------------------')
+  // Table created
+  return Attendance.create({
+    // UserId: '1',
+    // ShowcaseId: '1'
+  });
+});
 
 exports.User = User;
 exports.Venue = Venue;
