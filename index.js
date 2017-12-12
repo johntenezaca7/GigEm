@@ -23,6 +23,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // remove when sequlize is updated
+require('./nodeMailer')(app)
 require('./routes/authRoute')(app)
 require('./routes/venueRoute')(app, db)
 require('./routes/eventRoute')(app, db)
