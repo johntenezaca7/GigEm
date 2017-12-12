@@ -11,3 +11,7 @@ export const ADD_EVENT = 'add_event';
 export const ADD_VENUE = 'add_venue';
 export const FETCH_ALL_USERS = 'fetch_all_users';
 export const SAVE_PHOTO = 'save_photo'
+export const SEND_NEW_EVENT_EMAIL = 'send_new_event_email';
+
+
+

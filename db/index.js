@@ -68,8 +68,8 @@ let User = connection.define('User', {
     defaultValue: ''
   },
   phone: {
-    type: Sequelize.INTEGER,
-    defaultValue: null
+    type: Sequelize.STRING,
+    defaultValue: ''
   },
   age: {
     type: Sequelize.INTEGER,
@@ -88,8 +88,8 @@ let User = connection.define('User', {
     defaultValue: ''
   },
   photo: {
-    type: Sequelize.BLOB,
-    defaultValue: null
+    type: Sequelize.STRING,
+    defaultValue: ''
   },
   status: {
     type: Sequelize.STRING,
@@ -130,11 +130,19 @@ let Venue = connection.define('Venue', {
     type: Sequelize.TEXT,
     defaultValue: ''
   },
+  photo: {
+    type: Sequelize.STRING,
+    defaultValue: ''
+  },
   city: {
     type: Sequelize.STRING,
     defaultValue: ''
   },
   state: {
+    type: Sequelize.STRING,
+    defaultValue: ''
+  },
+  address: {
     type: Sequelize.STRING,
     defaultValue: ''
   },
@@ -157,7 +165,7 @@ let Venue = connection.define('Venue', {
 //     zip: 23456,
 //     city: "Brooklyn",
 //     state: "NY",
-//     location: 'right here',
+//     location: 'right here'
 //   });
 // });
 
@@ -176,8 +184,8 @@ let Showcase = connection.define('Showcase', {
     defaultValue: ''
   },
   photo: {
-    type: Sequelize.BLOB,
-    defaultValue: null
+    type: Sequelize.STRING,
+    defaultValue: ''
   },
   startDate: {
     type: Sequelize.DATE,
@@ -207,6 +215,10 @@ let Showcase = connection.define('Showcase', {
     type: Sequelize.STRING,
     defaultValue: ''
   },
+  address: {
+    type: Sequelize.STRING,
+    defaultValue: ''
+  },
   zip: {
     type: Sequelize.INTEGER,
     defaultValue: null
@@ -225,6 +237,14 @@ let Showcase = connection.define('Showcase', {
   },
   commits: {
     type: Sequelize.INTEGER,
+    defaultValue: 0
+  },
+  minCommitValue: {
+    type: Sequelize.FLOAT,
+    defaultValue: 0
+  },
+  currentCommitValue: {
+    type: Sequelize.FLOAT,
     defaultValue: 0
   }
 });
@@ -282,6 +302,18 @@ let Attendance = connection.define('Attendance', {
     type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true,
+  },
+  commitValue: {
+    type: Sequelize.FLOAT,
+    default: 0
+  },
+  invoiced: {
+    type: Sequelize.BOOLEAN,
+    default: 0
+  },
+  paid: {
+    type: Sequelize.BOOLEAN,
+    default: 0
   }
 });
 
@@ -289,14 +321,14 @@ let Attendance = connection.define('Attendance', {
 Attendance.belongsTo(User);
 Attendance.belongsTo(Showcase);
 
-// Attendance.sync(forceObj).then(() => {
-//   console.log('SYNC IN Atttendance-----------------------')
-//   // Table created
-//   return Attendance.create({
-//     // UserId: '1',
-//     // ShowcaseId: '1'
-//   });
-// });
+Attendance.sync(forceObj).then(() => {
+  console.log('SYNC IN Atttendance-----------------------')
+  // Table created
+  return Attendance.create({
+    // UserId: '1',
+    // ShowcaseId: '1'
+  });
+});
 
 exports.User = User;
 exports.Venue = Venue;
