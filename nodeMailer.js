@@ -13,13 +13,14 @@ let transporter = nodemailer.createTransport({
     }
 });
 
-app.post('/sendEmail', (req, res) => {
+app.post('/api/sendEmail', (req, res) => {
     // setup email data with unicode symbols
+    console.log("EMAIL REQQQ: ", req);
     let mailOptions = {
         from: '"GigEm GigsYou 👻" <foo@blurdybloop.com>', // sender address
         to: 'bigdmcb@gmail.com', // list of receivers
         subject: 'Hello ✔', // Subject line
-        text: 'Did you just get an email from GigEm? Yur ya durd', // plain text body
+        text: 'Yur ya durd', // plain text body
         html: '<b>Did you just get an email from GigEm? Yur ya durd</b>' // html body
     };
     transporter.sendMail(mailOptions, (err, info) => {
@@ -27,7 +28,7 @@ app.post('/sendEmail', (req, res) => {
             return console.log(error);
         }
         console.log('Message %s sent: %s', info.messageId, info.response);
-            res.render('index');
+            res.send(data);
     });
 })
 

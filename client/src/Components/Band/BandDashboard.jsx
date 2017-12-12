@@ -50,7 +50,10 @@ import BandPitch from './BandPitch';
       .then(() => {
         console.log("PROMISED EVENT", event);
         event.VenueId = this.props.venueInfo.id;
-        this.props.addNewEvent(event);
+        this.props.addNewEvent(event)
+        .then(() => {
+          this.props.sendNewEventEmail(event);
+        });
       })
     };
 
