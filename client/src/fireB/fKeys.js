@@ -1,5 +1,4 @@
-module.exports = {
-  
+module.exports = { 
         apiKey: "AIzaSyBdIVfMBsYKULpMBoYOY9dO6B3NFJg2AIA",
         authDomain: "gigem-185b4.firebaseapp.com",
         databaseURL: "https://gigem-185b4.firebaseio.com",
