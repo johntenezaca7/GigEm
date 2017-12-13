@@ -48,7 +48,7 @@ const renderField = ({
   type,
   meta: { touched, error, warning }
 }) => {
-  console.log("RENDERFIELD: input: ", input, " label: ", label, " type: ", type)
+  // console.log("RENDERFIELD: input: ", input, " label: ", label, " type: ", type)
   return (
   <div>
     <label>{label}</label>

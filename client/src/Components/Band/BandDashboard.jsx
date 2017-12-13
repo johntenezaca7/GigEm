@@ -52,6 +52,7 @@ import BandPitch from './BandPitch';
         event.VenueId = this.props.venueInfo.id;
         this.props.addNewEvent(event)
         .then(() => {
+          event.email = this.props.bandInfo.email;
           console.log("PROMISED PROPS BEFORE EMAIL", this.props);
           this.props.sendNewEventEmail(event);
         });
