@@ -311,9 +311,21 @@ let Attendance = connection.define('Attendance', {
     type: Sequelize.BOOLEAN,
     default: 0
   },
-  paid: {
+  isPaid: {
     type: Sequelize.BOOLEAN,
     default: 0
+  },
+  paymentId: {
+    type: Sequelize.STRING,
+    default: ''
+  },
+  paymentUrl: {
+    type: Sequelize.STRING,
+    default: ''
+  },
+  notes: {
+    type: Sequelize.TEXT,
+    default: ''
   }
 });
 
@@ -321,14 +333,14 @@ let Attendance = connection.define('Attendance', {
 Attendance.belongsTo(User);
 Attendance.belongsTo(Showcase);
 
-Attendance.sync(forceObj).then(() => {
-  console.log('SYNC IN Atttendance-----------------------')
-  // Table created
-  return Attendance.create({
-    // UserId: '1',
-    // ShowcaseId: '1'
-  });
-});
+// Attendance.sync(forceObj).then(() => {
+//   console.log('SYNC IN Atttendance-----------------------')
+//   // Table created
+//   return Attendance.create({
+//     // UserId: '1',
+//     // ShowcaseId: '1'
+//   });
+// });
 
 exports.User = User;
 exports.Venue = Venue;
