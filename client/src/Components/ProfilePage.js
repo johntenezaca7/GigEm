@@ -42,16 +42,17 @@ class ProfilePage extends Component {
     firebase.storage().ref('images')
         .child(filename).getDownloadURL()
             .then(url => {
+           
+                 database.ref().set({
+                  name: {
+                     userId: this.props.info.googleId,
+                      url: url
+                       }
+                });
+                this.props.savePhoto(url);
                 this.setState({
-                avatarURL: url
-            });
-            database.ref().set({
-                name: {
-                   userId: this.props.info.googleId,
-                   url: url
-                }
-            });
-            this.props.savePhoto(url)
+                    avatarURL: url
+                });
 
         })
   };
@@ -64,10 +65,9 @@ class ProfilePage extends Component {
     return (
       <div>
         <form>
-        
-             {this.props.info.photo ?
-                <img src={this.props.info.photo} className="user-profile-image"/>  :
-                <img src={this.state.avatarURL} className="user-profile-image"/> 
+             {this.state.avatarURL ?
+                    <img src={this.state.avatarURL} className="user-profile-image" /> :
+                <img src={this.props.info.photo} className="user-profile-image"/>  
              }          
 
           <FileUploader
