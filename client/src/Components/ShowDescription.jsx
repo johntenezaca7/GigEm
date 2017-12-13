@@ -29,7 +29,7 @@ class ShowDescription extends React.Component {
   }
 
   render() {
-    // console.log(this);
+    // console.log('fr');
     // console.log('showDescription showId', parseInt(this.props.match.params.showId));
     let selectedEvent = this.props.events[0] ? this.props.events.filter((x) => x.id === parseInt(this.props.match.params.showId, 10))[0] : [{}];
     return (
