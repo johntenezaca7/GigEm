@@ -54,7 +54,7 @@ class UserProfile extends React.Component {
     }
 
     render() {
-      console.log('userProfile props: ', this.props);
+      // console.log('userProfile props: ', this.props);
       let userAttendance = this.props.attendance.length > 0 ? 
       this.props.attendance
       .filter((x) => x.UserId === this.props.info.id) 

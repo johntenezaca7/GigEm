@@ -8,42 +8,51 @@ import PotentialGig from './PotentialGig';
 import { connect } from 'react-redux';
 import { fetchEvents, checkAttendance } from '../../actions/index';
 import Map from '../googleMaps';
+import axios from 'axios';
 
 
 class UserDashboard extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+          locations:[]
+        };
         this.props.init();
 
     }
     componentWillMount() {
       this.props.onFetchClick();
-
+      
     }
-
+    
     fetchEvents(e) {
       e.preventDefault();
       this.props.onFetchClick();
     }
-
+    
     componentDidMount() {
-      // console.log('UserDashboard.jsx this.props.auth.id in componentWillMount() method');
-      // console.log(this.props.auth.id);
+      
       this.props.checkAttendanceDispatch(this.props.auth.id);
+     
+      if(this.props.events){
+        this.props.events.map((place, id) => {
+            axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${place.address},%20NY%2010017&key=AIzaSyCn1886_Sxx7XVDi4xAjhKCKigLJyoxtvU`)
+              .then(res => this.state.locations.push([res.data.results[0].geometry.location, place]))
+            })
+      }
     }
   
 
     render() {
-      // console.log('UserDashboard.jsx this.props.auth in render() method:')
-      // console.log(this.props.auth);
-
+  
       return (
         <div >
             <div className="google-maps">
                  <div></div>
                 <div className="inside-map">
-                  <Map  
+                  <Map
+                   
+                    geoLoc={this.state.locations}  
                     center={{lat:40.728199 , lng:-73.9894738}}
                     containerElement={<div style={{ height: `400px` }}/>}
                     mapElement={<div style={{ height: `100%`}}/>}   

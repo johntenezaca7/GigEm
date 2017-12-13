@@ -39,7 +39,7 @@ class App extends Component {
   }
 
   render() {
-
+    // console.log('on app',this.props.events)
     return (
       <Router>
       <div>
@@ -63,12 +63,12 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ auth, info, users }){
+function mapStateToProps({ auth, info, users, events }){
   return { 
     auth: auth,
     info: info,
-    users: users
-    //userInfo: 'info'
+    users: users,
+    events,
   }
 }
 
