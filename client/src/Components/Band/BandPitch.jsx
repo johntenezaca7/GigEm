@@ -184,6 +184,16 @@ const renderDate = ({ input, label, type, meta }) => {
               </div>
               </div >
               <div>
+                <label>Venue Street Address</label>
+                  <Field
+                    name="address"
+                    component="input"
+                    // label="City"
+                    type="text"
+                    placeholder="123 Road St"
+                  />
+              </div>
+              <div>
                 <label>City</label>
                   <Field
                     name="city"
