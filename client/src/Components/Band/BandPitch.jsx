@@ -237,6 +237,16 @@ const renderDate = ({ input, label, type, meta }) => {
                   />
               </div>
               <div>
+                <label>Want us to send you text updates on your event?
+                  Add a phone number</label>
+                  <Field
+                    name="phone"
+                    component="input"
+                    type="string"
+                    placeholder="512-920-8543"
+                  />
+              </div>
+              <div>
                 <button type="submit" >Submit</button>
               </div>
             </form>
