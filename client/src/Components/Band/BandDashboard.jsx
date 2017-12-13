@@ -53,6 +53,7 @@ import BandPitch from './BandPitch';
         this.props.addNewEvent(event)
         .then(() => {
           event.email = this.props.bandInfo.email;
+          event.toName = this.props.bandInfo.name;
           console.log("PROMISED PROPS BEFORE EMAIL", this.props);
           this.props.sendNewEventEmail(event);
         });
@@ -69,7 +70,7 @@ import BandPitch from './BandPitch';
 
     render() {
 
-      // console.log('DASH PROPS:', this.props);
+      console.log('DASH PROPS:', this.props);
     return (
         <Router>
             <div className="band-dashboard">
@@ -122,7 +123,8 @@ function mapStateToProps(state) {
   return {
     user: state.auth,
     bandInfo: state.info,
-    venueInfo: state.venues
+    venueInfo: state.venues,
+    event: state.event
   }
 }
 

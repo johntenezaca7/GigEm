@@ -144,6 +144,7 @@ module.exports = (app, db) => {
       UserId: req.body.info.UserId      
     })
     .then((data) => {
+      console.log("EVENT ADDED DATA: ", data);
       res.send(data);
     })
   });
