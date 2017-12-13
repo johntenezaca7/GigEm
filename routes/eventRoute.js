@@ -132,6 +132,7 @@ module.exports = (app, db) => {
       endDate: req.body.info.end,
       startTime: req.body.info.startTime,
       finalCommitDate: req.body.info.finalCommitDate,
+      address: req.body.info.address,      
       city: req.body.info.city,
       state: req.body.info.state,
       zip: req.body.info.zip,
