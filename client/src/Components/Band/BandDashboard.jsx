@@ -53,12 +53,17 @@ import BandPitch from './BandPitch';
           event.email = this.props.bandInfo.email;
           event.toName = this.props.bandInfo.name;
           event.eventId = this.props.event.id;
-          console.log("PROMISED PROPS BEFORE EMAIL", this.props);
+          // console.log("PROMISED PROPS BEFORE EMAIL", this.props);
           this.props.sendNewEventEmail(event)
         });
       })
       .then(() => {
         this.props.editUserProfile({phone: event.phone})
+        .then(() => {
+          console.log("PROMISED PROPS BEFORE TEXT", this.props);
+          // event.phone = this.props.
+          this.props.sendNewEventText(event)
+        })
       })
       
     };
