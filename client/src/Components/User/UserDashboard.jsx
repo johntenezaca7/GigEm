@@ -66,7 +66,7 @@ class UserDashboard extends React.Component {
                     mapElement={<div style={{ height: `100%`}}/>}   
                     />  
                   </div>
-                  <div></div>
+                  {/* <div></div> */}
               </div>
            <div className="upComing-Po-Gigs">
              <div>

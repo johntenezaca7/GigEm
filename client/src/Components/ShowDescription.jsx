@@ -12,43 +12,45 @@ class ShowDescription extends React.Component {
     this.state = {}
   }
 
-  conditionalRendering(selectedEvent) {
-    if (selectedEvent.isCommitted) {
+  conditionalRendering(event) {
+    if (event.isCommitted) {
       return (
         <div>
           Fully Commited <span role="img" aria-label="celebrate">🎉</span>
-          Venue Placeholder<br />
-          Doors @ {selectedEvent.start_time}
+          {event.address}<br />
+          Doors @ {event.start_time}
+          {/* <GigText user={this.props.auth.id} keys={event.id} gig={event} usercommitted={this.props.attendance.includes(event.id)} /> */}
         </div>
       )
     } else {
       return (
-        <GigText user={this.props.auth.id} keys={selectedEvent.id} gig={selectedEvent} usercommitted={this.props.attendance.includes(selectedEvent.id)} />
+        <GigText user={this.props.auth.id} keys={event.id} gig={event} usercommitted={this.props.attendance.includes(event.id)} />
       )
     }
   }
 
   render() {
     // console.log('fr');
-    // console.log('showDescription showId', parseInt(this.props.match.params.showId));
-    let selectedEvent = this.props.events[0] ? this.props.events.filter((x) => x.id === parseInt(this.props.match.params.showId, 10))[0] : [{}];
+    // console.log('showd passed down ', this.props.showId);
+    const passedId = this.props.showId
+    let selectedEvent = this.props.events.filter(show => show.id === passedId)
+    let event = selectedEvent[0]
+    console.log('HER',event)
     return (
       <div>
-        <div>
-        <Navbar />
-        </div>
         <div className="container">
-          <h1 className="display-1">{selectedEvent.name}</h1>
+          <h1 className="display-1">{event.name}</h1>
           <h2>ShowId: {this.props.ShowId}</h2>
-          <div>{selectedEvent.description}</div>
+          <div>{event.description}</div>
           <div><br /></div>
           <div><h5>Venue Placeholder</h5></div>
-          <div>{`${selectedEvent.city}, ${selectedEvent.state}`}</div>
-          <div>{`${selectedEvent.zip}`}</div>
+          <div>{`${event.city}, ${event.state}`}</div>
+          <div>{`${event.zip}`}</div>
           <div><br /></div>
           <div><h5>My attendance:</h5></div>
-          <div>{this.conditionalRendering(selectedEvent)}</div>
+          <div>{this.conditionalRendering(event)}</div>
         </div>
+      
     </div>
     )
   }
