@@ -10,20 +10,25 @@ let transporter = nodemailer.createTransport({
     port: 465,
     secure: true, // true for 465, false for other ports
     auth: {
-        user: config.mailer.user, // generated ethereal user
-        pass: config.mailer.pass  // generated ethereal password
+        user: config.mailer.user, 
+        pass: config.mailer.pass  
     }
 });
 
 app.post('/api/sendEmail', (req, res) => {
     // setup email data with unicode symbols
     console.log("EMAIL REQQQ: ", req.body);
+    let baseUrl = "http://localhost:3000/showdetails/"; // need to change for deployment
+    let eventId = req.body.info.eventId;
+    let toEmail = req.body.info.email;
+    let eventLink = baseUrl + eventId;
+    let toName = req.body.info.toName;
     let mailOptions = {
         from: '"GigEm GigsYou 👻" <foo@blurdybloop.com>', // sender address
-        to: 'bigdmcb@gmail.com', // list of receivers
+        to: toEmail, // list of receivers
         subject: 'Hello ✔', // Subject line
-        text: 'Yur ya durd', // plain text body
-        html: '<b>Did you just get an email from GigEm? Yur ya durd</b>' // html body
+        text: 'Yur ya durd !', // plain text body
+        html: `<b><a href=${eventLink}>Visit Link</a> Yur ya durd</b>` // html body
     };
     transporter.sendMail(mailOptions, (err, info) => {
         if (error) {
