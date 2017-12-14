@@ -10,7 +10,7 @@ const Map = withGoogleMap(props => {
         const toggleShow = (marker) => {
             return marker[2].showInfo ? marker[2].showInfo = false : marker[2].showInfo = true
         }
-        const show = props.show;
+        // const show = props.show;
   return (
     
       <GoogleMap
@@ -22,15 +22,24 @@ const Map = withGoogleMap(props => {
                         key={idx}
                         onClick={() => {
                             // console.log('click', marker[2].showInfo)
-                            props.show()
-                            return toggleShow(marker);
+                            toggleShow(marker);
+                            return props.show()
                         }}
                         >
                      {marker[2].showInfo && (
-                        <InfoWindow onCloseClick={()=>{marker[2].showInfo = marker[2].showInfo}}>
+                        <InfoWindow onCloseClick={()=>{marker[2].showInfo}}>
                             <div>
-                              <h5>{marker[1].name}</h5>
+                              <h3>{marker[1].name}</h3>
+                              {marker[1].isCommitted ? 
+                                <h6>Upcoming Gig'em Shows</h6> :
+                                <h6>Potential Gigs</h6>
+                              }
+                              <p>{marker[1].address}</p>
                               <p>{marker[1].description}</p>
+                              {marker[1].isCommitted ? 
+                                <strong><p>Show is fully Committed!</p></strong> :
+                                <p>Show still needs more commits!</p>
+                              }
                             </div>
                         </InfoWindow>
                      )}
