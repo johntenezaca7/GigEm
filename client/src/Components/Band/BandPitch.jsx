@@ -139,9 +139,9 @@ const renderDate = ({ input, label, type, meta }) => {
                   />
               </div>
               <div>
-                <label htmlFor="hasVenue">Check box if there is NOT a planned venue for your event?</label>
+                <label htmlFor="hasNoVenue">Check box if there is NOT a planned venue for your event?</label>
                 <div>
-                  <Field name="hasVenue" id="hasVenue" component="input" type="checkbox"/>
+                  <Field name="hasNoVenue" id="hasNoVenue" component="input" type="checkbox"/>
                 </div>
               </div>
               <label>Venue Name</label>

@@ -43,7 +43,11 @@ import BandPitch from './BandPitch';
       // else if (!event.start) {
       //   throw new SubmissionError({ start: <b>YOUR EVENT NEEDS A START DATE</b>, _error: 'Submission failed!' })   
       // }
-    
+      if (event.hasNoVenue) {
+        event.venueName = "TBD";
+        event.venueDescription = `This event needs a venue. 
+        If you would like to host this venue please reach out to us.`
+      }
       this.props.addNewVenue(event)
       .then(() => {
         console.log("PROMISED EVENT", event);
