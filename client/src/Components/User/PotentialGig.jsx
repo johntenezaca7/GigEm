@@ -1,9 +1,21 @@
 import React from 'react';
+import Modal from 'react-modal';
 import ProgressComponent from './ProgressComponent';
-
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { commitToEvent, uncommitFromEvent, fetchAllUsers } from '../../actions/index';
+import ShowcaseInfo from '../ShowDescription';
+
+const customStyles = {
+    content : {
+      top                   : '50%',
+      left                  : '50%',
+      right                 : 'auto',
+      bottom                : 'auto',
+      marginRight           : '-50%',
+      transform             : 'translate(-50%, -50%)'
+    }
+  };
 
 
 class PotentialGig extends React.Component {
@@ -11,18 +23,34 @@ class PotentialGig extends React.Component {
         super(props);
         this.state = {
             commits: this.props.gig.commits,
-            usercommitted: this.props.usercommitted
+            usercommitted: this.props.usercommitted,
+            modalIsOpen: false
         }
-        // this.props.init();
+        this.openModal = this.openModal.bind(this);
+        this.afterOpenModal = this.afterOpenModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+    }
+
+    openModal() {
+        this.setState({modalIsOpen: true});
+    }
+
+    afterOpenModal() {
+        // references are now sync'd and can be accessed.
+        // this.subtitle.style.color = '#f00';
+    }
+
+    closeModal() {
+        this.setState({modalIsOpen: false});
     }
 
     renderButton() {
         // console.log('PotentialGig.jsx this.props in renderButton() method')
         // console.log(this.props); 
         if (!this.state.usercommitted) {
-            return (<div><button className="btn btn-primary btn-sm" onClick={(e) => this.commitButton(e, this.props.info.id, this.props.gig.id)}>Commit</button></div>)
+            return (<div><button className="btn btn-info my-2 my-sm-0" onClick={(e) => this.commitButton(e, this.props.info.id, this.props.gig.id)}>Commit</button></div>)
         } else if (this.state.usercommitted) {
-            return (<div><button className="btn btn-warning btn-sm" onClick={(e) => this.uncommitButton(e, this.props.info.id, this.props.gig.id)}>Uncommit</button></div>)
+            return (<div><button className="btn btn-info my-2 my-sm-0" onClick={(e) => this.uncommitButton(e, this.props.info.id, this.props.gig.id)}>Uncommit</button></div>)
         }
     }
 
@@ -47,14 +75,27 @@ class PotentialGig extends React.Component {
                     <div className="potential-gig-wrapper">
                         <div className="potential-gig-band-name">
                             <Link to={`/bandprofile/${this.props.gig.id}`}>
-                                <h3>{this.props.users.filter((x) => x.id = this.props.gig.id)[0].name}</h3>
+                                <h5>{this.props.users.filter((x) => x.id = this.props.gig.id)[0].name}</h5>
                             </Link>
+                            <div>
+                            <Modal
+                                isOpen={this.state.modalIsOpen}
+                                onAfterOpen={this.afterOpenModal}
+                                onRequestClose={this.closeModal}
+                                style={customStyles}
+                                contentLabel="Example Modal"
+                               >
+                            <button onClick={this.closeModal}>close</button>
+                          
+                           <ShowcaseInfo showId={this.props.gig.id} />
+                            </Modal>
+                          </div>
                         </div>
-                        <div className="potential-gig-event-name">
-                            <Link to={`/showdetails/${this.props.gig.id}`}>
-                              {this.props.gig.name}<br />
-                            </Link><br />
-                        </div>
+                        <h4 className="potential-gig-event-name" onClick={this.openModal}>
+                        
+                              {this.props.gig.name}
+                       
+                        </h4>
                         <div className="potential-gig-daterange">
                             {this.props.gig.city ? this.props.gig.city : 'No city specified.'}<br />
                             Daterange placeholder<br />
