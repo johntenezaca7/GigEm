@@ -14,9 +14,10 @@ var client = new twilio(accountSid, authToken);
     
 
 app.post('/api/sendText', (req, res) => {
+    console.log("SENDING TEXT REQ.BODY: ", req.body)
     client.messages.create({
-        body: 'Hey Stuart, its Dylan. Our website can send text messages. Cant get replies yet tho 👻. Love',
-        to: '+15129208543 ',  // Text this number .. +15129208543 .. dad 12149577112
+        body: `Hey, its GigEm. You created ${req.body.info.eventName}. Cant get replies yet tho 👻. Love`,
+        to: `+1${req.body.info.phone}`,  // Text this number .. +15129208543 .. dad 12149577112
         from: '+16018909041' // From a valid Twilio number
     })
     .then((message) => console.log("Text data back: ", message.sid));

@@ -48,7 +48,7 @@ const renderField = ({
   type,
   meta: { touched, error, warning }
 }) => {
-  console.log("RENDERFIELD: input: ", input, " label: ", label, " type: ", type)
+  // console.log("RENDERFIELD: input: ", input, " label: ", label, " type: ", type)
   return (
   <div>
     <label>{label}</label>
@@ -184,6 +184,16 @@ const renderDate = ({ input, label, type, meta }) => {
               </div>
               </div >
               <div>
+                <label>Venue Street Address</label>
+                  <Field
+                    name="address"
+                    component="input"
+                    // label="City"
+                    type="text"
+                    placeholder="123 Road St"
+                  />
+              </div>
+              <div>
                 <label>City</label>
                   <Field
                     name="city"
@@ -223,7 +233,26 @@ const renderDate = ({ input, label, type, meta }) => {
                     name="minCommits"
                     component="input"
                     type="integer"
+                    placeholder="10"
+                  />
+              </div>
+              <div>
+                <label>Suggested Price($)</label>
+                  <Field
+                    name="price"
+                    component="input"
+                    type="integer"
                     placeholder="5"
+                  />
+              </div>
+              <div>
+                <label>Want us to send you text updates on your event?
+                  Add a phone number</label>
+                  <Field
+                    name="phone"
+                    component="input"
+                    type="string"
+                    placeholder="512-920-8543"
                   />
               </div>
               <div>

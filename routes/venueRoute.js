@@ -31,6 +31,7 @@ module.exports = (app, db) => {
     dbDef.Venue.create({
       name: req.body.info.venueName,
       description: req.body.info.venueDescription,
+      address: req.body.info.address,
       city: req.body.info.city,
       state: req.body.info.state,
       zip: req.body.info.zip,

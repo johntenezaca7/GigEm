@@ -37,25 +37,35 @@ import BandPitch from './BandPitch';
       event.finalCommitDate = this.state.finalCommitDate; 
       console.log("SUBMITTED", event );
       
-      if (!event.eventName) {
-        throw new SubmissionError({ eventName: <b>YOUR EVENT NEEDS A NAME</b>, _error: 'Submission failed!' })   
+      if (!event.eventName || !event.start) {
+        throw new SubmissionError({ eventName: <b>ALL EVENTS NEEDS A NAME AND START DATE</b>, _error: 'Submission failed!' })   
       }
-      if (!event.start) {
-        throw new SubmissionError({ start: <b>YOUR EVENT NEEDS A START DATE</b>, _error: 'Submission failed!' })   
-      }
-      if (!event.minCommits) {
-        throw new SubmissionError({ minCommits: <b>YOUR EVENT NEEDS A MIN ATTENDANCE</b>, _error: 'Submission failed!' })   
-      }      
+      // else if (!event.start) {
+      //   throw new SubmissionError({ start: <b>YOUR EVENT NEEDS A START DATE</b>, _error: 'Submission failed!' })   
+      // }
+    
       this.props.addNewVenue(event)
       .then(() => {
         // console.log("PROMISED EVENT", event);
         event.VenueId = this.props.venueInfo.id;
         this.props.addNewEvent(event)
         .then(() => {
-          console.log("PROMISED PROPS BEFORE EMAIL", this.props);
-          this.props.sendNewEventEmail(event);
+          event.email = this.props.bandInfo.email;
+          event.toName = this.props.bandInfo.name;
+          event.eventId = this.props.event.id;
+          // console.log("PROMISED PROPS BEFORE EMAIL", this.props);
+          this.props.sendNewEventEmail(event)
         });
       })
+      .then(() => {
+        this.props.editUserProfile({phone: event.phone})
+        .then(() => {
+          console.log("PROMISED PROPS BEFORE TEXT", this.props);
+          // event.phone = this.props.
+          this.props.sendNewEventText(event)
+        })
+      })
+      
     };
 
     dateGrab(date) {
@@ -68,7 +78,7 @@ import BandPitch from './BandPitch';
 
     render() {
 
-      // console.log('DASH PROPS:', this.props);
+      console.log('DASH PROPS:', this.props);
     return (
         <Router>
             <div className="band-dashboard">
@@ -121,7 +131,9 @@ function mapStateToProps(state) {
   return {
     user: state.auth,
     bandInfo: state.info,
-    venueInfo: state.venues
+    venueInfo: state.venues,
+    event: state.event,
+    profile: state.profile
   }
 }
 
