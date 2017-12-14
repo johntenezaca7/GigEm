@@ -91,7 +91,7 @@ module.exports = (app, db) => {
 
   app.post('/api/commitCheck', (req, res) => {
     // console.log('eventRoute.js: attempting to check if user has committed to event');
-    console.log('eventRoute.js req.body:', req.body)
+    // console.log('eventRoute.js req.body:', req.body)
     // console.log(req.body);
     dbDef.Attendance.findAll()
     .then((attendance) => {
@@ -123,7 +123,7 @@ module.exports = (app, db) => {
   
   // Add Showcase Event and respond with added event obj 
   app.post('/api/addEvent', (req, res) =>{
-    console.log("REQQQQ BODYYYYYYY ", req.body);
+    console.log("REQQQQ BODYYYYYYY ", req.body.info);
     dbDef.Showcase.create({
       name: req.body.info.eventName,
       description: req.body.info.eventDescription,
@@ -144,7 +144,7 @@ module.exports = (app, db) => {
       UserId: req.body.info.UserId      
     })
     .then((data) => {
-      console.log("EVENT ADDED DATA: ", data);
+      // console.log("EVENT ADDED DATA: ", data);
       res.send(data);
     })
   });

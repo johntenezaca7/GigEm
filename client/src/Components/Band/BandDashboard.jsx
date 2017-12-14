@@ -46,29 +46,39 @@ import BandPitch from './BandPitch';
     
       this.props.addNewVenue(event)
       .then(() => {
-        // console.log("PROMISED EVENT", event);
+        console.log("PROMISED EVENT", event);
         event.VenueId = this.props.venueInfo.id;
+        // function to format phone then assign value to event.phone
+        event.formatPhoneNumber = (s) => {
+          var s2 = (""+s).replace(/\D/g, '');
+          var m = s2.match(/^(\d{3})(\d{3})(\d{4})$/);
+          return (!m) ? null : m[1] + m[2]  + m[3];
+        }
+        // event.phone = event.formatPhoneNumber(this.props.profile.phone);
+        event.phone = event.formatPhoneNumber(event.phone);
         this.props.addNewEvent(event)
         .then(() => {
           event.email = this.props.bandInfo.email;
           event.toName = this.props.bandInfo.name;
           event.eventId = this.props.event.id;
           // console.log("PROMISED PROPS BEFORE EMAIL", this.props);
-          this.props.sendNewEventEmail(event)
+          // this.props.sendNewEventEmail(event)
         });
       })
       .then(() => {
-        this.props.editUserProfile({phone: event.phone})
-        .then(() => {
-          console.log("PROMISED PROPS BEFORE TEXT", this.props);
-          event.formatPhoneNumber = (s) => {
-            var s2 = (""+s).replace(/\D/g, '');
-            var m = s2.match(/^(\d{3})(\d{3})(\d{4})$/);
-            return (!m) ? null : m[1] + m[2]  + m[3];
-          }
-          event.phone = event.formatPhoneNumber(this.props.profile.phone)
-          this.props.sendNewEventText(event)
-        })
+        // check for a phone entry with 10 chars
+        if (!event.phone || event.phone.length < 10) {
+          // maybe do something, maybe do nothing
+        } else {
+          // for phone #s with 10char or more, update user profile and send text                    
+          this.props.editUserProfile({phone: event.phone})
+          .then(() => {
+              console.log("PROMISED PROPS BEFORE TEXT", this.props);                    
+
+              console.log("EVENT BEFORE SENDING TEXT", event);
+              // this.props.sendNewEventText(event)
+          })
+        }
       })
       
     };
