@@ -233,6 +233,15 @@ const renderDate = ({ input, label, type, meta }) => {
                     name="minCommits"
                     component="input"
                     type="integer"
+                    placeholder="10"
+                  />
+              </div>
+              <div>
+                <label>Suggested Price($)</label>
+                  <Field
+                    name="price"
+                    component="input"
+                    type="integer"
                     placeholder="5"
                   />
               </div>
