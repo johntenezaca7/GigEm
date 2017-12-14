@@ -66,7 +66,7 @@ import BandPitch from './BandPitch';
           event.toName = this.props.bandInfo.name;
           event.eventId = this.props.event.id;
           // console.log("PROMISED PROPS BEFORE EMAIL", this.props);
-          // this.props.sendNewEventEmail(event)
+          this.props.sendNewEventEmail(event)
         });
       })
       .then(() => {
