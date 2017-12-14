@@ -15,10 +15,11 @@ class UserDashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          locations:[]
+          locations:[],
+          show: false
         };
         this.props.init();
-
+       this.changeState = this.changeState.bind(this);
     }
     componentWillMount() {
       this.props.onFetchClick();
@@ -36,22 +37,37 @@ class UserDashboard extends React.Component {
      
       if(this.props.events){
         this.props.events.map((place, id) => {
+              // const showInfo = false;
             axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${place.address},%20NY%2010017&key=AIzaSyCn1886_Sxx7XVDi4xAjhKCKigLJyoxtvU`)
-              .then(res => this.state.locations.push([res.data.results[0].geometry.location, place]))
+              .then(res => this.state.locations.push([res.data.results[0].geometry.location, place, {showInfo: true}]))
             })
       }
     }
-  
+    changeState(){
+      this.setState({
+        show:true
+      })
+    }
 
+    handleMarkerTap(marker) {
+      
+        if (marker.showInfo === false) {
+          marker.showInfo = true
+        } else if (marker.showInfo === true) {
+          marker.showInfo = false
+        }
+      }
     render() {
-  
+      console.log('loca', this.state.locations)
       return (
         <div >
             <div className="google-maps">
                  <div></div>
                 <div className="inside-map">
                   <Map
-                   
+                    handleMarkerTap={this.handleMarkerTap}
+                    showInfo={false}
+                    show={this.changeState}
                     geoLoc={this.state.locations}  
                     center={{lat:40.728199 , lng:-73.9894738}}
                     containerElement={<div style={{ height: `400px` }}/>}
