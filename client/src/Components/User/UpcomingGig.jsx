@@ -3,8 +3,7 @@ import ProgressComponent from './ProgressComponent';
 import Modal from 'react-modal';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import axios from 'axios';
-import { commitToEvent, uncommitFromEvent, fetchAllUsers } from '../../actions/index';
+import { commitToEvent, uncommitFromEvent } from '../../actions/index';
 import ShowcaseInfo from '../ShowDescription';
 
 
@@ -30,7 +29,8 @@ class UpcomingGig extends React.Component {
             usercommitment: this.props.attendance.filter((x) => x.ShowcaseId === this.props.gig.id)[0] ? 
                     this.props.attendance.filter((x) => x.ShowcaseId === this.props.gig.id)[0].commitValue : 0,
             usercommitted: this.props.usercommitted,
-            modalIsOpen: false
+            modalIsOpen: false,
+            value:''
         };
         this.openModal = this.openModal.bind(this);
         this.afterOpenModal = this.afterOpenModal.bind(this);
@@ -57,7 +57,7 @@ class UpcomingGig extends React.Component {
     }
 
       renderCommitmentForm(){
-        if (!this.state.usercommitted) { 
+        if (!this.state.usercommitment) { 
             return(
                 <form>
                     <input id="commits" 
@@ -109,7 +109,7 @@ class UpcomingGig extends React.Component {
     };
     
     handleSubmit(e) {
-        if (this.state.usercommitted) {
+        if (this.state.usercommitment) {
             this.uncommitButton(e, this.props.info.id, this.props.gig.id, 0)
         } else {
             this.commitButton(e, this.props.info.id, this.props.gig.id, this.state.formvalue)
@@ -130,27 +130,10 @@ class UpcomingGig extends React.Component {
         this.setState({usercommitment: 0, usercommitted: false, changed: true})
     }
 
-    componentDidMount() {
-    
-       
-        if(this.props.events){
-          this.props.events.map((place, id) => {
-                // const showInfo = false;
-              axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${place.address},%20NY%2010017&key=AIzaSyCn1886_Sxx7XVDi4xAjhKCKigLJyoxtvU`)
-                .then(res => this.state.locations.push([res.data.results[0].geometry.location, place, {showInfo: false}]))
-              })
-        }
-      }
-      changeState(info){
-        // info = false;
-        this.setState({
-          show:true
-        })
-      }
 
-    render() {  
-        console.log('upcominggig props: ', this.props);
-        console.log('upcominggig state: ', this.state);
+    render() {
+
+        
         if (this.props.users.length > 0) {
             return (
                 <div className="container border p-3 m-1 small" key={this.props.gig.id}>
@@ -196,21 +179,17 @@ class UpcomingGig extends React.Component {
                         </div>
                         <div className="potential-gig-commit-button">
 
-                            {/* instead of commit button it should just be an attend button
-                            {this.renderButton()} */}
-                        {/* </div>  */}
+                            {/*instead of commit button it should just be an attend button */}
+                            {this.renderButton()}
+                        </div>
 
                             {this.renderCommitmentForm()}
 
-                        {/* </div> */}
                         </div>
-                    </div>
-                </div>
+                        </div>
                     
                     
-
               )
-
         } else {
             return(<div></div>)
         }

@@ -38,6 +38,7 @@ class UserDashboard extends React.Component {
                   // const showInfo = false;
                 axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${place.address},%20NY%2010017&key=AIzaSyCn1886_Sxx7XVDi4xAjhKCKigLJyoxtvU`)
                   .then(res => this.state.locations.push([res.data.results[0].geometry.location, place, {showInfo: false}]))
+          
                 })
           }
         }

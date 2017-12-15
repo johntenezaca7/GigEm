@@ -1,7 +1,7 @@
 import React from 'react';
 
 import GigText from './User/GigText'
-import Navbar from './Navbar'
+// import Navbar from './Navbar'
 
 import { connect } from 'react-redux';
 import { fetchEvents, checkAttendance } from '../actions/index';
