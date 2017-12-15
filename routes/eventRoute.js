@@ -122,7 +122,7 @@ module.exports = (app, db) => {
   
   // Add Showcase Event and respond with added event obj 
   app.post('/api/addEvent', (req, res) =>{
-    console.log("REQQQQ BODYYYYYYY ", req.body.info);
+    // console.log("REQQQQ BODYYYYYYY ", req.body.info);
     dbDef.Showcase.create({
       name: req.body.info.eventName,
       description: req.body.info.eventDescription,

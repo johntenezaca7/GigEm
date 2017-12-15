@@ -57,7 +57,7 @@ class UpcomingGig extends React.Component {
     }
 
       renderCommitmentForm(){
-        if (!this.state.usercommitment) { 
+        if (!this.state.usercommitted) { 
             return(
                 <form>
                     <input id="commits" 
@@ -109,7 +109,7 @@ class UpcomingGig extends React.Component {
     };
     
     handleSubmit(e) {
-        if (this.state.usercommitment) {
+        if (this.state.usercommitted) {
             this.uncommitButton(e, this.props.info.id, this.props.gig.id, 0)
         } else {
             this.commitButton(e, this.props.info.id, this.props.gig.id, this.state.formvalue)
@@ -147,9 +147,10 @@ class UpcomingGig extends React.Component {
           show:true
         })
       }
-    render() {
 
-        
+    render() {  
+        console.log('upcominggig props: ', this.props);
+        console.log('upcominggig state: ', this.state);
         if (this.props.users.length > 0) {
             return (
                 <div className="container border p-3 m-1 small" key={this.props.gig.id}>
@@ -195,14 +196,16 @@ class UpcomingGig extends React.Component {
                         </div>
                         <div className="potential-gig-commit-button">
 
-                            {/*instead of commit button it should just be an attend button */}
-                            {this.renderButton()}
-                        </div>
+                            {/* instead of commit button it should just be an attend button
+                            {this.renderButton()} */}
+                        {/* </div>  */}
 
                             {this.renderCommitmentForm()}
 
+                        {/* </div> */}
                         </div>
-                        </div>
+                    </div>
+                </div>
                     
                     
 

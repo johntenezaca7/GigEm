@@ -58,7 +58,7 @@ class PotentialGig extends React.Component {
     }
 
     renderCommitmentForm(){
-        if (this.state.usercommitment === 0 || this.state.usercommitment === null) { 
+        if (!this.state.usercommitted) { 
             return(
                 <form>
                     <input id="commits" 
@@ -110,7 +110,7 @@ class PotentialGig extends React.Component {
 
     
     handleSubmit(e) {
-        if (this.state.usercommitment) {
+        if (this.state.usercommitted) {
             this.uncommitButton(e, this.props.info.id, this.props.gig.id, 0)
         } else {
             this.commitButton(e, this.props.info.id, this.props.gig.id, this.state.formvalue)
@@ -120,6 +120,7 @@ class PotentialGig extends React.Component {
     commitButton(e, user, gig, amount) {
         this.props.onCommitClick(user, gig, amount)
         this.setState({usercommitment: amount, usercommitted: true, changed: true})
+        // this.forceUpdate();
     }
 
     uncommitButton(e, user, gig) {
@@ -170,10 +171,12 @@ class PotentialGig extends React.Component {
                         <div className="potential-gig-money-commit-value">
                         </div>
                         <div className="potential-gig-commit-button">
+
                                 <div className={`commit-value-form`}>
                                   {this.renderCommitmentForm()}
                                   <Payment pitchValue={this.state.pitchValue}/>
                                 </div>
+
                         </div>
                     </div>
                 </div>)

@@ -45,9 +45,17 @@ class UserProfile extends React.Component {
         this.setState({modalIsOpen: false});
     }
 
-    // componentWillMount() {
-    //   this.props.init();
-    // }
+    componentWillMount() {
+      this.props.init();
+    }
+
+    componentWillReceiveProps() {
+      // this.props.init();
+      this.setState({userAttendance: this.props.attendance.length > 0 ? 
+        this.props.attendance
+        .filter((x) => x.UserId === this.props.info.id) 
+        .map((x) => x = x.ShowcaseId) : []});
+    }
 
 
     renderProfileType() {
@@ -76,13 +84,7 @@ class UserProfile extends React.Component {
     }
     
 
-    render() {
-      //console.log('userProfile props: ', this.props);
-      let userAttendance = this.props.attendance.length > 0 ? 
-      this.props.attendance
-      .filter((x) => x.UserId === this.props.info.id) 
-      .map((x) => x = x.ShowcaseId) : [];
-      
+    render() {      
       if(this.props.info){
         return (
           <div>
@@ -166,22 +168,26 @@ class UserProfile extends React.Component {
                       <h3>Upcoming Shows</h3>
                       <div className="band-show-scroll">
                         {this.props.events
-                          .filter((x) => userAttendance.includes(x.id) && x.isCommitted === true)
-                          .map((x) => <UpcomingGig user={this.props.info.id} key={x.id} gig={x} usercommitted={userAttendance.includes(x.id)}/>)
+                          .filter((x) => this.state.userAttendance.includes(x.id) && x.isCommitted === true)
+                          .map((x) => <UpcomingGig 
+                                        user={this.props.info.id} 
+                                        key={x.id} 
+                                        gig={x} 
+                                        usercommitted={this.state.userAttendance.includes(x.id)}/>)
                         }
                       </div>
                       <br />
                       <h3>Potential Gigs</h3>
                       <div className="band-show-scroll">
                         {this.props.events
-                            .filter((x) => userAttendance.includes(x.id) && x.isCommitted === false)
+                            .filter((x) => this.state.userAttendance.includes(x.id) && x.isCommitted === false)
                             .map((x) => <PotentialGig 
                                           user={this.props.info.id} 
                                           users={this.props.users}
                                           key={x.id} 
                                           gig={x} 
                                           attendance={this.props.attendance}
-                                          usercommitted={userAttendance.includes(x.id)}/>)
+                                          usercommitted={this.state.userAttendance.includes(x.id)}/>)
                           }
                       </div>
                   </div>          
