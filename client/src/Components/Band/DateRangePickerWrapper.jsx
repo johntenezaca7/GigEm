@@ -1,6 +1,7 @@
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import React from 'react';
+// eslint-disable-next-line
 import { DateRangePicker, SingleDatePicker, START_DATE, END_DATE } from 'react-dates';
 // import DateRangePicker from './SingleDatePicker'
 

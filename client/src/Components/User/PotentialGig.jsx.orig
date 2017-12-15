@@ -3,9 +3,9 @@ import Modal from 'react-modal';
 import ProgressComponent from './ProgressComponent';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { commitToEvent, uncommitFromEvent } from '../../actions/index';
+<<<<<<< HEAD
+import { commitToEvent, uncommitFromEvent, fetchAllUsers } from '../../actions/index';
 import ShowcaseInfo from '../ShowDescription';
-import Payment from '../Payment';
 
 const customStyles = {
     content : {
@@ -16,13 +16,18 @@ const customStyles = {
       marginRight           : '-50%',
       transform             : 'translate(-50%, -50%)'
     }
-};
+  };
+
+=======
+import { commitToEvent, uncommitFromEvent } from '../../actions/index';
+>>>>>>> commitValueBranch2
 
 class PotentialGig extends React.Component {
     constructor(props) {
         super(props);
     
         this.state = {
+<<<<<<< HEAD
             commits: this.props.gig.commits,
             usercommitted: this.props.usercommitted,
             modalIsOpen: false
@@ -42,11 +47,21 @@ class PotentialGig extends React.Component {
     }
 
     closeModal() {
-        this.setState({modalIsOpen: false,
+        this.setState({modalIsOpen: false});
+    }
+
+    renderButton() {
+        // console.log('PotentialGig.jsx this.props in renderButton() method')
+        // console.log(this.props); 
+        if (!this.state.usercommitted) {
+            return (<div><button className="btn btn-info my-2 my-sm-0" onClick={(e) => this.commitButton(e, this.props.info.id, this.props.gig.id)}>Commit</button></div>)
+        } else if (this.state.usercommitted) {
+            return (<div><button className="btn btn-info my-2 my-sm-0" onClick={(e) => this.uncommitButton(e, this.props.info.id, this.props.gig.id)}>Uncommit</button></div>)
+=======
             changed: false,
             usercommitment: this.props.attendance.filter((x) => x.ShowcaseId === this.props.gig.id)[0] ? 
                     this.props.attendance.filter((x) => x.ShowcaseId === this.props.gig.id)[0].commitValue : 0
-        })
+        }
     }
 
     componentWillReceiveProps() {
@@ -57,7 +72,7 @@ class PotentialGig extends React.Component {
     }
 
     renderCommitmentForm(){
-        if (this.state.usercommitment === 0 || this.state.usercommitment === null) { 
+        if (!this.state.usercommitted) { 
             return(
                 <form>
                     <input id="commits" 
@@ -113,6 +128,7 @@ class PotentialGig extends React.Component {
             this.uncommitButton(e, this.props.info.id, this.props.gig.id, 0)
         } else {
             this.commitButton(e, this.props.info.id, this.props.gig.id, this.state.formvalue)
+>>>>>>> commitValueBranch2
         }
     }
 
@@ -169,16 +185,11 @@ class PotentialGig extends React.Component {
                         <div className="potential-gig-money-commit-value">
                         </div>
                         <div className="potential-gig-commit-button">
-
-                            <Payment />
-                            {this.renderButton()}
-
                             <div>
                                 <div className={`commit-value-form`}>
                                   {this.renderCommitmentForm()}
                                 </div>
                             </div>
-
 
                         </div>
                     </div>

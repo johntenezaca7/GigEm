@@ -65,11 +65,18 @@ class ProfilePage extends Component {
     return (
       <div>
         <form>
+<<<<<<< HEAD
              {this.state.avatarURL ?
-                    <img src={this.state.avatarURL} className="user-profile-image" alt="User profile avatar." /> :
-                <img src={this.props.info.photo} className="user-profile-image" alt="User profile."/>  
+                    <img src={this.state.avatarURL} className="user-profile-image" /> :
+                <img src={this.props.info.photo} className="user-profile-image"/>  
              }          
 
+=======
+         
+          {this.state.avatarURL &&
+            <img src={this.state.avatarURL} className="user-profile-image" alt="User profile" />
+          }
+>>>>>>> commitValueBranch
           <FileUploader
             accept="image/*"
             name="avatar"

@@ -24,6 +24,9 @@ class UpcomingGig extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            changed: false,
+            usercommitment: this.props.attendance.filter((x) => x.ShowcaseId === this.props.gig.id)[0] ? 
+                    this.props.attendance.filter((x) => x.ShowcaseId === this.props.gig.id)[0].commitValue : 0,
             usercommitted: this.props.usercommitted,
             modalIsOpen: false
         };
@@ -32,48 +35,104 @@ class UpcomingGig extends React.Component {
         this.closeModal = this.closeModal.bind(this);
     }
 
+    componentWillReceiveProps() {
+        if (!this.state.changed) this.setState({
+          usercommitted: this.props.usercommitment,
+        })
+      }
 
-        openModal() {
-            this.setState({modalIsOpen: true});
+      openModal() {
+        this.setState({modalIsOpen: true});
+    }
+
+    afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // this.subtitle.style.color = '#f00';
+    }
+
+    closeModal() {
+        this.setState({modalIsOpen: false});
+    }
+
+      renderCommitmentForm(){
+        if (!this.state.usercommitment) { 
+            return(
+                <form>
+                    <input id="commits" 
+                        type="number"
+                        defaultValue={this.state.value}
+                        onChange={(e) => {
+                            this.setState({formvalue: e.target.value})
+                        }} />
+                    {this.renderButton()}
+                </form>    
+            )
+        } else {
+            return(
+                <div> 
+                    <div>
+                        {`User commitment: $ ${this.state.usercommitment ? this.state.usercommitment : 0}`}
+                    </div>
+                    <div>
+                        {this.renderButton('committed')}
+                    </div>
+                </div>
+            )
         }
+    };
 
-        afterOpenModal() {
-            // references are now sync'd and can be accessed.
-            // this.subtitle.style.color = '#f00';
+
+    renderButton(status) {
+        if (status !== 'committed') {
+            return (<div className="m-1">
+                        <button type="submit" 
+                            key={this.props.gig.id}
+                            className="btn btn-primary btn-sm"
+                            onClick={(e) => {
+                                this.handleSubmit(e)} }>
+                            Pitch In
+                        </button>
+                    </div>
+            )
+        } else {
+            return (<div className="m-1">
+                        <button
+                            className="btn btn-warning btn-sm"
+                            onClick={(e) => {
+                                this.handleSubmit(e)} }>
+                            Withdraw Funding
+                        </button>
+                    </div>)
         }
-
-        closeModal() {
-            this.setState({modalIsOpen: false});
-        }
-
-    renderButton() {
-        // console.log('PotentialGig.jsx this.props in renderButton() method')
-        // console.log(this.props); 
-        if (!this.state.usercommitted) {
-            return (
-                <div>
-                    <button className="btn btn-info my-2 my-sm-0" onClick={(e) => this.commitButton(e, this.props.info.id, this.props.gig.id)}>
-                        Commit
-                    </button>
-                </div>)
-        } else if (this.state.usercommitted) {
-            return (<div><button className="btn btn-warning my-2 my-sm-0" onClick={(e) => this.uncommitButton(e, this.props.info.id, this.props.gig.id)}>Uncommit</button></div>)
+    };
+    
+    handleSubmit(e) {
+        if (this.state.usercommitment) {
+            this.uncommitButton(e, this.props.info.id, this.props.gig.id, 0)
+        } else {
+            this.commitButton(e, this.props.info.id, this.props.gig.id, this.state.formvalue)
         }
     }
-    
-    commitButton(e, user, gig) {
-        // e.preventDefault();
-        this.props.onCommitClick(user, gig)
-        this.setState({usercommitted: !this.state.usercommitted});
+
+    commitButton(e, user, gig, amount) {
+        this.props.onCommitClick(user, gig, amount)
+        this.setState({
+            usercommitment: parseInt(amount,10) ? parseInt(amount,10) : 0, 
+            usercommitted: true,
+            changed: true
+        })
     }
 
     uncommitButton(e, user, gig) {
         this.props.onUncommitClick(user, gig)
-        this.setState({usercommitted: !this.state.usercommitted});
+        this.setState({usercommitment: 0, usercommitted: false, changed: true})
     }
 
     render() {
-        // console.log('Upcoming Gig this.props: ', this.props);
+        console.log('re-render: ========================')
+        console.log('Upcoming Gig this.props: ', this.props);
+        console.log('Upcoming Gig this.state: ', this.state);
+        
         if (this.props.users.length > 0) {
             return (
                 <div className="container border p-3 m-1 small" key={this.props.gig.id}>
@@ -118,10 +177,16 @@ class UpcomingGig extends React.Component {
                           <ProgressComponent percent={100} />
                         </div>
                         <div className="potential-gig-commit-button">
+
                             {/*instead of commit button it should just be an attend button */}
                             {this.renderButton()}
                         </div>
+
+                            {this.renderCommitmentForm()}
+
                         </div>
+                    </div>
+                    
               </div>)
         } else {
             return(<div></div>)
@@ -139,15 +204,10 @@ function mapStateToProps({ auth, attendance, users, info }){
   }
 
 
-const mapDispatchToProps = dispatch => {
-    //console.log('mapdispatch to props: ', dispatch);
+  const mapDispatchToProps = dispatch => {
     return {
-        init: (e) => {
-            dispatch(fetchAllUsers())
-        },
-      onCommitClick: (user, gig) => {
-        //console.log('onFetchClick id: ', id)
-        dispatch(commitToEvent(user, gig))
+      onCommitClick: (user, gig, amount) => {
+        dispatch(commitToEvent(user, gig, amount ? amount : 0))
       },
       onUncommitClick: (user, gig) => {
         dispatch(uncommitFromEvent(user, gig))
