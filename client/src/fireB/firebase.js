@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import keys from './fKeys';
-import axios from 'axios';
+// import axios from 'axios';
 
 const config = {
   apiKey: keys.apiKey,

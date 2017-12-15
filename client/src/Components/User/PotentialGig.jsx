@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import ProgressComponent from './ProgressComponent';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { commitToEvent, uncommitFromEvent, fetchAllUsers } from '../../actions/index';
+import { commitToEvent, uncommitFromEvent } from '../../actions/index';
 import ShowcaseInfo from '../ShowDescription';
 
 const customStyles = {
@@ -15,12 +15,12 @@ const customStyles = {
       marginRight           : '-50%',
       transform             : 'translate(-50%, -50%)'
     }
-  };
-
+};
 
 class PotentialGig extends React.Component {
     constructor(props) {
         super(props);
+    
         this.state = {
             commits: this.props.gig.commits,
             usercommitted: this.props.usercommitted,
@@ -41,35 +41,94 @@ class PotentialGig extends React.Component {
     }
 
     closeModal() {
-        this.setState({modalIsOpen: false});
+        this.setState({modalIsOpen: false,
+            changed: false,
+            usercommitment: this.props.attendance.filter((x) => x.ShowcaseId === this.props.gig.id)[0] ? 
+                    this.props.attendance.filter((x) => x.ShowcaseId === this.props.gig.id)[0].commitValue : 0
+        })
     }
 
-    renderButton() {
-        // console.log('PotentialGig.jsx this.props in renderButton() method')
-        // console.log(this.props); 
-        if (!this.state.usercommitted) {
-            return (<div><button className="btn btn-info my-2 my-sm-0" onClick={(e) => this.commitButton(e, this.props.info.id, this.props.gig.id)}>Commit</button></div>)
-        } else if (this.state.usercommitted) {
-            return (<div><button className="btn btn-info my-2 my-sm-0" onClick={(e) => this.uncommitButton(e, this.props.info.id, this.props.gig.id)}>Uncommit</button></div>)
+    componentWillReceiveProps() {
+      if (!this.state.changed) this.setState({
+        usercommitted : this.props.usercommitted,
+        usercommitment: this.props.attendance.filter((x) => x.ShowcaseId === this.props.gig.id)[0] ? 
+        this.props.attendance.filter((x) => x.ShowcaseId === this.props.gig.id)[0].commitValue : 0})
+    }
+
+    renderCommitmentForm(){
+        if (this.state.usercommitment === 0 || this.state.usercommitment === null) { 
+            return(
+                <form>
+                    <input id="commits" 
+                        type="number"
+                        defaultValue={this.state.value}
+                        onChange={(e) => {
+                            this.setState({formvalue: e.target.value})
+                        }} />
+                    {this.renderButton('uncommitted')}
+                </form>    
+            )
+        } else {
+            return(
+                <div> 
+                    <div>
+                        {`User commitment: $ ${this.state.usercommitment ? this.state.usercommitment : 0}`}
+                    </div>
+                    <div>
+                        {this.renderButton('committed')}
+                    </div>
+                </div>
+            )
+        }
+    };
+
+    renderButton(status) {
+        if (status !== 'committed') {
+            return (<div className="m-1">
+                        <button type="submit" 
+                            key={this.props.gig.id}
+                            className="btn btn-primary btn-sm"
+                            onClick={(e) => {
+                                this.handleSubmit(e)} }>
+                            Commit
+                        </button>
+                    </div>
+            )
+        } else {
+            return (<div className="m-1">
+                        <button
+                            className="btn btn-warning btn-sm"
+                            onClick={(e) => {
+                                this.handleSubmit(e)} }>
+                            Uncommit
+                        </button>
+                    </div>)
+        }
+    };
+
+    
+    handleSubmit(e) {
+        if (this.state.usercommitment) {
+            this.uncommitButton(e, this.props.info.id, this.props.gig.id, 0)
+        } else {
+            this.commitButton(e, this.props.info.id, this.props.gig.id, this.state.formvalue)
         }
     }
 
-    commitButton(e, user, gig) {
-        // e.preventDefault();
-        this.props.onCommitClick(user, gig)
-        this.setState({commits: this.state.commits + 1})
-        this.setState({usercommitted: !this.state.usercommitted});
+    commitButton(e, user, gig, amount) {
+        this.props.onCommitClick(user, gig, amount)
+        this.setState({usercommitment: amount, usercommitted: true, changed: true})
     }
 
     uncommitButton(e, user, gig) {
         this.props.onUncommitClick(user, gig)
-        this.setState({commits: this.state.commits - 1});
-        this.setState({usercommitted: !this.state.usercommitted});
+        this.setState({usercommitment: 0, usercommitted: false, changed: true})
     }
-
+    
     render() {
-                if (this.props.users.length > 0) {
-            let percent = ((this.state.commits / this.props.gig.min_commits)*100);
+        //console.log('potential gig this.state: ', this.state);
+        if (this.props.users.length > 0) {
+            let percent = ((this.props.gig.commits / this.props.gig.min_commits)*100);
             return (
                 <div className="container border p-3 m-1 small">
                     <div className="potential-gig-wrapper">
@@ -99,8 +158,6 @@ class PotentialGig extends React.Component {
                         <div className="potential-gig-daterange">
                             {this.props.gig.city ? this.props.gig.city : 'No city specified.'}<br />
                             Daterange placeholder<br />
-                            {/* {this.props.gig.start_date} to<br />
-                            {this.props.gig.end_date} */}
                         </div>
                         <div className="text-success potential-gig-commit-number"> 
                           {this.state.commits} of {this.props.gig.min_commits} commits!
@@ -108,15 +165,23 @@ class PotentialGig extends React.Component {
                         <div className="potential-gig-progress-bar">
                           <ProgressComponent percent={percent} />
                         </div>
+                        <div className="potential-gig-money-commit-value">
+                        </div>
                         <div className="potential-gig-commit-button">
-                            {this.renderButton()}
+                            <div>
+                                <div className={`commit-value-form`}>
+                                  {this.renderCommitmentForm()}
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>)
-        } else {
-            return(<div></div>)
-        }
-    } 
+                    } else {
+                        return(<div></div>)
+                    }
+                }
+                    
 }
 
 function mapStateToProps({ auth, attendance, users, info }){
@@ -129,14 +194,9 @@ function mapStateToProps({ auth, attendance, users, info }){
   }
 
 const mapDispatchToProps = dispatch => {
-    //console.log('mapdispatch to props: ', dispatch);
     return {
-        init: (e) => {
-            dispatch(fetchAllUsers())
-        },
-      onCommitClick: (user, gig) => {
-        //console.log('onFetchClick id: ', id)
-        dispatch(commitToEvent(user, gig))
+      onCommitClick: (user, gig, amount) => {
+        dispatch(commitToEvent(user, gig, amount))
       },
       onUncommitClick: (user, gig) => {
         dispatch(uncommitFromEvent(user, gig))

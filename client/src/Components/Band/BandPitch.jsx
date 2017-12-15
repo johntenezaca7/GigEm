@@ -2,8 +2,8 @@ import React from 'react';
 //import { connect } from 'react-redux';
 import { Field, reduxForm, Fields } from 'redux-form';
 // import ProgressComponent from './ProgressComponent';
-import moment from 'moment'
-import Datetime from 'react-datetime';
+//import moment from 'moment'
+//import Datetime from 'react-datetime';
 import DateRangePickerWrapper from './DateRangePickerWrapper';
 import SingleDatePicker from './SingleDatePicker';
 
