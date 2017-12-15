@@ -25,7 +25,8 @@ class PotentialGig extends React.Component {
         this.state = {
             commits: this.props.gig.commits,
             usercommitted: this.props.usercommitted,
-            modalIsOpen: false
+            modalIsOpen: false,
+            pitchValue: '',
         }
         this.openModal = this.openModal.bind(this);
         this.afterOpenModal = this.afterOpenModal.bind(this);
@@ -64,7 +65,7 @@ class PotentialGig extends React.Component {
                         type="number"
                         defaultValue={this.state.value}
                         onChange={(e) => {
-                            this.setState({formvalue: e.target.value})
+                            this.setState({pitchValue: e.target.value})
                         }} />
                     {this.renderButton('uncommitted')}
                 </form>    
@@ -169,17 +170,10 @@ class PotentialGig extends React.Component {
                         <div className="potential-gig-money-commit-value">
                         </div>
                         <div className="potential-gig-commit-button">
-
-                            <Payment />
-                            {this.renderButton()}
-
-                            <div>
                                 <div className={`commit-value-form`}>
                                   {this.renderCommitmentForm()}
+                                  <Payment pitchValue={this.state.pitchValue}/>
                                 </div>
-                            </div>
-
-
                         </div>
                     </div>
                 </div>)

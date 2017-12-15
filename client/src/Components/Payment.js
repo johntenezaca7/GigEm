@@ -25,8 +25,8 @@ class Payments extends Component {
         return(
             <StripeCheckout 
                 name="Gig'em "
-                description="Support this gig with $2!"
-                amount={200}
+                description={`Support this gig with ${this.props.pitchValue}!`}
+                amount={this.props.pitchValue * 100}
                 token={token =>{this.props.handleToken(token)}}
                 stripeKey = {Publish.key} >
          
