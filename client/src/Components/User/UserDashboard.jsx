@@ -57,17 +57,18 @@ class UserDashboard extends React.Component {
       return (
         <div >
           <div className="google-maps">
-                 <div></div>
+                 {/* <div></div> */}
                 <div className="inside-map">
                   <Map
                   
                     show={this.changeState}
                     geoLoc={this.state.locations}  
                     center={{lat:40.728199 , lng:-73.9894738}}
-                    containerElement={<div style={{ height: `400px` }}/>}
+                    containerElement={<div style={{ height: `400px` }} />}
                     mapElement={<div style={{ height: `100%`}}/>}   
                     />  
                   </div>    
+                  {/* <div></div> */}
            </div>
            <div className="upComing-Po-Gigs">
              <div>
