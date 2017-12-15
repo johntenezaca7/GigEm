@@ -33,7 +33,10 @@ module.exports = (app, db) => {
     app.get('/api/all_users', (req, res) => {
         // console.log('getting current user', req.user)
         dbDef.User.findAll({})
-        .then((users) => res.send(users))
+        .then((users) => {
+            console.log('ZOOYORK', JSON.stringify(users))
+            res.send(users) 
+        })
     });
 
 };
