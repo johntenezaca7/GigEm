@@ -6,6 +6,7 @@ import { SubmissionError, reset } from 'redux-form';
 import {
     BrowserRouter as Router,
     Route,
+    Redirect
     // Link
   } from 'react-router-dom'
 
@@ -100,6 +101,7 @@ import BandPitch from './BandPitch';
         // THIS IS THE ONLY THING CURRENTLY WORKING
         event.eventName = '';
         console.log("PENULTIMATE EVENT PHASE: ", event)
+        this.setState({eventcomplete: true});
         // for (let i in event) {
         //   console.log("PENULTIMATE: ", i)
         //   if (typeof event.i === "string") {
@@ -136,9 +138,10 @@ import BandPitch from './BandPitch';
     }
 
     render() {
-      // console.log('DASH STATE:', this.state);
-      
-      // console.log('DASH PROPS:', this.props);
+      if (this.state.eventcomplete) {
+        return( <Redirect to="/band" /> )
+      }
+
     return (
         <Router>
             <div className="band-dashboard">
