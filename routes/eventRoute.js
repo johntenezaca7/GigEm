@@ -1,5 +1,5 @@
 const dbDef = require('../db/index');
-const paypal = require('../services/paypal');
+// const paypal = require('../services/paypal');
 module.exports = (app, db) => {
 
   // const addEvent = (req, callback) => {
