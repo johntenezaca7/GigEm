@@ -187,7 +187,7 @@ class UpcomingGig extends React.Component {
                         </div>
                     </div>
                     
-              </div>)
+            )
         } else {
             return(<div></div>)
         }
