@@ -17,31 +17,9 @@ import SingleDatePicker from './SingleDatePicker';
 //   if (!values.eventName) {
 //     errors.name = 'Required'
 //   } 
-//   else if (values.eventName.length < 15) {
-//     errors.name = 'Must be over 15 characters'
-//   }
-  // if (!values.email) {
-  //   errors.email = 'Required'
-  // } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-  //   errors.email = 'Invalid email address'
-  // }
-  // if (!values.age) {
-  //   errors.age = 'Required'
-  // } else if (isNaN(Number(values.age))) {
-  //   errors.age = 'Must be a number'
-  // } else if (Number(values.age) < 18) {
-  //   errors.age = 'Sorry, you must be at least 18 years old'
-  // }
 //   return errors
 // }
 
-// const warn = values => {
-//   const warnings = {}
-//   if (values.age < 19) {
-//     warnings.age = 'Hmm, you seem a bit young...'
-//   }
-//   return warnings
-// }
 
 const renderField = ({
   input,
@@ -266,7 +244,6 @@ const renderDate = ({ input, label, type, meta }) => {
 
   )
 } 
-//}
 
 BandPitch = reduxForm({
   form: 'pitchGigForm'
@@ -274,85 +251,3 @@ BandPitch = reduxForm({
 })(BandPitch);
 
 export default BandPitch;
-
-// class BandPitch extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//           user: '',
-//           getFunc: '',
-//           fetched: false,
-//           temp: "",
-//           name: ''
-          
-//         };
-//     }
-
-// function mapStateToProps(state) {
-//   // console.log('REDUCERS STATES IN BADPITCH:', state)
-//   return {
-//     auth: state.auth,
-//     userInfo: state.info
-//   }
-// }
-
-// const asyncValidate = (values) => {
-//     return Promise.reject('errors');
-  
-// }
-
-// connect(mapStateToProps, actions)(BandPitch);
-
-
-// <div className="form-inline">
-//                           {/* <div className="col col-md-auto"> */}
-//                           <div>
-//                             <label className="text-left">Location</label>
-//                           </div>
-//                           {/* </div> */}
-//                           {/* <div className="col "> */}
-                          
-//                             <input type="email" className="form-control mt-1 form-control-sm justify-content-end" 
-//                             id="exampleInputEmail1" aria-describedby="emailHelp" placeholder='hi' />
-//                           {/* </div> */}
-//                         </div>
-//                         <div className="form-inline">
-//                           {/* <div className="col col-md-auto"> */}
-//                             <label >Available Dates</label>
-//                           {/* </div> */}
-//                           {/* <div className="col"> */}
-//                             <Datetime />
-//                           {/* </div> */}
-//                         </div>
-//                         <div className="form-inline ">
-//                           {/* <div className="col col-md-auto"> */}
-//                           <label>Notes</label>
-//                             <input type="email" className="form-control mt-1 form-control-sm  justify-content-end" 
-//                             id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-//                         </div>
-
-//                     </div>
-//                     <div className="col-sm text-right">
-//                         <div className="form-inline">
-//                             {/* <div className="col col-6"> */}
-//                               <label className="text-left">Commits Needed</label>
-//                             {/* </div> */}
-//                             {/* <div className="col"> */}
-//                               <input type="email" className="form-control mt-1 form-control-sm justify-content-right" 
-//                               id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-//                             {/* </div> */}
-//                         </div>
-//                         <div className="form-inline">
-//                           {/* <div className="col"> */}
-//                             <label>By</label>
-//                             {/* <div className="col align-self-end text-right"> */}
-//                             <Datetime />
-//                           {/* </div> */}
-//                         </div>
-//                         <div className="button-block">
-//                           <button type="submit" className ="btn btn-secondary">Submit</button>
-//                         </div>
-//                     </div>
-//                 </div> 
-//               </div>
-//             // </div
