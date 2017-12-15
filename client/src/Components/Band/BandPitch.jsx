@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 //import { connect } from 'react-redux';
-import { Field, reduxForm, Fields } from 'redux-form';
+import { Field, reduxForm, Fields, reset } from 'redux-form';
 // import ProgressComponent from './ProgressComponent';
 import moment from 'moment'
 import Datetime from 'react-datetime';
@@ -10,15 +11,15 @@ import SingleDatePicker from './SingleDatePicker';
 //import * as actions from '../../actions'
 //import { networkInterfaces } from 'os';
 
-const validate = values => {
-  console.log("VALIDATE VALUES: ", values);
-  const errors = {}
-  if (!values.eventName) {
-    errors.name = 'Required'
-  } 
-  else if (values.eventName.length < 15) {
-    errors.name = 'Must be over 15 characters'
-  }
+// const validate = values => {
+//   console.log("VALIDATE VALUES: ", values);
+//   const errors = {}
+//   if (!values.eventName) {
+//     errors.name = 'Required'
+//   } 
+//   else if (values.eventName.length < 15) {
+//     errors.name = 'Must be over 15 characters'
+//   }
   // if (!values.email) {
   //   errors.email = 'Required'
   // } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
@@ -31,8 +32,8 @@ const validate = values => {
   // } else if (Number(values.age) < 18) {
   //   errors.age = 'Sorry, you must be at least 18 years old'
   // }
-  return errors
-}
+//   return errors
+// }
 
 // const warn = values => {
 //   const warnings = {}
@@ -65,7 +66,7 @@ const renderField = ({
 let BandPitch = props => {
 
 const renderDates = fields => {
-  console.log("DATESSSS ARGS: ",fields);
+  // console.log("DATESSSS ARGS: ",fields);
   return  (
   <div>    
   <DateRangePickerWrapper
@@ -77,7 +78,7 @@ const renderDates = fields => {
 )};
 const renderDate = ({ input, label, type, meta }) => {
 
-  console.log("renderDate args: ", input)
+  // console.log("renderDate args: ", input)
 // const renderDate = fields => (
   return (
   <SingleDatePicker
@@ -97,7 +98,7 @@ const renderDate = ({ input, label, type, meta }) => {
 // };
 
               
-  console.log('props', props)
+  // console.log('props', props)
   return (
     
     <div className="container container-fluid border p-3 small" >
@@ -268,8 +269,8 @@ const renderDate = ({ input, label, type, meta }) => {
 //}
 
 BandPitch = reduxForm({
-  form: 'pitchGigForm',
-  validate
+  form: 'pitchGigForm'
+  // validate
 })(BandPitch);
 
 export default BandPitch;
