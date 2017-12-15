@@ -1,11 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-//import moment from 'moment';
-import { SubmissionError } from 'redux-form';
-
-
-
+import moment from 'moment';
+import { SubmissionError, reset } from 'redux-form';
 import {
     BrowserRouter as Router,
     Route,
@@ -21,8 +18,8 @@ import BandToFinalize from './BandToFinalize'
 import BandPitch from './BandPitch';
 
  class BandDashboard extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
         this.state = {
           finalCommitDate: ''
         };
@@ -31,41 +28,103 @@ import BandPitch from './BandPitch';
         this.dateGrab = this.dateGrab.bind(this);
     }
 
+    // this function does A LOT: 
+    // takes in a event from redux-form on BandPitch.js
+      // prevents event submission if no eventName or start date
+      // marks event TBD if No Venue box is checked
+      // adds a venue for every event
+      // formats phone # entry with regex
+      // creates new event
+        // emails user with event details
+      // updates user profile with phone number if added
+        // sends user text confirmation with event name
+      
+        // NEEDS TO DO:
+          // best case - redirect user to newEvent page on successful submisson
+          // worst case - clear form event fields after successful submission
     handleSubmit(event) {
       // event.preventDefault()
       event.UserId = this.props.bandInfo.id;
       event.finalCommitDate = this.state.finalCommitDate; 
-      console.log("SUBMITTED", event );
-      
+      // console.log("SUBMITTED", event );
+      // prevents event submission if no eventName or start date
       if (!event.eventName || !event.start) {
         throw new SubmissionError({ eventName: <b>ALL EVENTS NEEDS A NAME AND START DATE</b>, _error: 'Submission failed!' })   
+      } else {
+      // marks event TBD if No Venue box is checked
+      if (event.hasNoVenue) {
+        event.venueName = "TBD";
+        event.venueDescription = `This event needs a venue. 
+        If you would like to host this venue please reach out to us.`
       }
-      // else if (!event.start) {
-      //   throw new SubmissionError({ start: <b>YOUR EVENT NEEDS A START DATE</b>, _error: 'Submission failed!' })   
-      // }
-    
+      // adds a venue for every event
       this.props.addNewVenue(event)
       .then(() => {
         // console.log("PROMISED EVENT", event);
         event.VenueId = this.props.venueInfo.id;
+        
+        event.formatPhoneNumber = (s) => {
+          var s2 = (""+s).replace(/\D/g, '');
+          var m = s2.match(/^(\d{3})(\d{3})(\d{4})$/);
+          return (!m) ? null : m[1] + m[2]  + m[3];
+        }
+        // formats phone # entry with regex
+        event.phone = event.formatPhoneNumber(event.phone);
+        // creates new event
         this.props.addNewEvent(event)
         .then(() => {
           event.email = this.props.bandInfo.email;
           event.toName = this.props.bandInfo.name;
           event.eventId = this.props.event.id;
           // console.log("PROMISED PROPS BEFORE EMAIL", this.props);
-          this.props.sendNewEventEmail(event)
+          // this.props.sendNewEventEmail(event)
         });
       })
       .then(() => {
-        this.props.editUserProfile({phone: event.phone})
-        .then(() => {
-          console.log("PROMISED PROPS BEFORE TEXT", this.props);
-          // event.phone = this.props.
-          this.props.sendNewEventText(event)
-        })
+        // check for a phone entry with 10 chars
+        if (!event.phone || event.phone.length < 10) {
+          // maybe do something, maybe do nothing
+        } else {
+          // for phone #s with 10char or more, update user profile and send text                    
+          this.props.editUserProfile({phone: event.phone})
+          .then(() => {
+              console.log("PROMISED PROPS BEFORE TEXT", this.props);                    
+
+              console.log("EVENT BEFORE SENDING TEXT", event);
+              // this.props.sendNewEventText(event)
+          })
+        }
       })
+      .then(() => {
+        // Here's where we need to reset to form or reroute to event page
+        // THIS IS THE ONLY THING CURRENTLY WORKING
+        event.eventName = '';
+        console.log("PENULTIMATE EVENT PHASE: ", event)
+        // for (let i in event) {
+        //   console.log("PENULTIMATE: ", i)
+        //   if (typeof event.i === "string") {
+            
+        //     event.i = '';
+        //   } else {
+        //     event.i = null;
+        //   }
+        // }
+      })
+    }
+    // STUFF I TRIED THAT DOENST WORK YET
+      // this.context.router.history.push("/user");
       
+      // .then(() => {
+      //   event.eventName = ''
+      //   // this.props.reset()
+      //   // thi(null, '/user')
+      //   // event.resetForm();
+      //   // res.send()
+      // })
+   
+    // this.reset()
+    // event.eventDescription.reset()    
+    // this.props.resetForm();  
     };
 
     dateGrab(date) {
@@ -77,8 +136,9 @@ import BandPitch from './BandPitch';
     }
 
     render() {
-
-      console.log('DASH PROPS:', this.props);
+      // console.log('DASH STATE:', this.state);
+      
+      // console.log('DASH PROPS:', this.props);
     return (
         <Router>
             <div className="band-dashboard">
