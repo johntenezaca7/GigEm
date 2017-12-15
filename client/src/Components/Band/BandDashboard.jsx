@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import moment from 'moment';
-import { SubmissionError, reset } from 'redux-form';
+// import moment from 'moment';
+import { SubmissionError } from 'redux-form';
 import {
     BrowserRouter as Router,
     Route,

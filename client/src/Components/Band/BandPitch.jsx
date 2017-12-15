@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 //import { connect } from 'react-redux';
-import { Field, reduxForm, Fields, reset } from 'redux-form';
+import { Field, reduxForm, Fields } from 'redux-form';
 // import ProgressComponent from './ProgressComponent';
 //import moment from 'moment'
 //import Datetime from 'react-datetime';

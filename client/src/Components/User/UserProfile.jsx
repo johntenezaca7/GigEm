@@ -23,8 +23,9 @@ const customStyles = {
 class UserProfile extends React.Component {
     constructor(props) {
         super(props);
-        this.state = Object.assign({}, this.props, {ModalIsOpen: false});
-
+        this.state = {
+          modalIsOpen: false
+        }
         this.props.init();
         this.openModal = this.openModal.bind(this);
         this.afterOpenModal = this.afterOpenModal.bind(this);
@@ -47,14 +48,6 @@ class UserProfile extends React.Component {
 
     componentWillMount() {
       this.props.init();
-    }
-
-    componentWillReceiveProps() {
-      // this.props.init();
-      this.setState({userAttendance: this.props.attendance.length > 0 ? 
-        this.props.attendance
-        .filter((x) => x.UserId === this.props.info.id) 
-        .map((x) => x = x.ShowcaseId) : []});
     }
 
 
@@ -84,7 +77,14 @@ class UserProfile extends React.Component {
     }
     
 
-    render() {      
+    render() {
+      
+      console.log('userProfile props: ', this.props);
+      let userAttendance = this.props.attendance.length > 0 ? 
+      this.props.attendance
+      .filter((x) => x.UserId === this.props.info.id) 
+      .map((x) => x = x.ShowcaseId) : [];
+      
       if(this.props.info){
         return (
           <div>
@@ -168,26 +168,16 @@ class UserProfile extends React.Component {
                       <h3>Upcoming Shows</h3>
                       <div className="band-show-scroll">
                         {this.props.events
-                          .filter((x) => this.state.userAttendance.includes(x.id) && x.isCommitted === true)
-                          .map((x) => <UpcomingGig 
-                                        user={this.props.info.id} 
-                                        key={x.id} 
-                                        gig={x} 
-                                        usercommitted={this.state.userAttendance.includes(x.id)}/>)
+                          .filter((x) => userAttendance.includes(x.id) && x.isCommitted === true)
+                          .map((x) => <UpcomingGig user={this.props.info.id} key={x.id} gig={x} usercommitted={userAttendance.includes(x.id)}/>)
                         }
                       </div>
                       <br />
                       <h3>Potential Gigs</h3>
                       <div className="band-show-scroll">
                         {this.props.events
-                            .filter((x) => this.state.userAttendance.includes(x.id) && x.isCommitted === false)
-                            .map((x) => <PotentialGig 
-                                          user={this.props.info.id} 
-                                          users={this.props.users}
-                                          key={x.id} 
-                                          gig={x} 
-                                          attendance={this.props.attendance}
-                                          usercommitted={this.state.userAttendance.includes(x.id)}/>)
+                            .filter((x) => userAttendance.includes(x.id) && x.isCommitted === false)
+                            .map((x) => <PotentialGig user={this.props.info.id} key={x.id} gig={x} usercommitted={userAttendance.includes(x.id)}/>)
                           }
                       </div>
                   </div>          
@@ -200,12 +190,12 @@ class UserProfile extends React.Component {
     }
 }
 
-function mapStateToProps({ events, attendance, auth, info, users  }){
+function mapStateToProps({events, attendance, auth, info  }){
     return {
       attendance: attendance,
       events: events,
       info: info,
-      users: users
+      events: events
      }
   }
   
