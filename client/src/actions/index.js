@@ -32,8 +32,8 @@ export const fetchMyEvents = () => async dispatch => {
     dispatch({ type: types.FETCH_EVENTS, payload: res.data })
 }
 
-export const commitToEvent = (user, gig) => async dispatch => {
-    const res = await axios.post('/api/commit', {'user': user, 'gig': gig} );
+export const commitToEvent = (user, gig, amount) => async dispatch => {
+    const res = await axios.post('/api/commit', {'user': user, 'gig': gig, 'amount' : amount} );
     dispatch({ type: types.COMMIT_TO_EVENT, payload: res.data })
 }
 

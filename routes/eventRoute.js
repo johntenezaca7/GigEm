@@ -1,5 +1,5 @@
 const dbDef = require('../db/index');
-
+const paypal = require('../services/paypal');
 module.exports = (app, db) => {
 
   // const addEvent = (req, callback) => {
@@ -25,8 +25,6 @@ module.exports = (app, db) => {
   app.post('/api/myEvents', (req, res) =>{
     dbDef.Showcase.findAll({include: [{Model: dbDef.Attendance}]})
     .then((data) => {
-      // console.log('found showcases: ', console.log(data))
-      // console.log('myevents data: ', data);
       res.send(data);
     })
   });
@@ -34,33 +32,41 @@ module.exports = (app, db) => {
   app.post('/api/commit', (req, res) => {
     console.log('/api/commit UserId', req.body.user);
     console.log('/api/commit ShowcaseId', req.body.gig);
-    dbDef.Attendance.create({
-      UserId: req.body.user,
-      ShowcaseId: req.body.gig
+    console.log('/api/commit Commit Amount:', req.body.amount);
+
+    dbDef.Attendance
+    .findOne({where: {'UserId': req.body.user, 'ShowcaseId': req.body.gig}})
+    .then((attendance) => {
+      if (attendance) {
+        attendance.update({'commitValue': req.body.amount})
+      } else {
+        dbDef.Attendance.create({
+          UserId: req.body.user,
+          ShowcaseId: req.body.gig,
+          commitValue: req.body.amount
+        });
+      }
     })
-    
     .then(dbDef.Attendance.findAll()
     .then((attendance) => {
-      let returnValue = attendance
-      // .filter((x) => x.UserId === req.user)
-      // .reduce((memo, item) => {
-      //   memo.push(item.ShowcaseId)
-      //   return memo;
-      // }, []);
-      attendance ? res.send(returnValue) : res.send(returnValue)
-    }))
+      attendance ? res.send(attendance) : res.send(null);
+    }));
 
-    dbDef.Showcase.findOne({where: {'id': req.body.gig}})
+    dbDef.Showcase
+    .findOne({where: {'id': req.body.gig}})
     .then((show) => {
       show.update({
-        commits: show.dataValues.commits + 1
-      })
-    }) 
+          commits: show.dataValues.commits + 1,
+          currentCommitValue: show.dataValues.currentCommitValue + req.body.amount
+      });
+    });
   });
 
   app.post('/api/uncommit', (req, res) => {
     console.log('/api/uncommit UserId', req.body.user);
     console.log('/api/uncommit ShowcaseId', req.body.gig);
+
+
     dbDef.Attendance.findOne({
       where: {
         UserId: req.body.user, 
@@ -95,14 +101,7 @@ module.exports = (app, db) => {
     // console.log(req.body);
     dbDef.Attendance.findAll()
     .then((attendance) => {
-      let returnValue = attendance
-      // .filter((x) => x.UserId === req.user)
-      // .reduce((memo, item) => {
-      //   memo.push(item.ShowcaseId)
-      //   return memo;
-      // }, []);
-      // console.log('commitCheck returnValue: ', returnValue);
-      attendance ? res.send(returnValue) : res.send(returnValue)
+      res.send(attendance);
     })
   })
 

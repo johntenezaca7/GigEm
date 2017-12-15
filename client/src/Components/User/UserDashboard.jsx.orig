@@ -19,15 +19,48 @@ class UserDashboard extends React.Component {
           show: false
         };
         this.props.init();
+<<<<<<< HEAD
+       this.changeState = this.changeState.bind(this);
+    }
+    componentWillMount() {
+      this.props.onFetchClick();
+      
+=======
     }
     
     componentWillRecieveProps() {
       (this.props.init());
+>>>>>>> commitValueBranch2
     }
     
     fetchEvents(e) {
       e.preventDefault();
       this.props.onFetchClick();
+<<<<<<< HEAD
+    }
+    
+    componentDidMount() {
+      
+      this.props.checkAttendanceDispatch(this.props.auth.id);
+     
+      if(this.props.events){
+        this.props.events.map((place, id) => {
+              // const showInfo = false;
+            axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${place.address},%20NY%2010017&key=AIzaSyCn1886_Sxx7XVDi4xAjhKCKigLJyoxtvU`)
+              .then(res => this.state.locations.push([res.data.results[0].geometry.location, place, {showInfo: false}]))
+            })
+      }
+    }
+    changeState(info){
+      // info = false;
+      this.setState({
+        show:true
+      })
+    }
+
+    render() {
+      // console.log('loca', this.state.locations)
+=======
     }  /* */
 
     render() { 
@@ -36,6 +69,7 @@ class UserDashboard extends React.Component {
       .filter((x) => x.UserId === this.props.info.id) 
       .map((x) => x = x.ShowcaseId) : [];
 
+>>>>>>> commitValueBranch2
       return (
         <div >
           <div className="google-maps">

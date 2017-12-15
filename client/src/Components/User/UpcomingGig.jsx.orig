@@ -23,9 +23,7 @@ class UpcomingGig extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            changed: false,
-            usercommitment: this.props.attendance.filter((x) => x.ShowcaseId === this.props.gig.id)[0] ? 
-                    this.props.attendance.filter((x) => x.ShowcaseId === this.props.gig.id)[0].commitValue : 0,
+<<<<<<< HEAD
             usercommitted: this.props.usercommitted,
             modalIsOpen: false
         };
@@ -34,24 +32,44 @@ class UpcomingGig extends React.Component {
         this.closeModal = this.closeModal.bind(this);
     }
 
+
+        openModal() {
+            this.setState({modalIsOpen: true});
+        }
+
+        afterOpenModal() {
+            // references are now sync'd and can be accessed.
+            // this.subtitle.style.color = '#f00';
+        }
+
+        closeModal() {
+            this.setState({modalIsOpen: false});
+        }
+
+    renderButton() {
+        // console.log('PotentialGig.jsx this.props in renderButton() method')
+        // console.log(this.props); 
+        if (!this.state.usercommitted) {
+            return (
+                <div>
+                    <button className="btn btn-info my-2 my-sm-0" onClick={(e) => this.commitButton(e, this.props.info.id, this.props.gig.id)}>
+                        Commit
+                    </button>
+                </div>)
+        } else if (this.state.usercommitted) {
+            return (<div><button className="btn btn-warning my-2 my-sm-0" onClick={(e) => this.uncommitButton(e, this.props.info.id, this.props.gig.id)}>Uncommit</button></div>)
+=======
+            changed: false,
+            usercommitment: this.props.attendance.filter((x) => x.ShowcaseId === this.props.gig.id)[0] ? 
+                    this.props.attendance.filter((x) => x.ShowcaseId === this.props.gig.id)[0].commitValue : 0
+        }
+    }
+
     componentWillReceiveProps() {
         if (!this.state.changed) this.setState({
           usercommitted: this.props.usercommitment,
         })
       }
-
-      openModal() {
-        this.setState({modalIsOpen: true});
-    }
-
-    afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    // this.subtitle.style.color = '#f00';
-    }
-
-    closeModal() {
-        this.setState({modalIsOpen: false});
-    }
 
       renderCommitmentForm(){
         if (!this.state.usercommitment) { 
@@ -77,9 +95,9 @@ class UpcomingGig extends React.Component {
                     </div>
                 </div>
             )
+>>>>>>> commitValueBranch2
         }
     };
-
 
     renderButton(status) {
         if (status !== 'committed') {
@@ -115,20 +133,15 @@ class UpcomingGig extends React.Component {
 
     commitButton(e, user, gig, amount) {
         this.props.onCommitClick(user, gig, amount)
-        this.setState({
-            usercommitment: parseInt(amount,10) ? parseInt(amount,10) : 0, 
-            usercommitted: true,
-            changed: true
-        })
+        this.setState({usercommitment: parseInt(amount,10) ? parseInt(amount,10) : 0, /*, usercommitted: true, */ changed: true})
     }
 
     uncommitButton(e, user, gig) {
         this.props.onUncommitClick(user, gig)
-        this.setState({usercommitment: 0, usercommitted: false, changed: true})
+        this.setState({usercommitment: 0, /* usercommitted: false, */ changed: true})
     }
 
     render() {
-        console.log('re-render: ========================')
         console.log('Upcoming Gig this.props: ', this.props);
         console.log('Upcoming Gig this.state: ', this.state);
         
