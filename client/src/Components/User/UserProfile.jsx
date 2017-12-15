@@ -1,32 +1,55 @@
 import React from 'react';
 import PotentialGig from './PotentialGig';
 import UpcomingGig from './UpcomingGig';
-
 import { connect } from 'react-redux';
 import { /* fetchUser, */ fetchUserProfile, fetchEvents, checkAttendance, editUserProfile } from '../../actions/index';
-
 import { /* RIEToggle, */ RIEInput, RIETextArea, /*RIENumber, RIETags, RIESelect */} from 'riek'
 import _ from 'lodash'
-
 import Profile from '../ProfilePage';
-// import FileUploader from 'react-firebase-file-uploader';
 
+import Modal from 'react-modal';
 
-// ref.orderByChild("height").equalTo(25).on("child_added", function(snapshot) {
-//   console.log(snapshot.key);
-// });
-
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
 
 class UserProfile extends React.Component {
     constructor(props) {
         super(props);
-        this.state = this.props;
+        this.state = {
+          modalIsOpen: false
+        }
         this.props.init();
+        this.openModal = this.openModal.bind(this);
+        this.afterOpenModal = this.afterOpenModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+    }
+
+
+    openModal() {
+        this.setState({modalIsOpen: true});
+    }
+
+    afterOpenModal() {
+        // references are now sync'd and can be accessed.
+        // this.subtitle.style.color = '#f00';
+    }
+
+    closeModal() {
+        this.setState({modalIsOpen: false});
     }
 
     componentWillMount() {
       this.props.init();
     }
+
 
     renderProfileType() {
       // console.log('renderProfileType this.props', this.props);
@@ -52,9 +75,11 @@ class UserProfile extends React.Component {
           )
       }
     }
+    
 
     render() {
-      // console.log('userProfile props: ', this.props);
+      
+      console.log('userProfile props: ', this.props);
       let userAttendance = this.props.attendance.length > 0 ? 
       this.props.attendance
       .filter((x) => x.UserId === this.props.info.id) 
@@ -63,8 +88,8 @@ class UserProfile extends React.Component {
       if(this.props.info){
         return (
           <div>
-                <div className="userProfile-wrapper"> 
-                  <div className="user-side-bar nested">
+            <div className="userProfile-wrapper"> 
+                 <div className="user-side-bar nested">
                       <div>
                         <div>
                           Username: 
@@ -112,47 +137,55 @@ class UserProfile extends React.Component {
                         </div>
                   </div>
                   <div>
-                    <h1> Past Shows </h1>
+                    <h2> Past Shows </h2>
+                    {/* <button onClick={this.openModal}>post</button>
+                    <div>
+                            <Modal
+                                isOpen={this.state.modalIsOpen}
+                                onAfterOpen={this.afterOpenModal}
+                                onRequestClose={this.closeModal}
+                                style={customStyles}
+                                contentLabel="Example Modal"
+                               >
+                            <button onClick={this.closeModal}>close</button>
+                          
+                           
+                            </Modal>
+                          </div> */}
                     <div className="inside-wall">
-                      <div className="each-h-block">
-                        Show 1
+                    
+                        <div>
+                        <ul id="messages"></ul>
+                        <form action="">
+                          <input id="m" autocomplete="off" /><button>Send</button>
+                        </form>
                         </div>
-                      <div>Show 1 </div>
-                      <div>Show 1 </div>
-                      <div>Show 1 </div>
-                      <div>Show 1 </div>
-                      <div>Show 1 </div>
-                      <div>Show 1 </div>
-                      <div>Show 1 </div>
-                      <div>Show 1 </div>
-                 
+                    
+                     
                     </div>
                   </div>
                   <div>
-                        <h3>Upcoming Shows</h3>
-                         <div className="band-show-scroll">
-                          {this.props.events
-                            .filter((x) => userAttendance.includes(x.id) && x.isCommitted === true)
-                            .map((x) => <UpcomingGig user={this.props.info.id} key={x.id} gig={x} usercommitted={userAttendance.includes(x.id)}/>)
-                          }
-                          </div>
-                          <br />
-                        <h3>Potential Gigs</h3>
-                        <div className="band-show-scroll">
+                      <h3>Upcoming Shows</h3>
+                      <div className="band-show-scroll">
+                        {this.props.events
+                          .filter((x) => userAttendance.includes(x.id) && x.isCommitted === true)
+                          .map((x) => <UpcomingGig user={this.props.info.id} key={x.id} gig={x} usercommitted={userAttendance.includes(x.id)}/>)
+                        }
+                      </div>
+                      <br />
+                      <h3>Potential Gigs</h3>
+                      <div className="band-show-scroll">
                         {this.props.events
                             .filter((x) => userAttendance.includes(x.id) && x.isCommitted === false)
                             .map((x) => <PotentialGig user={this.props.info.id} key={x.id} gig={x} usercommitted={userAttendance.includes(x.id)}/>)
                           }
-                          </div>
                       </div>
-                      
-                
+                  </div>          
               </div>
-            </div>
+          </div>
         )
       } else {
         return(<div> </div>)
-
       }
     }
 }
@@ -161,7 +194,8 @@ function mapStateToProps({events, attendance, auth, info  }){
     return {
       attendance: attendance,
       events: events,
-      info: info
+      info: info,
+      events: events
      }
   }
   

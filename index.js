@@ -8,7 +8,21 @@ const keys = require('./config/keys')
 
 require('./services/passport');
 
+const io = require('socket.io')();
 var app = express();
+
+io.on('connection', (client) => {
+  client.on('subscribeToTimer', (interval) => {
+    console.log('client is subscribing to timer with interval ', interval);
+    setInterval(() => {
+      client.emit('timer', new Date());
+    }, interval);
+  });
+});
+
+const port = 9393;
+io.listen(port);
+console.log('listening on port ', port);
 
 app.use(bodyParser.json());
 
