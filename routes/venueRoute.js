@@ -27,7 +27,7 @@ module.exports = (app, db) => {
   // add venue works with SQL
   app.post('/api/addVenue', (req, res) =>{
     console.log('venue route working')
-    console.log("REQ VENUE BODYYYYYY ", req.body);
+    console.log("REQ VENUE BODYYYYYY ", req.body.info);
     dbDef.Venue.create({
       name: req.body.info.venueName,
       description: req.body.info.venueDescription,
