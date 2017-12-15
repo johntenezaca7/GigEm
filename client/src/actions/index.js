@@ -111,7 +111,11 @@ export const fetchAllUsers = () => async dispatch => {
     // eslint-disable-next-line
     const res = await axios.get('/api/all_users')
     // eslint-disable-next-line
-    dispatch({ type: types.FETCH_ALL_USERS, payload: res.data })
+    console.log('INACTIONS,', JSON.stringify(res.data))
+    console.log('CHECK',res.data.map((obj) => Object.assign({}, obj)))
+    console.log('NO STRING', res.data)
+    
+    dispatch({ type: types.FETCH_ALL_USERS, payload: res.data.map((obj) => Object.assign({}, obj)) })
 }
 
 export const savePhoto = (imageURL) => async dispatch =>{
