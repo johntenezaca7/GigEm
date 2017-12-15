@@ -149,15 +149,16 @@ class UpcomingGig extends React.Component {
       }
 
     render() {  
-        console.log('upcominggig props: ', this.props);
-        console.log('upcominggig state: ', this.state);
+        // console.log('upcominggig props: ', this.props);
+        // console.log('upcominggig state: ', this.state);
         if (this.props.users.length > 0) {
             return (
                 <div className="container border p-3 m-1 small" key={this.props.gig.id}>
                     <div className="potential-gig-wrapper">
                         <div className="potential-gig-band-name">
                           <Link to={`/bandprofile/${this.props.gig.id}`}>
-                            <h5>{this.props.users.filter((x) => x.id = this.props.gig.id)[0].name}</h5>
+                            {/* <h5>{this.props.users.filter((x) => x.id === this.props.gig.id)[0].name}</h5> */}
+                            <h5>{this.props.users.filter((x) => x.id === this.props.gig.UserId)[0].name}</h5>
                           </Link>
                           <div>
                             <Modal
