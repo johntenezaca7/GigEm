@@ -3,6 +3,7 @@ import ProgressComponent from './ProgressComponent';
 import Modal from 'react-modal';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
+import axios from 'axios';
 import { commitToEvent, uncommitFromEvent, fetchAllUsers } from '../../actions/index';
 import ShowcaseInfo from '../ShowDescription';
 
@@ -21,6 +22,7 @@ const customStyles = {
   
 
 class UpcomingGig extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -128,10 +130,25 @@ class UpcomingGig extends React.Component {
         this.setState({usercommitment: 0, usercommitted: false, changed: true})
     }
 
+    componentDidMount() {
+    
+       
+        if(this.props.events){
+          this.props.events.map((place, id) => {
+                // const showInfo = false;
+              axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${place.address},%20NY%2010017&key=AIzaSyCn1886_Sxx7XVDi4xAjhKCKigLJyoxtvU`)
+                .then(res => this.state.locations.push([res.data.results[0].geometry.location, place, {showInfo: false}]))
+              })
+        }
+      }
+      changeState(info){
+        // info = false;
+        this.setState({
+          show:true
+        })
+      }
     render() {
-        console.log('re-render: ========================')
-        console.log('Upcoming Gig this.props: ', this.props);
-        console.log('Upcoming Gig this.state: ', this.state);
+
         
         if (this.props.users.length > 0) {
             return (
@@ -185,9 +202,12 @@ class UpcomingGig extends React.Component {
                             {this.renderCommitmentForm()}
 
                         </div>
-                    </div>
+                        </div>
                     
-            )
+                    
+
+              )
+
         } else {
             return(<div></div>)
         }
