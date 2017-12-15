@@ -54,7 +54,7 @@ class UserDashboard extends React.Component {
       // console.log('loca', this.state.locations)
       return (
         <div >
-            <div className="google-maps">
+          <div className="google-maps">
                  <div></div>
                 <div className="inside-map">
                   <Map
@@ -65,9 +65,8 @@ class UserDashboard extends React.Component {
                     containerElement={<div style={{ height: `400px` }}/>}
                     mapElement={<div style={{ height: `100%`}}/>}   
                     />  
-                  </div>
-                  {/* <div></div> */}
-              </div>
+                  </div>    
+           </div>
            <div className="upComing-Po-Gigs">
              <div>
                 <h2>Upcoming Gig'em Shows</h2>
