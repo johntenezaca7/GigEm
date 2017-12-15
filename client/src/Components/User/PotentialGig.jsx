@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { commitToEvent, uncommitFromEvent } from '../../actions/index';
 import ShowcaseInfo from '../ShowDescription';
+import Payment from '../Payment';
 
 const customStyles = {
     content : {
@@ -168,11 +169,16 @@ class PotentialGig extends React.Component {
                         <div className="potential-gig-money-commit-value">
                         </div>
                         <div className="potential-gig-commit-button">
+
+                            <Payment />
+                            {this.renderButton()}
+
                             <div>
                                 <div className={`commit-value-form`}>
                                   {this.renderCommitmentForm()}
                                 </div>
                             </div>
+
 
                         </div>
                     </div>
