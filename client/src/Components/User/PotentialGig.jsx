@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { commitToEvent, uncommitFromEvent, fetchAllUsers } from '../../actions/index';
 import ShowcaseInfo from '../ShowDescription';
+import Payment from '../Payment';
 
 const customStyles = {
     content : {
@@ -109,6 +110,7 @@ class PotentialGig extends React.Component {
                           <ProgressComponent percent={percent} />
                         </div>
                         <div className="potential-gig-commit-button">
+                            <Payment />
                             {this.renderButton()}
                         </div>
                     </div>

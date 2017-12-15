@@ -7,6 +7,7 @@ import { commitToEvent, uncommitFromEvent, fetchAllUsers } from '../../actions/i
 import ShowcaseInfo from '../ShowDescription';
 
 
+
 const customStyles = {
     content : {
       top                   : '50%',
@@ -117,6 +118,7 @@ class UpcomingGig extends React.Component {
                           <ProgressComponent percent={100} />
                         </div>
                         <div className="potential-gig-commit-button">
+                            {/*instead of commit button it should just be an attend button */}
                             {this.renderButton()}
                         </div>
                         </div>
