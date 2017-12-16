@@ -2,9 +2,7 @@ import React from 'react';
 
 import UpcomingGig from './UpcomingGig';
 import PotentialGig from './PotentialGig';
-
-// import axios from 'axios'
-
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { fetchEvents, checkAttendance, fetchAllUsers } from '../../actions/index';
 import Map from '../googleMaps';
@@ -16,15 +14,27 @@ class UserDashboard extends React.Component {
         super(props);
         this.state = {
           locations:[],
-          show: false
+          show: false,
+          dashNav:'upcoming',
         };
+
         this.props.init();
         this.changeState = this.changeState.bind(this);
+        this.onClick = this.onClick.bind(this)
+
+       
+    }
+    onClick(e){
+      e.preventDefault()
+      this.setState({
+        dashNav: e.target.value
+      })
     }
     
     componentWillRecieveProps() {
       (this.props.init());
     }
+
     
     fetchEvents(e) {
       e.preventDefault();
@@ -32,7 +42,6 @@ class UserDashboard extends React.Component {
     }  
 
     componentDidMount() {
-         
           if(this.props.events){
             this.props.events.map((place, id) => {
                   // const showInfo = false;
@@ -42,47 +51,37 @@ class UserDashboard extends React.Component {
                 })
           }
         }
+
     changeState(info){
           // info = false;
           this.setState({
             show:true
           })
         }
-    
-    render() { 
+
+    renderContent(){
+
       let userAttendance = this.props.attendance.length > 0 ? 
       this.props.attendance
       .filter((x) => x.UserId === this.props.info.id) 
       .map((x) => x = x.ShowcaseId) : [];
 
-      return (
-        <div >
-          <div className="google-maps">
-                 {/* <div></div> */}
-                <div className="inside-map">
-                  <Map
-                  
-                    show={this.changeState}
-                    geoLoc={this.state.locations}  
-                    center={{lat:40.728199 , lng:-73.9894738}}
-                    containerElement={<div style={{ height: `400px` }} />}
-                    mapElement={<div style={{ height: `100%`}}/>}   
-                    />  
-                  </div>    
-                  {/* <div></div> */}
-           </div>
-           <div className="upComing-Po-Gigs">
-             <div>
-                <h2>Upcoming Gig'em Shows</h2>
-                  <div className="user-show-scroll">
-                  {this.props.events
-                    .map((x) => <UpcomingGig user={this.props.info.id} key={x.id} gig={x}/>)
-                  }
-                  </div> 
-             </div> 
-             <div>
-                <div>
-                  <h2>Potential Gigs</h2>
+      switch(this.state.dashNav){
+        case 'upcoming':
+          return(
+                  <div> 
+                    <h2>Upcoming Gig'em Shows</h2>
+                    <div className="user-show-scroll">
+                    {this.props.events
+                      .map((x) => <UpcomingGig user={this.props.info.id} key={x.id} gig={x}/>)
+                    }
+                    </div>
+                  </div>
+                  );
+        case 'potential':
+          return(
+                  <div>
+                    <h2>Potential Gigs</h2>
                     <div className="user-show-scroll">
                       { this.props.events
                           .filter((x) => x.isCommitted === false)
@@ -93,11 +92,47 @@ class UserDashboard extends React.Component {
                             gig={x} 
                             attendance={this.props.attendance}
                             usercommitted={userAttendance.includes(x.id)} />)
-                      }/>)
+                      }
+                    </div>                          
                   </div>
-                </div>
+                );
+        case 'chat':
+          return (
+            <div>
+                  This is Chat
+             </div>
+          );
+      }
+    }
+    
+    render() { 
+  
+      return (
+        <div >   
+            <div> 
+                <button className="btn btn-danger my-2 my-sm-0 m-1" type="submit" value="upcoming" onClick={this.onClick}>Upcoming Gigs</button>
+                <button className="btn btn-warning my-2 my-sm-0 m-1" type="submit" value="potential" onClick={this.onClick} >Potential Gigs</button>
+                <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit" value="chat" onClick={this.onClick}>Community Board</button>
               </div>
-           </div>
+              <div className="user-dashboard">
+              {this.renderContent()}
+              <div>
+              <div className="google-maps">
+                    {/* <div></div> */}
+                    <div className="inside-map">
+                      <Map
+                      
+                        show={this.changeState}
+                        geoLoc={this.state.locations}  
+                        center={{lat:40.728199 , lng:-73.9894738}}
+                        containerElement={<div style={{ height: `400px` }} />}
+                        mapElement={<div style={{ height: `200%`}}/>}   
+                        />  
+                      </div>    
+                      {/* <div></div> */}
+              </div>
+              </div>
+              </div>
         </div>
       )
     }
@@ -132,3 +167,30 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDashboard);
+
+{/* <Router>
+<div>
+ <Route exact path="/user/upcoming" render={() => <div> <h2>Upcoming Gig'em Shows</h2>
+                                                                 <div className="user-show-scroll">
+                                                                 {this.props.events
+                                                                   .map((x) => <UpcomingGig user={this.props.info.id} key={x.id} gig={x}/>)
+                                                                 }
+                                                                 </div>
+                                                           </div>} />
+
+ <Route exact path="/user/potential" render={() => <div> <h2>Potential Gigs</h2>
+                                               <div className="user-show-scroll">
+                                                 { this.props.events
+                                                     .filter((x) => x.isCommitted === false)
+                                                     .map((x) => <PotentialGig 
+                                                       user={this.props.info.id} 
+                                                       users={this.props.users}
+                                                       key={x.id} 
+                                                       gig={x} 
+                                                       attendance={this.props.attendance}
+                                                       usercommitted={userAttendance.includes(x.id)} />)
+                                                 }
+                                             </div>
+                                         </div>} />  
+</div>
+</Router> */}

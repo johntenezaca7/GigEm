@@ -138,7 +138,7 @@ class UserProfile extends React.Component {
                   </div>
                   <div>
                     <h2> Past Shows </h2>
-                    {/* <button onClick={this.openModal}>post</button>
+                    <button onClick={this.openModal}>post</button>
                     <div>
                             <Modal
                                 isOpen={this.state.modalIsOpen}
@@ -149,18 +149,18 @@ class UserProfile extends React.Component {
                                >
                             <button onClick={this.closeModal}>close</button>
                           
-                           
-                            </Modal>
-                          </div> */}
-                    <div className="inside-wall">
-                    
-                        <div>
+                            <div>
                         <ul id="messages"></ul>
                         <form action="">
                           <input id="m" autocomplete="off" /><button>Send</button>
                         </form>
                         </div>
                     
+                            </Modal>
+                          </div>
+                    <div className="inside-wall">
+                    
+                       
                      
                     </div>
                   </div>

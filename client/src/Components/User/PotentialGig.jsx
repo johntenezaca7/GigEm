@@ -139,6 +139,7 @@ class PotentialGig extends React.Component {
                         <div className="potential-gig-band-name">
                             <Link to={`/bandprofile/${this.props.gig.id}`}>
                                 {/* <h5>{this.props.users.filter((x) => x.id = this.props.gig.id)[0].name}</h5> */}
+                                <h6>Promoter:</h6>
                                 <h5>{this.props.users.filter((x) => x.id === this.props.gig.UserId)[0].name}</h5>
                             </Link>
                             <div>
@@ -181,7 +182,7 @@ class PotentialGig extends React.Component {
 
                         </div>
                     </div>
-                </div>)
+            </div> )
                     } else {
                         return(<div></div>)
                     }
