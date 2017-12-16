@@ -5,7 +5,7 @@ export default function(state = [], action) {
   
   switch(action.type) {
     case FETCH_ALL_USERS:
-    console.log('DATA SHOULD BE GOOOD',action.payload)
+    // console.log('DATA SHOULD BE GOOOD',action.payload)
       return action.payload || false;
     default:
       return state;

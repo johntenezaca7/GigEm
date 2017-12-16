@@ -170,14 +170,14 @@
 
 .upComing-Po-Gigs {
 	display: grid;
-	grid-template-columns: 50% 53%;
-	grid-auto-rows: minmax(100, auto);
-	grid-gap: 2em;
-	padding: .2cm 6cm 2cm 5cm;
+	/* grid-template-columns: 50% ; */
+	/* grid-auto-rows: minmax(100, auto); */
+	/* grid-gap: 2em; */
+	/* padding: .2cm 6cm 2cm 5cm; */
 }
 .user-show-scroll{
 	width: auto;
-    height: 350px;
+    height: 750px;
 	overflow: scroll;
 
 }
@@ -310,4 +310,9 @@
 }
 .band-dashboard{
 	padding: 2cm 9cm 2cm 5cm;
+}
+
+.user-dashboard {
+	display: grid;
+	grid-template-columns: 50% 50%;
 }

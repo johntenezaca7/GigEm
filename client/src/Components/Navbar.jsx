@@ -78,7 +78,7 @@ class Navbar extends React.Component {
 
 
     render() {
-
+      console.log('reducers in navbar', this.props)
       if (this.props.info.isBand ) {
         return (
               <div>
@@ -179,14 +179,24 @@ class Navbar extends React.Component {
     }
 }
 }
-function mapStateToProps({ auth, info, users }){
-    return { 
+ function mapStateToProps({ auth, info, users }){
+     return { 
       auth: auth,
       info: info,
       users: users
-      //userInfo: 'info'
+      // userInfo: 'info'
     }
 }
+
+
+// function mapStateToProps(state){
+//   return { 
+//     auth: state.auth,
+//     info: state.info,
+//     users: state.users
+//     //userInfo: 'info'
+//   }
+// }
 
 const mapDispatchToProps = dispatch => {
   return {
