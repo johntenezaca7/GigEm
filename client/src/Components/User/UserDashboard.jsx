@@ -1,10 +1,10 @@
 import React from 'react';
-
 import UpcomingGig from './UpcomingGig';
 import PotentialGig from './PotentialGig';
 import { connect } from 'react-redux';
 import { fetchEvents, checkAttendance, fetchAllUsers } from '../../actions/index';
 import Map from '../googleMaps';
+import Board from './reviewBoard';
 import axios from 'axios';
 
 
@@ -72,6 +72,7 @@ class UserDashboard extends React.Component {
                     <h2>Upcoming Gig'em Shows</h2>
                     <div className="user-show-scroll">
                     {this.props.events
+                      .filter((x) => x.isCommitted === true)
                       .map((x) => <UpcomingGig user={this.props.info.id} key={x.id} gig={x}/>)
                     }
                     </div>
@@ -92,13 +93,14 @@ class UserDashboard extends React.Component {
                             attendance={this.props.attendance}
                             usercommitted={userAttendance.includes(x.id)} />)
                       }
-                    </div>                          
+                    </div>   
+                               
                   </div>
                 );
         case 'chat':
           return (
             <div>
-                  This is Chat
+                   <Board />      
              </div>
           );
           default:

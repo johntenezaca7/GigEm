@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import BandProfile from './BandProfile';
-import UserProfile from './User/UserProfile';
 
 
-class AccountType extends Component {
+
+class Board extends Component {
     constructor(props){
         super(props);
 
@@ -16,4 +15,4 @@ class AccountType extends Component {
     }
 }
 
-export default Accounttype;
+export default Board;
