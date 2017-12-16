@@ -78,7 +78,7 @@ class Navbar extends React.Component {
 
 
     render() {
-      console.log('reducers in navbar', this.props)
+     
       if (this.props.info.isBand ) {
         return (
               <div>
