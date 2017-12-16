@@ -4,8 +4,8 @@ import { withGoogleMap, GoogleMap, Marker, InfoWindow, } from 'react-google-maps
 
 const Map = withGoogleMap(props => {
   
-        // const markers = props.geoLoc || []
-        console.log('markers', props.geoLoc);
+        // // const markers = props.geoLoc || []
+        // console.log('markers', props.geoLoc);
 
         const toggleShow = (marker) => {
             return marker[2].showInfo ? marker[2].showInfo = false : marker[2].showInfo = true

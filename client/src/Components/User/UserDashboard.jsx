@@ -2,7 +2,6 @@ import React from 'react';
 
 import UpcomingGig from './UpcomingGig';
 import PotentialGig from './PotentialGig';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { fetchEvents, checkAttendance, fetchAllUsers } from '../../actions/index';
 import Map from '../googleMaps';
@@ -44,8 +43,8 @@ class UserDashboard extends React.Component {
     componentDidMount() {
           if(this.props.events){
             this.props.events.map((place, id) => {
-                  // const showInfo = false;
-                axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${place.address},%20NY%2010017&key=AIzaSyCn1886_Sxx7XVDi4xAjhKCKigLJyoxtvU`)
+                  
+                return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${place.address},%20NY%2010017&key=AIzaSyCn1886_Sxx7XVDi4xAjhKCKigLJyoxtvU`)
                   .then(res => this.state.locations.push([res.data.results[0].geometry.location, place, {showInfo: false}]))
           
                 })
@@ -102,6 +101,8 @@ class UserDashboard extends React.Component {
                   This is Chat
              </div>
           );
+          default:
+          return;
       }
     }
     
@@ -167,30 +168,3 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDashboard);
-
-{/* <Router>
-<div>
- <Route exact path="/user/upcoming" render={() => <div> <h2>Upcoming Gig'em Shows</h2>
-                                                                 <div className="user-show-scroll">
-                                                                 {this.props.events
-                                                                   .map((x) => <UpcomingGig user={this.props.info.id} key={x.id} gig={x}/>)
-                                                                 }
-                                                                 </div>
-                                                           </div>} />
-
- <Route exact path="/user/potential" render={() => <div> <h2>Potential Gigs</h2>
-                                               <div className="user-show-scroll">
-                                                 { this.props.events
-                                                     .filter((x) => x.isCommitted === false)
-                                                     .map((x) => <PotentialGig 
-                                                       user={this.props.info.id} 
-                                                       users={this.props.users}
-                                                       key={x.id} 
-                                                       gig={x} 
-                                                       attendance={this.props.attendance}
-                                                       usercommitted={userAttendance.includes(x.id)} />)
-                                                 }
-                                             </div>
-                                         </div>} />  
-</div>
-</Router> */}

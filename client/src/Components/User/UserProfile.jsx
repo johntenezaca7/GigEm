@@ -78,8 +78,7 @@ class UserProfile extends React.Component {
     
 
     render() {
-      
-      console.log('userProfile props: ', this.props);
+    
       let userAttendance = this.props.attendance.length > 0 ? 
       this.props.attendance
       .filter((x) => x.UserId === this.props.info.id) 
@@ -195,7 +194,7 @@ function mapStateToProps({events, attendance, auth, info  }){
       attendance: attendance,
       events: events,
       info: info,
-      events: events
+      // events: events
      }
   }
   
