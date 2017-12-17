@@ -1,32 +1,67 @@
 import React from 'react';
 import ProgressComponent from '../User/ProgressComponent';
+import { connect } from 'react-redux';
 
-export default class BandPotentialGig extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
+class BandPotentialGig extends React.Component {
+  constructor(props) {
+      super(props);
+      this.state = {};
+  }
+
+  renderLocation(gig) {
+    if (!gig.city && !gig.state) {
+      return (<div>No location specified.</div>)
+    } else if (gig.city && !gig.state) {
+      return (<div>{gig.city}</div>)
+    } else if (!gig.city && gig.state) {
+      return (<div>{gig.state}</div>)
+    } else if (gig.city && gig.state) {
+      return (<div>{gig.city}, {gig.state}</div>)
     }
+  }
 
-    render() {
-        return (
-            <div className="container">
+  renderGig(gig) {
+    return (
+            <div className="container m-5">
                 <div className="row">
-                    <div className="col col-md-autoalign-self-start">
-                      Clark<br />
-                      <div className="text-primary">15 of 20 commits!</div>
-                      <div>5 more needed by 11/31/2017!</div>
+                    <div className="col-2 col-md-autoalign-self-start">
+                      {this.props.info.name}<br />
+                      <div className="text-primary">{'$'}{gig.currentCommitValue} committed of minimum {'$'}{gig.minCommitValue ? gig.minCommitValue : 1}</div>
                     </div>
-                    <div className="col-lg-6 justify-content-md-center">
-                      <ProgressComponent percent={Math.floor(Math.random() * 100)} />
+                    <div className="col-8 justify-content-md-center">
+                      <ProgressComponent percent={gig.currentCommitValue / gig.minCommitValue} /> 
+                      ({`${(gig.currentCommitValue / (gig.minCommitValue ? gig.minCommitValue : 1)) * 100}% committed.`})
                     </div>
-                    <div className="col col-md-auto align-self-end" align="right">
-                      Oakland, CA<br />
-                      December 12, 2017 to<br />
-                      December 17, 2017
+                    <div className="col-2 col-md-auto">
+                      {this.renderLocation(gig)}
+                      {`${(new Date(gig.finalCommitDate)).getMonth() + 1} / ${(new Date(gig.finalCommitDate)).getDate()} /
+                        ${(new Date(gig.finalCommitDate)).getFullYear()}`}<br />
                     </div>
                     </div>
                 </div>
 
         )
-    } 
+    }
+
+  render() {
+    return (
+      <div>
+        {this.props.events
+          .filter((x) => x.UserId === this.props.info.id && x.currentCommitValue <= x.minCommitValue)
+          .map((x) => this.renderGig(x))}
+      </div>
+    )}
 }
+
+
+function mapStateToProps({ events, auth, attendance, info, users }){
+  return { 
+    attendance: attendance,
+    events: events,
+    auth: auth,
+    info: info, 
+    users: users
+  }
+}
+  
+export default connect(mapStateToProps, null)(BandPotentialGig);

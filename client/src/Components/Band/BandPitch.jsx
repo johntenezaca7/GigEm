@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 //import { connect } from 'react-redux';
-import { Field, reduxForm, Fields, reset } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 // import ProgressComponent from './ProgressComponent';
 //import moment from 'moment'
 //import Datetime from 'react-datetime';
-import DateRangePickerWrapper from './DateRangePickerWrapper';
+// import DateRangePickerWrapper from './DateRangePickerWrapper';
 import SingleDatePicker from './SingleDatePicker';
 
 //import * as actions from '../../actions'
@@ -43,24 +43,20 @@ const renderField = ({
 
 let BandPitch = props => {
 
-const renderDates = fields => {
-  // console.log("DATESSSS ARGS: ",fields);
-  return  (
-  <div>    
-  <DateRangePickerWrapper
-  startDateFieldName="start"
-  endDateFieldName="end"
-  {...fields}
-/>
-</div>
-)};
+// const renderDates = fields => {
+//   // console.log("DATESSSS ARGS: ",fields);
+//   return  (
+//   <div>    
+//   <DateRangePickerWrapper
+//   startDateFieldName="start"
+//   endDateFieldName="end"
+//   {...fields}
+// />
+// </div>
+// )};
 const renderDate = ({ input, label, type, meta }) => {
-
-  // console.log("renderDate args: ", input)
-// const renderDate = fields => (
   return (
   <SingleDatePicker
-  //{...fields}
     date={input.value}
     focused={meta.active}
     onDateChange={value => input.onChange({ value })}
@@ -68,15 +64,7 @@ const renderDate = ({ input, label, type, meta }) => {
     dateGrab={props.dateGrab}
   />
 )};
-// const formatDate = (value, name) => {
-// return moment(value);
-// };
-// const normalizeDates = (name, value) => {
-// return value.format();
-// };
 
-              
-  // console.log('props', props)
   return (
     
     <div className="container container-fluid border p-3 small" >
@@ -95,7 +83,7 @@ const renderDate = ({ input, label, type, meta }) => {
                   />
               </div>
               <div>
-                <label>Select Event Start Date and End Date If Applicable</label>
+                {/* <label>Select Event Start Date and End Date If Applicable</label>
                   <div className="col">
                     <Fields
                       names={['start', 'end']}
@@ -103,17 +91,26 @@ const renderDate = ({ input, label, type, meta }) => {
                       // label="Pick Event Start Date and End Date If Applicable"
                       // normalize={normalizeDates}
                       // format={formatDates}
-                    />  
+                    />   */}
+                  <label>Event Date</label>
+                  <div className="col">
+                    <Field
+                    name="startDate"
+                    component={renderDate}
+                    type="date"
+                    // normalize={normalizeDate}
+                    // format={formatDate}
+                  />
                   </div>
               </div>
               <div>
-              <div>
+              <div className="row">
                 <label>Event Description</label>
                   <Field
                     name="eventDescription"
-                    component="textarea"
+                    component="input"
                     // label="Event Description"
-                    // type="text"
+                    type="text"
                     placeholder="Describe your event.. "
                   />
               </div>
@@ -152,7 +149,7 @@ const renderDate = ({ input, label, type, meta }) => {
                   />
               </div>
               <div>
-              <label>Last Day to Finalize Show</label>
+              {/* <label>Last Day to Finalize Show</label>
               <div className="col">
                 <Field
                   name="finaldate"
@@ -160,7 +157,7 @@ const renderDate = ({ input, label, type, meta }) => {
                   // normalize={normalizeDate}
                   // format={formatDate}
                 />
-              </div>
+              </div> */}
               </div >
               <div>
                 <label>Venue Street Address</label>
