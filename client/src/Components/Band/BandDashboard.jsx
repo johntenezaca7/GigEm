@@ -15,7 +15,6 @@ import {
 
 import BandUpcomingGig from './BandUpcomingGig';
 import BandPotentialGig from './BandPotentialGig';
-import BandToFinalize from './BandToFinalize'
 import BandPitch from './BandPitch';
 
  class BandDashboard extends React.Component {
@@ -49,7 +48,7 @@ import BandPitch from './BandPitch';
       event.finalCommitDate = this.state.finalCommitDate; 
       // console.log("SUBMITTED", event );
       // prevents event submission if no eventName or start date
-      if (!event.eventName || !event.start) {
+      if (!event.eventName || !event.finalCommitDate) {
         throw new SubmissionError({ eventName: <b>ALL EVENTS NEEDS A NAME AND START DATE</b>, _error: 'Submission failed!' })   
       } else {
       // marks event TBD if No Venue box is checked
@@ -161,14 +160,14 @@ import BandPitch from './BandPitch';
                     </div>
                     <BandUpcomingGig />
                   </div>} />
-                <Route exact path="/band/finalize" render={() => 
+                {/* <Route exact path="/band/finalize" render={() => 
                   <div>
-                    {/* <BandNavTabs tab="finalize" /> */}
+                    <BandNavTabs tab="finalize" />
                     <div className="text-center">
                       <h1 className="display-4">Gigs to Finalize</h1>
                     </div>
                     <BandToFinalize />
-                  </div>} />
+                  </div>} /> */}
                 <Route exact path="/band/potential" render={() => 
                   <div>
                     {/* <BandNavTabs tab="potential" /> */}

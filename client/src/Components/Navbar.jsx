@@ -93,7 +93,7 @@ class Navbar extends React.Component {
                   <ul className="navbar-nav mr-auto">
                     <li className="nav-item active">
                       <a className="nav-link">
-                      <h2>Gig'em Band: {this.props.info.name ? this.props.info.name : "Welcome to Gig'em"}</h2>
+                      <h2>Gig'em Band: {this.props.info.name ? this.props.info.name : "Welcome to Gig'em"} {this.props.info.id}</h2>
                       <span className="sr-only">(current)</span>
                       </a>
                     </li>
@@ -105,9 +105,9 @@ class Navbar extends React.Component {
                       <Link to="/band/upcoming">
                         <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">Upcoming Gigs</button>
                       </Link>
-                      <Link to="/band/finalize">
+                      {/* <Link to="/band/finalize">
                         <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">Gigs to Finalize</button>
-                      </Link>
+                      </Link> */}
                       <Link to="/band/potential">
                         <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">Potential Gigs</button>
                       </Link>
