@@ -49,33 +49,23 @@ export const uncommitFromEvent = (user, gig) => async dispatch => {
 }
 
 export const addNewEvent = (event) => async dispatch => {
-    console.log('attempting to add showcase event: ', event);
     const res = await axios.post('/api/addEvent', {'info': event} );
-        console.log('ADD EVENT ACT: ', res.data)
-
     dispatch({ type: types.ADD_EVENT, payload: res.data })
 }
 
 export const sendNewEventEmail = (event) => async dispatch => {
     console.log('attempting to send new event email: ', event);
     const res = await axios.post('/api/sendEmail', {'info': event} );
-        console.log('SENDING EMAIL RES: ', res.data)
-
     dispatch({ type: types.SEND_NEW_EVENT_EMAIL, payload: res.data })
 }
 
 export const sendNewEventText = (event) => async dispatch => {
-    console.log('attempting to send new event text: ', event);
     const res = await axios.post('/api/sendText', {'info': event} );
-        console.log('SENDING TEXT RES: ', res.data)
-
     dispatch({ type: types.SEND_NEW_EVENT_TEXT, payload: res.data })
 }
 
 export const addNewVenue = (event) => async dispatch => {
-    console.log('attempting to add venue: ', event);
     const res = await axios.post('/api/addVenue', {'info': event} );
-    console.log(res);
     dispatch({ type: types.ADD_VENUE, payload: res.data })
 }
 
@@ -85,41 +75,45 @@ export const checkAttendance = (user, gig) => async dispatch => {
 }
 
 export const fetchBandInfo = () => async dispatch => {
-    // eslint-disable-next-line
     const res = await axios.post('/bandinfo')
-    // eslint-disable-next-line
     dispatch({ type: types.FETCH_BAND_INFO, payload: res.data })
 }
 
 export const fetchUserProfile = () => async dispatch => {
-    // eslint-disable-next-line
     const res = await axios.get('/api/profile')
-    // console.log('attempting to fetch user profile / action')
-    // eslint-disable-next-line
     dispatch({ type: types.FETCH_USER_PROFILE, payload: res.data })
 }
 
 export const editUserProfile = (item) => async dispatch => {
-    // console.log(`editUserProfile item: ${item}`);
-    // eslint-disable-next-line
     const res = await axios.post(`/api/task/editprofile`, {item});
-    // this.forceRender();
     dispatch({ type: types.EDIT_USER_PROFILE, payload: res.data })
 }
 
 export const fetchAllUsers = () => async dispatch => {
-    // eslint-disable-next-line
-    const res = await axios.get('/api/all_users')
-    // eslint-disable-next-line
-    // console.log('INACTIONS,', JSON.stringify(res.data))
-    // console.log('CHECK',res.data.map((obj) => Object.assign({}, obj)))
-    // console.log('NO STRING', res.data)
-    
+    const res = await axios.get('/api/all_users')    
     dispatch({ type: types.FETCH_ALL_USERS, payload: res.data.map((obj) => Object.assign({}, obj)) })
 }
 
 export const savePhoto = (imageURL) => async dispatch =>{
     const res = await axios.post('/api/save_photo', {img: imageURL});
+    dispatch({ type: types.SAVE_PHOTO, payload: res.data})
+}
 
-    dispatch({ type: types.SAVE_PHOTO, pyaload: res.data})
+export const fetchProperties = () => async dispatch =>{
+    const res = await axios.get('/api/properties');
+    console.log('fetching properties ========================')
+    dispatch({ type: types.FETCH_PROPERTIES, payload: res.data})
+}
+
+export const addProperty = (bandId, description, linkUrl) => async dispatch => {
+    const res = await axios.post('/api/add_property', {userid: bandId, linkurl: linkUrl, description: description});
+    console.log('made axios post to submit property');
+    dispatch({ type: types.ADD_PROPERTY, payload: res.data});
+    fetchProperties();
+}
+
+export const removeProperty = (mediaItemId) => async dispatch =>{
+    const res = await axios.post('/api/remove_property', {itemid: mediaItemId});
+    dispatch({ type: types.REMOVE_PROPERTY, payload: res.data});
+    fetchProperties();
 }
