@@ -29,13 +29,13 @@ class Navbar extends React.Component {
           return(
             <div>
               {/* <td> */}
-                <a href="/auth/google"><button className="btn btn-danger my-2 my-sm-0" type="submit">Login With Google</button></a>
+                <a href="/auth/google"><button className=""type="submit">Login With Google</button></a>
             </div>
           );
         default:
           return (
             <div>
-                  <a href="/api/logout"><button className="btn btn-danger my-2 my-sm-0" type="submit">Logout</button></a>
+                  <a href="/api/logout"><button className="" type="submit">Logout</button></a>
           </div>
           )
       }
@@ -60,7 +60,7 @@ class Navbar extends React.Component {
       if (this.props.info.isBand) {
         return (
           <Link to="/userprofile">
-          <button className="btn btn-success my-2 my-sm-0" onClick={(e) => this.props.editUserProfile({'isBand': false})}>
+          <button className="" onClick={(e) => this.props.editUserProfile({'isBand': false})}>
           User Account
           </button>
           </Link>
@@ -68,7 +68,7 @@ class Navbar extends React.Component {
       } else {
           return (
             <Link to={`/bandprofile/${this.props.info.id}`}>
-              <button className="btn btn-success my-2 my-sm-0" onClick={(e) => this.props.editUserProfile({'isBand': true})}>
+              <button className="" onClick={(e) => this.props.editUserProfile({'isBand': true})}>
               Artist Account
               </button>
             </Link>
@@ -82,7 +82,7 @@ class Navbar extends React.Component {
       if (this.props.info.isBand ) {
         return (
               <div>
-              <nav className="navbar navbar-expand-lg navbar-light ">
+              <nav className="navbar navbar-expand-lg  ">
                 <Link to="/">
                   <img src="../Assets/party.svg" width="40px" height="40px" alt="User Logo" />
                 </Link>`
@@ -103,19 +103,19 @@ class Navbar extends React.Component {
                     <tr>
                     <td>
                       <Link to="/band/upcoming">
-                        <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">Upcoming Gigs</button>
+                        <button className="" type="submit">Upcoming Gigs</button>
                       </Link>
                       <Link to="/band/finalize">
-                        <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">Gigs to Finalize</button>
+                        <button className=" " type="submit">Gigs to Finalize</button>
                       </Link>
                       <Link to="/band/potential">
-                        <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">Potential Gigs</button>
+                        <button className=" " type="submit">Potential Gigs</button>
                       </Link>
                       <Link to="/band/pitch">
-                        <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">Pitch a Gig</button>
+                        <button className=" " type="submit">Pitch a Gig</button>
                       </Link>
                       <Link to={`/bandprofile/${this.props.info.id}`}>
-                        <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">My Profile</button>
+                        <button className="" type="submit">My Profile</button>
                       </Link>
                     </td>
                       <td>
@@ -134,7 +134,7 @@ class Navbar extends React.Component {
         } else {
             return (
               <div>
-                <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <nav className="navbar navbar-expand-lg ">
               
                   <Link to="/">
                     <img src="./Assets/party.svg" width="40px" height="40px" alt="User Logo" />
@@ -157,10 +157,10 @@ class Navbar extends React.Component {
                         <tr>
                           <td>
                             <Link to="/user">
-                              <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">Dashboard</button>
+                              <button className="" type="submit">Dashboard</button>
                             </Link>
                             <Link to="/userprofile">
-                              <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit">My Profile</button>
+                              <button className="" type="submit">My Profile</button>
                             </Link>
                           </td>
                           <td>
