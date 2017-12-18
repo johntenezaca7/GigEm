@@ -3,7 +3,7 @@ import PotentialGig from './PotentialGig';
 import UpcomingGig from './UpcomingGig';
 import { connect } from 'react-redux';
 import { /* fetchUser, */ fetchUserProfile, fetchEvents, checkAttendance, editUserProfile } from '../../actions/index';
-import { /* RIEToggle, */ RIEInput, RIETextArea, /*RIENumber, RIETags, RIESelect */} from 'riek'
+import { RIEInput, RIETextArea } from 'riek';
 import _ from 'lodash'
 import Profile from '../ProfilePage';
 
@@ -129,10 +129,10 @@ class UserProfile extends React.Component {
                         </div>
                         <div >
                           <RIETextArea
-                          value={this.props.info.description || 'Write your description here!'}
-                          change={(e) => this.props.editUserProfile(e)}
-                          propName='description'
-                          validate={_.isString} />
+                            value={this.props.info.description || 'Write your description here!'}
+                            change={(e) => this.props.editUserProfile(e)}
+                            propName='description'
+                            validate={_.isString} />
                         </div>
                   </div>
                   <div>

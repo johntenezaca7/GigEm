@@ -86,8 +86,8 @@ module.exports = (app, db) => {
     }))
 
     dbDef.Showcase.findOne({
-      where: {'id': req.body.gig
-    }})
+      where: {'id': req.body.gig}
+    })
       .then((show) => {
         show.update({
           commits: show.dataValues.commits - 1
