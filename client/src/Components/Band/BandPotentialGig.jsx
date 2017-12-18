@@ -21,10 +21,12 @@ class BandPotentialGig extends React.Component {
   }
 
   renderGig(gig) {
+    console.log('rendering gig: ', gig)
     return (
-            <div className="container m-5">
+            <div className="container m-5" key={gig.id} >
                 <div className="row">
                     <div className="col-2 col-md-autoalign-self-start">
+                      <h6>{gig.name}</h6><br />
                       {this.props.info.name}<br />
                       <div className="text-primary">{'$'}{gig.currentCommitValue} committed of minimum {'$'}{gig.minCommitValue ? gig.minCommitValue : 1}</div>
                     </div>
@@ -44,6 +46,7 @@ class BandPotentialGig extends React.Component {
     }
 
   render() {
+  console.log("potential gig props: ", this.props);
     return (
       <div>
         {this.props.events

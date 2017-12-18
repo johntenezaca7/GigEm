@@ -33,9 +33,9 @@ class UpcomingGig extends React.Component {
     }
 
     render() {
-        // console.log('bandupcominggig props: ', this.props);
-        // console.log('current user id: ', this.props.info.id);
-        // console.log('bandupcoming gig state: ', this.state)
+        console.log('bandupcominggig props: ', this.props);
+        console.log('current user id: ', this.props.info.id);
+        console.log('bandupcoming gig state: ', this.state)
         if (this.props.events) {
           return (
               <div className="container m-5">

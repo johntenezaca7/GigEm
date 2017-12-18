@@ -35,6 +35,7 @@ const Map = withGoogleMap(props => {
                         }}
                         >
                      {marker[2].showInfo && (
+                        // eslint-disable-next-line
                         <InfoWindow onCloseClick={()=>{marker[2].showInfo}}>
                             <div>
                               <h3>{marker[1].name}</h3>

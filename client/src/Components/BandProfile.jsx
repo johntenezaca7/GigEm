@@ -1,19 +1,24 @@
 import React from 'react';
 
 import Navbar from './Navbar'
-import PotentialGig from './User/PotentialGig'
-import UpcomingGig from './User/UpcomingGig'
+// import PotentialGig from './User/PotentialGig'
+// import UpcomingGig from './User/UpcomingGig'
+
+import BandUpcomingGig from './Band/BandUpcomingGig';
+import BandPotentialGig from './Band/BandPotentialGig';
 
 import { connect } from 'react-redux';
 import { fetchEvents, fetchAllUsers, editUserProfile, fetchUserProfile } from '../actions/index';
 import Profile from './ProfilePage';
+
+import { RIEInput, RIETextArea } from 'riek';
+import _ from 'lodash'
 
 class BandProfile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
         };
-    
     }
 
     render() {
@@ -28,7 +33,7 @@ class BandProfile extends React.Component {
       console.log('selectedUser: ', selectedUser);
       console.log('events potential map: ', eventsPotentialMap)
 
-      if (selectedUser) {
+      if (selectedUser.id !== this.props.info.id) {
         return (
             <div>
               <div>
@@ -41,27 +46,21 @@ class BandProfile extends React.Component {
                         <div>
                           <h4>Band Profile - {selectedUser.name}</h4>
                             <Profile />
-                          
                             <div>
-                            {`${selectedUser.city}, ${selectedUser.state}`}
+                            {`${selectedUser.city ? selectedUser.city : 'Anonymous City'}, ${selectedUser.state ? selectedUser.state : 'Aether'}`}
                             </div>
                             <div className="border border-dark p-1">
-                              <p>Lorem ipsum dolor sit amet, eam ex saperet labores inimicus, nam stet natum dissentiet at. Odio sumo qui id, nam lorem hendrerit ei, ut dicam commodo vis. No pri natum apeirian consulatu, sed at solet option efficiantur. An ius oporteat oportere repudiandae. Te mea inani honestatis.</p>
-                              <p>Qui ea eripuit disputationi, ex mea eius liber. Ea wisi detracto molestiae pri, cu erat tempor sadipscing sit. Usu minim liber sadipscing in. Nisl prompta inimicus sea ea. Eam autem meliore delicatissimi ne, mea an consul electram laboramus. Ex quo aeterno electram principes.</p>
+                              {selectedUser.description}
                             </div>
                         </div>
                          <div>
                             <h3>Upcoming Shows</h3>
                               <div className="band-show-scroll border border-dark m-2">
-                                { eventsCommitMap
-                                  .map((x) => <UpcomingGig user={selectedUser.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
-                                }
+                                <BandUpcomingGig />
                               </div>
                             <h3>Potential Gigs</h3>
                             <div className="band-show-scroll border border-dark m-2">
-                                { eventsPotentialMap
-                                  .map((x) => <PotentialGig user={selectedUser.id} key={x.id} gig={x} usercommitted={this.props.attendance.includes(x.id)}/>)
-                                } */}
+                                <BandPotentialGig />
                               </div>
                             </div>
                           <div className="band-media">
@@ -82,19 +81,74 @@ class BandProfile extends React.Component {
                   </div>
                 
             </div>
-        )
-      } else {
-        return (<div></div>)
+        )} else {
+        return (<div>
+          <div>
+            <Navbar />
+          </div>
+            <div className="bandProfile-wrapper">
+                <div>
+                </div>
+                <div className="bandContent-wrapper ">
+                    <div>
+                      <h4>Band Profile - {selectedUser.name} (Your Profile)</h4>
+                        <Profile />
+                        <div>
+                        {/* {`${selectedUser.city ? selectedUser.city : 'Anonymous City'}, */ }
+                        <RIEInput 
+                          value={this.props.info.city || 'City placeholder'}
+                          change={(e) => this.props.editUserProfile(e)}
+                          propName='city'
+                          validate={_.isString} />{`, `}
+                        <RIEInput
+                          value={this.props.info.state || 'State placeholder'}
+                          change={(e) => this.props.editUserProfile(e)}
+                          propName='state'
+                          validate={_.isString} />
+                        </div>   
+                        <div className="border border-dark p-1">
+                          {selectedUser.description ? selectedUser.description : 'Band placeholder'}                        
+                        </div>
+                    </div>
+                     <div>
+                        <h3>Upcoming Shows</h3>
+                          <div className="band-show-scroll border border-dark m-2">
+                            <BandUpcomingGig />
+                          </div>
+                        <h3>Potential Gigs</h3>
+                        <div className="band-show-scroll border border-dark m-2">
+                            <BandPotentialGig />
+                          </div>
+                        </div>
+                      <div className="band-media">
+                          <h3>Video Placeholder</h3>
+                          <div className="side-scrolling border border-dark text-center">
+                            <img src="../Assets/videoPlayer.svg" className="grid-image" alt="videoplayer" />
+                        
+                            <img src="../Assets/videoPlayer.svg" className="grid-image" alt="videoplayer" />
+      
+                            <img src="../Assets/videoPlayer.svg" className="grid-image" alt="videoplayer" />
+                          </div>
+                      </div>
+                      
+                    </div>
+                    <div>
+
+                    </div>
+              </div>
+
+        </div>)
       }
     }
 }
 
-function mapStateToProps({ events, auth, attendance, users }){
+function mapStateToProps({ events, auth, attendance, users, info }){
   return { 
     attendance: attendance,
     events: events,
     auth: auth,
-    users: users
+    users: users,
+    info: info
   }
 }
 
