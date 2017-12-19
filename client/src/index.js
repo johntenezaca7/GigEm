@@ -9,10 +9,10 @@ import io from 'socket.io-client';
 import App from './App';
 import reducers from './reducers';
 
-let socket = io('http://localhost:3050');
-let socketIoMiddleware = createSocketIoMiddleware(socket, "server/");
+// let socket = io('http://10.16.1.214:3050');
+// let socketIoMiddleware = createSocketIoMiddleware(socket, "server/");
 
-const store = createStore(reducers, {}, applyMiddleware(reduxThunk, socketIoMiddleware));
+const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 // store.subscribe(()=>{
 //   console.log('new client state from App', store.getState());
