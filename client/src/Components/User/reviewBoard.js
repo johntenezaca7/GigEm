@@ -31,14 +31,17 @@ class Board extends Component {
         event.preventDefault();
         const firstName = this.props.user.name.split(' ')[0]
         const lastName = this.props.user.name.split(' ')[1]
-      
+        
+        const mesid = this.state.logs.length || 1
         const nextMessage = {
-            id: this.state.logs.length,
+            id: mesid,
             username: firstName,
             text: this.state.input, 
             createdAt: Date.now()
         }
-        database.ref('messages/' +nextMessage.id).set(nextMessage);
+        const ref = `messages/${nextMessage.id}` || `messages/1` 
+
+        database.ref(ref).set(nextMessage);
    
         this.setState({
             input:''
@@ -79,7 +82,7 @@ class Board extends Component {
         return(
                  <div className="container">
                     <div>
-                        { !this.state.logs[0] ?
+                        { this.state.logs[0] ?
                         <div>New User</div> :
                         renderLogs()
                         }
