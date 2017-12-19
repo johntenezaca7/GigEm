@@ -61,7 +61,7 @@ class ProfilePage extends Component {
 
 
   render() {
-    // console.log('actions', this.props)
+    console.log('actions', this.props)
     return (
       <div className="small">
       <p>
