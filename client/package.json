@@ -36,8 +36,10 @@
     "recompose": "^0.26.0",
     "redux": "^3.7.2",
     "redux-form": "^7.2.0",
+    "redux-socket.io": "^1.4.0",
     "redux-thunk": "^2.2.0",
-    "riek": "^1.1.0"
+    "riek": "^1.1.0",
+    "socket.io-client": "^2.0.4"
   },
   "scripts": {
     "start": "react-scripts start",

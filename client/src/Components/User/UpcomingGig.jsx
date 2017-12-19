@@ -126,6 +126,7 @@ class UpcomingGig extends React.Component {
     }
 
     uncommitButton(e, user, gig) {
+
         this.props.onUncommitClick(user, gig)
         this.setState({usercommitment: 0, usercommitted: false, changed: true})
     }
@@ -141,7 +142,7 @@ class UpcomingGig extends React.Component {
                     <div className="potential-gig-wrapper">
                         <div className="potential-gig-band-name">
                           <Link to={`/bandprofile/${this.props.gig.id}`}>
-                            {/* <h5>{this.props.users.filter((x) => x.id === this.props.gig.id)[0].name}</h5> */}
+                         
                             <h6>Promoter:</h6>
                             <h5>{this.props.users.filter((x) => x.id === this.props.gig.UserId)[0].name}</h5>
                           </Link>

@@ -24,7 +24,7 @@ export const fetchEvents = () => async dispatch => {
 }
 
 export const fetchVenues = () => async dispatch => {
-    console.log('fetching venues');
+   
     // eslint-disable-next-line
     const res = await axios.get('/api/getAllVenues')
     // eslint-disable-next-line
@@ -110,10 +110,6 @@ export const editUserProfile = (item) => async dispatch => {
 export const fetchAllUsers = () => async dispatch => {
     // eslint-disable-next-line
     const res = await axios.get('/api/all_users')
-    // eslint-disable-next-line
-    // console.log('INACTIONS,', JSON.stringify(res.data))
-    // console.log('CHECK',res.data.map((obj) => Object.assign({}, obj)))
-    // console.log('NO STRING', res.data)
     
     dispatch({ type: types.FETCH_ALL_USERS, payload: res.data.map((obj) => Object.assign({}, obj)) })
 }
@@ -121,5 +117,14 @@ export const fetchAllUsers = () => async dispatch => {
 export const savePhoto = (imageURL) => async dispatch =>{
     const res = await axios.post('/api/save_photo', {img: imageURL});
 
-    dispatch({ type: types.SAVE_PHOTO, pyaload: res.data})
+    dispatch({ type: types.SAVE_PHOTO, payload: res.data})
 }
+
+export const newUserHere = (input) => dispatch => {
+    // subscribe(()=>{
+    //     console.log('new client state from action!', getState());
+    // });
+    // console.log('THIS IS HAPPENING FIRST');
+    dispatch({type:'server/hello', data:input})
+}
+
