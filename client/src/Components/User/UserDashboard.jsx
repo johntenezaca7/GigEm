@@ -16,29 +16,21 @@ class UserDashboard extends React.Component {
           show: false,
           dashNav:'upcoming',
         };
-
-        this.props.init();
         this.changeState = this.changeState.bind(this);
-        this.onClick = this.onClick.bind(this)
-
-       
+        this.onClick = this.onClick.bind(this);
+        this.props.init();     
     }
+
     onClick(e){
       e.preventDefault()
       this.setState({
         dashNav: e.target.value
       })
     }
-    
-    // componentWillRecieveProps() {
-    //   (this.props.init());
-    // }
 
-    
-    // fetchEvents(e) {
-    //   e.preventDefault();
-    //   this.props.onFetchClick();
-    // }  
+    componentDidMount() {
+      this.props.init();
+    }
 
     componentDidMount() {
           if(this.props.events){
@@ -51,21 +43,12 @@ class UserDashboard extends React.Component {
         }
 
     changeState(info){
-          // info = false;
           this.setState({
             show:true
           })
         }
 
     renderContent() {
-
-        console.log('UserDashboard renderContent props', this.props);
-
-      // let userAttendance = this.props.attendance ? 
-      // this.props.attendance
-      // .filter((x) => x.UserId === this.props.info.id) 
-      // .map((x) => x = x.ShowcaseId) : [];
-
       switch(this.state.dashNav){
         case 'upcoming':
           return(
@@ -79,7 +62,6 @@ class UserDashboard extends React.Component {
                         key={gig.id} 
                         usercommitment=
                           {Array.isArray(this.props.attendance) && 
-                            this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id) &&
                             this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id)[0] ? 
                             this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id)[0].commitValue :
                           0}
@@ -94,11 +76,16 @@ class UserDashboard extends React.Component {
                     <h2>Potential Gigs</h2>
                     <div className="user-show-scroll">
                       { this.props.events
-                          .filter((x) => x.commits < x.minCommits)
-                          .map((x) => <UpcomingGig 
-                            user={this.props.info.id} 
-                            key={x.id} 
-                            gig={x}  />)
+                      .filter((x) => x.commits < x.minCommits)
+                      .map((gig) => <UpcomingGig 
+                        user={this.props.info.id} 
+                        key={gig.id} 
+                        usercommitment=
+                          {Array.isArray(this.props.attendance) && 
+                            this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id)[0] ? 
+                            this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id)[0].commitValue :
+                          0}
+                        gig={gig}/>)
                       }
                     </div>       
                   </div>

@@ -77,7 +77,7 @@ module.exports = (app, db) => {
     })
       .then((show) => {
         show.update({
-          commits: show.dataValues.commits - req.body.amount
+          commits: show.dataValues.commits - (req.body.amount ? req.body.amount : 0)
         })})
     
   });
