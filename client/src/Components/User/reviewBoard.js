@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import firebase from '../../fireB/firebase';
 import { connect } from 'react-redux'; 
 import * as actions from '../../actions';
-import Logs from './messageLogs';
+// import Logs from './messageLogs';
 
 const database = firebase.database();
 

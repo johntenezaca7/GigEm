@@ -116,7 +116,7 @@ class UpcomingGig extends React.Component {
                             className="btn btn-warning btn-sm"
                             onClick={(e) => {
                                 this.handleSubmit(e)} }>
-                            Withdraw Funding
+                            Not Going!
                         </button>
                     </div>)
         }
