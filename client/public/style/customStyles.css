@@ -91,9 +91,11 @@
 }
 
 .user-profile-image {
-	width: 185px;
-	height:200px;
-	border-radius: 30%;
+	width: auto;
+	height:185px;
+	border-radius: 10%;
+	overflow:hidden; 
+	background: 50% 50% no-repeat;
 }
 
 .google-maps{
@@ -137,6 +139,8 @@
 	grid-auto-rows: minmax(100, auto);
 	justify-items: stretch;
 	align-items: stretch;
+	height: 90vh;
+	/* height: auto; */
 	/* padding: 1cm 2cm 1cm 1cm; */
 	/* background: rgb(255, 237, 222); */
 	/* padding:1em; */
@@ -152,8 +156,8 @@
 
 .band-show-scroll{
 	width: auto;
-    height: 300px;
-    overflow: scroll;
+  height: 39.5vh;
+  /* overflow: scroll; */
 }
 
 .grid-image {
@@ -173,7 +177,7 @@
 }
 .user-show-scroll{
 	width: auto;
-    height: 750px;
+  height: 360px;
 	overflow: scroll;
 
 }
@@ -240,7 +244,7 @@
 }
 
 .potential-gig-progress-bar {
-	grid-column: 1/4;
+	grid-column: 1/5;
 	grid-row: 2;
 }
 
@@ -279,12 +283,12 @@
 
 .inside-wall {
 	display: grid;
-	grid-auto-columns: 1fr;
+	grid-auto-columns: 2fr;
 	padding:1em;
 	grid-gap: 1em;
 	align-items: stretch;
 	width: auto;
-    height: 620px;
+    height: auto;
 	overflow: scroll;
 	
 }
@@ -292,8 +296,6 @@
 	background: #eee;
 	padding:1em;
 	border-radius: 25px;
-	
-
 }
 .each-h-block {
 	display: grid;
