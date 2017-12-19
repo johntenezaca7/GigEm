@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar';
 import BandUpcomingGig from './Band/BandUpcomingGig';
-import BandPotentialGig from './Band/BandPotentialGig';
+// import BandPotentialGig from './Band/BandPotentialGig';
 import MediaItem from './MediaItem';
 
 import { connect } from 'react-redux';
@@ -67,11 +67,11 @@ class BandProfile extends React.Component {
                          <div>
                             <h3>Upcoming Shows</h3>
                               <div className="band-show-scroll border border-dark m-2">
-                                <BandUpcomingGig />
+                              <BandUpcomingGig potential={false} />
                               </div>
                             <h3>Potential Gigs</h3>
                             <div className="band-show-scroll border border-dark m-2">
-                                <BandPotentialGig />
+                            <BandUpcomingGig potential={true} />
                               </div>
                             </div>
                           <div className="band-media">
@@ -129,11 +129,11 @@ class BandProfile extends React.Component {
                      <div>
                         <h3>Upcoming Shows</h3>
                           <div className="band-show-scroll border border-dark m-2">
-                            <BandUpcomingGig />
+                            <BandUpcomingGig potential={false} />
                           </div>
                         <h3>Potential Gigs</h3>
                         <div className="band-show-scroll border border-dark m-2">
-                            <BandPotentialGig />
+                            <BandUpcomingGig potential={true} />
                           </div>
                         </div>
                       <div className="band-media">
