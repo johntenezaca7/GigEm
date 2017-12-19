@@ -15,11 +15,19 @@ class mediaItem extends React.Component {
     this.props.deleteItem(itemid);
   }
 
-  componentWillReceiveProps() {}
+  renderRemoveButton() {
+    if (this.props.ownUserProfile) {
+      return(        <form>
+        <input type="submit" value="Remove item" onClick={(e) => this.handleClick(e, this.props.item.id)} />
+      </form>)
+    } else {
+      return (<div></div>)
+    }
+  }
 
   render() {
     return(
-      <div className='container m-3'>
+      <div className='m-3'>
         <iframe 
           width="auto" 
           height="auto" 
@@ -31,9 +39,7 @@ class mediaItem extends React.Component {
           allowfullscreen>
         </iframe>
         <div className="small">{this.props.item.description}</div>
-        <form>
-          <input type="submit" value="Remove item" onClick={(e) => this.handleClick(e, this.props.item.id)} />
-        </form>
+        {this.renderRemoveButton()}
       </div>
     )
   }

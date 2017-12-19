@@ -109,11 +109,9 @@ export const addProperty = (bandId, description, linkUrl) => async dispatch => {
     const res = await axios.post('/api/add_property', {userid: bandId, linkurl: linkUrl, description: description});
     console.log('made axios post to submit property');
     dispatch({ type: types.ADD_PROPERTY, payload: res.data});
-    fetchProperties();
 }
 
 export const removeProperty = (mediaItemId) => async dispatch =>{
     const res = await axios.post('/api/remove_property', {itemid: mediaItemId});
     dispatch({ type: types.REMOVE_PROPERTY, payload: res.data});
-    fetchProperties();
 }
