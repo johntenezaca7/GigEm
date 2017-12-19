@@ -26,9 +26,6 @@ class UserDashboard extends React.Component {
       this.setState({
         dashNav: e.target.value
       })
-    }
-
-    componentDidMount() {
       this.props.init();
     }
 
@@ -48,6 +45,10 @@ class UserDashboard extends React.Component {
           })
         }
 
+        // componentWillReceiveProps() {
+        //   console.log('component will receive props//');
+        // }
+
     renderContent() {
       switch(this.state.dashNav){
         case 'upcoming':
@@ -60,11 +61,12 @@ class UserDashboard extends React.Component {
                       .map((gig) => <UpcomingGig 
                         user={this.props.info.id} 
                         key={gig.id} 
-                        usercommitment=
-                          {Array.isArray(this.props.attendance) && 
-                            this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id)[0] ? 
-                            this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id)[0].commitValue :
-                          0}
+                        userAttendance=
+                          {Array.isArray(this.props.attendance) ?  
+                            this.props.attendance.filter((x) => 
+                              x.ShowcaseId === gig.id && x.UserId === this.props.info.id) 
+                            : [{}]
+                          }
                         gig={gig}/>)
                     }
                     </div>
@@ -80,11 +82,12 @@ class UserDashboard extends React.Component {
                       .map((gig) => <UpcomingGig 
                         user={this.props.info.id} 
                         key={gig.id} 
-                        usercommitment=
-                          {Array.isArray(this.props.attendance) && 
-                            this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id)[0] ? 
-                            this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id)[0].commitValue :
-                          0}
+                        userAttendance=
+                          {Array.isArray(this.props.attendance) ?  
+                            this.props.attendance.filter((x) => 
+                              x.ShowcaseId === gig.id && x.UserId === this.props.info.id) 
+                            : [{}]
+                          }
                         gig={gig}/>)
                       }
                     </div>       

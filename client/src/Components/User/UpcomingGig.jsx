@@ -3,8 +3,9 @@ import ProgressComponent from './ProgressComponent';
 import Modal from 'react-modal';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { commitToEvent, uncommitFromEvent, fetchEvents, checkAttendance } from '../../actions/index';
+import { payForEvent, commitToEvent, uncommitFromEvent, fetchEvents, checkAttendance } from '../../actions/index';
 import ShowcaseInfo from '../ShowDescription';
+import Payment from '../Payment';
 
 
 
@@ -28,34 +29,36 @@ class UpcomingGig extends React.Component {
             changed: false,
             modalIsOpen: false,
             value:'',
-            usercommitment: this.props.usercommitment
+            // usercommitment: this.props.userAttendance[0] ? this.props.userAttendance[0].commitValue : 0
         };
         this.openModal = this.openModal.bind(this);
-        this.afterOpenModal = this.afterOpenModal.bind(this);
+        // this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
     }
 
-    // componentWillReceiveProps() {
-    //     if (!this.state.changed) this.setState({
-    //       usercommitted: this.props.usercommitment,
-    //     })
-    //   }
-
     openModal() {
       this.setState({modalIsOpen: true});
-    }
-
-    afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    // this.subtitle.style.color = '#f00';
     }
 
     closeModal() {
         this.setState({modalIsOpen: false});
     }
 
+    componentWillReceiveProps() {
+      if (!this.state.changed) {
+        this.setState({
+        usercommitment: this.props.userAttendance && this.props.userAttendance[0] ? 
+          this.props.userAttendance[0].commitValue : 
+          0,
+        isPaid: this.props.userAttendance && this.props.userAttendance[0] ? 
+          this.props.userAttendance[0].isPaid : 
+          0,
+        });
+    }
+    }
+
       renderCommitmentForm(){
-        // console.log('renderCommitmentForm this.state.usercommitment: ', this.state.usercommitment)
+        console.log('renderCommitmentForm this.state:', this.state)
         if (!this.props.usercommitment && !this.state.usercommitment) { 
             return(
                 <form>
@@ -68,17 +71,29 @@ class UpcomingGig extends React.Component {
                     {this.renderButton()}
                 </form>    
             )
-        } else {
+        } else if (!this.state.isPaid) {
             return(
                 <div> 
                     <div>
                         {`User commitment: $ ${this.props.usercommitment ? this.props.usercommitment : this.state.usercommitment}`}
                     </div>
                     <div>
+                        <Payment pitchValue={this.props.usercommitment ? this.props.usercommitment : this.state.usercommitment}/>
+                        <button type="button" onClick={(e) => this.payButton(e, this.props.info, this.props.gig)} className="btn btn-sm btn-primary">(test payment)</button>
+                    </div>
+                    <div>
                         {this.renderButton('committed')}
                     </div>
                 </div>
             )
+        } else if (this.state.isPaid) {
+          return (
+            <div> 
+              <div>
+                  <h5>{`Paid ${`$`}${this.state.usercommitment}`}</h5>
+              </div>
+            </div>
+          )
         }
     };
 
@@ -116,8 +131,16 @@ class UpcomingGig extends React.Component {
         }
     }
 
+    payButton(e, user, gig) {
+        e.preventDefault();
+        this.props.onPayClick(user, gig)
+        this.setState({
+            isPaid: true,
+            changed: true
+        })
+    }
+
     commitButton(e, user, gig, amount) {
-        // e.preventDefault();
         this.props.onCommitClick(user, gig, amount)
         this.setState({
             usercommitment: parseInt(amount,10) ? parseInt(amount,10) : 0, 
@@ -127,23 +150,9 @@ class UpcomingGig extends React.Component {
     }
 
     uncommitButton(e, user, gig) {
-        // e.preventDefault();
         this.props.onUncommitClick(user, gig, this.state.usercommitment)
         this.setState({usercommitment: 0, usercommitted: false, changed: true})
     }
-
-    // componentDidMount() {
-    //     // this.props.init();
-    //     let attendanceArray = Array.isArray(this.props.attendance) ? this.props.attendance.filter((x) => x.ShowcaseId === this.props.gig.id && x.UserId === this.props.info.id) : [{commitValue: 0}];
-    //     console.log('ComponentWillMount attendanceArray', attendanceArray)
-    //     if (attendanceArray && attendanceArray[0]) {
-    //         this.setState({usercommitment : attendanceArray[0].commitValue})
-    //     } else {
-    //         this.setState({usercommitment : 0});
-    //     }
-    // }
-
-
 
     render() {  
       console.log('upcoming gig this.state:', this.state);
@@ -233,6 +242,11 @@ function mapStateToProps({ auth, attendance, users, info }){
         dispatch(uncommitFromEvent(user, gig, amount))
         .then(() => dispatch(fetchEvents()))
         .then(() => dispatch(checkAttendance()))
+      },
+      onPayClick: (user, gig) => {
+          dispatch(payForEvent(user, gig))
+          .then(() => dispatch(fetchEvents()))
+          .then(() => dispatch(checkAttendance()))
       }
     }
   }
