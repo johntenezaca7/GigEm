@@ -1,9 +1,11 @@
 import React from 'react';
 import PotentialGig from './PotentialGig';
 import UpcomingGig from './UpcomingGig';
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
-import { /* fetchUser, */ fetchUserProfile, fetchEvents, checkAttendance, editUserProfile } from '../../actions/index';
-import { RIEInput, RIETextArea } from 'riek';
+import { /* fetchUser, */ fetchUserProfile, fetchEvents, checkAttendance, editUserProfile} from '../../actions/index';
+import { /* RIEToggle, */ RIEInput, RIETextArea, /*RIENumber, RIETags, RIESelect */} from 'riek';
+// import { message } from '../../actions/index'; 
 import _ from 'lodash'
 import Profile from '../ProfilePage';
 
@@ -48,6 +50,7 @@ class UserProfile extends React.Component {
 
     componentWillMount() {
       this.props.init();
+     
     }
 
 
@@ -78,7 +81,7 @@ class UserProfile extends React.Component {
     
 
     render() {
-    
+      // console.log('userPORRR', this.props.message('tree'))
       let userAttendance = this.props.attendance.length > 0 ? 
       this.props.attendance
       .filter((x) => x.UserId === this.props.info.id) 
@@ -148,18 +151,18 @@ class UserProfile extends React.Component {
                                >
                             <button onClick={this.closeModal}>close</button>
                           
-                            <div>
-                        <ul id="messages"></ul>
-                        <form action="">
-                          <input id="m" autocomplete="off" /><button>Send</button>
-                        </form>
+                              <div>
+                          <ul id="messages"></ul>
+                          <form action="">
+                            <input id="m" autocomplete="off" /><button>Send</button>
+                          </form>
                         </div>
                     
                             </Modal>
                           </div>
                     <div className="inside-wall">
                     
-                       
+             
                      
                     </div>
                   </div>
@@ -199,6 +202,7 @@ function mapStateToProps({events, attendance, auth, info  }){
   }
   
   const mapDispatchToProps = dispatch => {
+ 
     return {
       init: () => {
         dispatch(fetchUserProfile())
@@ -209,6 +213,7 @@ function mapStateToProps({events, attendance, auth, info  }){
         dispatch(editUserProfile(e))
         .then(() => dispatch(fetchUserProfile()))
       }
+    ,
     }
   }
 

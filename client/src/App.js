@@ -36,7 +36,7 @@ class App extends Component {
     this.props.fetchUserProfile()
     this.props.fetchAllUsers()
     this.props.fetchVenues()
-    // var socket = io();
+
   }
 
   render() {
@@ -67,6 +67,7 @@ class App extends Component {
 function mapStateToProps({ auth, info, users, events }){
   return { 
     auth: auth,
+
     info: info,
     users: users,
     events,

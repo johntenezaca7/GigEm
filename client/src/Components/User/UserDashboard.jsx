@@ -100,8 +100,8 @@ class UserDashboard extends React.Component {
         case 'chat':
           return (
             <div>
-                   <Board />      
-             </div>
+                <Board />      
+            </div>
           );
           default:
           return;
@@ -113,9 +113,9 @@ class UserDashboard extends React.Component {
       return (
         <div >   
             <div> 
-                <button className="btn btn-danger my-2 my-sm-0 m-1" type="submit" value="upcoming" onClick={this.onClick}>Upcoming Gigs</button>
-                <button className="btn btn-warning my-2 my-sm-0 m-1" type="submit" value="potential" onClick={this.onClick} >Potential Gigs</button>
-                <button className="btn btn-primary my-2 my-sm-0 m-1" type="submit" value="chat" onClick={this.onClick}>Community Board</button>
+                <button className="" type="submit" value="upcoming" onClick={this.onClick}>Upcoming Gigs</button>
+                <button className="" type="submit" value="potential" onClick={this.onClick} >Potential Gigs</button>
+                <button className=""type="submit" value="chat" onClick={this.onClick}>Community Board</button>
               </div>
               <div className="user-dashboard">
               {this.renderContent()}

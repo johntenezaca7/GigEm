@@ -16,6 +16,8 @@ export const SEND_NEW_EVENT_TEXT = 'send_new_event_email';
 export const FETCH_PROPERTIES = 'fetch_properties';
 export const ADD_PROPERTY = 'add_property';
 export const REMOVE_PROPERTY = 'remove_property';
+export const SERVER_HELLO = 'server/hello';
+export const MESSAGE = 'message';
 
 
 

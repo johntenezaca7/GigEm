@@ -9,6 +9,9 @@ import userInfo from './userInfo';
 import profileReducer from './profileReducers';
 import propertyReducer from './propertyReducers';
 import {reducer as formReducer} from 'redux-form';
+// import Message from './boardMesRed';
+
+import User from './addChatUser';
 
 export default combineReducers({
     auth: authReducer,
@@ -20,5 +23,7 @@ export default combineReducers({
     info: userInfo,
     profile: profileReducer,
     form: formReducer,
-    properties: propertyReducer
-});
+    properties: propertyReducer,
+    chat: User
+    // message: Message
+})

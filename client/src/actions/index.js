@@ -24,7 +24,7 @@ export const fetchEvents = () => async dispatch => {
 }
 
 export const fetchVenues = () => async dispatch => {
-    console.log('fetching venues');
+   
     // eslint-disable-next-line
     const res = await axios.get('/api/getAllVenues')
     // eslint-disable-next-line
@@ -91,6 +91,8 @@ export const editUserProfile = (item) => async dispatch => {
 
 export const fetchAllUsers = () => async dispatch => {
     const res = await axios.get('/api/all_users')    
+    // eslint-disable-next-line
+    const res = await axios.get('/api/all_users')
     dispatch({ type: types.FETCH_ALL_USERS, payload: res.data.map((obj) => Object.assign({}, obj)) })
 }
 
@@ -115,3 +117,12 @@ export const removeProperty = (mediaItemId) => async dispatch =>{
     const res = await axios.post('/api/remove_property', {itemid: mediaItemId});
     dispatch({ type: types.REMOVE_PROPERTY, payload: res.data});
 }
+
+export const newUserHere = (input) => dispatch => {
+    // subscribe(()=>{
+    //     console.log('new client state from action!', getState());
+    // });
+    // console.log('THIS IS HAPPENING FIRST');
+    dispatch({type:'server/hello', data:input})
+}
+
