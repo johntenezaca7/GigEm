@@ -1,9 +1,9 @@
 import React from 'react';
-import PotentialGig from './PotentialGig';
+// import PotentialGig from './PotentialGig';
 import UpcomingGig from './UpcomingGig';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
-import { /* fetchUser, */ fetchUserProfile, fetchEvents, checkAttendance, editUserProfile} from '../../actions/index';
+import { /* fetchUser, */ fetchUserProfile, fetchEvents, checkAttendance, editUserProfile } from '../../actions/index';
 import { /* RIEToggle, */ RIEInput, RIETextArea, /*RIENumber, RIETags, RIESelect */} from 'riek';
 // import { message } from '../../actions/index'; 
 import _ from 'lodash'
@@ -28,10 +28,10 @@ class UserProfile extends React.Component {
         this.state = {
           modalIsOpen: false
         }
-        this.props.init();
         this.openModal = this.openModal.bind(this);
         this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        this.props.init();
     }
 
 
@@ -48,7 +48,7 @@ class UserProfile extends React.Component {
         this.setState({modalIsOpen: false});
     }
 
-    componentWillMount() {
+    componentDidMount() {
       this.props.init();
      
     }
@@ -81,12 +81,15 @@ class UserProfile extends React.Component {
     
 
     render() {
-      // console.log('userPORRR', this.props.message('tree'))
-      let userAttendance = this.props.attendance.length > 0 ? 
-      this.props.attendance
-      .filter((x) => x.UserId === this.props.info.id) 
-      .map((x) => x = x.ShowcaseId) : [];
-      
+
+      let userAttendance = Array.isArray(this.props.attendance) && this.props.attendance.length > 0 ? 
+        this.props.attendance
+        .filter((x) => x.UserId === this.props.info.id) 
+        .map((x) => x = x.ShowcaseId) : [];
+
+        console.log('userProfile props,',this.props)
+        console.log('userProfile userAttendance,',userAttendance);
+
       if(this.props.info){
         return (
           <div>
@@ -170,16 +173,34 @@ class UserProfile extends React.Component {
                       <h3>Upcoming Shows</h3>
                       <div className="band-show-scroll">
                         {this.props.events
-                          .filter((x) => userAttendance.includes(x.id) && x.isCommitted === true)
-                          .map((x) => <UpcomingGig user={this.props.info.id} key={x.id} gig={x} usercommitted={userAttendance.includes(x.id)}/>)
-                        }
+                          .filter((x) => userAttendance.includes(x.id) && x.commits >= x.minCommits)
+                            .map((gig) => <UpcomingGig 
+                              user={this.props.info.id} 
+                              key={gig.id} 
+                              usercommitment=
+                                {Array.isArray(this.props.attendance) && 
+                                  this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id) &&
+                                  this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id)[0] ? 
+                                  this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id)[0].commitValue :
+                                0}
+                              gig={gig}/>)
+                          }
                       </div>
                       <br />
                       <h3>Potential Gigs</h3>
                       <div className="band-show-scroll">
                         {this.props.events
-                            .filter((x) => userAttendance.includes(x.id) && x.isCommitted === false)
-                            .map((x) => <PotentialGig user={this.props.info.id} key={x.id} gig={x} usercommitted={userAttendance.includes(x.id)}/>)
+                          .filter((x) => userAttendance.includes(x.id) && x.commits < x.minCommits)
+                          .map((gig) => <UpcomingGig 
+                            user={this.props.info.id} 
+                            key={gig.id} 
+                            usercommitment=
+                              {Array.isArray(this.props.attendance) && 
+                                this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id) &&
+                                this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id)[0] ? 
+                                this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id)[0].commitValue :
+                              0}
+                            gig={gig}/>)
                           }
                       </div>
                   </div>          
@@ -205,9 +226,8 @@ function mapStateToProps({events, attendance, auth, info  }){
  
     return {
       init: () => {
-        dispatch(fetchUserProfile())
         dispatch(fetchEvents())
-        dispatch(checkAttendance())
+        .then(() => dispatch(checkAttendance()))
       },
       editUserProfile: (e) => {
         dispatch(editUserProfile(e))

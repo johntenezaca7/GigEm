@@ -43,8 +43,8 @@ export const commitToEvent = (user, gig, amount) => async dispatch => {
     dispatch({ type: types.COMMIT_TO_EVENT, payload: res.data })
 }
 
-export const uncommitFromEvent = (user, gig) => async dispatch => {
-    const res = await axios.post('/api/uncommit', {'user': user, 'gig': gig} );
+export const uncommitFromEvent = (user, gig, amount) => async dispatch => {
+    const res = await axios.post('/api/uncommit', {'user': user, 'gig': gig, 'amount': amount} );
     dispatch({ type: types.UNCOMMIT_FROM_EVENT, payload: res.data })
 }
 
