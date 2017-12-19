@@ -137,36 +137,34 @@ class BandProfile extends React.Component {
                           </div>
                         </div>
                       <div className="band-media">
-                          <h3>Video Placeholder</h3>
-                          <div className="container border border-dark p-2 m-1">
-                                <form>
-                                  <label>
-                                    Url: 
-                                    <input type="text" value={this.state.linkurl} onChange={(e) => this.handleChange(e, 'linkurl')} />
-                                  </label>
-                                  <label>
-                                    Description: 
-                                    <input type="text" value={this.state.description} onChange={(e) => this.handleChange(e, 'description')} />
-                                  </label>
-                                <input type="submit" value="Add video" onClick={(e) => this.handleClick(e, selectedUser)} />
-                              </form>
-                            </div>
-                          <div className="side-scrolling border border-dark text-center">
-                            {
-                              (this.props.properties) ? this.props.properties
-                                .filter((x) => x.UserId === selectedUser.id)
-                                .map((x) => {
-                                  return (<MediaItem item={x} ownUserProfile={true} />)
-                                }) : (<div></div>)}
-                          </div>
+                        <div className="side-scrolling border border-dark text-center">
+                            <h3>Video Placeholder</h3>
+
+                            <form>
+                                    <label>
+                                      Url (requires http://): 
+                                      <input type="text" value={this.state.linkurl} onChange={(e) => this.handleChange(e, 'linkurl')} />
+                                    </label>
+                                    <label>
+                                      Description: 
+                                      <input type="text" value={this.state.description} onChange={(e) => this.handleChange(e, 'description')} />
+                                    </label>
+                                  <input type="submit" value="Add video" onClick={(e) => this.handleClick(e, selectedUser)} />
+                                </form>
+
+                              {
+                                (this.props.properties) ? this.props.properties
+                                  .filter((x) => x.UserId === selectedUser.id)
+                                  .map((x) => {
+                                    return (<MediaItem item={x} ownUserProfile={true} />)
+                                  }) : (<div></div>)}
+                        </div>
                       </div>
                       
                     </div>
                     <div>
-
-                    </div>
               </div>
-
+            </div>
         </div>)
       }
     }
