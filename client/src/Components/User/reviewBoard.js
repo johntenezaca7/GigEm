@@ -30,15 +30,15 @@ class Board extends Component {
     onSubmit(event){
         event.preventDefault();
         const firstName = this.props.user.name.split(' ')[0]
-        const fullName = this.props.user.name.split(' ').join('')
+        const lastName = this.props.user.name.split(' ')[1]
       
         const nextMessage = {
-            uid: this.state.logs.length,
+            id: this.state.logs.length,
             username: firstName,
             text: this.state.input, 
             createdAt: Date.now()
         }
-        database.ref('messages/' +fullName).set(nextMessage);
+        database.ref('messages/' +nextMessage.id).set(nextMessage);
    
         this.setState({
             input:''
@@ -48,13 +48,13 @@ class Board extends Component {
 
     componentDidMount(){
         // console.log('connecting to db')s
-        database.ref('messages/').on('value', (snapshot) => {
+
+        database.ref(`messages/`).on('value', (snapshot) => {
             const currentMessages = snapshot.val();
 
             if(currentMessages !== null){
                 this.setState({
-                    logs: currentMessages
-                })
+                    logs: currentMessages})
             }
         })
     }
@@ -62,20 +62,27 @@ class Board extends Component {
     
     render(){
        
-    
-         const mes = Object.values(this.state.logs);
-       
-        // console.log('recent', mes)
+         const lastName = this.props.user.name.split(' ')[1]
+        //  const par = Object.values(this.state.logs);
+
+        //  console.log('logs', this.state.logs)
          const renderLogs = () => {
-                return mes.map( (mes, ix) => {
-                    return (<div key={ix}> user: {mes.text} <br/> </div>)
+                return this.state.logs.map( (blob, ix) => {
+                        // console.log('testing', blob)
+                  return(<div key={ix}> {blob.username}: {blob.text} <br/> </div>)
+                    // return 'ey'
+
                 })
             }
+            
         
         return(
                  <div className="container">
                     <div>
-                        {renderLogs()}
+                        { !this.state.logs[0] ?
+                        <div>New User</div> :
+                        renderLogs()
+                        }
                     </div>
               
             

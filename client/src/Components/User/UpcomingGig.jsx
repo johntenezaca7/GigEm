@@ -155,8 +155,7 @@ class UpcomingGig extends React.Component {
     }
 
     render() {  
-      console.log('upcoming gig this.state:', this.state);
-      console.log('upcoming gig this.props:', this.props);
+   
         if (this.props.users.length > 0) {
             return (
                 <div className="container border p-3 m-1 small" key={this.props.gig.id}>
