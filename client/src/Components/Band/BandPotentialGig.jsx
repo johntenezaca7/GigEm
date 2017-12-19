@@ -22,6 +22,7 @@ class BandPotentialGig extends React.Component {
 
   renderGig(gig) {
     console.log("GIGGGGG: ", gig)
+    console.log("PoGig Props:", this.props)
     return (
             <div className="container m-5" key={gig.id} >
                 <div className="row">
