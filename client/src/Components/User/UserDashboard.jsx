@@ -100,8 +100,8 @@ class UserDashboard extends React.Component {
         case 'chat':
           return (
             <div>
-                   <Board />      
-             </div>
+                <Board />      
+            </div>
           );
           default:
           return;

@@ -125,6 +125,6 @@ export const newUserHere = (input) => dispatch => {
     //     console.log('new client state from action!', getState());
     // });
     // console.log('THIS IS HAPPENING FIRST');
-    dispatch({type:'server', data:input})
+    dispatch({type:'server/hello', data:input})
 }
 

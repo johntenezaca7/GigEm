@@ -25,32 +25,46 @@ class Board extends Component {
 
     onSubmit(event){
         event.preventDefault();
-        // console.log('TRYINGG',event.target.value)
-        this.state.logs.push(this.state.input)
-        this.props.newUserHere(this.state.input)
+       
+        this.props.mes.push(this.state.input );
+        this.props.newUserHere(this.props.mes)
+        // {this.props.mes}
         this.setState({
             input:''
         })
     }
 
-    renderLogs(){
-        return this.state.logs.map( (mes, ix) => {
-            return (<div> <span>{mes}</span> <br /> </div>)
-        })
-    }
-
+    
     render(){
-        if(!this.props.mes){
-            const message = ''
+       
+        const name = this.props.user.name.split(' ')[0]
+        const renderLogs = () => {
+            return this.props.mes.map( (mes, ix) => {
+                return (<div> {name}: {mes} <br/> </div>)
+            })
         }
-        // const message = this.props.mes
-        // console.log('reducer', this.props.mes)
+        
         return(
             <div className="container">
-                {this.renderLogs()}
-             <form action="" onSubmit={this.onSubmit}>
-                 <input id="m"  value={this.state.input} onChange={this.onChange}/><button>Send</button>
-             </form>
+                <div class="chat">
+              
+                <div class="messages">
+                    <div class="messages-content">
+                    {renderLogs()}
+                    </div>
+                </div>
+                <div class="message-box">
+                   
+
+                    <form onSubmit={this.onSubmit}>
+                             <input type="text" className="message-input" placeholder="Type message..." value={this.state.input} onChange={this.onChange}/>
+                             <button type="submit" class="message-submit">Send</button>
+                    </form>
+                </div>
+
+                </div>
+            <div class="bg"></div>
+             
             </div>
              )
     }
@@ -58,7 +72,8 @@ class Board extends Component {
 
 function mapStateToProps(state){
     return {
-        mes: state.chat
+        mes: state.chat,
+        user: state.info
     }
 }
 

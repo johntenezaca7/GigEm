@@ -7,7 +7,8 @@ export default function(state = [], action) {
     switch(action.type){
     case 'send message':
       return action.data;
-    case 'message' :         
+    case 'message' :       
+    console.log('back from', action.data)  
       return action.data;
     default:
       return state;
