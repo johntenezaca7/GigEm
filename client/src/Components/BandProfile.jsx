@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { /* fetchEvents, fetchAllUsers, */ editUserProfile, fetchUserProfile, fetchProperties, addProperty } from '../actions/index';
 import Profile from './ProfilePage';
 
-import { RIEInput /*, RIETextArea */ } from 'riek';
+import { RIEInput, RIETextArea } from 'riek';
 import _ from 'lodash'
 
 class BandProfile extends React.Component {
@@ -33,7 +33,7 @@ class BandProfile extends React.Component {
   
     handleClick(event, selectedUser) {
       event.preventDefault();
-      console.log('======================= - handling click')
+      // console.log('======================= - handling click')
       this.props.submitProperty(selectedUser.id, this.state.description, this.state.linkurl);
     }
 
@@ -42,7 +42,7 @@ class BandProfile extends React.Component {
       var selectedUser = this.props.users.filter((x) => x.id === parseInt(this.props.match.params.bandId,10))[0];
       if (!selectedUser && !this.props.user) selectedUser = {id: -1}
 
-      console.log('rerendering, user props: ', this.props.properties);
+      // console.log('rerendering, user props: ', this.props.properties);
 
       if (selectedUser.id !== this.props.info.id) {
         return (
@@ -75,13 +75,13 @@ class BandProfile extends React.Component {
                               </div>
                             </div>
                           <div className="band-media">
-                              <h3>Media Placeholder</h3>
-                              <div className="side-scrolling border border-dark text-center">
+                          <div className="side-scrolling border border-dark text-center">
+                              <h3>Media</h3>
                               {
                               (this.props.properties) ? this.props.properties
                               .filter((x) => x.UserId === selectedUser.id)
                               .map((x) => {
-                                return (<MediaItem item={x} ownUserProfile='true' key={x.id} />)
+                                return (<MediaItem item={x} ownUserProfile={false} key={x.id} />)
                               }) : (<div></div>)}
                             </div>
                           </div>
@@ -119,8 +119,8 @@ class BandProfile extends React.Component {
                           validate={_.isString} />
                         </div>   
                         <div className="border border-dark p-1">
-                          <RIEInput
-                            value={this.props.info.state || 'Description placeholder'}
+                          <RIETextArea
+                            value={this.props.info.description || 'Description placeholder'}
                             change={(e) => this.props.editUserProfile(e)}
                             propName='description'
                             validate={_.isString} />               
@@ -156,7 +156,7 @@ class BandProfile extends React.Component {
                               (this.props.properties) ? this.props.properties
                                 .filter((x) => x.UserId === selectedUser.id)
                                 .map((x) => {
-                                  return (<MediaItem item={x} ownUserProfile='true'/>)
+                                  return (<MediaItem item={x} ownUserProfile={true} />)
                                 }) : (<div></div>)}
                           </div>
                       </div>

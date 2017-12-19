@@ -9,29 +9,37 @@ module.exports = (app, db) => {
   });
 
   app.post('/api/add_property', (req, res) => {
-    // console.log(req.body);
-    dbDef.Properties.create({
-      linkUrl: req.body.linkurl,
-      description: req.body.description,
-      UserId: req.body.userid
-    })
-    .then(() => res.send('good.'));
-    // .then(console.log('added item')));
+    dbDef.User.findOne({where: {'googleId': req.user}})
+    .then((data) => {
+      if (data.dataValues.id === req.body.userid) {
+        console.log('creating media item');
+        dbDef.Properties.create({
+          linkUrl: req.body.linkurl,
+          description: req.body.description,
+          UserId: req.body.userid
+        })
+        .then(() => res.send('Media item added.'));
+      } else {
+        console.log('user not authorized to add item');
+        res.send('Not authorized.');
+      }});
   });
 
   app.post('/api/remove_property', (req, res) => {
-    // need some authentication
-    // console.log('attempting to remove item, req.body: ', req.body);
-    dbDef.Properties.findOne({ where: 
-      {'id': req.body.itemid}})
-      .then((mediaItem) => {
-        // console.log('found media item: ', mediaItem);
-        if (mediaItem) mediaItem.destroy();
-        console.log('removed media item');
-      })
-      .then(dbDef.Properties.findAll({})
-      .then((data) => {
-        res.send(data);
-      }));
+    dbDef.User.findOne({where: {'googleId': req.user}})
+    .then((data) => {
+      if (data) {
+        dbDef.Properties.findOne(
+          { where: {'id': req.body.itemid}})
+          .then((mediaItem) => {
+            if (mediaItem) mediaItem.destroy();
+            console.log('removed media item');
+          })
+        .then(() => res.send('Media item removed.'));
+      } else {
+        console.log('user not authorized to remove item');
+        res.send('Not authorized.');
+      }});
   });
-}
+
+};
