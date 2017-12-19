@@ -29,6 +29,20 @@ module.exports = (app, db) => {
     })
   });
 
+  app.post('/api/payForEvent', (req, res) => {
+    console.log('attempting to pay for event');
+    dbDef.Attendance
+    .findOne({where: {'UserId': req.body.user, 'ShowcaseId': req.body.gig}})
+    .then((attendance) => {
+      if (attendance) {
+        attendance.update({'isPaid': true})
+        res.send('ok');
+      } else {
+        res.send('err');
+      }
+    })
+  })
+
   app.post('/api/commit', (req, res) => {
     console.log('/api/commit UserId', req.body.user);
     console.log('/api/commit ShowcaseId', req.body.gig);

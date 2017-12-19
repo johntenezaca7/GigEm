@@ -53,6 +53,11 @@ export const addNewEvent = (event) => async dispatch => {
     dispatch({ type: types.ADD_EVENT, payload: res.data })
 }
 
+export const payForEvent = (user, event) => async dispatch => {
+    const res = await axios.post('/api/payForEvent', {'user': user.id, 'gig': event.id} );
+    dispatch({ type: types.PAY_FOR_EVENT, payload: res.data })
+}
+
 export const sendNewEventEmail = (event) => async dispatch => {
     console.log('attempting to send new event email: ', event);
     const res = await axios.post('/api/sendEmail', {'info': event} );
