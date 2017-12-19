@@ -92,7 +92,6 @@ export const editUserProfile = (item) => async dispatch => {
 export const fetchAllUsers = () => async dispatch => {
     const res = await axios.get('/api/all_users')    
     // eslint-disable-next-line
-    const res = await axios.get('/api/all_users')
     dispatch({ type: types.FETCH_ALL_USERS, payload: res.data.map((obj) => Object.assign({}, obj)) })
 }
 
