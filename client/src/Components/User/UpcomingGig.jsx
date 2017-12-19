@@ -116,7 +116,7 @@ class UpcomingGig extends React.Component {
                             className="btn btn-warning btn-sm"
                             onClick={(e) => {
                                 this.handleSubmit(e)} }>
-                            Withdraw Funding
+                            Not Going!
                         </button>
                     </div>)
         }
@@ -191,8 +191,11 @@ class UpcomingGig extends React.Component {
                         <div className="potential-gig-daterange">
                           {/* {this.props.gig.final_commit_date}<br /> */}
                           {/* {this.props.gig.venue_id}<br /> */}
-                          Venue Placeholder<br />
-                          Doors @ {this.props.gig.start_time}
+                          { this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0] &&
+                            this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0].name ? 
+                            this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0].name :
+                            'Venue NA'}<br />
+                        {this.props.gig.startTime ? `Doors @ ${this.props.gig.startTime}` : 'Start time NA'}
                         </div>
                         <div className="text-success potential-gig-commit-number">
                           {this.props.gig.city}<br />
@@ -217,12 +220,13 @@ class UpcomingGig extends React.Component {
     } 
 }
 
-function mapStateToProps({ auth, attendance, users, info }){
+function mapStateToProps({ auth, attendance, users, info, venues }){
     return { 
       attendance: attendance,
       auth: auth,
       users: users,
-      info: info
+      info: info,
+      venues: venues
     }
   }
 

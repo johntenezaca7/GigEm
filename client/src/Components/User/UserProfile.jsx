@@ -1,26 +1,13 @@
 import React from 'react';
-// import PotentialGig from './PotentialGig';
 import UpcomingGig from './UpcomingGig';
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
-import { /* fetchUser, */ fetchUserProfile, fetchEvents, checkAttendance, editUserProfile } from '../../actions/index';
-import { /* RIEToggle, */ RIEInput, RIETextArea, /*RIENumber, RIETags, RIESelect */} from 'riek';
-// import { message } from '../../actions/index'; 
+import { fetchUserProfile, fetchEvents, checkAttendance, editUserProfile } from '../../actions/index';
+import { RIEInput, RIETextArea } from 'riek';
 import _ from 'lodash'
 import Profile from '../ProfilePage';
-
+// eslint-disable-next-line
 import Modal from 'react-modal';
 
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
 
 class UserProfile extends React.Component {
     constructor(props) {
