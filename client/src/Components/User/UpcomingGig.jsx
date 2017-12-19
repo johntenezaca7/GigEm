@@ -58,7 +58,7 @@ class UpcomingGig extends React.Component {
     }
 
       renderCommitmentForm(){
-        console.log('renderCommitmentForm this.state:', this.state)
+        // console.log('renderCommitmentForm this.state:', this.state)
         if (!this.props.usercommitment && !this.state.usercommitment) { 
             return(
                 <form>
