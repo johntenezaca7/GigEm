@@ -57,7 +57,7 @@ module.exports = (app, db) => {
         dbDef.Attendance.create({
           UserId: req.body.user,
           ShowcaseId: req.body.gig,
-          commit: req.body.amount
+          commitValue: req.body.amount
         });
       }
     })

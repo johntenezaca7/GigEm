@@ -45,20 +45,21 @@ class UpcomingGig extends React.Component {
     }
 
     componentWillReceiveProps() {
-      this.setState({
-        usercommitment: this.props.userAttendance[0] ? 
+      if (!this.state.changed) {
+        this.setState({
+        usercommitment: this.props.userAttendance && this.props.userAttendance[0] ? 
           this.props.userAttendance[0].commitValue : 
           0,
-        isPaid: this.props.userAttendance[0] ? 
+        isPaid: this.props.userAttendance && this.props.userAttendance[0] ? 
           this.props.userAttendance[0].isPaid : 
           0,
-        
         });
+    }
     }
 
       renderCommitmentForm(){
         console.log('renderCommitmentForm this.state:', this.state)
-        if (!this.state.usercommitment) { 
+        if (!this.props.usercommitment && !this.state.usercommitment) { 
             return(
                 <form>
                     <input id="commits" 

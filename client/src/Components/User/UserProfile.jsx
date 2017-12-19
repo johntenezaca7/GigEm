@@ -172,12 +172,12 @@ class UserProfile extends React.Component {
                           .map((gig) => <UpcomingGig 
                             user={this.props.info.id} 
                             key={gig.id} 
-                            usercommitment=
-                              {Array.isArray(this.props.attendance) && 
-                                this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id) &&
-                                this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id)[0] ? 
-                                this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id)[0].commitValue :
-                              0}
+                            userAttendance=
+                            {Array.isArray(this.props.attendance) ?  
+                              this.props.attendance.filter((x) => 
+                                x.ShowcaseId === gig.id && x.UserId === this.props.info.id) 
+                              : [{}]
+                            }
                             gig={gig}/>)
                         }
                     </div>
@@ -189,12 +189,12 @@ class UserProfile extends React.Component {
                         .map((gig) => <UpcomingGig 
                           user={this.props.info.id} 
                           key={gig.id} 
-                          usercommitment=
-                            {Array.isArray(this.props.attendance) && 
-                              this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id) &&
-                              this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id)[0] ? 
-                              this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id)[0].commitValue :
-                            0}
+                          userAttendance=
+                          {Array.isArray(this.props.attendance) ?  
+                            this.props.attendance.filter((x) => 
+                              x.ShowcaseId === gig.id && x.UserId === this.props.info.id) 
+                            : [{}]
+                          }
                           gig={gig}/>)
                         }
                     </div>
