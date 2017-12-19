@@ -21,7 +21,6 @@ class BandPotentialGig extends React.Component {
   }
 
   renderGig(gig) {
-    console.log('rendering gig: ', gig)
     return (
             <div className="container m-5" key={gig.id} >
                 <div className="row">
@@ -46,7 +45,6 @@ class BandPotentialGig extends React.Component {
     }
 
   render() {
-  console.log("potential gig props: ", this.props);
     return (
       <div>
         {this.props.events

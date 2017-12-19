@@ -1,14 +1,11 @@
 import React from 'react';
-
-import Navbar from './Navbar'
-// import PotentialGig from './User/PotentialGig'
-// import UpcomingGig from './User/UpcomingGig'
-
+import Navbar from './Navbar';
 import BandUpcomingGig from './Band/BandUpcomingGig';
 import BandPotentialGig from './Band/BandPotentialGig';
+import MediaItem from './MediaItem';
 
 import { connect } from 'react-redux';
-import { fetchEvents, fetchAllUsers, editUserProfile, fetchUserProfile } from '../actions/index';
+import { /* fetchEvents, fetchAllUsers, */ editUserProfile, fetchUserProfile, fetchProperties, addProperty } from '../actions/index';
 import Profile from './ProfilePage';
 
 import { RIEInput, RIETextArea } from 'riek';
@@ -18,20 +15,34 @@ class BandProfile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+          linkurl: '',
+          description: ''
         };
+        this.props.fetchProperties();
+    }
+
+    
+
+    handleChange(event, stateitem) {
+      // eslint-disable-next-line
+      if (!stateUpdate) { var stateUpdate = {}; };
+      stateUpdate[stateitem] = event.target.value;
+      this.setState(stateUpdate);
+      // console.log('current user properties: ', this.props.properties)
+    }
+  
+    handleClick(event, selectedUser) {
+      event.preventDefault();
+      // console.log('======================= - handling click')
+      this.props.submitProperty(selectedUser.id, this.state.description, this.state.linkurl);
     }
 
     render() {
-      console.log('bandprofile props: ', this.props);
-      console.log('matched url user: ', parseInt(this.props.match.params.bandId,10))
+
       var selectedUser = this.props.users.filter((x) => x.id === parseInt(this.props.match.params.bandId,10))[0];
       if (!selectedUser && !this.props.user) selectedUser = {id: -1}
-      let eventsCommitMap = this.props.events
-        .filter((x) => x.isCommitted === true && x.UserId === selectedUser.id)
-      let eventsPotentialMap = this.props.events
-        .filter((x) => x.isCommitted === false && x.UserId === selectedUser.id)
-      console.log('selectedUser: ', selectedUser);
-      console.log('events potential map: ', eventsPotentialMap)
+
+      // console.log('rerendering, user props: ', this.props.properties);
 
       if (selectedUser.id !== this.props.info.id) {
         return (
@@ -64,14 +75,15 @@ class BandProfile extends React.Component {
                               </div>
                             </div>
                           <div className="band-media">
-                              <h3>Video Placeholder</h3>
-                              <div className="side-scrolling border border-dark text-center">
-                                <img src="../Assets/videoPlayer.svg" className="grid-image" alt="videoplayer" />
-                            
-                                <img src="../Assets/videoPlayer.svg" className="grid-image" alt="videoplayer" />
-          
-                                <img src="../Assets/videoPlayer.svg" className="grid-image" alt="videoplayer" />
-                              </div>
+                          <div className="side-scrolling border border-dark text-center">
+                              <h3>Media</h3>
+                              {
+                              (this.props.properties) ? this.props.properties
+                              .filter((x) => x.UserId === selectedUser.id)
+                              .map((x) => {
+                                return (<MediaItem item={x} ownUserProfile={false} key={x.id} />)
+                              }) : (<div></div>)}
+                            </div>
                           </div>
                           
                         </div>
@@ -107,7 +119,11 @@ class BandProfile extends React.Component {
                           validate={_.isString} />
                         </div>   
                         <div className="border border-dark p-1">
-                          {selectedUser.description ? selectedUser.description : 'Band placeholder'}                        
+                          <RIETextArea
+                            value={this.props.info.description || 'Description placeholder'}
+                            change={(e) => this.props.editUserProfile(e)}
+                            propName='description'
+                            validate={_.isString} />               
                         </div>
                     </div>
                      <div>
@@ -121,42 +137,56 @@ class BandProfile extends React.Component {
                           </div>
                         </div>
                       <div className="band-media">
-                          <h3>Video Placeholder</h3>
-                          <div className="side-scrolling border border-dark text-center">
-                            <img src="../Assets/videoPlayer.svg" className="grid-image" alt="videoplayer" />
-                        
-                            <img src="../Assets/videoPlayer.svg" className="grid-image" alt="videoplayer" />
-      
-                            <img src="../Assets/videoPlayer.svg" className="grid-image" alt="videoplayer" />
-                          </div>
+                        <div className="side-scrolling border border-dark text-center">
+                            <h3>Video Placeholder</h3>
+
+                            <form>
+                                    <label>
+                                      Url (requires http://): 
+                                      <input type="text" value={this.state.linkurl} onChange={(e) => this.handleChange(e, 'linkurl')} />
+                                    </label>
+                                    <label>
+                                      Description: 
+                                      <input type="text" value={this.state.description} onChange={(e) => this.handleChange(e, 'description')} />
+                                    </label>
+                                  <input type="submit" value="Add video" onClick={(e) => this.handleClick(e, selectedUser)} />
+                                </form>
+
+                              {
+                                (this.props.properties) ? this.props.properties
+                                  .filter((x) => x.UserId === selectedUser.id)
+                                  .map((x) => {
+                                    return (<MediaItem item={x} ownUserProfile={true} />)
+                                  }) : (<div></div>)}
+                        </div>
                       </div>
                       
                     </div>
                     <div>
-
-                    </div>
               </div>
-
+            </div>
         </div>)
       }
     }
 }
 
-function mapStateToProps({ events, auth, attendance, users, info }){
+function mapStateToProps({ events, auth, attendance, users, info, properties }){
   return { 
     attendance: attendance,
     events: events,
     auth: auth,
     users: users,
-    info: info
+    info: info,
+    properties: properties
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    init: (e) => {
-      dispatch(fetchEvents())
-      dispatch(fetchAllUsers())
+    fetchProperties: () => { dispatch(fetchProperties()) },
+    submitProperty: (bandId, description, linkUrl) => {
+      dispatch(addProperty(bandId, description, linkUrl))
+      .then(() => dispatch(fetchProperties()))
     },
     editUserProfile: (e) => {
       dispatch(editUserProfile(e))

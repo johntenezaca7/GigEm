@@ -132,10 +132,10 @@ class UserProfile extends React.Component {
                         </div>
                         <div >
                           <RIETextArea
-                          value={this.props.info.description || 'Write your description here!'}
-                          change={(e) => this.props.editUserProfile(e)}
-                          propName='description'
-                          validate={_.isString} />
+                            value={this.props.info.description || 'Write your description here!'}
+                            change={(e) => this.props.editUserProfile(e)}
+                            propName='description'
+                            validate={_.isString} />
                         </div>
                   </div>
                   <div>
