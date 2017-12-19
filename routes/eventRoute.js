@@ -43,30 +43,22 @@ module.exports = (app, db) => {
         dbDef.Attendance.create({
           UserId: req.body.user,
           ShowcaseId: req.body.gig,
-          commitValue: req.body.amount
+          commit: req.body.amount
         });
       }
     })
-    .then(dbDef.Attendance.findAll()
-    .then((attendance) => {
-      attendance ? res.send(attendance) : res.send(null);
-    }));
-
-    dbDef.Showcase
-    .findOne({where: {'id': req.body.gig}})
-    .then((show) => {
-      show.update({
-          commits: show.dataValues.commits + 1,
-          currentCommitValue: show.dataValues.currentCommitValue + req.body.amount
-      });
-    });
+    .then(() => dbDef.Showcase
+      .findOne({where: {'id': req.body.gig}})
+      .then((show) => {
+        show.update({
+            commits: show.dataValues.commits + req.body.amount,
+        });
+      })
+    )
+    .then(() => res.send('OK'));
   });
 
   app.post('/api/uncommit', (req, res) => {
-    console.log('/api/uncommit UserId', req.body.user);
-    console.log('/api/uncommit ShowcaseId', req.body.gig);
-
-
     dbDef.Attendance.findOne({
       where: {
         UserId: req.body.user, 
@@ -77,11 +69,6 @@ module.exports = (app, db) => {
     .then(dbDef.Attendance.findAll()
     .then((attendance) => {
       let returnValue = attendance
-      // .filter((x) => x.UserId === req.user)
-      // .reduce((memo, item) => {
-      //   memo.push(item.ShowcaseId)
-      //   return memo;
-      // }, []);
       attendance ? res.send(returnValue) : res.send(returnValue)
     }))
 
@@ -90,34 +77,27 @@ module.exports = (app, db) => {
     })
       .then((show) => {
         show.update({
-          commits: show.dataValues.commits - 1
+          commits: show.dataValues.commits - req.body.amount
         })})
     
   });
 
   app.post('/api/commitCheck', (req, res) => {
-    // console.log('eventRoute.js: attempting to check if user has committed to event');
-    // console.log('eventRoute.js req.body:', req.body)
-    // console.log(req.body);
     dbDef.Attendance.findAll()
     .then((attendance) => {
       res.send(attendance);
     })
   })
 
-  // dbDef.User.findAll()
-  // .then(data => console.log(data));
-
   app.get('/eventsByBand', (req, res) =>{
-    // console.log(req.query);
     dbDef.Showcase.findAll({
       where: { UserId: req.query.userId },
       include: [ { model: dbDef.User} ]
- })
+    })
     .then((data) => {
       // console.log('found events: ', data);
       res.send(data);
-    })
+    });
   });
   
   // Add Showcase Event and respond with added event obj 

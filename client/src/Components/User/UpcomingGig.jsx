@@ -3,7 +3,7 @@ import ProgressComponent from './ProgressComponent';
 import Modal from 'react-modal';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { commitToEvent, uncommitFromEvent } from '../../actions/index';
+import { commitToEvent, uncommitFromEvent, fetchEvents, checkAttendance } from '../../actions/index';
 import ShowcaseInfo from '../ShowDescription';
 
 
@@ -26,25 +26,23 @@ class UpcomingGig extends React.Component {
         super(props);
         this.state = {
             changed: false,
-            usercommitment: this.props.attendance.filter((x) => x.ShowcaseId === this.props.gig.id)[0] ? 
-                    this.props.attendance.filter((x) => x.ShowcaseId === this.props.gig.id)[0].commitValue : 0,
-            usercommitted: this.props.usercommitted,
             modalIsOpen: false,
-            value:''
+            value:'',
+            usercommitment: this.props.usercommitment
         };
         this.openModal = this.openModal.bind(this);
         this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
     }
 
-    componentWillReceiveProps() {
-        if (!this.state.changed) this.setState({
-          usercommitted: this.props.usercommitment,
-        })
-      }
+    // componentWillReceiveProps() {
+    //     if (!this.state.changed) this.setState({
+    //       usercommitted: this.props.usercommitment,
+    //     })
+    //   }
 
-      openModal() {
-        this.setState({modalIsOpen: true});
+    openModal() {
+      this.setState({modalIsOpen: true});
     }
 
     afterOpenModal() {
@@ -57,7 +55,8 @@ class UpcomingGig extends React.Component {
     }
 
       renderCommitmentForm(){
-        if (!this.state.usercommitment) { 
+        // console.log('renderCommitmentForm this.state.usercommitment: ', this.state.usercommitment)
+        if (!this.props.usercommitment && !this.state.usercommitment) { 
             return(
                 <form>
                     <input id="commits" 
@@ -73,7 +72,7 @@ class UpcomingGig extends React.Component {
             return(
                 <div> 
                     <div>
-                        {`User commitment: $ ${this.state.usercommitment ? this.state.usercommitment : 0}`}
+                        {`User commitment: $ ${this.props.usercommitment ? this.props.usercommitment : this.state.usercommitment}`}
                     </div>
                     <div>
                         {this.renderButton('committed')}
@@ -109,14 +108,16 @@ class UpcomingGig extends React.Component {
     };
     
     handleSubmit(e) {
+      e.preventDefault();
         if (this.state.usercommitment) {
-            this.uncommitButton(e, this.props.info.id, this.props.gig.id, 0)
+            this.uncommitButton(e, this.props.info.id, this.props.gig.id, this.state.usercommitment)
         } else {
-            this.commitButton(e, this.props.info.id, this.props.gig.id, this.state.formvalue)
+            this.commitButton(e, this.props.info.id, this.props.gig.id, this.state.formvalue);
         }
     }
 
     commitButton(e, user, gig, amount) {
+        // e.preventDefault();
         this.props.onCommitClick(user, gig, amount)
         this.setState({
             usercommitment: parseInt(amount,10) ? parseInt(amount,10) : 0, 
@@ -126,16 +127,27 @@ class UpcomingGig extends React.Component {
     }
 
     uncommitButton(e, user, gig) {
-
-        this.props.onUncommitClick(user, gig)
+        // e.preventDefault();
+        this.props.onUncommitClick(user, gig, this.state.usercommitment)
         this.setState({usercommitment: 0, usercommitted: false, changed: true})
     }
+
+    // componentDidMount() {
+    //     // this.props.init();
+    //     let attendanceArray = Array.isArray(this.props.attendance) ? this.props.attendance.filter((x) => x.ShowcaseId === this.props.gig.id && x.UserId === this.props.info.id) : [{commitValue: 0}];
+    //     console.log('ComponentWillMount attendanceArray', attendanceArray)
+    //     if (attendanceArray && attendanceArray[0]) {
+    //         this.setState({usercommitment : attendanceArray[0].commitValue})
+    //     } else {
+    //         this.setState({usercommitment : 0});
+    //     }
+    // }
 
 
 
     render() {  
-        // console.log('upcominggig props: ', this.props);
-        // console.log('upcominggig state: ', this.state);
+      console.log('upcoming gig this.state:', this.state);
+      console.log('upcoming gig this.props:', this.props);
         if (this.props.users.length > 0) {
             return (
                 <div className="container border p-3 m-1 small" key={this.props.gig.id}>
@@ -176,21 +188,18 @@ class UpcomingGig extends React.Component {
                         </div>
                         <div className="text-success potential-gig-commit-number">
                           {this.props.gig.city}<br />
-                            Fully Commited 🎉
+
+                            Fully Commited 🎉<br />
+                            {`$`}{this.props.gig.commits} of {`$`}{this.props.gig.minCommits}!
                         </div>
                         <div className="potential-gig-progress-bar">
-                          <ProgressComponent percent={100} />
+                          <ProgressComponent percent={Math.min((this.props.gig.commits / this.props.gig.minCommits)*100,100)} />
                         </div>
                         <div className="potential-gig-commit-button">
-
-                            {/*instead of commit button it should just be an attend button */}
-                            {this.renderButton()}
-                        </div>
-
                             {this.renderCommitmentForm()}
-
                         </div>
-                        </div>
+                    </div>
+                </div>
                     
                     
               )
@@ -212,11 +221,18 @@ function mapStateToProps({ auth, attendance, users, info }){
 
   const mapDispatchToProps = dispatch => {
     return {
+      // init: () => {
+      //   dispatch(checkAttendance())
+      // },
       onCommitClick: (user, gig, amount) => {
-        dispatch(commitToEvent(user, gig, amount ? amount : 0))
+        dispatch(commitToEvent(user, gig, amount ? parseInt(amount, 10) : 0))
+        .then(() => dispatch(fetchEvents()))
+        .then(() => dispatch(checkAttendance()))
       },
-      onUncommitClick: (user, gig) => {
-        dispatch(uncommitFromEvent(user, gig))
+      onUncommitClick: (user, gig, amount) => {
+        dispatch(uncommitFromEvent(user, gig, amount))
+        .then(() => dispatch(fetchEvents()))
+        .then(() => dispatch(checkAttendance()))
       }
     }
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import UpcomingGig from './UpcomingGig';
-import PotentialGig from './PotentialGig';
+// import PotentialGig from './PotentialGig';
 import { connect } from 'react-redux';
 import { fetchEvents, checkAttendance, fetchAllUsers } from '../../actions/index';
 import Map from '../googleMaps';
@@ -30,20 +30,19 @@ class UserDashboard extends React.Component {
       })
     }
     
-    componentWillRecieveProps() {
-      (this.props.init());
-    }
+    // componentWillRecieveProps() {
+    //   (this.props.init());
+    // }
 
     
-    fetchEvents(e) {
-      e.preventDefault();
-      this.props.onFetchClick();
-    }  
+    // fetchEvents(e) {
+    //   e.preventDefault();
+    //   this.props.onFetchClick();
+    // }  
 
     componentDidMount() {
           if(this.props.events){
             this.props.events.map((place, id) => {
-                  
                 return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${place.address},%20NY%2010017&key=AIzaSyCn1886_Sxx7XVDi4xAjhKCKigLJyoxtvU`)
                   .then(res => this.state.locations.push([res.data.results[0].geometry.location, place, {showInfo: false}]))
           
@@ -58,12 +57,14 @@ class UserDashboard extends React.Component {
           })
         }
 
-    renderContent(){
+    renderContent() {
 
-      let userAttendance = this.props.attendance.length > 0 ? 
-      this.props.attendance
-      .filter((x) => x.UserId === this.props.info.id) 
-      .map((x) => x = x.ShowcaseId) : [];
+        console.log('UserDashboard renderContent props', this.props);
+
+      // let userAttendance = this.props.attendance ? 
+      // this.props.attendance
+      // .filter((x) => x.UserId === this.props.info.id) 
+      // .map((x) => x = x.ShowcaseId) : [];
 
       switch(this.state.dashNav){
         case 'upcoming':
@@ -72,8 +73,17 @@ class UserDashboard extends React.Component {
                     <h2>Upcoming Gig'em Shows</h2>
                     <div className="user-show-scroll">
                     {this.props.events
-                      .filter((x) => x.isCommitted === true)
-                      .map((x) => <UpcomingGig user={this.props.info.id} key={x.id} gig={x}/>)
+                      .filter((x) => x.commits >= x.minCommits)
+                      .map((gig) => <UpcomingGig 
+                        user={this.props.info.id} 
+                        key={gig.id} 
+                        usercommitment=
+                          {Array.isArray(this.props.attendance) && 
+                            this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id) &&
+                            this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id)[0] ? 
+                            this.props.attendance.filter((x) => x.ShowcaseId === gig.id && x.UserId === this.props.info.id)[0].commitValue :
+                          0}
+                        gig={gig}/>)
                     }
                     </div>
                   </div>
@@ -84,17 +94,13 @@ class UserDashboard extends React.Component {
                     <h2>Potential Gigs</h2>
                     <div className="user-show-scroll">
                       { this.props.events
-                          .filter((x) => x.isCommitted === false)
-                          .map((x) => <PotentialGig 
+                          .filter((x) => x.commits < x.minCommits)
+                          .map((x) => <UpcomingGig 
                             user={this.props.info.id} 
-                            users={this.props.users}
                             key={x.id} 
-                            gig={x} 
-                            attendance={this.props.attendance}
-                            usercommitted={userAttendance.includes(x.id)} />)
+                            gig={x}  />)
                       }
-                    </div>   
-                               
+                    </div>       
                   </div>
                 );
         case 'chat':
@@ -157,13 +163,6 @@ const mapDispatchToProps = dispatch => {
       dispatch(fetchEvents())
       .then(() => dispatch(checkAttendance()))
       .then(() => dispatch(fetchAllUsers()))
-    },
-    onFetchClick: id => {
-      //console.log('onFetchClick id: ', id)
-      dispatch(fetchEvents());
-    },
-    checkAttendanceDispatch: (user) => {
-      dispatch(checkAttendance())
     }
   }
 }

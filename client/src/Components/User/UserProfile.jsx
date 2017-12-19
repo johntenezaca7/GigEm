@@ -1,5 +1,5 @@
 import React from 'react';
-import PotentialGig from './PotentialGig';
+// import PotentialGig from './PotentialGig';
 import UpcomingGig from './UpcomingGig';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
@@ -170,16 +170,16 @@ class UserProfile extends React.Component {
                       <h3>Upcoming Shows</h3>
                       <div className="band-show-scroll">
                         {this.props.events
-                          .filter((x) => userAttendance.includes(x.id) && x.isCommitted === true)
-                          .map((x) => <UpcomingGig user={this.props.info.id} key={x.id} gig={x} usercommitted={userAttendance.includes(x.id)}/>)
+                          .filter((x) => userAttendance.includes(x.id) && x.commits >= x.minCommits)
+                          .map((x) => <UpcomingGig user={this.props.info.id} key={x.id} gig={x} />)
                         }
                       </div>
                       <br />
                       <h3>Potential Gigs</h3>
                       <div className="band-show-scroll">
                         {this.props.events
-                            .filter((x) => userAttendance.includes(x.id) && x.isCommitted === false)
-                            .map((x) => <PotentialGig user={this.props.info.id} key={x.id} gig={x} usercommitted={userAttendance.includes(x.id)}/>)
+                            .filter((x) => userAttendance.includes(x.id) && x.commits < x.minCommits)
+                            .map((x) => <UpcomingGig user={this.props.info.id} key={x.id} gig={x} />)
                           }
                       </div>
                   </div>          
