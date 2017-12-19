@@ -7,6 +7,7 @@ import Logs from './messageLogs';
 class Board extends Component {
     constructor(props){
         super(props);
+
         this.state={
             input:'',
             logs: []
@@ -32,6 +33,7 @@ class Board extends Component {
         this.setState({
             input:''
         })
+
     }
 
     

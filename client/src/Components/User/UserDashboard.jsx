@@ -124,7 +124,6 @@ class UserDashboard extends React.Component {
                     {/* <div></div> */}
                     <div className="inside-map">
                       <Map
-                      
                         show={this.changeState}
                         geoLoc={this.state.locations}  
                         center={{lat:40.728199 , lng:-73.9894738}}
