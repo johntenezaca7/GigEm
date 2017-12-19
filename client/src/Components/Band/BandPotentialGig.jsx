@@ -27,11 +27,11 @@ class BandPotentialGig extends React.Component {
                     <div className="col-2 col-md-autoalign-self-start">
                       <h6>{gig.name}</h6><br />
                       {this.props.info.name}<br />
-                      <div className="text-primary">{'$'}{gig.currentCommitValue} committed of minimum {'$'}{gig.minCommitValue ? gig.minCommitValue : 1}</div>
+                      <div className="text-primary">{'$'}{gig.commits} committed of minimum {'$'}{gig.minCommits ? gig.minCommits : 1}</div>
                     </div>
                     <div className="col-8 justify-content-md-center">
-                      <ProgressComponent percent={gig.currentCommitValue / gig.minCommitValue} /> 
-                      ({`${(gig.currentCommitValue / (gig.minCommitValue ? gig.minCommitValue : 1)) * 100}% committed.`})
+                      <ProgressComponent percent={gig.commits / gig.minCommits} /> 
+                      ({`${(Math.min(gig.commits / (gig.minCommits ? gig.minCommits : 1)) * 100)}% committed.`})
                     </div>
                     <div className="col-2 col-md-auto">
                       {this.renderLocation(gig)}
