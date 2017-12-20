@@ -155,7 +155,7 @@ class UpcomingGig extends React.Component {
     }
 
     render() {  
-   
+
         if (this.props.users.length > 0) {
             return (
                 <div className="container border p-3 m-1 w-100" key={this.props.gig.id}>
@@ -183,9 +183,14 @@ class UpcomingGig extends React.Component {
                           </div>
                         </div>
                         <a><h4 className="potential-gig-event-name" onClick={this.openModal}>
-                       
+                        
                             {this.props.gig.name}
-            
+                            { this.props.gig.photo ?
+                                <img src={this.props.gig.photo} className="user-profile-image" alt="Event image."/> :
+                                
+                                <p>Imagine a Photo</p>
+                                // <img src={holderPic} className="user-profile-image" alt="Event image."/>
+                            } 
                         </h4></a>
 
                         <div className="potential-gig-daterange">
