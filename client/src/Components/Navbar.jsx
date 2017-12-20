@@ -131,8 +131,7 @@ class Navbar extends React.Component {
         } else {
             return (
               <div>
-                <nav className="navbar navbar-expand-lg ">
-              
+                <nav className="navbar navbar-expand-lg">
                   <Link to="/">
                     <img src="./Assets/party.svg" width="40px" height="40px" alt="User Logo" />
                   </Link>
@@ -143,7 +142,6 @@ class Navbar extends React.Component {
                     <ul className="navbar-nav mr-auto">
                       <li className="nav-item active">
                         <a className="nav-link">
-                      
                         <h2>{this.props.info.name ? `Welcome, ${this.props.info.name}` : 'Anonymous User'}</h2>
                         <span className="sr-only">(current)</span>
                         </a>
@@ -181,19 +179,8 @@ class Navbar extends React.Component {
       auth: auth,
       info: info,
       users: users
-      // userInfo: 'info'
     }
 }
-
-
-// function mapStateToProps(state){
-//   return { 
-//     auth: state.auth,
-//     info: state.info,
-//     users: state.users
-//     //userInfo: 'info'
-//   }
-// }
 
 const mapDispatchToProps = dispatch => {
   return {

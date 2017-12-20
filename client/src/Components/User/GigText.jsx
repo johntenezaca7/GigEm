@@ -1,6 +1,5 @@
 import React from 'react';
-// import ProgressComponent from './ProgressComponent';
-import {  /* ShareButtons, ShareCounts, */ generateShareIcon } from 'react-share';
+import {  generateShareIcon } from 'react-share';
 
 
 import { Link } from 'react-router-dom';

@@ -2,14 +2,10 @@ import React from 'react';
 
 export default class Footer extends React.Component {
   // constructor(props) {
-  //   super();
-  //   this.state = {};
-  // }
 
   render() {
-    return(
-      // <nav class="navbar fixed-bottom bg-white">
-        <div className="border p-1 m-3 w-100" style={{ backgroundImage: '../../Assets/talkingheads-live.jpg' }}>
+    return (
+      <div className="border p-1 m-3 w-100" style={{ backgroundImage: '../../Assets/talkingheads-live.jpg' }}>
           <div className="row">
             <div className="col col-1">
             </div>
@@ -65,7 +61,6 @@ export default class Footer extends React.Component {
             </div>
           </div>
         </div>
-      // </nav>
     )
   }
 }

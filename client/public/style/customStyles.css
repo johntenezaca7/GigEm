@@ -91,11 +91,12 @@
 }
 
 .user-profile-image {
-	width: auto;
-	height:185px;
-	border-radius: 10%;
-	overflow:hidden; 
-	background: 50% 50% no-repeat;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10%;
+  overflow:hidden; 
+  background: 50% 50% no-repeat;
 }
 
 .google-maps{
@@ -177,7 +178,7 @@
 }
 .user-show-scroll{
 	width: auto;
-  height: 360px;
+    height: 750px;
 	overflow: scroll;
 
 }
