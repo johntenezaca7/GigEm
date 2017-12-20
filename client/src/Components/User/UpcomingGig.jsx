@@ -158,7 +158,7 @@ class UpcomingGig extends React.Component {
    
         if (this.props.users.length > 0) {
             return (
-                <div className="container border p-3 m-1 small" key={this.props.gig.id}>
+                <div className="container border p-3 m-1 w-100" key={this.props.gig.id}>
                     <div className="potential-gig-wrapper">
                         <div className="potential-gig-band-name">
                           <Link to={`/bandprofile/${this.props.gig.id}`}>

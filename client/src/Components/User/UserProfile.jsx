@@ -44,9 +44,9 @@ class UserProfile extends React.Component {
     renderProfileType() {
       // console.log('renderProfileType this.props', this.props);
       if (this.props.info.isBand) {
-        return (`Band`)
+        return (`Gig'em Band`);
       } else {
-        return (`User`)
+        return (`Gig'em User`);
       }
     }
 
@@ -85,7 +85,6 @@ class UserProfile extends React.Component {
                  <div className="user-side-bar nested">
                       <div>
                         <div>
-                          Username: 
                           <RIEInput 
                           value={this.props.info.name || 'No username!'}
                           change={(e) => this.props.editUserProfile(e)}
@@ -93,7 +92,7 @@ class UserProfile extends React.Component {
                           validate={_.isString} />
                         </div>
                         <div>
-                          Profile Type - {this.renderProfileType()}
+                          {this.renderProfileType()}
                         </div>
                         <div>
                          <Profile photo={this.props.info.photo}/>
@@ -130,27 +129,6 @@ class UserProfile extends React.Component {
                         </div>
                   </div>
                   <div>
-                    {/* <h2> Past Shows </h2>
-                    <button onClick={this.openModal}>post</button>
-                    <div>
-                            <Modal
-                                isOpen={this.state.modalIsOpen}
-                                onAfterOpen={this.afterOpenModal}
-                                onRequestClose={this.closeModal}
-                                style={customStyles}
-                                contentLabel="Example Modal"
-                               >
-                            <button onClick={this.closeModal}>close</button>
-                          
-                              <div>
-                          <ul id="messages"></ul>
-                          <form action="">
-                            <input id="m" autocomplete="off" /><button>Send</button>
-                          </form>
-                        </div>
-                    
-                            </Modal>
-                          </div> */}
                     <div className="inside-wall">
                     <h3>Upcoming Shows</h3>
                     <div className="band-show-scroll">

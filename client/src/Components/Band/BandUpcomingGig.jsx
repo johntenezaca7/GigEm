@@ -25,9 +25,9 @@ class UpcomingGig extends React.Component {
         <div className="col col-2 align-top text-right">
           {`${(new Date(gig.finalCommitDate)).getMonth() + 1} / ${(new Date(gig.finalCommitDate)).getDate()} /
             ${(new Date(gig.finalCommitDate)).getFullYear()}`}<br />
-                          { this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0] &&
-                            this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0].name ? 
-                            this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0].name :
+                          { this.props.venues.filter((x) => x.id === gig.VenueId)[0] &&
+                            this.props.venues.filter((x) => x.id === gig.VenueId)[0].name ? 
+                            this.props.venues.filter((x) => x.id === gig.VenueId)[0].name :
                             'Venue NA'}<br />
           {gig.startTime ? `Doors @ ${gig.startTime}` : 'Start time NA'}
         </div>
