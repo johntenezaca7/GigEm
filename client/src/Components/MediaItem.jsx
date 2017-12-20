@@ -30,7 +30,7 @@ class mediaItem extends React.Component {
       <div className="container m-1">
         <div className='border border-dark'>
           <iframe 
-            width="auto" 
+            width="100%" 
             height="auto" 
             src={`${this.props.item.linkUrl}`}
             frameborder="0" 

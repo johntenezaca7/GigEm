@@ -1,5 +1,7 @@
 import React from 'react';
-import { Line } from 'rc-progress';
+import {
+  Line
+} from 'rc-progress';
 import 'rc-progress/assets/index.css';
 
 
@@ -10,14 +12,14 @@ export default class ProgressComponent extends React.Component {
   }
 
 
-    render() {
-      let containerStyle = {
-        width: '100',
-      };        
-      return (
-        <div style={containerStyle}>
+  render() {
+    let containerStyle = {
+      width: '100',
+    };
+    return (
+      <div style={containerStyle}>
           <Line percent={this.props.percent} strokeWidth="1" strokeColor={`#0ea534`} />
         </div>
-      );
+    );
   }
 }

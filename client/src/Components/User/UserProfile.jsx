@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { fetchUserProfile, fetchEvents, checkAttendance, editUserProfile } from '../../actions/index';
 import { RIEInput, RIETextArea } from 'riek';
 import _ from 'lodash'
-import Profile from '../ProfilePage';
+import Profile from '../ProfileImage';
 // eslint-disable-next-line
 import Modal from 'react-modal';
 
@@ -42,7 +42,6 @@ class UserProfile extends React.Component {
 
 
     renderProfileType() {
-      // console.log('renderProfileType this.props', this.props);
       if (this.props.info.isBand) {
         return (`Gig'em Band`);
       } else {
@@ -79,7 +78,7 @@ class UserProfile extends React.Component {
       if(this.props.info){
         return (
           <div>
-            <h1 className="display-2">My Profile</h1>
+            <h1 className="display-4">My Profile</h1>
             <div className="userProfile-wrapper"> 
                  <div className="user-side-bar nested">
                       <div>

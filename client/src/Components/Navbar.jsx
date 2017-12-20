@@ -29,13 +29,13 @@ class Navbar extends React.Component {
           return(
             <div>
               {/* <td> */}
-                <a href="/auth/google"><button className="navButton"type="submit">Login With Google</button></a>
+                <a href="/auth/google"><button className="btn btn-info" type="submit">Login With Google</button></a>
             </div>
           );
         default:
           return (
             <div>
-                  <a href="/api/logout"><button className="navButton" type="submit">Logout</button></a>
+                  <a href="/api/logout"><button className="btn btn-info" type="submit">Logout</button></a>
           </div>
           )
       }
@@ -60,7 +60,7 @@ class Navbar extends React.Component {
       if (this.props.info.isBand) {
         return (
           <Link to="/userprofile">
-          <button className="navButton" onClick={(e) => this.props.editUserProfile({'isBand': false})}>
+          <button className="btn btn-primary" onClick={(e) => this.props.editUserProfile({'isBand': false})}>
           User Account
           </button>
           </Link>
@@ -68,7 +68,7 @@ class Navbar extends React.Component {
       } else {
           return (
             <Link to={`/bandprofile/${this.props.info.id}`}>
-              <button className="navButton" onClick={(e) => this.props.editUserProfile({'isBand': true})}>
+              <button className="btn btn-primary" onClick={(e) => this.props.editUserProfile({'isBand': true})}>
               Artist Account
               </button>
             </Link>
@@ -103,24 +103,25 @@ class Navbar extends React.Component {
                     <tr>
                     <td>
                       <Link to="/band/upcoming">
-                        <button className="navButton" type="submit">Upcoming Gigs</button>
+                        <button className="btn btn-primary" type="submit">Upcoming Gigs</button>
                       </Link>
                       <Link to="/band/potential">
-                        <button className="navButton" type="submit">Potential Gigs</button>
+                        <button className="btn btn-primary" type="submit">Potential Gigs</button>
                       </Link>
                       <Link to="/band/pitch">
-                        <button className="navButton" type="submit">Pitch a Gig</button>
+                        <button className="btn btn-primary" type="submit">Pitch a Gig</button>
                       </Link>
                       <Link to={`/bandprofile/${this.props.info.id}`}>
-                        <button className="navButton" type="submit">My Profile</button>
+                        <button className="btn btn-primary" type="submit">My Profile</button>
                       </Link>
                     </td>
                       <td>
-                         {this.renderContent()}
+                      {this.renderChangeButton()}
+                         
                       </td> 
                   
                       <td>
-                          {this.renderChangeButton()}
+                      {this.renderContent()}
                         </td>
                     </tr>
                   </tbody>
@@ -130,9 +131,8 @@ class Navbar extends React.Component {
           </div>)
         } else {
             return (
-              <div className="nav-custom">
-                <nav className="navbar navbar-expand-lg ">
-              
+              <div>
+                <nav className="navbar navbar-expand-lg">
                   <Link to="/">
                     <img src="./Assets/party.svg" width="40px" height="40px" alt="User Logo" />
                   </Link>
@@ -143,7 +143,6 @@ class Navbar extends React.Component {
                     <ul className="navbar-nav mr-auto">
                       <li className="nav-item active">
                         <a className="nav-link">
-                      
                         <h2>{this.props.info.name ? `Welcome, ${this.props.info.name}` : 'Anonymous User'}</h2>
                         <span className="sr-only">(current)</span>
                         </a>
@@ -154,10 +153,10 @@ class Navbar extends React.Component {
                         <tr>
                           <td>
                             <Link to="/user">
-                              <button className="navButton" type="submit">Dashboard</button>
+                              <button className="btn btn-primary" type="submit">Dashboard</button>
                             </Link>
                             <Link to="/userprofile">
-                              <button className="navButton" type="submit">My Profile</button>
+                              <button className="btn btn-primary" type="submit">My Profile</button>
                             </Link>
                           </td>
                           <td>
@@ -181,19 +180,8 @@ class Navbar extends React.Component {
       auth: auth,
       info: info,
       users: users
-      // userInfo: 'info'
     }
 }
-
-
-// function mapStateToProps(state){
-//   return { 
-//     auth: state.auth,
-//     info: state.info,
-//     users: state.users
-//     //userInfo: 'info'
-//   }
-// }
 
 const mapDispatchToProps = dispatch => {
   return {

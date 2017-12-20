@@ -5,18 +5,17 @@ import Developers from './Developers';
 // import Particles from 'react-particles';
 
 export default class UserDashboard extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-    render() {
+  render() {
 
-      return (
-        <div className="landingpage">
+    return (
+      <div className="landingpage">
           <div className="container-fluid p-5 landingcontainer">
             <div className="row"> 
-          
                     <div className="col mx-auto text-center m-5">
                           <img src="../../Assets/tools/aws.svg" width="100%" style={{maxWidth: '40%'}} className="img-fluid" alt="Gigem Logo"/>
                     </div>
@@ -51,8 +50,6 @@ export default class UserDashboard extends React.Component {
           <div className="container-fluid">
 
           <div className="row">
-            {/* <div className="col col-2">
-            </div> */}
             <div className="col mx-auto text-center">
               <div className="m-5">
                 <a name="description">
@@ -100,6 +97,6 @@ export default class UserDashboard extends React.Component {
       </div>
 
     </div>
-      )
-    }
+    )
+  }
 }

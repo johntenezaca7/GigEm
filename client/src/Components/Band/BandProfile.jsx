@@ -1,52 +1,71 @@
 import React from 'react';
-import Navbar from './Navbar';
-import BandUpcomingGig from './Band/BandUpcomingGig';
-// import BandPotentialGig from './Band/BandPotentialGig';
-import MediaItem from './MediaItem';
+import {
+  connect
+} from 'react-redux';
+import {
+  editUserProfile,
+  fetchUserProfile,
+  fetchProperties,
+  addProperty
+} from '../../actions/index';
 
-import { connect } from 'react-redux';
-import { /* fetchEvents, fetchAllUsers, */ editUserProfile, fetchUserProfile, fetchProperties, addProperty } from '../actions/index';
-import Profile from './ProfilePage';
 
-import { RIEInput, RIETextArea } from 'riek';
+import {
+  RIEInput,
+  RIETextArea
+} from 'riek';
 import _ from 'lodash'
 
+import Navbar from '../Navbar';
+import BandUpcomingGig from './BandUpcomingGig';
+import MediaItem from '../MediaItem';
+
+import Profile from '../ProfileImage';
+
+
+
 class BandProfile extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          linkurl: '',
-          description: ''
-        };
-        this.props.fetchProperties();
+  constructor(props) {
+    super(props);
+    this.state = {
+      linkurl: '',
+      description: ''
+    };
+    this.props.fetchProperties();
+  }
+
+
+
+  handleChange(event, stateitem) {
+    // eslint-disable-next-line
+    if (!stateUpdate) {
+      var stateUpdate = {};
+    };
+    stateUpdate[stateitem] = event.target.value;
+    this.setState(stateUpdate);
+    // console.log('current user properties: ', this.props.properties)
+  }
+
+  handleClick(event, selectedUser) {
+    event.preventDefault();
+    // console.log('======================= - handling click')
+    this.props.submitProperty(selectedUser.id, this.state.description, this
+      .state.linkurl);
+  }
+
+  render() {
+    // console.log('rerendering bandprofile this.prosp: ', this.props);
+
+    var selectedUser = this.props.users.filter((x) => x.id === parseInt(
+      this.props.match.params.bandId, 10))[0];
+    if (!selectedUser && !this.props.user) selectedUser = {
+      id: -1
     }
 
-    
 
-    handleChange(event, stateitem) {
-      // eslint-disable-next-line
-      if (!stateUpdate) { var stateUpdate = {}; };
-      stateUpdate[stateitem] = event.target.value;
-      this.setState(stateUpdate);
-      // console.log('current user properties: ', this.props.properties)
-    }
-  
-    handleClick(event, selectedUser) {
-      event.preventDefault();
-      // console.log('======================= - handling click')
-      this.props.submitProperty(selectedUser.id, this.state.description, this.state.linkurl);
-    }
-
-    render() {
-      // console.log('rerendering bandprofile this.prosp: ', this.props);
-      
-      var selectedUser = this.props.users.filter((x) => x.id === parseInt(this.props.match.params.bandId,10))[0];
-      if (!selectedUser && !this.props.user) selectedUser = {id: -1}
-
-
-      if (selectedUser.id !== this.props.info.id) {
-        return (
-            <div>
+    if (selectedUser.id !== this.props.info.id) {
+      return (
+        <div>
               <div>
                 <Navbar />
               </div>
@@ -93,8 +112,10 @@ class BandProfile extends React.Component {
                   </div>
                 
             </div>
-        )} else {
-        return (<div>
+      )
+    } else {
+      return (
+        <div>
           <div>
             <Navbar />
           </div>
@@ -162,13 +183,21 @@ class BandProfile extends React.Component {
                     </div>
                 </div>
             </div>
-        </div>)
-      }
+        </div>
+      )
     }
+  }
 }
 
-function mapStateToProps({ events, auth, attendance, users, info, properties }){
-  return { 
+function mapStateToProps({
+  events,
+  auth,
+  attendance,
+  users,
+  info,
+  properties
+}) {
+  return {
     attendance: attendance,
     events: events,
     auth: auth,
@@ -180,14 +209,16 @@ function mapStateToProps({ events, auth, attendance, users, info, properties }){
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchProperties: () => { dispatch(fetchProperties()) },
+    fetchProperties: () => {
+      dispatch(fetchProperties())
+    },
     submitProperty: (bandId, description, linkUrl) => {
       dispatch(addProperty(bandId, description, linkUrl))
-      .then(() => dispatch(fetchProperties()))
+        .then(() => dispatch(fetchProperties()))
     },
     editUserProfile: (e) => {
       dispatch(editUserProfile(e))
-      .then(() => dispatch(fetchUserProfile()))
+        .then(() => dispatch(fetchUserProfile()))
     }
   }
 }
