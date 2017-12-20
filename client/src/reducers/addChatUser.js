@@ -1,4 +1,4 @@
-import { SERVER_HELLO, MESSAGE  } from '../actions/types'
+// import { SERVER_HELLO, MESSAGE  } from '../actions/types'
 
 export default function(state = [], action) {
     // console.log('SOCKEY', action)

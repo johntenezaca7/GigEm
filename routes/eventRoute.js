@@ -113,6 +113,18 @@ module.exports = (app, db) => {
       res.send(data);
     });
   });
+
+  app.post('/api/save_event_photo', (req, res) => {
+    console.log('SAVE EVENT PHOTO', req.body)
+
+    dbDef.Showcase.findOne({ where: {id: req.body.id}})
+      .then((data) => {
+        console.log("PIC DATA: ", data)
+          data.update({
+           photo: req.body.photo 
+          })
+      })
+  });
   
   // Add Showcase Event and respond with added event obj 
   app.post('/api/addEvent', (req, res) =>{

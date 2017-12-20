@@ -116,7 +116,7 @@ class UpcomingGig extends React.Component {
                             className="btn btn-warning btn-sm"
                             onClick={(e) => {
                                 this.handleSubmit(e)} }>
-                            Withdraw Funding
+                            Not Going!
                         </button>
                     </div>)
         }
@@ -155,10 +155,10 @@ class UpcomingGig extends React.Component {
     }
 
     render() {  
-   
+
         if (this.props.users.length > 0) {
             return (
-                <div className="container border p-3 m-1 small" key={this.props.gig.id}>
+                <div className="container border p-3 m-1 w-100" key={this.props.gig.id}>
                     <div className="potential-gig-wrapper">
                         <div className="potential-gig-band-name">
                           <Link to={`/bandprofile/${this.props.gig.id}`}>
@@ -183,16 +183,24 @@ class UpcomingGig extends React.Component {
                           </div>
                         </div>
                         <a><h4 className="potential-gig-event-name" onClick={this.openModal}>
-                       
+                        
                             {this.props.gig.name}
-            
+                            { this.props.gig.photo ?
+                                <img src={this.props.gig.photo} className="user-profile-image" alt="Event image."/> :
+                                
+                                <p>Imagine a Photo</p>
+                                // <img src={holderPic} className="user-profile-image" alt="Event image."/>
+                            } 
                         </h4></a>
 
                         <div className="potential-gig-daterange">
                           {/* {this.props.gig.final_commit_date}<br /> */}
                           {/* {this.props.gig.venue_id}<br /> */}
-                          Venue Placeholder<br />
-                          Doors @ {this.props.gig.start_time}
+                          { this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0] &&
+                            this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0].name ? 
+                            this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0].name :
+                            'Venue NA'}<br />
+                        {this.props.gig.startTime ? `Doors @ ${this.props.gig.startTime}` : 'Start time NA'}
                         </div>
                         <div className="text-success potential-gig-commit-number">
                           {this.props.gig.city}<br />
@@ -217,12 +225,13 @@ class UpcomingGig extends React.Component {
     } 
 }
 
-function mapStateToProps({ auth, attendance, users, info }){
+function mapStateToProps({ auth, attendance, users, info, venues }){
     return { 
       attendance: attendance,
       auth: auth,
       users: users,
-      info: info
+      info: info,
+      venues: venues
     }
   }
 

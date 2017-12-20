@@ -176,7 +176,7 @@ const renderDate = ({ input, label, type, meta }) => {
                     component="input"
                     // label="City"
                     type="text"
-                    placeholder="D-lon Musk "
+                    placeholder="New York "
                   />
               </div>
               <div>
@@ -185,7 +185,7 @@ const renderDate = ({ input, label, type, meta }) => {
                     name="state"
                     component="input"
                     type="text"
-                    placeholder="ST"
+                    placeholder="NY"
                   />
               </div>
               <div>
@@ -198,13 +198,13 @@ const renderDate = ({ input, label, type, meta }) => {
                   />
               </div>
               <div>
-                <label htmlFor="isCommitted">Is Your Event Already Fully Committed</label>
+                <label htmlFor="isCommitted">Check Box If Your Event Already Confirmed</label>
                 <div>
                   <Field name="isCommitted" id="isCommitted" component="input" type="checkbox"/>
                 </div>
               </div>
               <div>
-                <label>Minimum Attendance</label>
+                <label>Minimum $ To Have The Event</label>
                   <Field
                     name="minCommits"
                     component="input"
@@ -213,7 +213,7 @@ const renderDate = ({ input, label, type, meta }) => {
                   />
               </div>
               <div>
-                <label>Suggested Price($)</label>
+                <label>Suggested Pitch In($)</label>
                   <Field
                     name="price"
                     component="input"

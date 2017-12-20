@@ -61,13 +61,14 @@ class ProfilePage extends Component {
 
 
   render() {
-    // console.log('actions', this.props)
+    console.log('actions', this.props)
     return (
-      <div>
+      <div className="small">
+      <p>
         <form>
              {this.state.avatarURL ?
-                    <img src={this.state.avatarURL} className="user-profile-image" alt="User profile avatar." /> :
-                <img src={this.props.info.photo} className="user-profile-image" alt="User profile."/>  
+                <img src={this.state.avatarURL} className="user-profile-image p-1" alt="User profile avatar." /> :
+                <img src={this.props.info.photo} className="user-profile-image p-1" alt="User profile."/>  
              }          
 
           <FileUploader
@@ -81,6 +82,7 @@ class ProfilePage extends Component {
             onProgress={this.handleProgress}
           />
         </form>
+      </p>
       </div>
     );
   }

@@ -5,13 +5,14 @@ import { connect } from 'react-redux';
 class Logs extends Component {
     constructor(props){
         super(props);
+        this.state = {};
         
     }
 
     
     
     renderMessages(){
-        return "hello"
+        return "hello";
     }
     
     render(){

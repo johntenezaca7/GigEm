@@ -1,26 +1,13 @@
 import React from 'react';
-// import PotentialGig from './PotentialGig';
 import UpcomingGig from './UpcomingGig';
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
-import { /* fetchUser, */ fetchUserProfile, fetchEvents, checkAttendance, editUserProfile } from '../../actions/index';
-import { /* RIEToggle, */ RIEInput, RIETextArea, /*RIENumber, RIETags, RIESelect */} from 'riek';
-// import { message } from '../../actions/index'; 
+import { fetchUserProfile, fetchEvents, checkAttendance, editUserProfile } from '../../actions/index';
+import { RIEInput, RIETextArea } from 'riek';
 import _ from 'lodash'
 import Profile from '../ProfilePage';
-
+// eslint-disable-next-line
 import Modal from 'react-modal';
 
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
 
 class UserProfile extends React.Component {
     constructor(props) {
@@ -57,9 +44,9 @@ class UserProfile extends React.Component {
     renderProfileType() {
       // console.log('renderProfileType this.props', this.props);
       if (this.props.info.isBand) {
-        return (`Band`)
+        return (`Gig'em Band`);
       } else {
-        return (`User`)
+        return (`Gig'em User`);
       }
     }
 
@@ -97,7 +84,6 @@ class UserProfile extends React.Component {
                  <div className="user-side-bar nested">
                       <div>
                         <div>
-                          Username: 
                           <RIEInput 
                           value={this.props.info.name || 'No username!'}
                           change={(e) => this.props.editUserProfile(e)}
@@ -105,7 +91,7 @@ class UserProfile extends React.Component {
                           validate={_.isString} />
                         </div>
                         <div>
-                          Profile Type - {this.renderProfileType()}
+                          {this.renderProfileType()}
                         </div>
                         <div>
                          <Profile photo={this.props.info.photo}/>
@@ -142,27 +128,6 @@ class UserProfile extends React.Component {
                         </div>
                   </div>
                   <div>
-                    {/* <h2> Past Shows </h2>
-                    <button onClick={this.openModal}>post</button>
-                    <div>
-                            <Modal
-                                isOpen={this.state.modalIsOpen}
-                                onAfterOpen={this.afterOpenModal}
-                                onRequestClose={this.closeModal}
-                                style={customStyles}
-                                contentLabel="Example Modal"
-                               >
-                            <button onClick={this.closeModal}>close</button>
-                          
-                              <div>
-                          <ul id="messages"></ul>
-                          <form action="">
-                            <input id="m" autocomplete="off" /><button>Send</button>
-                          </form>
-                        </div>
-                    
-                            </Modal>
-                          </div> */}
                     <div className="inside-wall">
                     <h3>Upcoming Shows</h3>
                     <div className="band-show-scroll">
