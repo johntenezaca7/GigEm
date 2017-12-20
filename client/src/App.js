@@ -15,12 +15,12 @@ import * as actions from './actions';
 ///////////////////////////////
 
 import Navbar from './Components/Navbar'
-import BandProfile from './Components/BandProfile';
+import BandProfile from './Components/Band/BandProfile';
 import ShowDescription from './Components/ShowDescription';
 import UserProfile from './Components/User/UserProfile';
 import UserDashboard from './Components/User/UserDashboard';
 import BandDashboard from './Components/Band/BandDashboard';
-import LandingPage from './Components/LandingPage';
+import LandingPage from './Components/LandingPage/LandingPage';
 
 
 class App extends Component {
@@ -55,7 +55,7 @@ class App extends Component {
           <Route exact path="/band" render={() => <div><Navbar /><BandDashboard /></div>} />
 
           <Route exact path="/band/upcoming" render={() => <div><Navbar /><BandDashboard tab="upcoming" /></div>} />
-          <Route exact path="/band/finalize" render={() => <div><Navbar /><BandDashboard tab="finalize" /></div>} />
+          <Route exact path="/band/potential" render={() => <div><Navbar /><BandDashboard tab="potential" /></div>} />
           <Route exact path="/band/pitch" render={() => <div><Navbar /><BandDashboard tab="pitch" /></div>} />
         </div>
       </Router>
