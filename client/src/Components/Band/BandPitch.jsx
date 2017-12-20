@@ -27,217 +27,230 @@ const renderField = ({
   type,
   meta: { touched, error, warning }
 }) => {
-  // console.log("RENDERFIELD: input: ", input, " label: ", label, " type: ", type)
   return (
   <div>
-    <label>{label}</label>
-    <div>
-      <input {...input} placeholder={label} type={type} />
-      {touched &&
-        ((error && <span>{error}</span>) ||
-          (warning && <span>{warning}</span>))}
-    </div>
+    <input {...input} placeholder={label} type={type} />
+    {touched &&
+      ((error && <span>{error}</span>) ||
+      (warning && <span>{warning}</span>))}
   </div>
 )}
 
 
 let BandPitch = props => {
 
-// const renderDates = fields => {
-//   // console.log("DATESSSS ARGS: ",fields);
-//   return  (
-//   <div>    
-//   <DateRangePickerWrapper
-//   startDateFieldName="start"
-//   endDateFieldName="end"
-//   {...fields}
-// />
-// </div>
-// )};
 const renderDate = ({ input, label, type, meta }) => {
   return (
-  <SingleDatePicker
-    date={input.value}
-    focused={meta.active}
-    onDateChange={value => input.onChange({ value })}
-    onFocusChange={({ focused }) => input.onFocus({ focused })}
-    dateGrab={props.dateGrab}
-  />
+  <div>
+    <SingleDatePicker
+      date={input.value}
+      focused={meta.active}
+      onDateChange={value => input.onChange({ value })}
+      onFocusChange={({ focused }) => input.onFocus({ focused })}
+      dateGrab={props.dateGrab}
+    />
+  </div>
 )};
 
   return (
-    
-    <div className="container container-fluid border p-3 small" >
-        <div className="row">
-          <div className="col-sm">
-            <form  className="form-group" onSubmit={props.handleSubmit} >
-            <div className="col">
-                {/* <label>Event Name*</label> */}
+    <div className="container border w-75 align-self-center">
+      <div className="m-1 p-0">
+            <form onSubmit={props.handleSubmit} className="pitch-gig-wrapper">
+
+            <div className="pitch-gig-left-element">
+              <label>Event Name</label>
+            </div>
+            <div className="pitch-gig-right-element">
                   <Field
                     name="eventName"
                     component={renderField}
-                    // component="input"
-                    type="text"
-                    label="Event Name"
-                    placeholder="D-lon Musk "
-                  />
-              </div>
-              <div>
-                {/* <label>Select Event Start Date and End Date If Applicable</label>
-                  <div className="col">
-                    <Fields
-                      names={['start', 'end']}
-                      component={renderDates}
-                      // label="Pick Event Start Date and End Date If Applicable"
-                      // normalize={normalizeDates}
-                      // format={formatDates}
-                    />   */}
-                  <label>Event Date</label>
-                  <div className="col">
-                    <Field
-                    name="startDate"
-                    component={renderDate}
-                    type="date"
-                    // normalize={normalizeDate}
-                    // format={formatDate}
-                  />
-                  </div>
-              </div>
-              <div>
-              <div className="row">
-                <label>Event Description</label>
-                  <Field
-                    name="eventDescription"
                     component="input"
-                    // label="Event Description"
                     type="text"
-                    placeholder="Describe your event.. "
+                    placeholder="Event Name"
                   />
-              </div>
-              <div>
-                <label htmlFor="hasNoVenue">Check box if there is NOT a planned venue for your event?</label>
-                <div>
-                  <Field name="hasNoVenue" id="hasNoVenue" component="input" type="checkbox"/>
-                </div>
-              </div>
-              <label>Venue Name</label>
+            </div>
+
+          <div className="pitch-gig-left-element">
+            <label>Event Date</label>
+          </div>
+          <div className="pitch-gig-right-element">
+            <Field
+              name="startDate"
+              component={renderDate}
+              type="date"
+              placeholder="Event Date"
+              // normalize={normalizeDate}
+              // format={formatDate}
+              />
+          </div>
+
+          <div className="pitch-gig-left-element">
+            <label>Event Description</label>
+          </div>
+          <div className="pitch-gig-right-element">
+            <Field
+              name="eventDescription"
+              component="input"
+              type="text"
+              placeholder="Describe your event.. "
+            />
+          </div>
+
+          <div className="pitch-gig-left-element">
+            <label>No venue for event yet?</label>
+          </div>
+          <div className="pitch-gig-right-element">
+            <Field name="hasNoVenue" id="hasNoVenue" component="input" type="checkbox"/>
+          </div>
+
+          <div className="pitch-gig-left-element">
+            <label>Venue</label>
+          </div>
+          <div className="pitch-gig-right-element">
                   <Field
                     name="venueName"
                     component="input"
-                    // label="Venue Name"
+                    label="Venue Name"
                     type="text"
                     placeholder="My Garage "
                   />
-              </div>
-              <div>
-              <label>Venue Description</label>
+          </div>
+
+          <div className="pitch-gig-left-element">
+            <label>Venue Description</label>
+          </div>
+          <div className="pitch-gig-right-element">
                   <Field
                     name="venueDescription"
                     component="textarea"
-                    // label="Venue Description"
-                    // type="text"
+                    label="Venue Description"
+                    type="text"
                     placeholder="My Garage "
                   />
-              </div>
-              <div>
-              <label>Show Starts</label>
-                  <Field
-                    name="startTime"
-                    component="input"
-                    type="text"
-                    placeholder="8:00 PM"
-                  />
-              </div>
-              <div>
-              {/* <label>Last Day to Finalize Show</label>
-              <div className="col">
-                <Field
-                  name="finaldate"
-                  component={renderDate}
-                  // normalize={normalizeDate}
-                  // format={formatDate}
-                />
-              </div> */}
-              </div >
-              <div>
-                <label>Venue Street Address</label>
+          </div>
+
+          <div className="pitch-gig-left-element">
+            <label>Show start time</label>
+          </div>
+          <div className="pitch-gig-right-element">
+            <Field
+              name="startTime"
+              component="input"
+              type="text"
+              label="Show Starts"
+              placeholder="8:00 PM"
+            />
+          </div>
+
+          <div className="pitch-gig-left-element">
+            <label>Venue Address</label>
+          </div>
+          <div className="pitch-gig-right-element">
                   <Field
                     name="address"
                     component="input"
-                    // label="City"
+                    label="Venue Street Address"
                     type="text"
                     placeholder="123 Road St"
                   />
-              </div>
-              <div>
-                <label>City</label>
+          </div>
+
+          <div className="pitch-gig-left-element">
+            <label>City</label>
+          </div>
+          <div className="pitch-gig-right-element">
+
                   <Field
                     name="city"
                     component="input"
-                    // label="City"
+                    label="City"
                     type="text"
                     placeholder="New York "
                   />
-              </div>
-              <div>
-                <label>State</label>
+          </div>
+
+          <div className="pitch-gig-left-element">
+            <label>State</label>
+          </div>
+          <div className="pitch-gig-right-element">
                   <Field
                     name="state"
                     component="input"
                     type="text"
+                    label="State"
                     placeholder="NY"
                   />
-              </div>
-              <div>
-                <label>Zip Code</label>
+          </div>
+
+          <div className="pitch-gig-left-element">
+            <label>Zip Code</label>
+          </div>
+          <div className="pitch-gig-right-element">
+
                   <Field
                     name="zip"
                     component="input"
                     type="integer"
+                    label="Zip Code"
                     placeholder="12345"
                   />
-              </div>
-              <div>
-                <label htmlFor="isCommitted">Check Box If Your Event Already Confirmed</label>
-                <div>
+
+          </div>
+
+          <div className="pitch-gig-left-element">
+          <label htmlFor="isCommitted">Check Box If Your Event Already Confirmed</label>
+          </div>
+          <div className="pitch-gig-right-element">
                   <Field name="isCommitted" id="isCommitted" component="input" type="checkbox"/>
-                </div>
-              </div>
-              <div>
-                <label>Minimum $ To Have The Event</label>
+          </div>
+
+          <div className="pitch-gig-left-element">
+          Minimum Commitment to Have Event
+          </div>
+          <div className="pitch-gig-right-element">
                   <Field
                     name="minCommits"
                     component="input"
                     type="integer"
                     placeholder="10"
+                    label="Minimum Commitment to Have the Event"
                   />
-              </div>
-              <div>
-                <label>Suggested Pitch In($)</label>
+          </div>
+          
+          <div className="pitch-gig-left-element">
+            <label>Suggested Commitment</label>
+          </div>
+          <div className="pitch-gig-right-element">
                   <Field
                     name="price"
                     component="input"
                     type="integer"
                     placeholder="5"
+                    label="Suggested Commitment"
                   />
-              </div>
-              <div>
-                <label>Want us to send you text updates on your event?
-                  Add a phone number</label>
+          </div>
+
+          <div className="pitch-gig-left-element">
+            <label>Mobile number for text updates</label>
+          </div>
+          <div className="pitch-gig-right-element">
+
                   <Field
                     name="phone"
                     component="input"
                     type="string"
                     placeholder="512-920-8543"
+                    label="Do you want us to send you text updates on the event? If so, add a phone number."
                   />
-              </div>
-              <div>
-                <button type="submit" >Submit</button>
-              </div>
+          </div>
+
+          <div className="pitch-gig-center-element">
+                <button type="submit" className="btn btn-primary">Submit</button>
+          </div>
             </form>
           </div> 
         </div>
-      </div>
+
 
   )
 } 
