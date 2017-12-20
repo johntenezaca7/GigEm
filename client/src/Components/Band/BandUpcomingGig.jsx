@@ -2,68 +2,81 @@ import React from 'react';
 import ProgressComponent from '../User/ProgressComponent';
 import firebase from '../../fireB/firebase';
 import FileUploader from 'react-firebase-file-uploader';
-import { connect } from 'react-redux';
-import { saveEventPhoto, fetchEvents } from '../../actions/index';
+import {
+  connect
+} from 'react-redux';
+import {
+  saveEventPhoto,
+  fetchEvents
+} from '../../actions/index';
 
 var database = firebase.database();
 
 class UpcomingGig extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          avatar: '', 
-          isUploading: false,
-          progress: 0,
-          avatarURL: ''
-        }
-        this.handleUploadStart = this.handleUploadStart.bind(this);
-        this.handleProgress = this.handleProgress.bind(this);
-        this.handleUploadError = this.handleUploadError.bind(this);
-        // this.handleUploadSuccess = this.handleUploadSuccess.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = {
+      avatar: '',
+      isUploading: false,
+      progress: 0,
+      avatarURL: ''
     }
-  
-    handleUploadStart = () => this.setState({isUploading: true, progress: 0});
-    handleProgress = (progress) => this.setState({progress});
-    handleUploadError = (error) => {
-      this.setState({isUploading: false});
-      console.error(error);
-    }
-    handleUploadSuccess = (gig, filename) => {
-      console.log("IN HANDLE UPLOAD: ", gig)
-      console.log("IN HANDLE FILENAME: ", filename)
-      
-      this.setState({
-          avatar: filename, 
-          progress: 100, 
-          isUploading: false
-      });
-  
-      firebase.storage().ref('images')
-          .child(filename).getDownloadURL()
-              .then(url => {
-                console.log("PROPPPPPS FB: ", this.props);                
-             console.log("GIG IN FB: ", gig.id);
-                   database.ref().child('events').child(gig.id).set({
-                    // events: {
-                      eventId : gig.id,
-                      //  userId: this.props.info.googleId,
-                        url: url
-                        //  }
-                  });
-                  let infos = {};
-                  infos.photo = url;
-                  infos.id = gig.id;
-                  this.props.saveTheEventPhoto(infos)
-                  this.setState({
-            avatarURL: url
-                  });
-  
-          })
-    };
-    
-    renderIndividualUpcomingGig(gig) {
-        return (                
-        <div className="row m-3" key={gig.id}>
+    this.handleUploadStart = this.handleUploadStart.bind(this);
+    this.handleProgress = this.handleProgress.bind(this);
+    this.handleUploadError = this.handleUploadError.bind(this);
+  }
+
+  handleUploadStart = () => this.setState({
+    isUploading: true,
+    progress: 0
+  });
+  handleProgress = (progress) => this.setState({
+    progress
+  });
+  handleUploadError = (error) => {
+    this.setState({
+      isUploading: false
+    });
+    console.error(error);
+  }
+  handleUploadSuccess = (gig, filename) => {
+    console.log("IN HANDLE UPLOAD: ", gig)
+    console.log("IN HANDLE FILENAME: ", filename)
+
+    this.setState({
+      avatar: filename,
+      progress: 100,
+      isUploading: false
+    });
+
+    firebase.storage()
+      .ref('images')
+      .child(filename)
+      .getDownloadURL()
+      .then(url => {
+        console.log("PROPPPPPS FB: ", this.props);
+        console.log("GIG IN FB: ", gig.id);
+        database.ref()
+          .child('events')
+          .child(gig.id)
+          .set({
+            eventId: gig.id,
+            url: url
+          });
+        let infos = {};
+        infos.photo = url;
+        infos.id = gig.id;
+        this.props.saveTheEventPhoto(infos)
+        this.setState({
+          avatarURL: url
+        });
+
+      })
+  };
+
+  renderIndividualUpcomingGig(gig) {
+    return (
+      <div className="row m-3" key={gig.id}>
         <div className="col col-3 align-self-start">
           {gig.name}<br />
           {`${'$'}${gig.commits} of ${'$'}${gig.minCommits} committed!`} 🎉
@@ -86,10 +99,8 @@ class UpcomingGig extends React.Component {
         <div>
               <form>
                   {this.avatarURL ?
-                      // <img src={this.avatarURL} className="user-profile-image" alt="Epic." /> :
-                      // <img src={this.props.info.photo} className="user-profile-image" alt="Event image."/> 
                       <img src={this.avatarURL} className="user-profile-image" alt="Epic." /> :
-                      <img src={gig.photo} className="user-profile-image" alt="Event image."/>  
+                      <img src={gig.photo} className="user-profile-image" alt="Event."/>  
                   }          
 
                 <FileUploader
@@ -105,54 +116,56 @@ class UpcomingGig extends React.Component {
                 />
               </form>
             </div>
-        </div>)
-    }
+        </div>
+    )
+  }
 
-    render() {
-      // console.log('band upcoming gig props: ', this.props);
-        if (this.props.events && !this.props.potential) {
-          return (
-              <div className="container m-5">
-                {this.props.events.filter((x) => (x.UserId === this.props.info.id && x.commits > x.minCommits/* this.id && x.isCommitted === true */ ))
-                // .forEach((x) => console.log(x))
+  render() {
+    if (this.props.events && !this.props.potential) {
+      return (
+        <div className="container m-5">
+                {this.props.events.filter((x) => (x.UserId === this.props.info.id && x.commits > x.minCommits ))
                 .map((x) => this.renderIndividualUpcomingGig(x))
                 }    
               </div>
-          )
-        } else if (this.props.events && this.props.potential) {
-          return (
-              <div className="container m-5">
-                {this.props.events.filter((x) => (x.UserId === this.props.info.id && x.commits <= x.minCommits/* this.id && x.isCommitted === true */ ))
-                // .forEach((x) => console.log(x))
+      )
+    } else if (this.props.events && this.props.potential) {
+      return (
+        <div className="container m-5">
+                {this.props.events.filter((x) => (x.UserId === this.props.info.id && x.commits <= x.minCommits ))
                 .map((x) => this.renderIndividualUpcomingGig(x))
                 }    
               </div>
-          )
-        } else { return(<div></div>)}
-    } 
+      )
+    } else {
+      return (<div></div>)
+    }
+  }
 }
 
 
-function mapStateToProps({ auth, events, info, venues }) {
-    return {
-      auth: auth,
-      events: events,
-      info: info,
-      venues: venues
-    }
+function mapStateToProps({
+  auth,
+  events,
+  info,
+  venues
+}) {
+  return {
+    auth: auth,
+    events: events,
+    info: info,
+    venues: venues
+  }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    // init: () => {
-    //   dispatch(checkAttendance())
-    // },
     saveTheEventPhoto: (infos) => {
       dispatch(saveEventPhoto(infos))
-      .then(() => dispatch(fetchEvents()))
+        .then(() => dispatch(fetchEvents()))
     }
   }
 }
-  
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(UpcomingGig);
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(UpcomingGig);
