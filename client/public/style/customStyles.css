@@ -396,6 +396,26 @@ button:hover {
 	padding-left: 25px;
 }
 
+.pitch-gig-wrapper {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-gap: 10px;
+  grid-auto-rows: auto;
+}
+
+.pitch-gig-left-element {
+  grid-column: 1;
+}
+
+.pitch-gig-right-element {
+  grid-column: 2;
+  text-align: right;
+}
+
+.pitch-gig-center-element {
+  grid-column: 1 / 3;
+  text-align: center;
+}
 
 /* ::-webkit-scrollbar-track
 {
