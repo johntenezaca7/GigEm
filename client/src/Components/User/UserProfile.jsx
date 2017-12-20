@@ -87,8 +87,7 @@ class UserProfile extends React.Component {
         .filter((x) => x.UserId === this.props.info.id) 
         .map((x) => x = x.ShowcaseId) : [];
 
-        console.log('userProfile props,',this.props)
-        console.log('userProfile userAttendance,',userAttendance);
+    
 
       if(this.props.info){
         return (

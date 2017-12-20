@@ -383,21 +383,40 @@ button:hover {
     color: white;
 }
 
-
-/* ::-webkit-scrollbar-track
-{
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    background-color: #F5F5F5;
+.chat-container {
+	display: grid;
+	grid-template-columns: 70;
+	padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+	padding-left: 0px;
+	border: 5px solid rgb(231, 236, 243);
 }
 
-::-webkit-scrollbar
-{
-    width: 12px;
-    background-color: #F5F5F5;
-} */
+.chat-content{
 
-/* ::-webkit-scrollbar-thumb
-{
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-    background-color: #555;
-} */
+	width: auto;
+    height: 500px;
+    overflow: scroll;
+	  
+}
+.mes-input{
+	display: grid;
+	grid-template-columns: 70;
+	padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+	padding-left: 0px;
+	border: 5px solid rgb(174, 206, 247);
+}
+
+.message-input  {
+
+	width: 100%;
+	height: 45px;
+}
+
+.message-submit{
+
+	width: 100%;
+}

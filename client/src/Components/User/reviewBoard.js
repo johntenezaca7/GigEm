@@ -3,6 +3,7 @@ import firebase from '../../fireB/firebase';
 import { connect } from 'react-redux'; 
 import * as actions from '../../actions';
 import Logs from './messageLogs';
+var Infinite = require('react-infinite');
 
 const database = firebase.database();
 
@@ -17,8 +18,27 @@ class Board extends Component {
         }
         this.onSubmit = this.onSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
-
+        this.scrollToBottom  = this.scrollToBottom.bind(this);
+        
     }
+
+    componentDidMount(){
+        database.ref(`messages/`).on('value', (snapshot) => {
+            const currentMessages = snapshot.val();
+
+            if(currentMessages !== null){
+                this.setState({
+                    logs: currentMessages})
+            }
+        });
+        
+        // this.scrollToBottom();
+    }
+
+    scrollToBottom(){
+        const elm = document.getElementById('text-m');
+        elm.scrollIntoView(true);
+      }
 
     onChange(event){
         // console.log(event.target.value)
@@ -49,51 +69,44 @@ class Board extends Component {
 
     }
 
-    componentDidMount(){
-        // console.log('connecting to db')s
+  
 
-        database.ref(`messages/`).on('value', (snapshot) => {
-            const currentMessages = snapshot.val();
-
-            if(currentMessages !== null){
-                this.setState({
-                    logs: currentMessages})
-            }
-        })
-    }
-
+    componentDidUpdate() {
+        // this.scrollToBottom();
+      }
     
     render(){
        
          const lastName = this.props.user.name.split(' ')[1]
-        //  const par = Object.values(this.state.logs);
-
-        //  console.log('logs', this.state.logs)
+    
          const renderLogs = () => {
                 return this.state.logs.map( (blob, ix) => {
-                        // console.log('testing', blob)
-                  return(<div key={ix}> {blob.username}: {blob.text} <br/> </div>)
-                    // return 'ey'
-
-                })
-            }
-            
-        
+                  return(
+                        <div key={ix}  id="text-m" ref={(y) => {this.scrollToBottom() }}> {blob.username}: {blob.text} <br/> 
+                        
+                      </div>)    
+            })
+        }
         return(
-                 <div className="container">
-                    <div>
-                        { this.state.logs[0] ?
-                        <div>New User</div> :
-                        renderLogs()
-                        }
+                 <div>
+                    <div className="chat-container">
+                           
+                        <div className="chat-content">
+                            { this.state.logs[0] ?
+                            <div>New User</div> :
+                            renderLogs()
+                            }
+                        </div>
+                       
                     </div>
-              
-            
-                    <form onSubmit={this.onSubmit}>
-                             <input type="text" className="message-input" placeholder="Type message..." value={this.state.input} onChange={this.onChange}/>
-                             <button type="submit" className="message-submit">Send</button>
-                    </form>
-               
+                    <br />
+                    <div className="mes-input">
+                        <form onSubmit={this.onSubmit}>
+                                <input type="text" className="message-input" placeholder="Type message..." value={this.state.input} onChange={this.onChange}/>
+                                <button type="submit" className="message-submit">Send</button>
+                        </form>
+                    </div>
+                        
                           
                  </div>
              )
