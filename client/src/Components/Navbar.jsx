@@ -131,8 +131,7 @@ class Navbar extends React.Component {
         } else {
             return (
               <div>
-                <nav className="navbar navbar-expand-lg ">
-              
+                <nav className="navbar navbar-expand-lg">
                   <Link to="/">
                     <img src="./Assets/party.svg" width="40px" height="40px" alt="User Logo" />
                   </Link>

@@ -45,10 +45,6 @@ class UserDashboard extends React.Component {
           })
         }
 
-        // componentWillReceiveProps() {
-        //   console.log('component will receive props//');
-        // }
-
     renderContent() {
       switch(this.state.dashNav){
         case 'upcoming':
@@ -107,31 +103,29 @@ class UserDashboard extends React.Component {
     render() { 
   
       return (
-        <div >   
-            <div> 
-                <button className="" type="submit" value="upcoming" onClick={this.onClick}>Upcoming Gigs</button>
-                <button className="" type="submit" value="potential" onClick={this.onClick} >Potential Gigs</button>
-                <button className=""type="submit" value="chat" onClick={this.onClick}>Community Board</button>
-              </div>
-              <div className="user-dashboard">
-              {this.renderContent()}
-              <div>
-              <div className="google-maps">
-                    {/* <div></div> */}
-                    <div className="inside-map">
-                      <Map
-                        show={this.changeState}
-                        geoLoc={this.state.locations}  
-                        center={{lat:40.728199 , lng:-73.9894738}}
-                        containerElement={<div style={{ height: `400px` }} />}
-                        mapElement={<div style={{ height: `200%`}}/>}   
-                        />  
-                      </div>    
-                      {/* <div></div> */}
-              </div>
-              </div>
-              </div>
+        <div className="user-dashboard">   
+        <div classname="user-dashboard-leftcolumn">
+          <div className="nav navbar user-dashboard-nav"> 
+            <button className="" type="submit" value="upcoming" onClick={this.onClick}>Upcoming Gigs</button>
+            <button className="" type="submit" value="potential" onClick={this.onClick} >Potential Gigs</button>
+            <button className=""type="submit" value="chat" onClick={this.onClick}>Community Board</button>
+          </div>
+          <div className="user-dashboard-content">
+            {this.renderContent()}
+          </div>
         </div>
+          <div className="google-maps">
+            {/* <div className="inside-map"> */}
+              <Map
+                show={this.changeState}
+                geoLoc={this.state.locations}  
+                center={{lat:40.728199 , lng:-73.9894738}}
+                containerElement={<div style={{ height: `400px` }} />}
+                mapElement={<div style={{ height: `200%`}}/>}   
+              />  
+            {/* </div>     */}
+            </div>
+          </div>
       )
     }
 }
