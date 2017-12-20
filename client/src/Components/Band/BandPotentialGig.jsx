@@ -88,18 +88,18 @@ class BandPotentialGig extends React.Component {
 
   renderGig(gig) {
     return (
-      <div className="container">
-      <div className="row m-3">
-        <div className="col-2 col-md-autoalign-self-start">
-          <h6>{gig.name}</h6><br />
+      <div className="container text-center">
+      <div className="row justify-content-md-center m-2 border border-dark">
+        <div className="col-2 align-self-start">
             {this.props.info.name}<br />
             <div className="text-primary">{'$'}{gig.commits} committed of minimum {'$'}{gig.minCommits ? gig.minCommits : 1}</div>
           </div>
-          <div className="col-8 justify-content-md-center">
-            <ProgressComponent percent={gig.commits / gig.minCommits} /> 
-            ({`${(Math.min(gig.commits / (gig.minCommits ? gig.minCommits : 1)) * 100)}% committed.`})
+          <div className="col col-6 text-center">
+          <h3>{gig.name}</h3><br />
+            <ProgressComponent percent={(Math.min(gig.commits / (gig.minCommits ? gig.minCommits : 1)) * 100)} />
+            ({`${(Math.floor(Math.min(gig.commits / (gig.minCommits ? gig.minCommits : 1)) * 100))}% committed.`})
           </div>
-          <div className="col-2 col-md-auto">
+          <div className="col col-2 align-top text-right">
             {this.renderLocation(gig)}
             {`${(new Date(gig.finalCommitDate)).getMonth() + 1} / ${(new Date(gig.finalCommitDate)).getDate()} /
               ${(new Date(gig.finalCommitDate)).getFullYear()}`}<br />
