@@ -248,12 +248,8 @@ function mapStateToProps({
   }
 }
 
-
 const mapDispatchToProps = dispatch => {
   return {
-    // init: () => {
-    //   dispatch(checkAttendance())
-    // },
     onCommitClick: (user, gig, amount) => {
       dispatch(commitToEvent(user, gig, amount ? parseInt(amount, 10) : 0))
         .then(() => dispatch(fetchEvents()))

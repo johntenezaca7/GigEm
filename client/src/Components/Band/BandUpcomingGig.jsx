@@ -76,6 +76,7 @@ class UpcomingGig extends React.Component {
 
   renderIndividualUpcomingGig(gig) {
     return (
+      <div className="container">
       <div className="row m-3" key={gig.id}>
         <div className="col col-3 align-self-start">
           {gig.name}<br />
@@ -117,6 +118,7 @@ class UpcomingGig extends React.Component {
               </form>
             </div>
         </div>
+      </div>
     )
   }
 

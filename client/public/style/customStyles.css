@@ -27,11 +27,9 @@
 	margin-left: -30px;
 	bottom: 20px;
 }
-
 .img-fluid {
 	color:#FF9900;
 }
-
 .arrows path {
 	stroke: #FF9900;
 	fill: transparent;
@@ -42,18 +40,18 @@
 
 @keyframes arrow
 {
-	0% {opacity:0}
-	40% {opacity:1}
-	80% {opacity:0}
-	100% {opacity:0}
+0% {opacity:0}
+40% {opacity:1}
+80% {opacity:0}
+100% {opacity:0}
 }
 
 @-webkit-keyframes arrow /*Safari and Chrome*/
 {
-	0% {opacity:0}
-	40% {opacity:1}
-	80% {opacity:0}
-	100% {opacity:0}
+0% {opacity:0}
+40% {opacity:1}
+80% {opacity:0}
+100% {opacity:0}
 }
 
 
@@ -93,11 +91,19 @@
 }
 
 .user-profile-image {
-	width: auto;
-	height:185px;
-	border-radius: 10%;
-	overflow:hidden; 
-	background: 50% 50% no-repeat;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10%;
+  overflow:hidden; 
+  background: 50% 50% no-repeat;
+}
+
+.google-maps{
+	padding:1em;
+	display: grid;
+	grid-template-columns: 1fr;
+	/* width: 900px; */
 }
 
 
@@ -134,8 +140,6 @@
 	grid-auto-rows: minmax(100, auto);
 	justify-items: stretch;
 	align-items: stretch;
-	height: 90vh;
-	/* height: auto; */
 	/* padding: 1cm 2cm 1cm 1cm; */
 	/* background: rgb(255, 237, 222); */
 	/* padding:1em; */
@@ -150,9 +154,9 @@
 }
 
 .band-show-scroll{
-	width: auto;
-  height: 39.5vh;
-  /* overflow: scroll; */
+	width: 100%;
+    height: 300px;
+    overflow: scroll;
 }
 
 .grid-image {
@@ -172,7 +176,7 @@
 }
 .user-show-scroll{
 	width: auto;
-  height: 360px;
+    height: 750px;
 	overflow: scroll;
 
 }
@@ -239,7 +243,7 @@
 }
 
 .potential-gig-progress-bar {
-	grid-column: 1/5;
+	grid-column: 1/4;
 	grid-row: 2;
 }
 
@@ -278,12 +282,12 @@
 
 .inside-wall {
 	display: grid;
-	grid-auto-columns: 2fr;
+	grid-auto-columns: 1fr;
 	padding:1em;
 	grid-gap: 1em;
 	align-items: stretch;
 	width: auto;
-    height: auto;
+    height: 620px;
 	overflow: scroll;
 	
 }
@@ -291,6 +295,8 @@
 	background: #eee;
 	padding:1em;
 	border-radius: 25px;
+	
+
 }
 .each-h-block {
 	display: grid;
@@ -307,31 +313,7 @@
 
 .user-dashboard {
 	display: grid;
-	grid-template-columns: 60% 40%;
-	/* grid-template-rows: 10% 90%; */
-}
-
-.user-dashboard-leftcolumn {
-	display: grid;
-	grid-template-rows: minmax(100px, auto);
-}
-
-.user-dashboard-nav {
-	grid-row: 1;
-}
-
-.user-dashboard-content {
-	grid-row: 2;
-}
-
-
-.google-maps{
-	/* padding:1em;
-	display: grid;
-	grid-template-columns: 1fr;
-	width: 900px; */
-	grid-row: 1/2;
-	grid-column: 2;
+	grid-template-columns: 50% 50%;
 }
 
 
@@ -410,7 +392,6 @@ button:hover {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     background-color: #F5F5F5;
 }
-
 ::-webkit-scrollbar
 {
     width: 12px;

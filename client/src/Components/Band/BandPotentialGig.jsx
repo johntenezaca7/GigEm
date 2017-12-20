@@ -52,7 +52,7 @@ class BandPotentialGig extends React.Component {
       .child(filename)
       .getDownloadURL()
       .then(url => {
-        console.log("GIG IN FB: ", gig.id);
+  
         database.ref()
           .child('events')
           .child(gig.id)
@@ -87,50 +87,48 @@ class BandPotentialGig extends React.Component {
   }
 
   renderGig(gig) {
-    console.log("GIGGGGG: ", gig)
-    console.log("PoGig Props:", this.props)
     return (
-      <div className="container m-5" key={gig.id} >
-                <div className="row">
-                    <div className="col-2 col-md-autoalign-self-start">
-                      <h6>{gig.name}</h6><br />
-                      {this.props.info.name}<br />
-                      <div className="text-primary">{'$'}{gig.commits} committed of minimum {'$'}{gig.minCommits ? gig.minCommits : 1}</div>
-                    </div>
-                    <div className="col-8 justify-content-md-center">
-                      <ProgressComponent percent={gig.commits / gig.minCommits} /> 
-                      ({`${(Math.min(gig.commits / (gig.minCommits ? gig.minCommits : 1)) * 100)}% committed.`})
-                    </div>
-                    <div className="col-2 col-md-auto">
-                      {this.renderLocation(gig)}
-                      {`${(new Date(gig.finalCommitDate)).getMonth() + 1} / ${(new Date(gig.finalCommitDate)).getDate()} /
-                        ${(new Date(gig.finalCommitDate)).getFullYear()}`}<br />
-                    </div>
-                    </div>
-                    <div>
-                      <form>
-                          {gig.photo ?
-                              // <img src={this.avatarURL} className="user-profile-image" alt="Epic." /> :
-                              // <img src={this.props.info.photo} className="user-profile-image" alt="Event image."/> 
-                              <img src={gig.photo} className="user-profile-image" alt="Epic." /> :
-                              <img src={gig.photo} className="user-profile-image" alt="Event."/>  
-                          }          
+      <div className="container">
+      <div className="row m-3">
+        <div className="col-2 col-md-autoalign-self-start">
+          <h6>{gig.name}</h6><br />
+            {this.props.info.name}<br />
+            <div className="text-primary">{'$'}{gig.commits} committed of minimum {'$'}{gig.minCommits ? gig.minCommits : 1}</div>
+          </div>
+          <div className="col-8 justify-content-md-center">
+            <ProgressComponent percent={gig.commits / gig.minCommits} /> 
+            ({`${(Math.min(gig.commits / (gig.minCommits ? gig.minCommits : 1)) * 100)}% committed.`})
+          </div>
+          <div className="col-2 col-md-auto">
+            {this.renderLocation(gig)}
+            {`${(new Date(gig.finalCommitDate)).getMonth() + 1} / ${(new Date(gig.finalCommitDate)).getDate()} /
+              ${(new Date(gig.finalCommitDate)).getFullYear()}`}<br />
+          </div>
+        <div>
+          <form>
+              {gig.photo ?
+                  // <img src={this.avatarURL} className="user-profile-image" alt="Epic." /> :
+                  // <img src={this.props.info.photo} className="user-profile-image" alt="Event image."/> 
+                  <img src={gig.photo} className="user-profile-image" alt="Epic." /> :
+                  <img src={gig.photo} className="user-profile-image" alt="Event."/>  
+              }          
 
-                        <FileUploader
-                          accept="image/*"
-                          name= "avatar"
-                          gig={gig}
-                          randomizeFilename
-                          storageRef={firebase.storage().ref('images')}
-                          onUploadStart={this.handleUploadStart}
-                          onUploadError={this.handleUploadError}
-                          onUploadSuccess={this.handleUploadSuccess.bind(this,gig)}
-                          onProgress={this.handleProgress}
-                        />
-                      </form>
-                    </div>
-                </div>
-
+            <FileUploader
+              accept="image/*"
+              name= "avatar"
+              gig={gig}
+              randomizeFilename
+              storageRef={firebase.storage().ref('images')}
+              onUploadStart={this.handleUploadStart}
+              onUploadError={this.handleUploadError}
+              onUploadSuccess={this.handleUploadSuccess.bind(this,gig)}
+              onProgress={this.handleProgress}
+            />
+          </form>
+        </div>
+    </div>
+    </div>
+                  
     )
   }
 
