@@ -70,7 +70,7 @@ const renderDate = ({ input, label, type, meta }) => {
     <div className="container container-fluid border p-3 small" >
         <div className="row">
           <div className="col-sm">
-            <form  onSubmit={props.handleSubmit} >
+            <form  className="form-group" onSubmit={props.handleSubmit} >
             <div className="col">
                 {/* <label>Event Name*</label> */}
                   <Field
