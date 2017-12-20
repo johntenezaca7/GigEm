@@ -226,47 +226,71 @@
   display: grid;
   grid-template-columns: repeat(3, 3fr);
   grid-gap: 0px;
-  /* grid-auto-rows: minmax(100px, auto); */
+  grid-auto-columns: minmax(500px, auto);
 }
 
+/* row 1 */
+
 .potential-gig-band-name {
-  grid-column: 1;
   grid-row: 1;
+  grid-column: 1;
 }
 
 .potential-gig-event-name {
-  grid-column: 2;
   grid-row: 1;
+  grid-column: 2;
   text-align: center;
 }
 
-.potential-gig-daterange {
-  grid-column: 3;
+.potential-gig-venue {
   grid-row: 1;
+  grid-column: 3;
   text-align: right;
 }
 
-.potential-gig-progress-bar {
-  grid-column: 1/4;
+/* row 2 */
+
+.potential-gig-img {
   grid-row: 2;
+  grid-column: 1/4;
+  text-align: center;
 }
 
+.potential-gig-image {
+  width: 20%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10%;
+  overflow:hidden; 
+  background: 50% 50% no-repeat;
+}
+
+/* row 3 */
+
+.potential-gig-progress-bar {
+  grid-row: 3;
+  grid-column: 1/4;
+}
+
+/* row 4 */
+
 .potential-gig-commit-number {
+  grid-row: 4;
   grid-column: 1;
-  grid-row: 3
 }
 
 .potential-gig-money-commit-value {
+  grid-row: 4;
   grid-column: 2;
-  grid-row: 3;
-  /* text-align: right; */
 }
 
 .potential-gig-commit-button {
+  grid-row: 4;
   grid-column: 3;
-  grid-row: 3;
   text-align: right;
 }
+
+/* progress wrapper start */
 
 .progress-wrapper
 
