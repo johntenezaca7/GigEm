@@ -18,7 +18,7 @@ class Board extends Component {
         }
         this.onSubmit = this.onSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
-        this.scrollToBottom  = this.scrollToBottom.bind(this);
+
         
     }
 
@@ -32,16 +32,11 @@ class Board extends Component {
             }
         });
         
-        // this.scrollToBottom();
     }
 
-    scrollToBottom(){
-        const elm = document.getElementById('text-m');
-        elm.scrollIntoView(true);
-      }
 
     onChange(event){
-        // console.log(event.target.value)
+    
         this.setState({
             input: event.target.value
         })
@@ -69,11 +64,7 @@ class Board extends Component {
 
     }
 
-  
 
-    componentDidUpdate() {
-        // this.scrollToBottom();
-      }
     
     render(){
        
@@ -81,14 +72,12 @@ class Board extends Component {
     
          const renderLogs = () => {
                 return this.state.logs.map( (blob, ix) => {
-                  return(
-                        <div key={ix}  id="text-m" ref={(y) => {this.scrollToBottom() }}> {blob.username}: {blob.text} <br/> 
-                        
-                      </div>)    
+                  return( <div key={ix} className="each-text"> <h5>{blob.username}: <strong>{blob.text}</strong></h5>  </div>)    
             })
         }
         return(
                  <div>
+                    <div className="chat-box">
                     <div className="chat-container">
                            
                         <div className="chat-content">
@@ -96,18 +85,22 @@ class Board extends Component {
                             <div>New User</div> :
                             renderLogs()
                             }
+                            <div id="new-texts" ref={() => {
+                                                    const elm = document.getElementById('new-texts');
+                                                    elm.scrollIntoView(true);
+                                                           }}>
+                            </div>
                         </div>
                        
                     </div>
-                    <br />
+                    
                     <div className="mes-input">
                         <form onSubmit={this.onSubmit}>
                                 <input type="text" className="message-input" placeholder="Type message..." value={this.state.input} onChange={this.onChange}/>
                                 <button type="submit" className="message-submit">Send</button>
                         </form>
                     </div>
-                        
-                          
+                </div>   
                  </div>
              )
     }

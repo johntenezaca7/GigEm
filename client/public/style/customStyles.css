@@ -70,6 +70,10 @@
 	-webkit-animation-delay:0s; /* Safari 和 Chrome */
 }
 
+.nav-custom{
+	border-bottom: 5px solid #008CBA;
+}
+
 .nested {
 	display: grid;
 	grid-template-columns: 90%;
@@ -177,7 +181,7 @@
 }
 .user-show-scroll{
 	width: auto;
-  height: 360px;
+	height: 700px;
 	overflow: scroll;
 
 }
@@ -358,12 +362,12 @@
     height: 350px;
 }
 
-button {
-	background-color: #4CAF50; /* Green */
-	border-radius: 9px;
+.navButton {
+	
+	/* border-radius: 5px; */
     border: none;
     color: white;
-    padding: 16px 32px;
+	padding: 8px 28px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -374,25 +378,32 @@ button {
     cursor: pointer;
 }
 
-button {
+.navButton {
 	background-color: white; 
     color: black; 
     border: 2px solid #008CBA;
 }
 
-button:hover {
+.navButton:hover {
 	background-color: #008CBA;
     color: white;
+}
+.chat-box{
+	padding-top: 30px;
+    padding-right: 10px;
+    padding-bottom: 0px;
+	padding-left: 25px;
 }
 
 .chat-container {
 	display: grid;
 	grid-template-columns: 70;
-	padding-top: 0px;
+	padding-top: 25px;
     padding-right: 0px;
     padding-bottom: 0px;
-	padding-left: 0px;
+	padding-left: 30px;
 	border: 5px solid rgb(231, 236, 243);
+	border-radius: 40px;
 }
 
 .chat-content{
@@ -410,6 +421,7 @@ button:hover {
     padding-bottom: 0px;
 	padding-left: 0px;
 	border: 5px solid rgb(174, 206, 247);
+	
 }
 
 .message-input  {
@@ -421,4 +433,49 @@ button:hover {
 .message-submit{
 
 	width: 100%;
+}
+.each-text {
+
+	border-left: 8px solid rgb(247, 168, 163);
+	
+
+}
+
+.event-name {
+    position: relative;
+    display: inline-block;
+
+}
+
+ .info-helper{
+	visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 110%;
+    
+    /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+    opacity: 0;
+    transition: opacity .5s;
+}
+.event-name .info-helper::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+}
+
+.event-name:hover .info-helper{
+    visibility: visible;
+    opacity: 1;
 }

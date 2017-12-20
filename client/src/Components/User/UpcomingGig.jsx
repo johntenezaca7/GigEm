@@ -182,16 +182,23 @@ class UpcomingGig extends React.Component {
                             </Modal>
                           </div>
                         </div>
-                        <a><h4 className="potential-gig-event-name" onClick={this.openModal}>
+                      
+                        <div className="potential-gig-event-name" >
                         
-                            {this.props.gig.name}
+                          
+                            <h5  onClick={this.openModal}   className="event-name" >{this.props.gig.name}
+                            
+                             <span className="info-helper">Click here for more information!</span>
+                            </h5> 
+                          
+                            
+                          
                             { this.props.gig.photo ?
-                                <img src={this.props.gig.photo} className="user-profile-image" alt="Event image."/> :
-                                
+                                <img src={this.props.gig.photo} className="user-profile-image" alt="Event image."/> :  
                                 <p>Imagine a Photo</p>
                                 // <img src={holderPic} className="user-profile-image" alt="Event image."/>
                             } 
-                        </h4></a>
+                        </div>
 
                         <div className="potential-gig-daterange">
                           {/* {this.props.gig.final_commit_date}<br /> */}

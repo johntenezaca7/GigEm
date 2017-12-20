@@ -29,13 +29,13 @@ class Navbar extends React.Component {
           return(
             <div>
               {/* <td> */}
-                <a href="/auth/google"><button className=""type="submit">Login With Google</button></a>
+                <a href="/auth/google"><button className="navButton"type="submit">Login With Google</button></a>
             </div>
           );
         default:
           return (
             <div>
-                  <a href="/api/logout"><button className="" type="submit">Logout</button></a>
+                  <a href="/api/logout"><button className="navButton" type="submit">Logout</button></a>
           </div>
           )
       }
@@ -60,7 +60,7 @@ class Navbar extends React.Component {
       if (this.props.info.isBand) {
         return (
           <Link to="/userprofile">
-          <button className="" onClick={(e) => this.props.editUserProfile({'isBand': false})}>
+          <button className="navButton" onClick={(e) => this.props.editUserProfile({'isBand': false})}>
           User Account
           </button>
           </Link>
@@ -68,7 +68,7 @@ class Navbar extends React.Component {
       } else {
           return (
             <Link to={`/bandprofile/${this.props.info.id}`}>
-              <button className="" onClick={(e) => this.props.editUserProfile({'isBand': true})}>
+              <button className="navButton" onClick={(e) => this.props.editUserProfile({'isBand': true})}>
               Artist Account
               </button>
             </Link>
@@ -103,16 +103,16 @@ class Navbar extends React.Component {
                     <tr>
                     <td>
                       <Link to="/band/upcoming">
-                        <button className="" type="submit">Upcoming Gigs</button>
+                        <button className="navButton" type="submit">Upcoming Gigs</button>
                       </Link>
                       <Link to="/band/potential">
-                        <button className=" " type="submit">Potential Gigs</button>
+                        <button className="navButton" type="submit">Potential Gigs</button>
                       </Link>
                       <Link to="/band/pitch">
-                        <button className=" " type="submit">Pitch a Gig</button>
+                        <button className="navButton" type="submit">Pitch a Gig</button>
                       </Link>
                       <Link to={`/bandprofile/${this.props.info.id}`}>
-                        <button className="" type="submit">My Profile</button>
+                        <button className="navButton" type="submit">My Profile</button>
                       </Link>
                     </td>
                       <td>
@@ -130,7 +130,7 @@ class Navbar extends React.Component {
           </div>)
         } else {
             return (
-              <div>
+              <div className="nav-custom">
                 <nav className="navbar navbar-expand-lg ">
               
                   <Link to="/">
@@ -154,10 +154,10 @@ class Navbar extends React.Component {
                         <tr>
                           <td>
                             <Link to="/user">
-                              <button className="" type="submit">Dashboard</button>
+                              <button className="navButton" type="submit">Dashboard</button>
                             </Link>
                             <Link to="/userprofile">
-                              <button className="" type="submit">My Profile</button>
+                              <button className="navButton" type="submit">My Profile</button>
                             </Link>
                           </td>
                           <td>
