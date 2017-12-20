@@ -158,13 +158,12 @@ class UpcomingGig extends React.Component {
    
         if (this.props.users.length > 0) {
             return (
-                <div className="container border p-3 m-1 w-100" key={this.props.gig.id}>
-                    <div className="potential-gig-wrapper">
+                <div>
+                {/* <div className="container border p-3 m-1 w-100" key={this.props.gig.id} > */}
+                    <div className="potential-gig-wrapper p-2">
                         <div className="potential-gig-band-name">
                           <Link to={`/bandprofile/${this.props.gig.id}`}>
-                         
-                            <h6>Promoter:</h6>
-                            <h5>{this.props.users.filter((x) => x.id === this.props.gig.UserId)[0].name}</h5>
+                            <h4>{this.props.users.filter((x) => x.id === this.props.gig.UserId)[0].name}</h4>
                           </Link>
                           <div>
                             <Modal
@@ -174,23 +173,16 @@ class UpcomingGig extends React.Component {
                                 style={customStyles}
                                 contentLabel="Example Modal"
                                >
-
-                            {/* <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2> */}
                             <button onClick={this.closeModal}>close</button>
-                          
                            <ShowcaseInfo showId={this.props.gig.id} />
                             </Modal>
                           </div>
                         </div>
                         <a><h4 className="potential-gig-event-name" onClick={this.openModal}>
-                       
                             {this.props.gig.name}
-            
                         </h4></a>
 
                         <div className="potential-gig-daterange">
-                          {/* {this.props.gig.final_commit_date}<br /> */}
-                          {/* {this.props.gig.venue_id}<br /> */}
                           { this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0] &&
                             this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0].name ? 
                             this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0].name :
@@ -198,8 +190,6 @@ class UpcomingGig extends React.Component {
                         {this.props.gig.startTime ? `Doors @ ${this.props.gig.startTime}` : 'Start time NA'}
                         </div>
                         <div className="text-success potential-gig-commit-number">
-                          {this.props.gig.city}<br />
-
                             Fully Commited 🎉<br />
                             {`$`}{this.props.gig.commits} of {`$`}{this.props.gig.minCommits}!
                         </div>

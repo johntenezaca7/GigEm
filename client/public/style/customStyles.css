@@ -27,9 +27,11 @@
 	margin-left: -30px;
 	bottom: 20px;
 }
+
 .img-fluid {
 	color:#FF9900;
 }
+
 .arrows path {
 	stroke: #FF9900;
 	fill: transparent;
@@ -40,18 +42,18 @@
 
 @keyframes arrow
 {
-0% {opacity:0}
-40% {opacity:1}
-80% {opacity:0}
-100% {opacity:0}
+	0% {opacity:0}
+	40% {opacity:1}
+	80% {opacity:0}
+	100% {opacity:0}
 }
 
 @-webkit-keyframes arrow /*Safari and Chrome*/
 {
-0% {opacity:0}
-40% {opacity:1}
-80% {opacity:0}
-100% {opacity:0}
+	0% {opacity:0}
+	40% {opacity:1}
+	80% {opacity:0}
+	100% {opacity:0}
 }
 
 
@@ -96,13 +98,6 @@
 	border-radius: 10%;
 	overflow:hidden; 
 	background: 50% 50% no-repeat;
-}
-
-.google-maps{
-	padding:1em;
-	display: grid;
-	grid-template-columns: 1fr;
-	/* width: 900px; */
 }
 
 
@@ -312,7 +307,31 @@
 
 .user-dashboard {
 	display: grid;
-	grid-template-columns: 50% 50%;
+	grid-template-columns: 60% 40%;
+	/* grid-template-rows: 10% 90%; */
+}
+
+.user-dashboard-leftcolumn {
+	display: grid;
+	grid-template-rows: minmax(100px, auto);
+}
+
+.user-dashboard-nav {
+	grid-row: 1;
+}
+
+.user-dashboard-content {
+	grid-row: 2;
+}
+
+
+.google-maps{
+	/* padding:1em;
+	display: grid;
+	grid-template-columns: 1fr;
+	width: 900px; */
+	grid-row: 1/2;
+	grid-column: 2;
 }
 
 
