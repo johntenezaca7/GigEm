@@ -105,6 +105,11 @@ export const savePhoto = (imageURL) => async dispatch =>{
     dispatch({ type: types.SAVE_PHOTO, payload: res.data})
 }
 
+export const saveEventPhoto = (infos) => async dispatch =>{
+    const res = await axios.post('/api/save_event_photo', infos);
+    dispatch({ type: types.SAVE_EVENT_PHOTO, payload: res.data})
+}
+
 export const fetchProperties = () => async dispatch =>{
     const res = await axios.get('/api/properties');
     console.log('fetching properties ========================')
