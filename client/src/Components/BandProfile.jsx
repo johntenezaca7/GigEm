@@ -38,7 +38,7 @@ class BandProfile extends React.Component {
     }
 
     render() {
-      console.log('rerendering bandprofile this.prosp: ', this.props);
+      // console.log('rerendering bandprofile this.prosp: ', this.props);
       
       var selectedUser = this.props.users.filter((x) => x.id === parseInt(this.props.match.params.bandId,10))[0];
       if (!selectedUser && !this.props.user) selectedUser = {id: -1}
