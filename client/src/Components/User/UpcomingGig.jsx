@@ -53,7 +53,7 @@ class UpcomingGig extends React.Component {
 
   deletePic(e) {
       let infos = {};
-      infos.photo = ''; // set to template image
+      infos.photo = 'https://images.pexels.com/photos/386025/pexels-photo-386025.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb'; // set to template image
       infos.id = this.props.gig.id;
       this.props.saveTheEventPhoto(infos)
     }
@@ -241,6 +241,7 @@ class UpcomingGig extends React.Component {
   }
 
   render() {
+    console.log("UpCo props", this.props)
     if (this.props.users.length > 0) {
       return (
 
@@ -278,11 +279,11 @@ class UpcomingGig extends React.Component {
          
             <div className="potential-gig-venue">
                 <span>Location</span>
-              { this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0] &&
-                this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0].name ? 
-                this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0].name :
+                { this.props.venues.id === this.props.gig.VenueId &&
+                this.props.venues.id === this.props.gig.VenueId.name ? 
+                this.props.venues.id === this.props.gig.VenueId.name :
                 'Venue NA'}<br />
-              {this.props.gig.startTime ? `Doors @ ${this.props.gig.startTime}` : 'Start time NA'}
+              {this.props.gig.startTime ? `Doors @ ${this.props.gig.startTime.slice(0,5)}` : 'Start time NA'}
             </div>
 
             <div className="potential-gig-img">
@@ -310,8 +311,7 @@ class UpcomingGig extends React.Component {
           </div>
             
           <div className="text-success potential-gig-commit-number">
-            {/*} eslint-disable-next-line */}
-            Fully Commited 🎉<br />
+            { this.props.gig.commits > this.props.gig.minCommits ? <a>Fully Commited🎉</a> : <a>Current Status</a> }<br />
             {`$`}{this.props.gig.commits} of {`$`}{this.props.gig.minCommits}!
           </div>
           <div className="potential-gig-progress-bar">
