@@ -21,7 +21,7 @@ module.exports = (app, db) => {
   });
 
   app.post('/api/task/editprofile', async (req, res) => {
-  
+    console.log("bodaaaaay", req.body)
     await dbDef.User.findOne({where: {googleId: req.user}})
     .then((data) => {
       data.update(

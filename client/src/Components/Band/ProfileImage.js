@@ -44,19 +44,23 @@ class ProfilePage extends Component {
     
 
     firebase.storage().ref('images')
-      .child(filename).getDownloadURL()
-        .then(url => {
-          database.ref().set({
-            name: {
-              userId: this.props.profileUser.googleId,
-              url: url
-            }
-          });
-          this.props.editTheUserProfile({photo: url, id: this.props.info.id});
-          this.setState({
-            avatarURL: url
-          });
-        });
+        .child(filename).getDownloadURL()
+            .then(url => {
+           
+                 database.ref().set({
+                  name: {
+                     userId: this.props.profileUser.googleId,
+                      url: url
+                       }
+                });
+                let changes = {};
+                changes.photo = url;
+                this.props.editTheUserProfile(changes);
+                this.setState({
+                    avatarURL: url
+                });
+
+        })
   };
 
   deletePic(e) {
@@ -68,6 +72,7 @@ class ProfilePage extends Component {
   }
 
   render() {
+    console.log("Profile pics, ", this.props)
     return (
       <div className="small">
       
