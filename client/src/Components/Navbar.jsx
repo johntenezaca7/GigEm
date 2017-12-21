@@ -83,12 +83,16 @@ class Navbar extends React.Component {
         return (
               <div className="user-Navbar">
               <nav className="navbar navbar-expand-lg  ">
-               
+              <li className="nav-item">
+                <img src="../../Assets/giglogo.svg" width="80%" alt="Gigem Logo"/>
+              </li>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul className="navbar-nav mr-auto">
+
+      
                     <li className="nav-item active">
                       <a className="nav-link">
                       <h2>Gig'em Band: {this.props.info.name ? this.props.info.name : "Welcome to Gig'em"} {this.props.info.id}</h2>
@@ -131,7 +135,7 @@ class Navbar extends React.Component {
             return (
               <div className="user-Navbar">
                 <nav className="navbar navbar-expand-lg">
-                  
+                <img src="../../Assets/giglogo.svg" height="50px" alt="Gigem Logo"/>
                   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                   </button>
