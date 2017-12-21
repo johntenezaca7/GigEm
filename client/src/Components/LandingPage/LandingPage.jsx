@@ -17,7 +17,7 @@ export default class UserDashboard extends React.Component {
           <div className="container-fluid p-5 landingcontainer">
             <div className="row"> 
                     <div className="col mx-auto text-center m-5">
-                          <img src="../../Assets/tools/aws.svg" width="100%" style={{maxWidth: '40%'}} className="img-fluid" alt="Gigem Logo"/>
+                          <img src="../../Assets/giglogo.svg" width="100%" style={{maxWidth: '40%'}} className="img-fluid" alt="Gigem Logo"/>
                     </div>
                   </div>
           
