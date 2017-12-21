@@ -26,7 +26,7 @@ app.post('/api/sendEmail', (req, res) => {
     let mailOptions = {
         from: '"GigEm GigsYou 👻" <gigemnews@gmail.com>', // sender address
         to: toEmail, // list of receivers
-        subject: 'See You New Event!', // Subject line
+        subject: `See Your New Event, ${req.body.info.eventName}!`, // Subject line
         // text: 'Yur ya durd !', // plain text body
         html: `
   <head>
