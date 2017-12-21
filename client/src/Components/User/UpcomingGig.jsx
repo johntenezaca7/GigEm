@@ -12,12 +12,17 @@ import {
   commitToEvent,
   uncommitFromEvent,
   fetchEvents,
-  checkAttendance
+  checkAttendance,
+  saveEventPhoto
 } from '../../actions/index';
 import ShowcaseInfo from '../ShowDescription';
 import Payment from '../Payment';
 
+import firebase from '../../fireB/firebase';
+import FileUploader from 'react-firebase-file-uploader';
 
+
+var database = firebase.database();
 
 const customStyles = {
   content: {
@@ -45,6 +50,64 @@ class UpcomingGig extends React.Component {
     // this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
+
+  deletePic(e) {
+      let infos = {};
+      infos.photo = ''; // set to template image
+      infos.id = this.props.gig.id;
+      this.props.saveTheEventPhoto(infos)
+    }
+
+  handleUploadStart = () => this.setState({
+    isUploading: true,
+    progress: 0
+  });
+
+  handleProgress = (progress) => this.setState({
+    progress
+  });
+
+  handleUploadError = (error) => {
+    this.setState({
+      isUploading: false
+    });
+    console.error(error);
+  }
+
+  handleUploadSuccess = (gig, filename) => {
+    console.log("IN HANDLE UPLOAD: ", gig)
+    console.log("IN HANDLE FILENAME: ", filename)
+
+    this.setState({
+      avatar: filename,
+      progress: 100,
+      isUploading: false
+    });
+
+    firebase.storage()
+      .ref('images')
+      .child(filename)
+      .getDownloadURL()
+      .then(url => {
+        console.log("PROPPPPPS FB: ", this.props);
+        console.log("GIG IN FB: ", gig.id);
+        database.ref()
+          .child('events')
+          .child(gig.id)
+          .set({
+            eventId: gig.id,
+            url: url
+          });
+        let infos = {};
+        infos.photo = url;
+        infos.id = gig.id;
+        this.props.saveTheEventPhoto(infos)
+        this.setState({
+          avatarURL: url
+        });
+
+      })
+  };
 
   openModal() {
     this.setState({
@@ -180,49 +243,82 @@ class UpcomingGig extends React.Component {
   render() {
     if (this.props.users.length > 0) {
       return (
-        <div>
-                    <div className="potential-gig-wrapper p-2">
-                        <div className="potential-gig-band-name">
-                          <Link to={`/bandprofile/${this.props.gig.id}`}>
-                            <h4>{this.props.users.filter((x) => x.id === this.props.gig.UserId)[0].name}</h4>
-                          </Link>
-                          <div>
-                            <Modal
-                                isOpen={this.state.modalIsOpen}
-                                onAfterOpen={this.afterOpenModal}
-                                onRequestClose={this.closeModal}
-                                style={customStyles}
-                                contentLabel="Example Modal"
-                               >
-                            <button onClick={this.closeModal}>close</button>
-                           <ShowcaseInfo showId={this.props.gig.id} />
-                            </Modal>
-                          </div>
-                        </div>
-                        <a><h4 className="potential-gig-event-name" onClick={this.openModal}>
-                            {this.props.gig.name}
-                        </h4></a>
+        <div className="border border-dark m-2">
+          <div className="potential-gig-wrapper p-2">
 
-                        <div className="potential-gig-daterange">
-                          { this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0] &&
-                            this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0].name ? 
-                            this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0].name :
-                            'Venue NA'}<br />
-                        {this.props.gig.startTime ? `Doors @ ${this.props.gig.startTime}` : 'Start time NA'}
-                        </div>
-                        <div className="text-success potential-gig-commit-number">
-                        {/*} eslint-disable-next-line */}
-                            Fully Commited 🎉<br />
-                            {`$`}{this.props.gig.commits} of {`$`}{this.props.gig.minCommits}!
-                        </div>
-                        <div className="potential-gig-progress-bar">
-                          <ProgressComponent percent={Math.min((this.props.gig.commits / this.props.gig.minCommits)*100,100)} />
-                        </div>
-                        <div className="potential-gig-commit-button">
-                            {this.renderCommitmentForm()}
-                        </div>
-                    </div>
-                </div>
+            <div className="potential-gig-band-name">
+              <Link to={`/bandprofile/${this.props.gig.UserId}`}>
+                <h4>{this.props.users.filter((x) => x.id === this.props.gig.UserId)[0].name}</h4>
+                {/* {this.props.gig.UserId} */}
+              </Link>
+              <div>
+                <Modal
+                  isOpen={this.state.modalIsOpen}
+                  onAfterOpen={this.afterOpenModal}
+                  onRequestClose={this.closeModal}
+                  style={customStyles}
+                  contentLabel="Example Modal">
+                  <button onClick={this.closeModal}>
+                    close
+                  </button>
+                  <ShowcaseInfo showId={this.props.gig.id} />
+                </Modal>
+              </div>
+            </div>
+
+            <a>
+              <h4 className="potential-gig-event-name" onClick={this.openModal}>
+                {this.props.gig.name}
+              </h4>
+            </a>
+
+            <div className="potential-gig-venue">
+              { this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0] &&
+                this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0].name ? 
+                this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0].name :
+                'Venue NA'}<br />
+              {this.props.gig.startTime ? `Doors @ ${this.props.gig.startTime}` : 'Start time NA'}
+            </div>
+
+            <div className="potential-gig-img">
+              {this.avatarURL ?
+                <img src={this.avatarURL} className="potential-gig-image" alt="Epic." /> :
+                <img src={this.props.gig.photo} className="potential-gig-image" alt="Event."/>  
+              }          
+              <form className="p-1">
+                { (this.props.gig.UserId === this.props.info.id) ? 
+                  <FileUploader
+                    accept="image/*"
+                    name= "avatar"
+                    gig={this.props.gig}
+                    randomizeFilename
+                    storageRef={firebase.storage().ref('images')}
+                    onUploadStart={this.handleUploadStart}
+                    onUploadError={this.handleUploadError}
+                    onUploadSuccess={this.handleUploadSuccess.bind(this,this.props.gig)}
+                    onProgress={this.handleProgress}
+              /> : ''} 
+              { (this.props.gig.UserId === this.props.info.id) ? 
+              <button className="btn btn-primary btn-sm" onClick={(e) => this.deletePic(e)}>Remove</button> : ''}
+              
+              </form>
+          </div>
+            
+          <div className="text-success potential-gig-commit-number">
+            {/*} eslint-disable-next-line */}
+            Fully Commited 🎉<br />
+            {`$`}{this.props.gig.commits} of {`$`}{this.props.gig.minCommits}!
+          </div>
+          <div className="potential-gig-progress-bar">
+            <ProgressComponent percent={Math.min((this.props.gig.commits / this.props.gig.minCommits)*100,100)} />
+          </div>
+          <div className="potential-gig-commit-button">
+              {this.renderCommitmentForm()}
+          </div>
+          <div>
+          </div>
+        </div>
+      </div>
 
 
       )
@@ -264,6 +360,10 @@ const mapDispatchToProps = dispatch => {
       dispatch(payForEvent(user, gig))
         .then(() => dispatch(fetchEvents()))
         .then(() => dispatch(checkAttendance()))
+    },
+    saveTheEventPhoto: (infos) => {
+      dispatch(saveEventPhoto(infos))
+        .then(() => dispatch(fetchEvents()))
     }
   }
 }

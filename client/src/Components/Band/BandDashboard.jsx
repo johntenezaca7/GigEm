@@ -12,9 +12,8 @@ import {
   Redirect
 } from 'react-router-dom'
 
-import BandUpcomingGig from './BandUpcomingGig';
-import BandPotentialGig from './BandPotentialGig';
 import BandPitch from './BandPitch';
+import UpcomingGig from '../User/UpcomingGig';
 
 class BandDashboard extends React.Component {
   constructor(props, context) {
@@ -119,21 +118,57 @@ class BandDashboard extends React.Component {
                     <div className="text-center">
                       <h1 className="display-4">Upcoming Gigs</h1>
                     </div>
-                    <BandUpcomingGig/>
+                    {this.props.events
+                      .filter((x) => x.commits >= x.minCommits && x.UserId === this.props.info.id)
+                      .map((gig) => <UpcomingGig 
+                        user={this.props.info.id} 
+                        key={gig.id} 
+                        userAttendance=
+                          {Array.isArray(this.props.attendance) ?  
+                            this.props.attendance.filter((x) => 
+                              x.ShowcaseId === gig.id && x.UserId === this.props.info.id) 
+                            : [{}]
+                          }
+                        gig={gig}/>)
+                    }
                   </div>} />
                 <Route exact path="/band/upcoming" render={() => 
                   <div>
                     <div className="text-center">
                       <h1 className="display-4">Upcoming Gigs</h1>
                     </div>
-                    <BandUpcomingGig />
+                    {this.props.events
+                      .filter((x) => x.commits >= x.minCommits && x.UserId === this.props.info.id)
+                      .map((gig) => <UpcomingGig 
+                        user={this.props.info.id} 
+                        key={gig.id} 
+                        userAttendance=
+                          {Array.isArray(this.props.attendance) ?  
+                            this.props.attendance.filter((x) => 
+                              x.ShowcaseId === gig.id && x.UserId === this.props.info.id) 
+                            : [{}]
+                          }
+                        gig={gig}/>)
+                    }
                   </div>} />
                 <Route exact path="/band/potential" render={() => 
                   <div>
                     <div className="text-center">
                       <h1 className="display-4">Potential Gigs</h1>
                     </div>
-                    <BandPotentialGig />
+                    {this.props.events
+                      .filter((x) => x.commits < x.minCommits && x.UserId === this.props.info.id)
+                      .map((gig) => <UpcomingGig 
+                        user={this.props.info.id} 
+                        key={gig.id} 
+                        userAttendance=
+                          {Array.isArray(this.props.attendance) ?  
+                            this.props.attendance.filter((x) => 
+                              x.ShowcaseId === gig.id && x.UserId === this.props.info.id) 
+                            : [{}]
+                          }
+                        gig={gig}/>)
+                    }
                   </div>} />
                 <Route exact path="/band/pitch" render={() => <div>
                   <div className="text-center">
@@ -154,6 +189,8 @@ function mapStateToProps(state) {
     bandInfo: state.info,
     venueInfo: state.venues,
     event: state.event,
+    events: state.events,
+    info: state.info,
     profile: state.profile
   }
 }

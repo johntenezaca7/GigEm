@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import firebase from '../fireB/firebase';
+import firebase from '../../fireB/firebase';
 import FileUploader from 'react-firebase-file-uploader';
 import { connect } from 'react-redux';
-import * as actions from '../actions/index';
+import * as actions from '../../actions/index';
 
 var database = firebase.database();
 
@@ -15,13 +15,14 @@ class ProfilePage extends Component {
             avatar: '', 
             isUploading: false,
             progress: 0,
-            avatarURL: ''
+            avatarURL: ''          
         }
         this.handleChangeUsername = this.handleChangeUsername.bind(this);
         this.handleUploadStart = this.handleUploadStart.bind(this);
         this.handleProgress = this.handleProgress.bind(this);
         this.handleUploadError = this.handleUploadError.bind(this);
         this.handleUploadSuccess = this.handleUploadSuccess.bind(this);
+
     }
 
   handleChangeUsername = (event) => this.setState({username: event.target.value});
@@ -45,7 +46,7 @@ class ProfilePage extends Component {
            
                  database.ref().set({
                   name: {
-                     userId: this.props.info.googleId,
+                     userId: this.state.profileUser.googleId,
                       url: url
                        }
                 });
@@ -57,20 +58,16 @@ class ProfilePage extends Component {
         })
   };
 
-
-
-
   render() {
-    console.log('actions', this.props)
     return (
       <div className="small">
       <p>
         <form>
              {this.state.avatarURL ?
                 <img src={this.state.avatarURL} className="user-profile-image p-1" alt="User profile avatar." /> :
-                <img src={this.props.info.photo} className="user-profile-image p-1" alt="User profile."/>  
+                <img src={this.props.profileUser.photo} className="user-profile-image p-1" alt="User profile."/>  
              }          
-
+        {this.props.profileUser.id === this.props.info.id ? 
           <FileUploader
             accept="image/*"
             name="avatar"
@@ -80,7 +77,7 @@ class ProfilePage extends Component {
             onUploadError={this.handleUploadError}
             onUploadSuccess={this.handleUploadSuccess}
             onProgress={this.handleProgress}
-          />
+          /> : ''}
         </form>
       </p>
       </div>

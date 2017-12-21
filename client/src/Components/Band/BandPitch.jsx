@@ -64,7 +64,6 @@ const renderDate = ({ input, label, type, meta }) => {
                   <Field
                     name="eventName"
                     component={renderField}
-                    component="input"
                     type="text"
                     placeholder="Event Name"
                   />
