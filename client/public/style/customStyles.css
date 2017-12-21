@@ -185,7 +185,8 @@ a {
 	padding-left: 10px;
 	position: sticky;
 	max-width: 100%;
-    height: auto;
+	height: auto;
+	margin-top: 70px;
 	
 }
 
@@ -218,20 +219,17 @@ a {
 
 .band-media {
   display: grid;
-  /* grid-template-columns: 25% 55%  30%; */
-  /* grid-gap: 4em; */
+
   grid-auto-rows: minmax(100, auto);
   justify-items: stretch;
   align-items: stretch;
-  /* padding: 1cm 2cm 1cm 1cm; */
-  /* background: rgb(255, 237, 222); */
-  /* padding:1em; */
+
   border-radius: 15px 50px 30px;
 }
 
 
 .bandContent-wrapper > div {
-  /* background: rgb(255, 237, 222); */
+
   padding:1em;
   border-radius: 15px 50px 30px;
 }
@@ -252,14 +250,13 @@ a {
 
 .upComing-Po-Gigs {
   display: grid;
-  /* grid-template-columns: 50% ; */
-  /* grid-auto-rows: minmax(100, auto); */
-  /* grid-gap: 2em; */
-  /* padding: .2cm 6cm 2cm 5cm; */
+
 }
 .user-show-scroll{
   width: auto;
-    height: 600px;
+  height: 600px;
+ 
+  border-radius: 35px;
   overflow: scroll;
 
 }
@@ -272,7 +269,7 @@ a {
 }
 
 .userProfile-wrapper > div {
-  background: #cbe0fa;
+  /* background: #cbe0fa; */
   padding:1em;
   border-radius: 15px 50px 30px;
 }
@@ -280,21 +277,22 @@ a {
 
 .user-side-bar {
   align-self: start;
-  /* border-radius: 15px 50px 30px;s */
+  background-color: rgb(231, 243, 252);
+
 }
 
 .up-comingShows {
   align-self: start;
 }
 .potential-gig-wrapper{
-	border: 6px solid rgb(228, 242, 253);
+	border: 6px solid rgb(231, 243, 252);
+	
 	padding: 1em;
 	box-shadow: 4px 4px 6px grey;
 }
 
 .nested > div {
-  /* background: #eee; */
-  /* background: rgb(255, 252, 252); */
+
   padding:1em;
   border-radius: 15px 50px 30px;
 }
@@ -304,25 +302,33 @@ a {
   grid-template-columns: repeat(3, 3fr);
   grid-gap: 0px;
   grid-auto-columns: minmax(500px, auto);
+  margin-bottom: 20px;
+  border-radius: 40px;
 }
 
 /* row 1 */
 
 .potential-gig-band-name {
+  margin-top: 15px;
+  /* margin-left: 10px; */
   grid-row: 1;
   grid-column: 1;
+  text-align: center;
 }
 
 .potential-gig-event-name {
+	margin-top: 15px;
   grid-row: 1;
   grid-column: 2;
   text-align: center;
 }
 
 .potential-gig-venue {
+  margin-top: 15px;
+  /* margin-right: 10px; */
   grid-row: 1;
   grid-column: 3;
-  text-align: right;
+  text-align: center;
 }
 
 /* row 2 */
@@ -352,6 +358,7 @@ a {
 /* row 4 */
 
 .potential-gig-commit-number {
+  margin-left: 15px;
   grid-row: 4;
   grid-column: 1;
 }
@@ -362,6 +369,7 @@ a {
 }
 
 .potential-gig-commit-button {
+	margin-right: 15px;
   grid-row: 4;
   grid-column: 3;
   text-align: right;
@@ -376,7 +384,7 @@ a {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   background: rgba(248, 248, 248, 0.87);
   padding:1em;
-  border: solid 1px;
+ 
 }
 
 .social-media {
@@ -399,7 +407,7 @@ a {
 .inside-wall > div {
   background:white;
   padding:1em;
-  border-radius: 25px;
+  /* border-radius: 25px; */
   
 
 }
@@ -420,7 +428,7 @@ a {
   display: grid;
   grid-template-columns: 50% 50%;
   max-width: 100%;
-  height: auto;
+  height: 550px;
 }
 .user-dashboard-leftcolumn{
 	padding-top: 30px;
@@ -480,9 +488,6 @@ a {
 	  color: white;
   }
 
-  .com-board{
-	  /* position: fixed */
-  }
 
 .chat-box{
 	height: 600px;
@@ -496,7 +501,7 @@ a {
 	padding-top: 20px;
     padding-right: 10px; 
 	padding-left: 15px;
-	height: 400px;
+	height: 480px;
 	border: 6px solid rgb(195, 222, 243);
 	border-radius: 10px;
 	overflow: scroll;
@@ -528,6 +533,18 @@ a {
 .message-input {
 	width: 100%;
 	height:50px;
+	padding: 0 25px;
+	border-radius: 10px;
+
+
+
+}
+
+
+.message-input,
+.message-input::-webkit-input-placeholder {
+    font-size: 35px;
+    line-height: 2;
 }
 .message-submit {
 	border-radius: 15px;

@@ -5,7 +5,9 @@ import Map from './GoogleMaps';
 import UpcomingGig from './UpcomingGig';
 import firebase from '../../fireB/firebase';
 import axios from 'axios';
+import moment from 'moment';
 const database = firebase.database();
+
 
 
 class UserDashboard extends React.Component {
@@ -53,8 +55,9 @@ class UserDashboard extends React.Component {
   }
 
  renderLogs(){
+   const timeSent = moment().startOf('second').fromNow();   
   return this.state.logs.map( (blob, ix) => {
-          return( <div key={ix} className="each-text"> <h4>{blob.username}: <strong>{blob.text}</strong></h4>  </div>)    
+          return( <div key={ix} className="each-text"> <h4>{blob.username}: <strong>{blob.text}</strong></h4> <p>{timeSent}</p>  </div>)    
     })
   }
   
@@ -164,7 +167,7 @@ class UserDashboard extends React.Component {
                     
                     
                         <form onSubmit={this.onSubmit}>
-                                <input type="text" className="message-input" value={this.state.input} onChange={this.onChange}/>
+                                <input type="text" className="message-input" placeholder="Write message here!" value={this.state.input} onChange={this.onChange}/>
                                 <button type="submit" className="message-submit">Send</button>
                         </form>
                 
