@@ -287,9 +287,9 @@ class UpcomingGig extends React.Component {
             </div>
 
             <div className="potential-gig-img">
-              {this.avatarURL ?
-                <img src={this.avatarURL} className="potential-gig-image" alt="Epic." /> :
-                <img src={this.props.gig.photo} className="potential-gig-image" alt="Event."/>  
+              {this.props.gig.photo ?
+                <img src={this.props.gig.photo} className="potential-gig-image" alt="Epic." /> :
+                <img src="https://images.pexels.com/photos/386025/pexels-photo-386025.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb" className="potential-gig-image" alt="Event."/>  
               }          
               <form className="p-1">
                 { (this.props.gig.UserId === this.props.info.id) ? 

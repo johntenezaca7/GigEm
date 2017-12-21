@@ -18,15 +18,15 @@ let transporter = nodemailer.createTransport({
 app.post('/api/sendEmail', (req, res) => {
     // setup email data with unicode symbols
     console.log("EMAIL REQQQ: ", req.body);
-    let baseUrl = "http://localhost:3000/showdetails/"; // need to change for deployment
-    let eventId = req.body.info.eventId;
+    let baseUrl = "http://localhost:3000/bandprofile/"; // need to change for deployment
+    let eventId = req.body.info.UserId;
     let toEmail = req.body.info.email;
     let eventLink = baseUrl + eventId;
     let toName = req.body.info.toName;
     let mailOptions = {
-        from: '"GigEm GigsYou 👻" <foo@blurdybloop.com>', // sender address
+        from: '"GigEm GigsYou 👻" <gigemnews@gmail.com>', // sender address
         to: toEmail, // list of receivers
-        subject: 'Hello ✔', // Subject line
+        subject: `See Your New Event, ${req.body.info.eventName}!`, // Subject line
         // text: 'Yur ya durd !', // plain text body
         html: `
   <head>
@@ -148,8 +148,8 @@ app.post('/api/sendEmail', (req, res) => {
                             </tr>
                           </tbody>
                         </table>
-                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Now work your magic to get the minimum commits needed for your event to be successful. Share it, shake it, bake it, whatever you think. We won't judge you.</p>
-                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Oh and later we'll all be rich. Good luck! Hope it works.</p>
+                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Now work your magic to get enough involvement for your event to be successful. Share it, shake it, bake it, whatever you think. We won't judge you.</p>
+                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Good luck!</p>
                       </td>
                     </tr>
                   </table>
@@ -165,7 +165,7 @@ app.post('/api/sendEmail', (req, res) => {
                 <tr>
                   <td class="content-block" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
                     <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;">GigEm VLLC, 369 Lexington Ave, New York, NY 10016</span>
-                    <br> Don't like these emails? <a href="https://gph.is/RL8B9X" style="text-decoration: underline; color: #999999; font-size: 12px; text-align: center;">Unsubscribe</a>.
+                    <br> Don't like these emails? <a href="https://giphy.com/gifs/9NnlCZPGoIdMc" style="text-decoration: underline; color: #999999; font-size: 12px; text-align: center;">Unsubscribe</a>.
                   </td>
                 </tr>
                 <tr>
