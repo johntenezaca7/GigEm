@@ -227,7 +227,7 @@ class BandProfile extends React.Component {
                           propName='state'
                           validate={_.isString} />
                         </div>   
-                        <div className="border border-dark p-1">
+                        <div >
                           <RIETextArea
                             value={this.props.info.description || 'Description placeholder'}
                             change={(e) => this.props.editUserProfile(e)}
