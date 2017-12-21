@@ -41,6 +41,8 @@ class ProfilePage extends Component {
         isUploading: false
     });
 
+    
+
     firebase.storage().ref('images')
       .child(filename).getDownloadURL()
         .then(url => {
@@ -106,7 +108,7 @@ const mapDispatchToProps = dispatch => {
 function mapStateToProps({info}){
     return { 
       info: info,
-    }
+    }   
 }
 
 

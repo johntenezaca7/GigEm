@@ -138,7 +138,8 @@ a {
 }
 
 .user-Navbar {
-	background-color: rgb(117, 162, 214);
+  /* (25, 81, 138) */
+	background-color: rgb(44, 68, 92);
 	color: white ; 
 
 }
@@ -302,7 +303,7 @@ a {
   align-self: start;
 }
 .potential-gig-wrapper{
-	border: 6px solid rgb(231, 243, 252);
+	border: 6px solid rgb(25, 81, 138);
 	
 	padding: 1em;
 	box-shadow: 4px 4px 6px grey;
@@ -461,6 +462,7 @@ a {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    font-weight: 900;
     margin: 4px 2px;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
@@ -468,19 +470,19 @@ a {
 }
 
 .nav-button {
-  background-color: white; 
-    color: black; 
+  background-color: rgb(44, 68, 92);
+    color: orange; 
     /* border: 2px solid #E07330; */
 }
 
 .nav-button:hover {
-  background-color: rgb(255, 159, 152);
+  background-color: rgb(255, 136, 0);
     color: white;
 }
 
 .pitch-button{
 	border-radius: 15px;
-	border-color: rgb(255, 159, 152);
+	border-color: rgb(255, 136, 0);
     color: white;
 	padding: 5px 20px;
     text-align: center;
@@ -495,12 +497,12 @@ a {
 }
 .pitch-button {
 	background-color: white; 
-	  color:rgb(255, 159, 152); 
+	  color:rgb(255, 136, 0)
 	  /* border: 2px solid #E07330; */
   }
   
   .pitch-button:hover {
-	background-color: rgb(255, 159, 152);
+	background-color:rgb(255, 136, 0);
 	  color: white;
   }
 
@@ -518,7 +520,7 @@ a {
     padding-right: 10px; 
 	padding-left: 15px;
 	height: 480px;
-	border: 6px solid rgb(195, 222, 243);
+	border: 6px solid rgb(25, 81, 138);
 	border-radius: 10px;
 	overflow: scroll;
 }
@@ -564,7 +566,7 @@ a {
 }
 .message-submit {
 	border-radius: 15px;
-	border-color: rgb(255, 159, 152);
+	border-color: rgb(255, 136, 0);
     color: white;
 	padding: 25px 20px;
     text-align: center;
@@ -580,12 +582,12 @@ a {
 
 .message-submit {
 	background-color: white; 
-	  color:rgb(255, 159, 152); 
+	  color:rgb(255, 136, 0)
 	  /* border: 2px solid #E07330; */
   }
   
   .message-submit:hover {
-	background-color: rgb(255, 159, 152);
+	background-color: rgb(255, 136, 0);
 	  color: white;
   }
 .each-text{

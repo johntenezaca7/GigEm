@@ -16,7 +16,7 @@ class mediaItem extends React.Component {
   }
 
   renderRemoveButton() {
-    if (this.props.ownUserProfile) {
+    if (this.props.ownUserProfile && this.props.linkUrl) {
       return(        <form>
         <input type="submit" value="Remove item" className="btn btn-info btn-sm" onClick={(e) => this.handleClick(e, this.props.item.id)} />
       </form>)
