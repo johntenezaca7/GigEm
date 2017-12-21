@@ -13,9 +13,11 @@ class UserProfile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          modalIsOpen: false
+          modalIsOpen: false,
+          userNav: 'upcoming',
         }
         this.openModal = this.openModal.bind(this);
+        this.onClick = this.onClick.bind(this);
         this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.props.init();
@@ -40,6 +42,66 @@ class UserProfile extends React.Component {
      
     }
 
+    onClick(obj) {
+    this.setState({
+      userNav: obj.value
+    })
+    this.props.init();
+  }
+
+    renderContent(){
+      let userAttendance = Array.isArray(this.props.attendance) && this.props.attendance.length > 0 ? 
+        this.props.attendance
+        .filter((x) => x.UserId === this.props.info.id) 
+        .map((x) => x = x.ShowcaseId) : [];
+
+
+      switch(this.state.userNav){
+        case 'upcoming':
+        return(<div>
+                 <div className="inside-wall">
+                    <div className="user-show-scroll">
+                  
+                      {this.props.events
+                        .filter((x) => userAttendance.includes(x.id) && x.commits >= x.minCommits)
+                          .map((gig) => <UpcomingGig 
+                            user={this.props.info.id} 
+                            key={gig.id} 
+                            userAttendance=
+                            {Array.isArray(this.props.attendance) ?  
+                              this.props.attendance.filter((x) => 
+                                x.ShowcaseId === gig.id && x.UserId === this.props.info.id) 
+                              : [{}]
+                            }
+                            gig={gig}/>)
+                        }
+                    </div>
+                    </div>
+              </div>);
+        case 'potential':
+        return(<div>
+               <div className="inside-wall">
+                    <div className="user-show-scroll">
+                      {this.props.events
+                        .filter((x) => userAttendance.includes(x.id) && x.commits < x.minCommits)
+                        .map((gig) => <UpcomingGig 
+                          user={this.props.info.id} 
+                          key={gig.id} 
+                          userAttendance=
+                          {Array.isArray(this.props.attendance) ?  
+                            this.props.attendance.filter((x) => 
+                              x.ShowcaseId === gig.id && x.UserId === this.props.info.id) 
+                            : [{}]
+                          }
+                          gig={gig}/>)
+                        }
+                        </div>
+                        </div>
+                </div>);
+             default:
+              return;
+      }
+    }
 
     renderProfileType() {
       if (this.props.info.isBand) {
@@ -67,13 +129,6 @@ class UserProfile extends React.Component {
     
 
     render() {
-
-      let userAttendance = Array.isArray(this.props.attendance) && this.props.attendance.length > 0 ? 
-        this.props.attendance
-        .filter((x) => x.UserId === this.props.info.id) 
-        .map((x) => x = x.ShowcaseId) : [];
-
-    
 
       if(this.props.info){
         return (
@@ -124,48 +179,20 @@ class UserProfile extends React.Component {
                             propName='description'
                             validate={_.isString} />
                         </div>
+                  </div>       
+                  <div className="user-dashboard-leftcolumn">
+                    <div className="nav nav-tabs user-dashboard-nav justify-content-center"> 
+                      <li className="nav-item">
+                        <a className={this.state.userNav === 'upcoming' ? `nav-link active` : `nav-link`} href="#upcoming" onClick={() => this.onClick({value: 'upcoming'})}>Upcoming Gigs</a>
+                      </li>
+                      <li className="nav-item">
+                        <a className={this.state.userNav === 'potential' ? `nav-link active` : `nav-link`} href="#potential" onClick={() => this.onClick({value: 'potential'})}>Potential Gigs</a>
+                      </li>
+                    </div>
+                    <div className="user-dashboard-content">
+                      {this.renderContent()} 
                   </div>
-                  <div>
-                    <div className="inside-wall">
-                    <h3>Upcoming Shows</h3>
-                    <div className="band-show-scroll">
-                      {this.props.events
-                        .filter((x) => userAttendance.includes(x.id) && x.commits >= x.minCommits)
-                          .map((gig) => <UpcomingGig 
-                            user={this.props.info.id} 
-                            key={gig.id} 
-                            userAttendance=
-                            {Array.isArray(this.props.attendance) ?  
-                              this.props.attendance.filter((x) => 
-                                x.ShowcaseId === gig.id && x.UserId === this.props.info.id) 
-                              : [{}]
-                            }
-                            gig={gig}/>)
-                        }
-                    </div>
-                  
-                    <h3>Potential Gigs</h3>
-                    <div className="band-show-scroll">
-                      {this.props.events
-                        .filter((x) => userAttendance.includes(x.id) && x.commits < x.minCommits)
-                        .map((gig) => <UpcomingGig 
-                          user={this.props.info.id} 
-                          key={gig.id} 
-                          userAttendance=
-                          {Array.isArray(this.props.attendance) ?  
-                            this.props.attendance.filter((x) => 
-                              x.ShowcaseId === gig.id && x.UserId === this.props.info.id) 
-                            : [{}]
-                          }
-                          gig={gig}/>)
-                        }
-                    </div>
-                </div>     
-                     
-                    </div>
                   </div>
-                  <div>
-     
               </div>
           </div>
         )

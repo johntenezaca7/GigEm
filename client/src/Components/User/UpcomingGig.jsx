@@ -244,13 +244,14 @@ class UpcomingGig extends React.Component {
     if (this.props.users.length > 0) {
       return (
 
-        <div className="border border-dark m-2">
+        <div >
           <div className="potential-gig-wrapper p-2">
-
+         
             <div className="potential-gig-band-name">
+                <span>Host:</span>
               <Link to={`/bandprofile/${this.props.gig.UserId}`}>
+                
                 <h4>{this.props.users.filter((x) => x.id === this.props.gig.UserId)[0].name}</h4>
-                {/* {this.props.gig.UserId} */}
               </Link>
               <div>
                 <Modal
@@ -267,13 +268,16 @@ class UpcomingGig extends React.Component {
               </div>
             </div>
 
-            <a>
-              <h4 className="potential-gig-event-name" onClick={this.openModal}>
-                {this.props.gig.name}
-              </h4>
-            </a>
+            
+              <div className="potential-gig-event-name" onClick={this.openModal}>
+                <span>Event:</span>
+                <h4>{this.props.gig.name}</h4>
+              </div>
+            
 
+         
             <div className="potential-gig-venue">
+                <span>Location</span>
               { this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0] &&
                 this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0].name ? 
                 this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0].name :
@@ -319,6 +323,7 @@ class UpcomingGig extends React.Component {
           <div>
           </div>
         </div>
+     
       </div>
 
 
