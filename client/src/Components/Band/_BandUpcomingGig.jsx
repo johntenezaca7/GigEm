@@ -76,21 +76,23 @@ class UpcomingGig extends React.Component {
 
   renderIndividualUpcomingGig(gig) {
     return (
-      <div className="container">
-      <div className="row m-3" key={gig.id}>
-        <div className="col col-3 align-self-start">
-          {gig.name}<br />
+      <div className="container text-center">
+      <div className="row justify-content-md-center m-2 border border-dark" key={gig.id}>
+        <div className="col col-2 align-self-start">
+          
           {`${'$'}${gig.commits} of ${'$'}${gig.minCommits} committed!`} 🎉
         </div>
-        <div className="col col-5 text-center">
+        <div className="col col-6 text-center">
+        <h3>{gig.name}</h3><br />
           <ProgressComponent percent={Math.min((gig.commits / (gig.minCommits ? gig.minCommits : 1)) * 100,100)} /> 
                         ({`${Math.min(Math.floor((gig.commits / (gig.minCommits ? gig.minCommits : 1)) * 100),100)}% committed.`})
 
         </div>
 
         <div className="col col-2 align-top text-right">
-          {`${(new Date(gig.finalCommitDate)).getMonth() + 1} / ${(new Date(gig.finalCommitDate)).getDate()} /
-            ${(new Date(gig.finalCommitDate)).getFullYear()}`}<br />
+        
+          {`${(new Date(gig.finalCommitDate)).getMonth() + 1}/${(new Date(gig.finalCommitDate))
+            .getDate()}/${(new Date(gig.finalCommitDate)).getFullYear()}`}<br />
                           { this.props.venues.filter((x) => x.id === gig.VenueId)[0] &&
                             this.props.venues.filter((x) => x.id === gig.VenueId)[0].name ? 
                             this.props.venues.filter((x) => x.id === gig.VenueId)[0].name :
@@ -125,7 +127,7 @@ class UpcomingGig extends React.Component {
   render() {
     if (this.props.events && !this.props.potential) {
       return (
-        <div className="container m-5">
+        <div>
                 {this.props.events.filter((x) => (x.UserId === this.props.info.id && x.commits > x.minCommits ))
                 .map((x) => this.renderIndividualUpcomingGig(x))
                 }    
@@ -133,7 +135,7 @@ class UpcomingGig extends React.Component {
       )
     } else if (this.props.events && this.props.potential) {
       return (
-        <div className="container m-5">
+        <div>
                 {this.props.events.filter((x) => (x.UserId === this.props.info.id && x.commits <= x.minCommits ))
                 .map((x) => this.renderIndividualUpcomingGig(x))
                 }    

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { fetchUserProfile, fetchEvents, checkAttendance, editUserProfile } from '../../actions/index';
 import { RIEInput, RIETextArea } from 'riek';
 import _ from 'lodash'
-import Profile from '../ProfileImage';
+import Profile from '../Band/ProfileImage';
 // eslint-disable-next-line
 import Modal from 'react-modal';
 
@@ -92,7 +92,7 @@ class UserProfile extends React.Component {
                           {this.renderProfileType()}
                         </div>
                         <div>
-                         <Profile photo={this.props.info.photo}/>
+                         <Profile photo={this.props.info.photo} profileUser={this.props.info}/>
                         </div>
                         <div>
                           <RIEInput 

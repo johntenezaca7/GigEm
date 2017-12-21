@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { removeProperty, fetchProperties } from '../actions/index';
+import { removeProperty, fetchProperties } from '../../actions/index';
 
 
 class mediaItem extends React.Component {
@@ -27,11 +27,11 @@ class mediaItem extends React.Component {
 
   render() {
     return(
-      <div className="container m-1">
-        <div className='border border-dark'>
+      <div className="container p-1 m-1">
+        <div className=''>
           <iframe 
             width="100%" 
-            height="auto" 
+            height="100%" 
             src={`${this.props.item.linkUrl}`}
             frameborder="0" 
             gesture="media" 
