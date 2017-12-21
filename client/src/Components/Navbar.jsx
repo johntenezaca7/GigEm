@@ -84,7 +84,7 @@ class Navbar extends React.Component {
               <div className="user-Navbar">
               <nav className="navbar navbar-expand-lg  ">
               <li className="nav-item">
-                <img src="../../Assets/giglogo.svg" width="80%" alt="Gigem Logo"/>
+                <img src="../../Assets/giglogo.svg" height="50px" alt="Gigem Logo"/>
               </li>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span className="navbar-toggler-icon"></span>
