@@ -18,7 +18,8 @@ let transporter = nodemailer.createTransport({
 app.post('/api/sendEmail', (req, res) => {
     // setup email data with unicode symbols
     console.log("EMAIL REQQQ: ", req.body);
-    let baseUrl = "http://localhost:3000/bandprofile/"; // need to change for deployment
+    const PORT = process.env.PORT || 5000;
+    let baseUrl = `http://localhost:${PORT}/bandprofile/`; // need to change for deployment
     let eventId = req.body.info.UserId;
     let toEmail = req.body.info.email;
     let eventLink = baseUrl + eventId;
