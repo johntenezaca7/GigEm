@@ -78,7 +78,6 @@ class UserProfile extends React.Component {
       if(this.props.info){
         return (
           <div>
-            <h1 className="display-4">My Profile</h1>
             <div className="userProfile-wrapper"> 
                  <div className="user-side-bar nested">
                       <div>
@@ -144,7 +143,7 @@ class UserProfile extends React.Component {
                             gig={gig}/>)
                         }
                     </div>
-                    <br />
+                  
                     <h3>Potential Gigs</h3>
                     <div className="band-show-scroll">
                       {this.props.events

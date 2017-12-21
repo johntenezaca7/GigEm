@@ -15,10 +15,11 @@ export default class ProgressComponent extends React.Component {
   render() {
     let containerStyle = {
       width: '100',
+      color: '255, 159, 152'
     };
     return (
       <div style={containerStyle}>
-          <Line percent={this.props.percent} strokeWidth="1" strokeColor={`#0ea534`} />
+          <Line percent={this.props.percent} strokeWidth="2" strokeColor={`#44c744`} />
         </div>
     );
   }

@@ -181,7 +181,7 @@ class UpcomingGig extends React.Component {
         <div className="m-1">
                         <button type="submit" 
                             key={this.props.gig.id}
-                            className="btn btn-primary btn-sm"
+                            className="pitch-button"
                             onClick={(e) => {
                                 this.handleSubmit(e)} }>
                             Pitch In
@@ -192,7 +192,7 @@ class UpcomingGig extends React.Component {
       return (
         <div className="m-1">
                         <button
-                            className="btn btn-warning btn-sm"
+                            className="pitch-button"
                             onClick={(e) => {
                                 this.handleSubmit(e)} }>
                             Not Going!
@@ -243,6 +243,7 @@ class UpcomingGig extends React.Component {
   render() {
     if (this.props.users.length > 0) {
       return (
+
         <div className="border border-dark m-2">
           <div className="potential-gig-wrapper p-2">
 
@@ -319,6 +320,7 @@ class UpcomingGig extends React.Component {
           </div>
         </div>
       </div>
+
 
 
       )

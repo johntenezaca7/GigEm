@@ -29,13 +29,13 @@ class Navbar extends React.Component {
           return(
             <div>
               {/* <td> */}
-                <a href="/auth/google"><button className="btn btn-info" type="submit">Login With Google</button></a>
+                <a href="/auth/google"><button  className="nav-button" type="submit">Login With Google</button></a>
             </div>
           );
         default:
           return (
             <div>
-                  <a href="/api/logout"><button className="btn btn-info" type="submit">Logout</button></a>
+                  <a href="/api/logout"><button className="nav-button"  type="submit">Logout</button></a>
           </div>
           )
       }
@@ -60,7 +60,7 @@ class Navbar extends React.Component {
       if (this.props.info.isBand) {
         return (
           <Link to="/userprofile">
-          <button className="btn btn-primary" onClick={(e) => this.props.editUserProfile({'isBand': false})}>
+          <button className="nav-button" onClick={(e) => this.props.editUserProfile({'isBand': false})}>
           User Account
           </button>
           </Link>
@@ -68,7 +68,7 @@ class Navbar extends React.Component {
       } else {
           return (
             <Link to={`/bandprofile/${this.props.info.id}`}>
-              <button className="btn btn-primary" onClick={(e) => this.props.editUserProfile({'isBand': true})}>
+              <button className="nav-button" onClick={(e) => this.props.editUserProfile({'isBand': true})}>
               Artist Account
               </button>
             </Link>
@@ -81,11 +81,9 @@ class Navbar extends React.Component {
      
       if (this.props.info.isBand ) {
         return (
-              <div>
+              <div className="user-Navbar">
               <nav className="navbar navbar-expand-lg  ">
-                <Link to="/">
-                  <img src="../Assets/party.svg" width="40px" height="40px" alt="User Logo" />
-                </Link>`
+               
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span className="navbar-toggler-icon"></span>
                 </button>
@@ -103,16 +101,16 @@ class Navbar extends React.Component {
                     <tr>
                     <td>
                       <Link to="/band/upcoming">
-                        <button className="btn btn-primary" type="submit">Upcoming Gigs</button>
+                        <button className="nav-button"  type="submit">Upcoming Gigs</button>
                       </Link>
                       <Link to="/band/potential">
-                        <button className="btn btn-primary" type="submit">Potential Gigs</button>
+                        <button className="nav-button"  type="submit">Potential Gigs</button>
                       </Link>
                       <Link to="/band/pitch">
-                        <button className="btn btn-primary" type="submit">Pitch a Gig</button>
+                        <button className="nav-button"  type="submit">Pitch a Gig</button>
                       </Link>
                       <Link to={`/bandprofile/${this.props.info.id}`}>
-                        <button className="btn btn-primary" type="submit">My Profile</button>
+                        <button className="nav-button"  type="submit">My Profile</button>
                       </Link>
                     </td>
                       <td>
@@ -131,11 +129,9 @@ class Navbar extends React.Component {
           </div>)
         } else {
             return (
-              <div>
+              <div className="user-Navbar">
                 <nav className="navbar navbar-expand-lg">
-                  <Link to="/">
-                    <img src="./Assets/party.svg" width="40px" height="40px" alt="User Logo" />
-                  </Link>
+                  
                   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                   </button>
@@ -143,7 +139,7 @@ class Navbar extends React.Component {
                     <ul className="navbar-nav mr-auto">
                       <li className="nav-item active">
                         <a className="nav-link">
-                        <h2>{this.props.info.name ? `Welcome, ${this.props.info.name}` : 'Anonymous User'}</h2>
+                        <h2>{this.props.info.name ? `Welcome, ${this.props.info.name} !` : 'Anonymous User'}</h2>
                         <span className="sr-only">(current)</span>
                         </a>
                       </li>
@@ -153,10 +149,10 @@ class Navbar extends React.Component {
                         <tr>
                           <td>
                             <Link to="/user">
-                              <button className="btn btn-primary" type="submit">Dashboard</button>
+                              <button className="nav-button" type="submit">Dashboard</button>
                             </Link>
                             <Link to="/userprofile">
-                              <button className="btn btn-primary" type="submit">My Profile</button>
+                              <button className="nav-button" type="submit">My Profile</button>
                             </Link>
                           </td>
                           <td>
