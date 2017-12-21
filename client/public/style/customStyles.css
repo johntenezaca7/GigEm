@@ -10,6 +10,15 @@
 a {
     color: rgb(0, 0, 0);
 }
+
+
+.footer {
+	position:absolute;
+	bottom:0;
+	width:100%;
+	height:70px; 
+    background-color: #6495D0;
+  }
 .landingcontainer {
   background-image: url('../Assets/talkingheads-live.jpg');
   background-size: cover;
@@ -205,6 +214,10 @@ a {
   margin: 10px
 
 }
+.band-profile-content{
+  margin-top: 10px;
+  background-color: rgb(237, 243, 249);
+}
 
 .bandContent-wrapper {
   display: grid;
@@ -254,18 +267,22 @@ a {
 }
 .user-show-scroll{
   width: auto;
-  height: 600px;
+  height: 700px;
  
   border-radius: 35px;
+  border: 2px solid rgb(229, 234, 237);
   overflow: scroll;
 
 }
 
 .side-scrolling{
+  padding: 1em;
   width: auto;
   height: auto;
   overflow-y: scroll;
   overflow-x: hidden;
+  border-radius: 30px 50px 15px;
+  background-color: rgb(237, 243, 249);
 }
 
 .userProfile-wrapper > div {
@@ -400,8 +417,7 @@ a {
   /* align-items: stretch; */
   width: auto;
   height: 700px;
-  /* overflow: scroll;/ */
-  /* color: white; */
+
   
 }
 .inside-wall > div {

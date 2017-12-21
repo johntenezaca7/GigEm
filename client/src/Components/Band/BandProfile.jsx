@@ -28,9 +28,19 @@ class BandProfile extends React.Component {
     super(props);
     this.state = {
       linkurl: '',
-      description: ''
+      description: '',
+      bandProNav: 'upcoming',
     };
     this.props.fetchProperties();
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick(obj) {
+    this.setState({
+      bandProNav: obj.value
+    })
+    this.forceUpdate()
+
   }
 
 
@@ -51,6 +61,61 @@ class BandProfile extends React.Component {
     this.props.submitProperty(selectedUser.id, this.state.description, this
       .state.linkurl);
   }
+
+  renderContent() {
+    var selectedUser = this.props.users.filter((x) => x.id === parseInt(
+      this.props.match.params.bandId, 10))[0];
+    if (!selectedUser && !this.props.user) selectedUser = {
+      id: -1
+    }
+
+    
+    switch (this.state.bandProNav) {
+      case 'upcoming':
+        return (
+          <div>     
+                <div className="band-show-scroll ">
+                {this.props.events
+              .filter((x) => x.UserId === selectedUser.id && x.commits >= x.minCommits)
+                .map((gig) => <UpcomingGig 
+                  user={selectedUser.id} 
+                  key={gig.id} 
+                  userAttendance=
+                  {Array.isArray(this.props.attendance) ?  
+                    this.props.attendance.filter((x) => 
+                      x.ShowcaseId === gig.id && x.UserId === this.props.info.id) 
+                    : [{}]
+                  }
+                  gig={gig}/>)
+                }
+                </div>
+            </div>
+        );
+      case 'potential':
+        return (
+          <div>
+                        <h3>Potential Gigs</h3>
+                        <div className="band-show-scroll ">
+                        {this.props.events
+                        .filter((x) => x.UserId === selectedUser.id && x.commits < x.minCommits)
+                          .map((gig) => <UpcomingGig 
+                            user={selectedUser.id} 
+                            key={gig.id} 
+                            userAttendance=
+                            {Array.isArray(this.props.attendance) ?  
+                              this.props.attendance.filter((x) => 
+                                x.ShowcaseId === gig.id && x.UserId === this.props.info.id) 
+                              : [{}]
+                            }
+                            gig={gig}/>)
+                        }
+                          </div>
+               </div> 
+                      
+        );
+      }
+    }
+
 
   render() {
     // console.log('rerendering bandprofile this.prosp: ', this.props);
@@ -78,13 +143,13 @@ class BandProfile extends React.Component {
                             <div>
                             {`${selectedUser.city ? selectedUser.city : 'Anonymous City'}, ${selectedUser.state ? selectedUser.state : 'Aether'}`}
                             </div>
-                            <div className="border border-dark p-1">
+                            <div >
                               {selectedUser.description}
                             </div>
                         </div>
                          <div>
                             <h3>Upcoming Shows</h3>
-                              <div className="band-show-scroll border border-dark m-2">
+                              <div >
                               {this.props.events
                                   .filter((x) => x.UserId === selectedUser.id && x.commits >= x.minCommits)
                                     .map((gig) => <UpcomingGig 
@@ -100,7 +165,7 @@ class BandProfile extends React.Component {
                                 }
                               </div>
                             <h3>Potential Gigs</h3>
-                            <div className="band-show-scroll border border-dark m-2">
+                            <div >
                             {this.props.events
                         .filter((x) => x.UserId === selectedUser.id && x.commits < x.minCommits)
                           .map((gig) => <UpcomingGig 
@@ -117,7 +182,7 @@ class BandProfile extends React.Component {
                               </div>
                             </div>
                           <div className="band-media">
-                          <div className="side-scrolling border border-dark text-center">
+                          <div className="side-scrolling  text-center">
                               <h3>Media</h3>
                               {
                               (this.props.properties) ? this.props.properties
@@ -146,7 +211,7 @@ class BandProfile extends React.Component {
                 <div>
                 </div>
                 <div className="bandContent-wrapper ">
-                    <div>
+                    <div className="band-profile-content"> 
                       <h4>Band Profile - {selectedUser.name}<br /> (Your Profile)</h4>
                       <Profile profileUser={selectedUser} />
                         <div>
@@ -171,43 +236,25 @@ class BandProfile extends React.Component {
                         </div>
                     </div>
                      <div>
-                        <h3>Upcoming Shows</h3>
-                          <div className="band-show-scroll border border-dark m-2">
-                          {this.props.events
-                        .filter((x) => x.UserId === selectedUser.id && x.commits >= x.minCommits)
-                          .map((gig) => <UpcomingGig 
-                            user={selectedUser.id} 
-                            key={gig.id} 
-                            userAttendance=
-                            {Array.isArray(this.props.attendance) ?  
-                              this.props.attendance.filter((x) => 
-                                x.ShowcaseId === gig.id && x.UserId === this.props.info.id) 
-                              : [{}]
-                            }
-                            gig={gig}/>)
-                        }
+                      <div className="user-dashboard-leftcolumn">
+                          <div className="nav nav-tabs user-dashboard-nav justify-content-center"> 
+                            <li className="nav-item">
+                              <a className={this.state.bandProNav === 'upcoming' ? `nav-link active` : `nav-link`} href="#upcoming" onClick={() => {this.onClick({value: 'upcoming'})}}>Upcoming Gigs</a>
+                            </li>
+                            <li className="nav-item">
+                              <a className={this.state.bandProNav === 'potential' ? `nav-link active` : `nav-link`} href="#potential" onClick={() => {this.onClick({value: 'potential'})}}>Potential Gigs</a>
+                            </li>
                           </div>
-                        <h3>Potential Gigs</h3>
-                        <div className="band-show-scroll border border-dark m-2">
-                        {this.props.events
-                        .filter((x) => x.UserId === selectedUser.id && x.commits < x.minCommits)
-                          .map((gig) => <UpcomingGig 
-                            user={selectedUser.id} 
-                            key={gig.id} 
-                            userAttendance=
-                            {Array.isArray(this.props.attendance) ?  
-                              this.props.attendance.filter((x) => 
-                                x.ShowcaseId === gig.id && x.UserId === this.props.info.id) 
-                              : [{}]
-                            }
-                            gig={gig}/>)
-                        }
+                          <div className="user-dashboard-content">
+                          <br/>
+                            {this.renderContent()}
                           </div>
-                        </div>
+                      </div>
+                    </div>
                       <div className="band-media">
-                        <div className="side-scrolling border border-dark text-center p-2">
+                        <div className="side-scrolling  text-center ">
                             <h3>Band Media</h3>
-                          <div className="container border border-dark">
+                          <div className="container ">
                             <h6>Submit Additional Videos:</h6>
                             <div class="form-group">
                               {/* <label for="fileUrl">Url</label> */}
@@ -256,6 +303,7 @@ function mapStateToProps({
 
 const mapDispatchToProps = dispatch => {
   return {
+    
     fetchProperties: () => {
       dispatch(fetchProperties())
     },
@@ -271,3 +319,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BandProfile);
+

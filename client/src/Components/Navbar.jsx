@@ -104,12 +104,6 @@ class Navbar extends React.Component {
                   <tbody>
                     <tr>
                     <td>
-                      <Link to="/band/upcoming">
-                        <button className="nav-button"  type="submit">Upcoming Gigs</button>
-                      </Link>
-                      <Link to="/band/potential">
-                        <button className="nav-button"  type="submit">Potential Gigs</button>
-                      </Link>
                       <Link to="/band/pitch">
                         <button className="nav-button"  type="submit">Pitch a Gig</button>
                       </Link>
