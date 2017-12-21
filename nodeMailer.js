@@ -18,15 +18,15 @@ let transporter = nodemailer.createTransport({
 app.post('/api/sendEmail', (req, res) => {
     // setup email data with unicode symbols
     console.log("EMAIL REQQQ: ", req.body);
-    let baseUrl = "http://localhost:3000/showdetails/"; // need to change for deployment
-    let eventId = req.body.info.eventId;
+    let baseUrl = "http://localhost:3000/bandprofile/"; // need to change for deployment
+    let eventId = req.body.info.UserId;
     let toEmail = req.body.info.email;
     let eventLink = baseUrl + eventId;
     let toName = req.body.info.toName;
     let mailOptions = {
-        from: '"GigEm GigsYou 👻" <foo@blurdybloop.com>', // sender address
+        from: '"GigEm GigsYou 👻" <gigemnews@gmail.com>', // sender address
         to: toEmail, // list of receivers
-        subject: 'Hello ✔', // Subject line
+        subject: 'See You New Event!', // Subject line
         // text: 'Yur ya durd !', // plain text body
         html: `
   <head>
