@@ -17,16 +17,15 @@ export default class UserDashboard extends React.Component {
           <div className="container-fluid p-5 landingcontainer">
             <div className="row"> 
                     <div className="col mx-auto text-center m-5">
-                          <img src="../../Assets/tools/aws.svg" width="100%" style={{maxWidth: '40%'}} className="img-fluid" alt="Gigem Logo"/>
+                          <img src="../../Assets/giglogo.svg" width="80%" alt="Gigem Logo"/>
                     </div>
                   </div>
           
-                  <div className="row m-2">
-                    <div className="col col-md-auto mx-auto text-center" id="branddiv">
-                      <div className="m-5" style={{height: '20%'}}>
+                  <div className="row">
+                    <div className="col mx-auto text-center" id="branddiv">
+                      <div className="" style={{height: '20%'}}>
                         <a href="/auth/google" crossOrigin="true" >
-                        
-                        <button className="loginBtn loginBtn--google" type="submit">Login with Google</button></a>
+                        <button className="loginBtn loginBtn--google text-center" type="submit">Login with Google</button></a>
                         <br/>
                         <br/>
                       </div>  
@@ -37,7 +36,7 @@ export default class UserDashboard extends React.Component {
                   </div>
           
                     <div className="row">
-                        <div className="col col-md-auto mx-auto text-center m-5">
+                        <div className="col mx-auto p-5">
                           <a href="#description">
                             <svg className="arrows">
                               <path className="a1" d="M0 0 L30 32 L60 0"></path>

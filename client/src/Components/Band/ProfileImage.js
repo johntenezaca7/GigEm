@@ -42,21 +42,19 @@ class ProfilePage extends Component {
     });
 
     firebase.storage().ref('images')
-        .child(filename).getDownloadURL()
-            .then(url => {
-           
-                 database.ref().set({
-                  name: {
-                     userId: this.props.profileUser.googleId,
-                      url: url
-                       }
-                });
-                this.props.editTheUserProfile(url);
-                this.setState({
-                    avatarURL: url
-                });
-
-        })
+      .child(filename).getDownloadURL()
+        .then(url => {
+          database.ref().set({
+            name: {
+              userId: this.props.profileUser.googleId,
+              url: url
+            }
+          });
+          this.props.editTheUserProfile({photo: url, id: this.props.info.id});
+          this.setState({
+            avatarURL: url
+          });
+        });
   };
 
   deletePic(e) {
@@ -64,7 +62,7 @@ class ProfilePage extends Component {
     infos.photo = ''; // set to template image
     infos.id = this.props.info.id;
     this.props.editTheUserProfile(infos)
-   this.setState({avatarURL: ''});
+    this.setState({avatarURL: null});
   }
 
   render() {
@@ -90,8 +88,6 @@ class ProfilePage extends Component {
         </form>
         { (this.props.profileUser.id === this.props.info.id) ? 
               <button className="btn btn-primary btn-sm" onClick={(e) => this.deletePic(e)}>Remove</button> : ''}
-              
-      </p>
       </div>
     );
   }
