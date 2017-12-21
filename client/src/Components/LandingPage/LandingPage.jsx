@@ -24,10 +24,12 @@ export default class UserDashboard extends React.Component {
                   <div className="row m-2">
                     <div className="col col-md-auto mx-auto text-center" id="branddiv">
                       <div className="m-5" style={{height: '20%'}}>
-                        <a href="/auth/google" crossOrigin="true" ><button className="btn btn-info btn-lg align-middle" type="submit">Login</button></a>
+                        <a href="/auth/google" crossOrigin="true" >
+                        
+                        <button className="loginBtn loginBtn--google" type="submit">Login with Google</button></a>
                         <br/>
                         <br/>
-                      </div>
+                      </div>  
                     </div>
                   </div>
 

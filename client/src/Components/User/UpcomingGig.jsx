@@ -118,7 +118,7 @@ class UpcomingGig extends React.Component {
         <div className="m-1">
                         <button type="submit" 
                             key={this.props.gig.id}
-                            className="btn btn-primary btn-sm"
+                            className="pitch-button"
                             onClick={(e) => {
                                 this.handleSubmit(e)} }>
                             Pitch In
@@ -129,7 +129,7 @@ class UpcomingGig extends React.Component {
       return (
         <div className="m-1">
                         <button
-                            className="btn btn-warning btn-sm"
+                            className="pitch-button"
                             onClick={(e) => {
                                 this.handleSubmit(e)} }>
                             Not Going!
@@ -181,7 +181,7 @@ class UpcomingGig extends React.Component {
     if (this.props.users.length > 0) {
       return (
         <div>
-                    <div className="potential-gig-wrapper p-2">
+                    <div className="potential-gig-wrapper">
                         <div className="potential-gig-band-name">
                           <Link to={`/bandprofile/${this.props.gig.id}`}>
                             <h4>{this.props.users.filter((x) => x.id === this.props.gig.UserId)[0].name}</h4>
@@ -210,8 +210,8 @@ class UpcomingGig extends React.Component {
                             'Venue NA'}<br />
                         {this.props.gig.startTime ? `Doors @ ${this.props.gig.startTime}` : 'Start time NA'}
                         </div>
-                        <div className="text-success potential-gig-commit-number">
-                        {/*} eslint-disable-next-line */}
+                        <div className="potential-gig-commit-number">
+                        
                             Fully Commited 🎉<br />
                             {`$`}{this.props.gig.commits} of {`$`}{this.props.gig.minCommits}!
                         </div>
@@ -222,6 +222,7 @@ class UpcomingGig extends React.Component {
                             {this.renderCommitmentForm()}
                         </div>
                     </div>
+                    <br />
                 </div>
 
 
