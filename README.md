@@ -26,5 +26,5 @@ Gig'em was initially written as a thesis project at Hack Reactor New York.
 Gig'en is currently deployed on **_URL_**
 
 ## License and Attribution
-MIT License.
+Mozilla Public License Version 2.0.
 Originally designed and coded by Dylan McBurnett, John Tenezaca, and Tommy York 
