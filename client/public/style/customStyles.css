@@ -144,6 +144,10 @@ a {
 
 }
 
+.nav-user-name {
+  /* font-weight: 500; */
+}
+
 .user-navbar-row{
     list-style-type: none;
     margin: 0;
@@ -217,7 +221,7 @@ a {
 }
 .band-profile-content{
   margin-top: 10px;
-  background-color: rgb(237, 243, 249);
+  background-color: rgb(233, 235, 236);
 }
 
 .bandContent-wrapper {
@@ -271,7 +275,7 @@ a {
   height: 700px;
  
   border-radius: 35px;
-  border: 2px solid rgb(229, 234, 237);
+  border: 2px solid rgb(233, 235, 236);
   overflow: scroll;
 
 }
@@ -283,7 +287,7 @@ a {
   overflow-y: scroll;
   overflow-x: hidden;
   border-radius: 30px 50px 15px;
-  background-color: rgb(237, 243, 249);
+  background-color: rgb(233, 235, 236);
 }
 
 .userProfile-wrapper > div {
@@ -295,7 +299,7 @@ a {
 
 .user-side-bar {
   align-self: start;
-  background-color: rgb(231, 243, 252);
+  background-color: rgb(233, 235, 236);
 
 }
 
@@ -303,7 +307,7 @@ a {
   align-self: start;
 }
 .potential-gig-wrapper{
-	border: 6px solid rgb(2, 25, 51);
+	border: 6px solid rgb(44, 68, 92);
 	
 	padding: 1em;
 	box-shadow: 4px 4px 6px grey;

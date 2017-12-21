@@ -95,7 +95,7 @@ class Navbar extends React.Component {
       
                     <li className="nav-item active">
                       <a className="nav-link">
-                      <h2>Gig'em Band: {this.props.info.name ? this.props.info.name : "Welcome to Gig'em"} {this.props.info.id}</h2>
+                      <h2 className="nav-user-name">{this.props.info.name ? `Welcome, ${this.props.info.name} !` : 'Anonymous User'}</h2>
                       <span className="sr-only">(current)</span>
                       </a>
                     </li>
