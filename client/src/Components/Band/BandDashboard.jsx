@@ -12,8 +12,6 @@ import {
   Redirect
 } from 'react-router-dom'
 
-// import BandUpcomingGig from './BandUpcomingGig';
-// import BandPotentialGig from './BandPotentialGig';
 import BandPitch from './BandPitch';
 import UpcomingGig from '../User/UpcomingGig';
 

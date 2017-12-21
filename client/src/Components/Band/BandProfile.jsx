@@ -9,7 +9,6 @@ import {
   addProperty
 } from '../../actions/index';
 
-
 import {
   RIEInput,
   RIETextArea
@@ -17,10 +16,10 @@ import {
 import _ from 'lodash'
 
 import Navbar from '../Navbar';
-import BandUpcomingGig from './BandUpcomingGig';
-import MediaItem from '../MediaItem';
-
-import Profile from '../ProfileImage';
+// import BandUpcomingGig from './BandUpcomingGig';
+import UpcomingGig from '../User/UpcomingGig';
+import MediaItem from './MediaItem';
+import Profile from './ProfileImage';
 
 
 
@@ -75,7 +74,7 @@ class BandProfile extends React.Component {
                     <div className="bandContent-wrapper ">
                         <div>
                           <h4>Band Profile - {selectedUser.name}</h4>
-                            <Profile />
+                            <Profile profileUser={selectedUser} />
                             <div>
                             {`${selectedUser.city ? selectedUser.city : 'Anonymous City'}, ${selectedUser.state ? selectedUser.state : 'Aether'}`}
                             </div>
@@ -86,11 +85,35 @@ class BandProfile extends React.Component {
                          <div>
                             <h3>Upcoming Shows</h3>
                               <div className="band-show-scroll border border-dark m-2">
-                              <BandUpcomingGig potential={false} />
+                              {this.props.events
+                                  .filter((x) => x.UserId === selectedUser.id && x.commits >= x.minCommits)
+                                    .map((gig) => <UpcomingGig 
+                                      user={selectedUser.id} 
+                                      key={gig.id} 
+                                      userAttendance=
+                                      {Array.isArray(this.props.attendance) ?  
+                                        this.props.attendance.filter((x) => 
+                                          x.ShowcaseId === gig.id && x.UserId === this.props.info.id) 
+                                        : [{}]
+                                      }
+                                      gig={gig}/>)
+                                }
                               </div>
                             <h3>Potential Gigs</h3>
                             <div className="band-show-scroll border border-dark m-2">
-                            <BandUpcomingGig potential={true} />
+                            {this.props.events
+                        .filter((x) => x.UserId === selectedUser.id && x.commits < x.minCommits)
+                          .map((gig) => <UpcomingGig 
+                            user={selectedUser.id} 
+                            key={gig.id} 
+                            userAttendance=
+                            {Array.isArray(this.props.attendance) ?  
+                              this.props.attendance.filter((x) => 
+                                x.ShowcaseId === gig.id && x.UserId === this.props.info.id) 
+                              : [{}]
+                            }
+                            gig={gig}/>)
+                        }
                               </div>
                             </div>
                           <div className="band-media">
@@ -125,7 +148,7 @@ class BandProfile extends React.Component {
                 <div className="bandContent-wrapper ">
                     <div>
                       <h4>Band Profile - {selectedUser.name}<br /> (Your Profile)</h4>
-                        <Profile />
+                      <Profile profileUser={selectedUser} />
                         <div>
                         {/* {`${selectedUser.city ? selectedUser.city : 'Anonymous City'}, */ }
                         <RIEInput 
@@ -150,25 +173,49 @@ class BandProfile extends React.Component {
                      <div>
                         <h3>Upcoming Shows</h3>
                           <div className="band-show-scroll border border-dark m-2">
-                            <BandUpcomingGig potential={false} />
+                          {this.props.events
+                        .filter((x) => x.UserId === selectedUser.id && x.commits >= x.minCommits)
+                          .map((gig) => <UpcomingGig 
+                            user={selectedUser.id} 
+                            key={gig.id} 
+                            userAttendance=
+                            {Array.isArray(this.props.attendance) ?  
+                              this.props.attendance.filter((x) => 
+                                x.ShowcaseId === gig.id && x.UserId === this.props.info.id) 
+                              : [{}]
+                            }
+                            gig={gig}/>)
+                        }
                           </div>
                         <h3>Potential Gigs</h3>
                         <div className="band-show-scroll border border-dark m-2">
-                            <BandUpcomingGig potential={true} />
+                        {this.props.events
+                        .filter((x) => x.UserId === selectedUser.id && x.commits < x.minCommits)
+                          .map((gig) => <UpcomingGig 
+                            user={selectedUser.id} 
+                            key={gig.id} 
+                            userAttendance=
+                            {Array.isArray(this.props.attendance) ?  
+                              this.props.attendance.filter((x) => 
+                                x.ShowcaseId === gig.id && x.UserId === this.props.info.id) 
+                              : [{}]
+                            }
+                            gig={gig}/>)
+                        }
                           </div>
                         </div>
                       <div className="band-media">
-                        <div className="side-scrolling border border-dark text-center p-1 m-1">
+                        <div className="side-scrolling border border-dark text-center p-2">
                             <h3>Band Media</h3>
                           <div className="container border border-dark">
-                            <h5>Submit Additional Videos:</h5>
+                            <h6>Submit Additional Videos:</h6>
                             <div class="form-group">
-                              <label for="fileUrl">Url</label>
-                              <input type="text" className="form-control" value={this.state.linkurl} id="fileUrl" onChange={(e) => this.handleChange(e, 'linkurl')} />
-                              <small id="url-help" class="form-text text-muted">(requires http://)</small>
-                              <br />
-                              <label for="description">Description</label>
-                              <input type="text" className="form-control" value={this.state.description} onChange={(e) => this.handleChange(e, 'description')} />
+                              {/* <label for="fileUrl">Url</label> */}
+                              Url <small id="url-help" class="form-text text-muted">(requires http://)</small>
+                              <input type="text" className="form-control form-control-sm" value={this.state.linkurl} id="fileUrl" onChange={(e) => this.handleChange(e, 'linkurl')} />
+                              {/* <label for="description">Description</label> */}
+                              Description
+                              <input type="text" className="form-control form-control-sm" value={this.state.description} onChange={(e) => this.handleChange(e, 'description')} />
                               <button type="submit" className="btn btn-primary btn-sm" value="Add video" onClick={(e) => this.handleClick(e, selectedUser)}>Submit New Item</button>
                             </div>
                           </div>
