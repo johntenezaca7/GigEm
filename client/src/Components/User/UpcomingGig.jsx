@@ -274,7 +274,8 @@ class UpcomingGig extends React.Component {
             </a>
 
             <div className="potential-gig-venue">
-              { this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0] &&
+              { Array.isArray(this.props.venues) &&
+                this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0] &&
                 this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0].name ? 
                 this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0].name :
                 'Venue NA'}<br />

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import firebase from '../../fireB/firebase';
 import FileUploader from 'react-firebase-file-uploader';
 import { connect } from 'react-redux';
-import * as actions from '../../actions/index';
+import { editUserProfile, fetchAllUsers } from '../../actions/index';
 
 var database = firebase.database();
 
@@ -32,6 +32,7 @@ class ProfilePage extends Component {
     this.setState({isUploading: false});
     console.error(error);
   }
+  
   handleUploadSuccess = (filename) => {
       
     this.setState({
@@ -46,17 +47,25 @@ class ProfilePage extends Component {
            
                  database.ref().set({
                   name: {
-                     userId: this.state.profileUser.googleId,
+                     userId: this.props.profileUser.googleId,
                       url: url
                        }
                 });
-                this.props.savePhoto(url);
+                this.props.editTheUserProfile(url);
                 this.setState({
                     avatarURL: url
                 });
 
         })
   };
+
+  deletePic(e) {
+    let infos = {};
+    infos.photo = ''; // set to template image
+    infos.id = this.props.info.id;
+    this.props.editTheUserProfile(infos)
+   this.setState({avatarURL: ''});
+  }
 
   render() {
     return (
@@ -79,9 +88,22 @@ class ProfilePage extends Component {
             onProgress={this.handleProgress}
           /> : ''}
         </form>
+        { (this.props.profileUser.id === this.props.info.id) ? 
+              <button className="btn btn-primary btn-sm" onClick={(e) => this.deletePic(e)}>Remove</button> : ''}
+              
       </p>
       </div>
     );
+  }
+}
+
+
+const mapDispatchToProps = dispatch => {
+  return {
+    editTheUserProfile: (infos) => {
+      dispatch(editUserProfile(infos))
+        .then(() => dispatch(fetchAllUsers()))
+    }
   }
 }
 
@@ -92,4 +114,4 @@ function mapStateToProps({info}){
 }
 
 
-export default connect(mapStateToProps, actions)(ProfilePage);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);
