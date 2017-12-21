@@ -70,7 +70,7 @@ class ProfilePage extends Component {
   render() {
     return (
       <div className="small">
-      <p>
+      
         <form>
              {this.state.avatarURL ?
                 <img src={this.state.avatarURL} className="user-profile-image p-1" alt="User profile avatar." /> :

@@ -53,7 +53,7 @@ class UpcomingGig extends React.Component {
 
   deletePic(e) {
       let infos = {};
-      infos.photo = ''; // set to template image
+      infos.photo = 'https://images.pexels.com/photos/386025/pexels-photo-386025.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb'; // set to template image
       infos.id = this.props.gig.id;
       this.props.saveTheEventPhoto(infos)
     }
@@ -241,16 +241,18 @@ class UpcomingGig extends React.Component {
   }
 
   render() {
+    console.log("UpCo props", this.props)
     if (this.props.users.length > 0) {
       return (
 
-        <div className="border border-dark m-2">
+        <div >
           <div className="potential-gig-wrapper p-2">
-
+         
             <div className="potential-gig-band-name">
+                <span>Host:</span>
               <Link to={`/bandprofile/${this.props.gig.UserId}`}>
+                
                 <h4>{this.props.users.filter((x) => x.id === this.props.gig.UserId)[0].name}</h4>
-                {/* {this.props.gig.UserId} */}
               </Link>
               <div>
                 <Modal
@@ -267,19 +269,21 @@ class UpcomingGig extends React.Component {
               </div>
             </div>
 
-            <a>
-              <h4 className="potential-gig-event-name" onClick={this.openModal}>
-                {this.props.gig.name}
-              </h4>
-            </a>
+            
+              <div className="potential-gig-event-name" onClick={this.openModal}>
+                <span>Event:</span>
+                <h4>{this.props.gig.name}</h4>
+              </div>
+            
 
+         
             <div className="potential-gig-venue">
-              { Array.isArray(this.props.venues) &&
-                this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0] &&
-                this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0].name ? 
-                this.props.venues.filter((x) => x.id === this.props.gig.VenueId)[0].name :
+                <span>Location</span>
+                { this.props.venues.id === this.props.gig.VenueId &&
+                this.props.venues.id === this.props.gig.VenueId.name ? 
+                this.props.venues.id === this.props.gig.VenueId.name :
                 'Venue NA'}<br />
-              {this.props.gig.startTime ? `Doors @ ${this.props.gig.startTime}` : 'Start time NA'}
+              {this.props.gig.startTime ? `Doors @ ${this.props.gig.startTime.slice(0,5)}` : 'Start time NA'}
             </div>
 
             <div className="potential-gig-img">
@@ -307,8 +311,7 @@ class UpcomingGig extends React.Component {
           </div>
             
           <div className="text-success potential-gig-commit-number">
-            {/*} eslint-disable-next-line */}
-            Fully Commited 🎉<br />
+            { this.props.gig.commits > this.props.gig.minCommits ? <a>Fully Commited🎉</a> : <a>Current Status</a> }<br />
             {`$`}{this.props.gig.commits} of {`$`}{this.props.gig.minCommits}!
           </div>
           <div className="potential-gig-progress-bar">
@@ -320,6 +323,7 @@ class UpcomingGig extends React.Component {
           <div>
           </div>
         </div>
+     
       </div>
 
 
