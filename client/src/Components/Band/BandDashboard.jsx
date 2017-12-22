@@ -107,7 +107,10 @@ class BandDashboard extends React.Component {
 
   render() {
     if (this.state.eventcomplete) {
-      return (<Redirect to="/band" />)
+      console.log("MORE PROPS:", this.props)
+      const userId = this.props.bandInfo.id
+      const redirectTo = `/bandprofile/${userId}`;
+      return (<Redirect to={redirectTo} />)
     }
 
     return (
