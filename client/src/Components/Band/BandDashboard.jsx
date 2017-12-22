@@ -107,7 +107,10 @@ class BandDashboard extends React.Component {
 
   render() {
     if (this.state.eventcomplete) {
-      return (<Redirect to="/band" />)
+      console.log("MORE PROPS:", this.props)
+      const userId = this.props.bandInfo.id
+      const redirectTo = `/bandprofile/${userId}`;
+      return (<Redirect to={redirectTo} />)
     }
 
     return (
@@ -119,7 +122,7 @@ class BandDashboard extends React.Component {
                       <h1 className="display-4">Upcoming Gigs</h1>
                     </div>
                     {this.props.events
-                      .filter((x) => x.commits >= x.minCommits && x.UserId === this.props.info.id)
+                      .filter((x) => (x.commits >= x.minCommits || x.isCommitted) && x.UserId === this.props.info.id)
                       .map((gig) => <UpcomingGig 
                         user={this.props.info.id} 
                         key={gig.id} 
