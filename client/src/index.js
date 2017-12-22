@@ -6,6 +6,7 @@ import reduxThunk from 'redux-thunk';
 import App from './App';
 import reducers from './reducers';
 
+
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 
