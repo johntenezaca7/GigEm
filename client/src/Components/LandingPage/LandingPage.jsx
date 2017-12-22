@@ -53,25 +53,25 @@ export default class UserDashboard extends React.Component {
           <div className="row">
             <div className="col mx-auto text-center">
               <div className="m-5">
+              <h1 className="display-4 text-center m-2">About Gig'em</h1>
+
                 <a name="description">
-                  A Kickstarter-like application for local music shows, allowing users to commit to potential local show and 
-                  bands to propose events across the country. This project was designed as a thesis project at Hack Reactor NYC
-                  by the following developers:
+                  The hardest part of being an artists is getting your first gig. Gig'em is a platform that allows communities to support their local artists by crowdfunding their shows.
+                  Artist can get the support they need and users can view up-coming events, support potential shows and explore the Gig'em community!
                 </a>
               </div>
             </div>
-            {/* <div className="col col-2">
-            </div> */}
+        
           </div>
 
           <div className="row">
             {/* <div className="col col-2">
             </div> */}
             <div className="col mx-auto">
+            <h1 className="display-4 text-center m-2">Development Team</h1>
               <Developers />
             </div>
-            {/* <div className="col col-2">
-            </div> */}
+          
         </div>
 
         <div className="row">
