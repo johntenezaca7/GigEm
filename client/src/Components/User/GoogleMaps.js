@@ -5,14 +5,14 @@ import { withGoogleMap, GoogleMap, Marker, InfoWindow, } from 'react-google-maps
 const Map = withGoogleMap(props => {
   
         // // const markers = props.geoLoc || []
-        // console.log('markers', props.geoLoc);
+        console.log('markers', props.geoLoc);
 
         const toggleShow = (marker) => {
             return marker[2].showInfo ? marker[2].showInfo = false : marker[2].showInfo = true
         }
         
         const changeColor = (status) =>{
-              if(!status){
+              if(!status.isCommitted && (status.commits < status.minCommits) ){
                 return 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
               } 
                
@@ -26,7 +26,7 @@ const Map = withGoogleMap(props => {
                     <Marker 
                         position={{lat: marker[0].lat, lng: marker[0].lng}} 
                         
-                        icon={changeColor(marker[1].isCommitted)}
+                        icon={changeColor(marker[1])}
                         key={idx}
                         onClick={() => {
                            
