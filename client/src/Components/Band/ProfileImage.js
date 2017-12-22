@@ -72,7 +72,7 @@ class ProfilePage extends Component {
   }
 
   render() {
-    console.log("Profile pics, ", this.props)
+    
     return (
       <div className="small">
       

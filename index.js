@@ -8,6 +8,7 @@ const keys = require('./config/keys');
 var http = require('http');
 var server = http.createServer();
 var socket_io = require('socket.io');
+require('create-react-class');
 
 require('./services/passport');
 

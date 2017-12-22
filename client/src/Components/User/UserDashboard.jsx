@@ -160,12 +160,7 @@ class UserDashboard extends React.Component {
                                                     elm.scrollIntoView(true);
                                                            }}>
                             </div>
-                            
-                        </div>
-                       
-                    
-                    
-                    
+                        </div>  
                         <form onSubmit={this.onSubmit}>
                                 <input type="text" className="message-input" placeholder="Write message here!" value={this.state.input} onChange={this.onChange}/>
                                 <button type="submit" className="message-submit">Send</button>

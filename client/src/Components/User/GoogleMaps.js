@@ -29,7 +29,7 @@ const Map = withGoogleMap(props => {
                         icon={changeColor(marker[1].isCommitted)}
                         key={idx}
                         onClick={() => {
-                            // console.log('click', marker[2].showInfo)
+                           
                             toggleShow(marker);
                             return props.show()
                         }}

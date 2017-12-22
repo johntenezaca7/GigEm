@@ -241,7 +241,7 @@ class UpcomingGig extends React.Component {
   }
 
   render() {
-    console.log("UpCo props", this.props)
+
     if (this.props.users.length > 0) {
       return (
 

@@ -16,7 +16,7 @@ import {
 import _ from 'lodash'
 
 import Navbar from '../Navbar';
-// import BandUpcomingGig from './BandUpcomingGig';
+
 import UpcomingGig from '../User/UpcomingGig';
 import MediaItem from './MediaItem';
 import Profile from './ProfileImage';
@@ -113,6 +113,8 @@ class BandProfile extends React.Component {
                </div> 
                       
         );
+        default:
+        return;
       }
     }
 
