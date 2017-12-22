@@ -111,7 +111,7 @@ class UserDashboard extends React.Component {
           <div>        
             <div className="user-show-scroll">
               {this.props.events
-                .filter((x) => x.commits >= x.minCommits)
+                .filter((x) => ( (x.commits >= x.minCommits) || x.isCommitted  ))
                 .map((gig) => <UpcomingGig 
                                 user={this.props.info.id} 
                                 key={gig.id} 

@@ -122,7 +122,7 @@ class BandDashboard extends React.Component {
                       <h1 className="display-4">Upcoming Gigs</h1>
                     </div>
                     {this.props.events
-                      .filter((x) => x.commits >= x.minCommits && x.UserId === this.props.info.id)
+                      .filter((x) => (x.commits >= x.minCommits || x.isCommitted) && x.UserId === this.props.info.id)
                       .map((gig) => <UpcomingGig 
                         user={this.props.info.id} 
                         key={gig.id} 
